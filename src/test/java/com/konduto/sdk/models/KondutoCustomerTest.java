@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoCustomerFactory;
 import org.junit.Test;
 
@@ -25,14 +26,30 @@ public class KondutoCustomerTest {
 	@Test
 	public void serializationTest() {
 		KondutoCustomer expectedCustomer = KondutoCustomerFactory.completeCustomer();
-		KondutoCustomer actualCustomer = KondutoCustomer.fromJSON(expectedCustomer.toJSON());
+		KondutoCustomer actualCustomer = null;
+		try {
+			actualCustomer = KondutoCustomer.fromJSON(expectedCustomer.toJSON());
+		} catch (KondutoInvalidEntityException e) {
+			e.printStackTrace();
+		}
 		assertEquals("actual customer should equal the expected customer", expectedCustomer, actualCustomer);
 	}
 
 	@Test
 	public void serializationWithOptFieldsTest() {
 		KondutoCustomer expectedCustomer = KondutoCustomerFactory.basicCustomer();
-		KondutoCustomer actualCustomer = KondutoCustomer.fromJSON(expectedCustomer.toJSON());
+		KondutoCustomer actualCustomer = null;
+		try {
+			actualCustomer = KondutoCustomer.fromJSON(expectedCustomer.toJSON());
+		} catch (KondutoInvalidEntityException e) {
+			e.printStackTrace();
+		}
 		assertEquals("actual customer should equal the expected customer", expectedCustomer, actualCustomer);
+	}
+
+	@Test(expected=KondutoInvalidEntityException.class)
+	public void invalidCustomerThrowsExceptionTest() throws KondutoInvalidEntityException {
+		KondutoCustomer customer = new KondutoCustomer();
+		customer.toJSON(); // triggers invalid customer exceptions
 	}
 }

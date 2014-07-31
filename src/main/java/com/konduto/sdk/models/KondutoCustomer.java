@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import org.json.JSONObject;
 
 /**
@@ -25,8 +26,8 @@ public class KondutoCustomer extends KondutoModel {
 	}
 
 	@Override
-	protected JSONObject toJSON() {
-//		if(!this.isValid()){ throw new KondutoInvalidOrderException(); }
+	protected JSONObject toJSON() throws KondutoInvalidEntityException {
+		if(!this.isValid()){ throw new KondutoInvalidEntityException("customer"); }
 		JSONObject json = new JSONObject();
 		json.put("id", this.id);
 		json.put("name", this.name);

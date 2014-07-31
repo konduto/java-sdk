@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public abstract class KondutoModel {
 
 	public abstract boolean isValid();
 
-	protected abstract JSONObject toJSON();
+	protected abstract JSONObject toJSON() throws KondutoInvalidEntityException;
 
 	protected void isRequiredError(String field) {
 		this.errors.add(field + " is required");
