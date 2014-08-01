@@ -48,8 +48,8 @@ public class KondutoCustomerTest {
 	}
 
 	@Test(expected=KondutoInvalidEntityException.class)
-	public void invalidCustomerThrowsExceptionTest() throws KondutoInvalidEntityException {
+	public void invalidCustomerSerializationThrowsExceptionTest() throws KondutoInvalidEntityException {
 		KondutoCustomer customer = new KondutoCustomer();
-		customer.toJSON(); // triggers invalid customer exceptions
+		customer.toJSON(); // triggers invalid customer exception
 	}
 }

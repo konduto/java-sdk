@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoCustomerFactory;
 import com.konduto.sdk.factories.KondutoOrderFactory;
 import org.junit.Test;
@@ -35,14 +36,30 @@ public class KondutoOrderTest {
 	@Test
 	public void serializationTest() {
 		KondutoOrder expectedOrder = KondutoOrderFactory.completeOrder();
-		KondutoOrder actualOrder = KondutoOrder.fromJSON(expectedOrder.toJSON());
+		KondutoOrder actualOrder = null;
+		try {
+			actualOrder = KondutoOrder.fromJSON(expectedOrder.toJSON());
+		} catch (KondutoInvalidEntityException e) {
+			e.printStackTrace();
+		}
 		assertEquals("actual order should equal the expected order", expectedOrder, actualOrder);
 	}
 
 	@Test
 	public void serializationWithOptFieldsTest() {
 		KondutoOrder expectedOrder = KondutoOrderFactory.basicOrder();
-		KondutoOrder actualOrder = KondutoOrder.fromJSON(expectedOrder.toJSON());
+		KondutoOrder actualOrder = null;
+		try {
+			actualOrder = KondutoOrder.fromJSON(expectedOrder.toJSON());
+		} catch (KondutoInvalidEntityException e) {
+			e.printStackTrace();
+		}
 		assertEquals("actual order should equal the expected order", expectedOrder, actualOrder);
+	}
+
+	@Test(expected=KondutoInvalidEntityException.class)
+	public void invalidOrderSerializationThrowsExceptionTest() throws KondutoInvalidEntityException {
+		KondutoOrder order = new KondutoOrder();
+		order.toJSON(); // triggers invalid customer exception
 	}
 }

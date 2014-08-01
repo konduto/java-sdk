@@ -6,7 +6,7 @@ import org.json.JSONObject;
 /**
  * Created by rsampaio on 31/07/14.
  */
-public class KondutoOrder extends KondutoModel {
+public final class KondutoOrder extends KondutoModel {
 
 	private String id;
 	private String visitor;
@@ -19,6 +19,17 @@ public class KondutoOrder extends KondutoModel {
 	private String ip;
 	private Double score;
 	private KondutoCustomer customer;
+	private KondutoRecommendation recommendation;
+
+	public KondutoOrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+
+	protected void setOrderStatus(KondutoOrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	private KondutoOrderStatus orderStatus;
 
 	@Override
 	public boolean equals(Object o) {
@@ -73,7 +84,8 @@ public class KondutoOrder extends KondutoModel {
 	}
 
 	@Override
-	protected JSONObject toJSON() {
+	protected JSONObject toJSON() throws KondutoInvalidEntityException {
+		if(!this.isValid()){ throw new KondutoInvalidEntityException(this); }
 		JSONObject json = new JSONObject();
 		json.put("id", this.id);
 		json.put("visitor", this.visitor);
@@ -98,6 +110,7 @@ public class KondutoOrder extends KondutoModel {
 
 	protected static KondutoOrder fromJSON(JSONObject json) {
 		KondutoOrder order = new KondutoOrder();
+
 		// required fields
 		order.setId(json.getString("id"));
 		order.setTotalAmount(json.getDouble("total_amount"));
@@ -112,10 +125,16 @@ public class KondutoOrder extends KondutoModel {
 		if(json.has("installments")) { order.setInstallments(json.getInt("installments")); }
 		if(json.has("ip")) { order.setIp(json.getString("ip")); }
 		if(json.has("score")) { order.setScore(json.getDouble("score")); }
+		if(json.has("recommendation")) { order.setRecommendation(KondutoRecommendation.fromString(json.getString("recommendation"))); }
+		if(json.has("status")) { order.setOrderStatus(KondutoOrderStatus.fromString(json.getString("status"))); }
 
 		return order;
 	}
 
+
+	public KondutoRecommendation getRecommendation() {
+		return recommendation;
+	}
 
 	public Double getScore() {
 		return score;
@@ -203,5 +222,9 @@ public class KondutoOrder extends KondutoModel {
 
 	protected void setScore(Double score) {
 		this.score = score;
+	}
+
+	protected void setRecommendation(KondutoRecommendation recommendation) {
+		this.recommendation = recommendation;
 	}
 }

@@ -6,7 +6,7 @@ import org.json.JSONObject;
 /**
  * Created by rsampaio on 31/07/14.
  */
-public class KondutoCustomer extends KondutoModel {
+public final class KondutoCustomer extends KondutoModel {
 	private String id;
 	private String name;
 	private String email;
@@ -27,7 +27,7 @@ public class KondutoCustomer extends KondutoModel {
 
 	@Override
 	protected JSONObject toJSON() throws KondutoInvalidEntityException {
-		if(!this.isValid()){ throw new KondutoInvalidEntityException("customer"); }
+		if(!this.isValid()){ throw new KondutoInvalidEntityException(this); }
 		JSONObject json = new JSONObject();
 		json.put("id", this.id);
 		json.put("name", this.name);
