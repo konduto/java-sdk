@@ -48,11 +48,11 @@ public final class Konduto {
 		return sb.toString();
 	}
 
-	private static String kondutoUrl(){
+	private static String kondutoUrl() {
 		return String.format("%s/%s", endpoint, version);
 	}
 
-	private static String kondutoGetOrderUrl(){
+	private static String kondutoGetOrderUrl() {
 		return String.format("%s/orders", kondutoUrl());
 	}
 
