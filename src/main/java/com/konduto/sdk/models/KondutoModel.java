@@ -12,8 +12,8 @@ import java.util.List;
 public abstract class KondutoModel {
 	protected List<String> errors = new ArrayList<String>();
 
-	public List<String> getErrors(){
-		return errors;
+	public String getErrors(){
+		return errors.toString();
 	}
 
 	public abstract boolean isValid();
