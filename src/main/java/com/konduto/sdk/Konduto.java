@@ -7,7 +7,7 @@ package com.konduto.sdk;
  *
  */
 
-public abstract class Konduto {
+public final class Konduto {
 	private static String apiKey;
 	private static String version;
 	private static String requestBody;
@@ -32,4 +32,7 @@ public abstract class Konduto {
 		sb.append(String.format("requestBody: %s\n", Konduto.requestBody));
 		return sb.toString();
 	}
+
+	private Konduto() { /* cannot be instantiated */  }
+
 }
