@@ -84,7 +84,7 @@ public final class KondutoOrder extends KondutoModel {
 	}
 
 	@Override
-	protected JSONObject toJSON() throws KondutoInvalidEntityException {
+	public JSONObject toJSON() throws KondutoInvalidEntityException {
 		if(!this.isValid()){ throw new KondutoInvalidEntityException(this); }
 		JSONObject json = new JSONObject();
 		json.put("id", this.id);
@@ -108,7 +108,7 @@ public final class KondutoOrder extends KondutoModel {
 		return json;
 	}
 
-	protected static KondutoOrder fromJSON(JSONObject json) {
+	public static KondutoOrder fromJSON(JSONObject json) {
 		KondutoOrder order = new KondutoOrder();
 
 		// required fields

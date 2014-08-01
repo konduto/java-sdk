@@ -17,7 +17,7 @@ public class KondutoModelTest {
 		}
 
 		@Override
-		protected JSONObject toJSON() {
+		public JSONObject toJSON() {
 			return null;
 		}
 	}

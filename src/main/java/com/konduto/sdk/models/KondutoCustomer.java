@@ -26,7 +26,7 @@ public final class KondutoCustomer extends KondutoModel {
 	}
 
 	@Override
-	protected JSONObject toJSON() throws KondutoInvalidEntityException {
+	public JSONObject toJSON() throws KondutoInvalidEntityException {
 		if(!this.isValid()){ throw new KondutoInvalidEntityException(this); }
 		JSONObject json = new JSONObject();
 		json.put("id", this.id);
@@ -40,7 +40,7 @@ public final class KondutoCustomer extends KondutoModel {
 		return json;
 	}
 
-	protected static KondutoCustomer fromJSON(JSONObject json) {
+	public static KondutoCustomer fromJSON(JSONObject json) {
 		KondutoCustomer customer = new KondutoCustomer();
 		// required
 		customer.setId(json.getString("id"));

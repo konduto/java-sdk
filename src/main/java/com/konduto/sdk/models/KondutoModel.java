@@ -18,7 +18,7 @@ public abstract class KondutoModel {
 
 	public abstract boolean isValid();
 
-	protected abstract JSONObject toJSON() throws KondutoInvalidEntityException;
+	public abstract JSONObject toJSON() throws KondutoInvalidEntityException;
 
 	protected void isRequiredError(String field) {
 		this.errors.add(field + " is required");
