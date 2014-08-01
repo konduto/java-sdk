@@ -1,17 +1,19 @@
 package com.konduto.sdk.exceptions;
 
+import com.konduto.sdk.models.KondutoModel;
+
 /**
  * Created by rsampaio on 31/07/14.
  */
-public class KondutoInvalidEntityException extends Exception {
-	private String entity;
+public final class KondutoInvalidEntityException extends KondutoException {
+	private KondutoModel entity;
 
-	public KondutoInvalidEntityException(String entity) {
+	public KondutoInvalidEntityException(KondutoModel entity) {
 		this.entity = entity;
 	}
 
 	@Override
 	public String getMessage() {
-		return String.format("%s is invalid", this.entity);
+		return String.format("%s is invalid: %s", this.entity, this.entity.getErrors());
 	}
 }
