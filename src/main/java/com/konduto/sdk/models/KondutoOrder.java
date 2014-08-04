@@ -108,8 +108,8 @@ public final class KondutoOrder extends KondutoModel {
 		return json;
 	}
 
-	public static KondutoOrder fromJSON(JSONObject json) {
-		KondutoOrder order = new KondutoOrder();
+	public static void fromJSON(KondutoOrder order, JSONObject json) {
+		if(json.has("order")) { json = json.getJSONObject("order"); } // unwrap if necessary
 
 		// required fields
 		order.setId(json.getString("id"));
@@ -127,6 +127,12 @@ public final class KondutoOrder extends KondutoModel {
 		if(json.has("score")) { order.setScore(json.getDouble("score")); }
 		if(json.has("recommendation")) { order.setRecommendation(KondutoRecommendation.fromString(json.getString("recommendation"))); }
 		if(json.has("status")) { order.setOrderStatus(KondutoOrderStatus.fromString(json.getString("status"))); }
+	}
+
+	public static KondutoOrder fromJSON(JSONObject json) {
+		KondutoOrder order = new KondutoOrder();
+
+		fromJSON(order, json);
 
 		return order;
 	}

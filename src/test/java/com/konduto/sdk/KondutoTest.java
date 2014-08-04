@@ -2,7 +2,10 @@ package com.konduto.sdk;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.konduto.sdk.exceptions.KondutoHTTPException;
+import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
+import com.konduto.sdk.factories.KondutoOrderFactory;
 import com.konduto.sdk.models.KondutoOrder;
+import com.konduto.sdk.models.KondutoRecommendation;
 import org.apache.commons.httpclient.HttpStatus;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -43,10 +46,8 @@ public class KondutoTest {
 	public void debugTest() {
 		Konduto.setApiKey("API_KEY");
 		Konduto.setVersion("1");
-		Konduto.setRequestBody("{}");
 		String expectedDebug = "API key: API_KEY\n" +
-				"version: 1\n" +
-				"requestBody: {}\n";
+				"version: 1\n";
 		String actualDebug = Konduto.debug();
 		assertTrue(expectedDebug.equalsIgnoreCase(actualDebug));
 	}
@@ -64,10 +65,10 @@ public class KondutoTest {
 				.willReturn(aResponse()
 						.withStatus(200)
 						.withHeader("Content-Type", "application/json")
-						.withBodyFile("get_order.json")));
+						.withBodyFile("order.json")));
 
 		KondutoOrder expectedOrder = KondutoOrder.fromJSON(
-				readJSONFromFile("__files/get_order.json").getJSONObject("order"));
+				readJSONFromFile("__files/order.json"));
 
 		KondutoOrder actualOrder = null;
 
@@ -92,13 +93,90 @@ public class KondutoTest {
 				Konduto.getOrder(ORDER_ID);
 				fail("Exception expected");
 			} catch (KondutoHTTPException e) {
-				System.out.println(httpStatus);
-				e.printStackTrace();
-				// nothing to do (exception caught)
+				// nothing to do, because exception was expected
 			}
 		}
 
 	}
+
+	@Test
+	public void sendOrderSuccessfullyTest() {
+		stubFor(post(urlEqualTo("/v1/orders")).
+				willReturn(aResponse()
+						.withStatus(200)
+						.withHeader("Content-Type", "application/json")
+						.withBodyFile("order.json")));
+
+		KondutoOrder orderToSend = KondutoOrderFactory.basicOrder();
+
+		assertNull("basic order should have no recommendation", orderToSend.getRecommendation());
+
+		try {
+			Konduto.sendOrder(orderToSend, true); // do analyze
+		} catch (KondutoInvalidEntityException e) {
+			fail("order should be valid");
+		} catch (KondutoHTTPException e) {
+			fail("server should respond with status 200");
+		}
+
+		assertTrue("analyze should be true", Konduto.getRequestBody().getBoolean("analyze"));
+
+		KondutoRecommendation actualRecommendation =
+				KondutoOrder.fromJSON(readJSONFromFile("__files/order.json")).getRecommendation();
+
+		assertEquals(orderToSend.getRecommendation(), actualRecommendation);
+
+		try {
+			Konduto.sendOrder(orderToSend, false); // do analyze
+		} catch (KondutoInvalidEntityException e) {
+			e.printStackTrace();
+		} catch (KondutoHTTPException e) {
+			e.printStackTrace();
+		}
+
+		assertFalse("analyze should be false", Konduto.getRequestBody().getBoolean("analyze"));
+	}
+
+	@Test
+	public void sendInvalidOrderTest(){
+		stubFor(post(urlEqualTo("/v1/orders")).
+				willReturn(aResponse()
+						.withStatus(200)
+						.withHeader("Content-Type", "application/json")
+						.withBodyFile("order.json")));
+
+		KondutoOrder order = new KondutoOrder();
+
+		try {
+			Konduto.sendOrder(order, true);
+			fail("KondutoInvalidEntityException should have been thrown");
+		} catch (KondutoInvalidEntityException e) {
+			// nothing to do, because exception was expected
+		} catch (KondutoHTTPException e) {
+			fail("Expected KondutoInvalidEntityException, but got KondutoHTTPException");
+		}
+	}
+
+
+	@Test
+	public void sendOrderHTTPErrorTest(){
+		for(int httpStatus: HTTP_STATUSES) {
+			stubFor(post(urlEqualTo("/v1/orders"))
+					.willReturn(aResponse()
+							.withStatus(httpStatus)
+							.withHeader("Content-Type", "application/json")
+							.withBody("{}")));
+			try {
+				Konduto.sendOrder(KondutoOrderFactory.basicOrder(), true);
+				fail("Exception expected");
+			} catch (KondutoHTTPException e) {
+				// nothing to do, because exception was expected
+			} catch (KondutoInvalidEntityException e) {
+				fail("order should be valid");
+			}
+		}
+	}
+
 
 	private JSONObject readJSONFromFile(String resourceName) {
 		try {
