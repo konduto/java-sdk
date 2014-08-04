@@ -15,7 +15,7 @@ public class KondutoOrderFactory {
 		order.setIp("192.168.0.1");
 		order.setShippingAmount(5.0);
 		order.setTaxAmount(3.0);
-		order.setTimestamp("123123123123");
+		order.setTimestamp(123123123123L);
 		order.setCustomer(KondutoCustomerFactory.completeCustomer());
 		return order;
 	}

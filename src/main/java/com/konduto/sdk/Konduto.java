@@ -52,26 +52,28 @@ public final class Konduto {
 		return String.format("%s/%s", endpoint, version);
 	}
 
-	private static String kondutoGetOrderUrl() {
-		return String.format("%s/orders", kondutoUrl());
+	private static String kondutoGetOrderUrl(String orderId) {
+		return String.format("%s/orders/%s", kondutoUrl(), orderId);
 	}
 
-	public static KondutoOrder getOrder(String orderId) {
+	public static KondutoOrder getOrder(String orderId) throws KondutoHTTPException {
 		KondutoOrder order = null;
 		HttpClient httpClient = new HttpClient();
-		GetMethod getMethod = new GetMethod(kondutoGetOrderUrl());
+
+		GetMethod getMethod = new GetMethod(kondutoGetOrderUrl(orderId));
+
 		try {
 			int statusCode = httpClient.executeMethod(getMethod);
 			byte[] responseBodyAsByteArray = getMethod.getResponseBody();
 			String responseBodyAsString = new String(responseBodyAsByteArray, "UTF-8");
+
 			JSONObject responseBody = new JSONObject(responseBodyAsString);
 
 			if(statusCode != 200) { throw KondutoHTTPExceptionFactory.buildException(statusCode, responseBody); }
 
-			order = KondutoOrder.fromJSON(responseBody);
+			if(responseBody.has("order")) { order = KondutoOrder.fromJSON(responseBody.getJSONObject("order")); }
+
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (KondutoHTTPException e) {
 			e.printStackTrace();
 		} finally {
 			getMethod.releaseConnection();

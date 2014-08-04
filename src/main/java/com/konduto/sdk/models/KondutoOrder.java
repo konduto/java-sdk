@@ -10,7 +10,7 @@ public final class KondutoOrder extends KondutoModel {
 
 	private String id;
 	private String visitor;
-	private String timestamp;
+	private Long timestamp;
 	private Double totalAmount;
 	private Double shippingAmount;
 	private Double taxAmount;
@@ -118,7 +118,7 @@ public final class KondutoOrder extends KondutoModel {
 
 		// optional fields
 		if(json.has("visitor")) { order.setVisitor(json.getString("visitor")); }
-		if(json.has("timestamp")) { order.setTimestamp(json.getString("timestamp")); }
+		if(json.has("timestamp")) { order.setTimestamp(json.getLong("timestamp")); }
 		if(json.has("shipping_amount")) { order.setShippingAmount(json.getDouble("shipping_amount")); }
 		if(json.has("tax_amount")) { order.setTaxAmount(json.getDouble("tax_amount")); }
 		if(json.has("currency")) { order.setCurrency(json.getString("currency")); }
@@ -156,11 +156,11 @@ public final class KondutoOrder extends KondutoModel {
 		this.visitor = visitor;
 	}
 
-	public String getTimestamp() {
+	public Long getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 	}
 
