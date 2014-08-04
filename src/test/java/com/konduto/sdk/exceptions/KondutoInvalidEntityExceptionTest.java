@@ -16,6 +16,7 @@ public class KondutoInvalidEntityExceptionTest {
 		customer.isValid(); // triggers errors
 		KondutoInvalidEntityException exception = new KondutoInvalidEntityException(customer);
 
-		assertEquals("incorrect expected exception message", String.format("%s is invalid: %s", customer, customer.getErrors()), exception.getMessage());
+		assertEquals("incorrect expected exception message",
+				String.format("%s is invalid: %s", customer, customer.getErrors()), exception.getMessage());
 	}
 }

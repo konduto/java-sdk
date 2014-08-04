@@ -125,7 +125,9 @@ public final class KondutoOrder extends KondutoModel {
 		if(json.has("installments")) { order.setInstallments(json.getInt("installments")); }
 		if(json.has("ip")) { order.setIp(json.getString("ip")); }
 		if(json.has("score")) { order.setScore(json.getDouble("score")); }
-		if(json.has("recommendation")) { order.setRecommendation(KondutoRecommendation.fromString(json.getString("recommendation"))); }
+		if(json.has("recommendation")) {
+			order.setRecommendation(KondutoRecommendation.fromString(json.getString("recommendation")));
+		}
 		if(json.has("status")) { order.setOrderStatus(KondutoOrderStatus.fromString(json.getString("status"))); }
 	}
 

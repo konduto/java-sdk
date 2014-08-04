@@ -18,7 +18,8 @@ public class KondutoHTTPExceptionFactoryTest {
 		put(HttpStatus.SC_FORBIDDEN, KondutoHTTPExceptionFactory.KondutoHTTPForbiddenException.class);
 		put(HttpStatus.SC_NOT_FOUND, KondutoHTTPExceptionFactory.KondutoHTTPNotFoundException.class);
 		put(HttpStatus.SC_METHOD_NOT_ALLOWED, KondutoHTTPExceptionFactory.KondutoHTTPMethodNotAllowedException.class);
-		put(HttpStatus.SC_UNPROCESSABLE_ENTITY, KondutoHTTPExceptionFactory.KondutoHTTPUnprocessableEntityException.class);
+		put(HttpStatus.SC_UNPROCESSABLE_ENTITY,
+				KondutoHTTPExceptionFactory.KondutoHTTPUnprocessableEntityException.class);
 		put(429, KondutoHTTPExceptionFactory.KondutoHTTPTooManyRequestsException.class);
 		put(HttpStatus.SC_INTERNAL_SERVER_ERROR, KondutoHTTPExceptionFactory.KondutoHTTPInternalErrorException.class);
 	}};

@@ -28,7 +28,8 @@ public class KondutoModelTest {
 	public void isRequiredErrorTest(){
 		dummyModel.isRequiredError("dummy field");
 		assertEquals("errors should contain one error", dummyModel.errors.size(), 1);
-		assertTrue("errors should be [\"dummy field is required\"]", dummyModel.errors.get(0).equalsIgnoreCase("dummy field is required"));
+		assertTrue("errors should be [\"dummy field is required\"]",
+				dummyModel.errors.get(0).equalsIgnoreCase("dummy field is required"));
 		dummyModel.errors.clear();
 	}
 

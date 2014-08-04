@@ -97,7 +97,8 @@ public final class Konduto {
 		return order;
 	}
 
-	public static void sendOrder(KondutoOrder order, boolean analyze) throws KondutoInvalidEntityException, KondutoHTTPException {
+	public static void sendOrder(KondutoOrder order, boolean analyze)
+			throws KondutoInvalidEntityException, KondutoHTTPException {
 		HttpClient httpClient = new HttpClient();
 
 		PostMethod postMethod = new PostMethod(kondutoPostOrderUrl());
