@@ -1,9 +1,7 @@
 package com.konduto.sdk;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import com.konduto.sdk.exceptions.KondutoHTTPException;
-import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
-import com.konduto.sdk.exceptions.KondutoInvalidOrderStatusException;
+import com.konduto.sdk.exceptions.*;
 import com.konduto.sdk.factories.KondutoOrderFactory;
 import com.konduto.sdk.models.KondutoOrder;
 import com.konduto.sdk.models.KondutoOrderStatus;
@@ -23,15 +21,17 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static org.junit.Assert.*;
 
 /**
  * Created by rsampaio on 30/07/14.
  */
 public class KondutoTest {
 	private static final String ORDER_ID = "1406910391037";
+
+	private static final String AUTH_HEADER = "Basic VDczOEQ1MTZGMDlDQUIzQTJDMUVF";
+	private static final String API_KEY = "T738D516F09CAB3A2C1EE";
 
 	private static final int[] HTTP_STATUSES = {
 			HttpStatus.SC_UNAUTHORIZED, // 401
@@ -48,14 +48,19 @@ public class KondutoTest {
 
 	@Before
 	public void setupKonduto(){
-		Konduto.setEndpoint("http://localhost:8080");
-		Konduto.setVersion("v1");
+		Konduto.setEndpoint(URI.create("http://localhost:8080/v1"));
+		try {
+			Konduto.setApiKey(API_KEY);
+		} catch (KondutoInvalidApiKeyException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	public void getOrderSuccessfullyTest(){
 
 		stubFor(get(urlEqualTo("/v1/orders/" + ORDER_ID))
+				.withHeader("Authorization", equalTo(AUTH_HEADER))
 				.willReturn(aResponse()
 						.withStatus(200)
 						.withHeader("Content-Type", "application/json")
@@ -68,8 +73,8 @@ public class KondutoTest {
 
 		try {
 			 actualOrder = Konduto.getOrder(ORDER_ID);
-		} catch (KondutoHTTPException e) {
-			e.printStackTrace();
+		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
+			fail("[GET] should succeed");
 		}
 
 		assertEquals(expectedOrder, actualOrder);
@@ -79,6 +84,7 @@ public class KondutoTest {
 	public void getOrderErrorTest(){
 		for(int httpStatus: HTTP_STATUSES) {
 			stubFor(get(urlEqualTo("/v1/orders/" + ORDER_ID))
+					.withHeader("Authorization", equalTo(AUTH_HEADER))
 					.willReturn(aResponse()
 							.withStatus(httpStatus)
 							.withHeader("Content-Type", "application/json")
@@ -88,6 +94,8 @@ public class KondutoTest {
 				fail("Exception expected");
 			} catch (KondutoHTTPException e) {
 				// nothing to do, because exception was expected
+			} catch (KondutoUnexpectedAPIResponseException e) {
+				fail("KondutoHTTPException was expected");
 			}
 		}
 
@@ -95,8 +103,9 @@ public class KondutoTest {
 
 	@Test
 	public void analyzeSuccessfullyTest() {
-		stubFor(post(urlEqualTo("/v1/orders")).
-				willReturn(aResponse()
+		stubFor(post(urlEqualTo("/v1/orders"))
+				.withHeader("Authorization", equalTo(AUTH_HEADER))
+				.willReturn(aResponse()
 						.withStatus(200)
 						.withHeader("Content-Type", "application/json")
 						.withBodyFile("order.json")));
@@ -109,7 +118,7 @@ public class KondutoTest {
 			Konduto.analyze(orderToSend); // do analyze
 		} catch (KondutoInvalidEntityException e) {
 			fail("order should be valid");
-		} catch (KondutoHTTPException e) {
+		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("server should respond with status 200");
 		}
 
@@ -122,8 +131,9 @@ public class KondutoTest {
 
 	@Test
 	public void analyzeInvalidOrderTest(){
-		stubFor(post(urlEqualTo("/v1/orders")).
-				willReturn(aResponse()
+		stubFor(post(urlEqualTo("/v1/orders"))
+				.withHeader("Authorization", equalTo(AUTH_HEADER))
+				.willReturn(aResponse()
 						.withStatus(200)
 						.withHeader("Content-Type", "application/json")
 						.withBodyFile("order.json")));
@@ -135,7 +145,7 @@ public class KondutoTest {
 			fail("KondutoInvalidEntityException should have been thrown");
 		} catch (KondutoInvalidEntityException e) {
 			// nothing to do, because exception was expected
-		} catch (KondutoHTTPException e) {
+		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("Expected KondutoInvalidEntityException, but got KondutoHTTPException");
 		}
 	}
@@ -145,6 +155,7 @@ public class KondutoTest {
 	public void analyzeHTTPErrorTest(){
 		for(int httpStatus: HTTP_STATUSES) {
 			stubFor(post(urlEqualTo("/v1/orders"))
+					.withHeader("Authorization", equalTo(AUTH_HEADER))
 					.willReturn(aResponse()
 							.withStatus(httpStatus)
 							.withHeader("Content-Type", "application/json")
@@ -154,8 +165,8 @@ public class KondutoTest {
 				fail("Exception expected");
 			} catch (KondutoHTTPException e) {
 				// nothing to do, because exception was expected
-			} catch (KondutoInvalidEntityException e) {
-				fail("order should be valid");
+			} catch (KondutoInvalidEntityException | KondutoUnexpectedAPIResponseException e) {
+				fail("expected KondutoHTTPException");
 			}
 		}
 	}
@@ -163,23 +174,18 @@ public class KondutoTest {
 	@Test
 	public void updateSuccessfullyTest(){
 		stubFor(put(urlEqualTo("/v1/orders/" + ORDER_ID))
+				.withHeader("Authorization", equalTo(AUTH_HEADER))
 				.withRequestBody(equalTo("{\"status\":\"approved\",\"comments\":\"no comments\"}"))
 				.willReturn(aResponse()
 						.withStatus(200)
 						.withHeader("Content-Type", "application/json")
 						.withBody("{\"old_status\":\"review\",\"new_status\":\"approved\"}")));
 
-		boolean updateSucceeded = false;
-
 		try {
-			updateSucceeded = Konduto.updateOrderStatus(ORDER_ID, KondutoOrderStatus.APPROVED, "no comments");
-		} catch (KondutoHTTPException e) {
-			fail("status update should succeed");
-		} catch (KondutoInvalidOrderStatusException kondutoInvalidOrderStatusException) {
-			fail("status update should succeed");
+			Konduto.updateOrderStatus(ORDER_ID, KondutoOrderStatus.APPROVED, "no comments");
+		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException | KondutoInvalidOrderStatusException e) {
+			fail("order update should have succeeded");
 		}
-
-		assertTrue("update should succeeded", updateSucceeded);
 
 	}
 
@@ -187,6 +193,7 @@ public class KondutoTest {
 	public void updateHTTPErrorTest(){
 		for(int httpStatus : HTTP_STATUSES){
 			stubFor(put(urlEqualTo("/v1/orders/" + ORDER_ID))
+					.withHeader("Authorization", equalTo(AUTH_HEADER))
 					.willReturn(aResponse()
 							.withStatus(httpStatus)
 							.withHeader("Content-Type", "application/json")
@@ -198,7 +205,7 @@ public class KondutoTest {
 			fail("exception expected");
 		} catch (KondutoHTTPException e) {
 			// nothing to do, because exception was expected
-		} catch (KondutoInvalidOrderStatusException kondutoInvalidOrderStatusException) {
+		} catch (KondutoInvalidOrderStatusException | KondutoUnexpectedAPIResponseException e) {
 			fail("KondutoHTTPException was expected");
 		}
 	}
@@ -214,7 +221,7 @@ public class KondutoTest {
 			try {
 				Konduto.updateOrderStatus(ORDER_ID, status, "");
 				fail("expected KondutoInvalidOrderStatus exception");
-			} catch (KondutoHTTPException e) {
+			} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 				fail("expected KondutoInvalidOrderStatus exception");
 			} catch (KondutoInvalidOrderStatusException kondutoInvalidOrderStatusException) {
 				// nothing to do, because exception was expected
@@ -226,11 +233,14 @@ public class KondutoTest {
 	public void nullCommentsWhenUpdatingTest(){
 		try {
 			Konduto.updateOrderStatus(ORDER_ID, KondutoOrderStatus.APPROVED, null);
-		} catch (KondutoHTTPException e) {
-			fail("expected NullPointerException");
-		} catch (KondutoInvalidOrderStatusException kondutoInvalidOrderStatusException) {
+		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException | KondutoInvalidOrderStatusException e) {
 			fail("expected NullPointerException");
 		}
+	}
+
+	@Test(expected = KondutoInvalidApiKeyException.class)
+	public void invalidApiKeyTest() throws KondutoInvalidApiKeyException {
+		Konduto.setApiKey("invalid key");
 	}
 
 
@@ -242,9 +252,7 @@ public class KondutoTest {
 				byte[] bytes = Files.readAllBytes(Paths.get(uri));
 				return new JSONObject(new String(bytes, "UTF-8"));
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
+		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 		return null;

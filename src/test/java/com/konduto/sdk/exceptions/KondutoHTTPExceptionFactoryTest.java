@@ -3,10 +3,11 @@ package com.konduto.sdk.exceptions;
 import org.apache.commons.httpclient.HttpStatus;
 import org.json.JSONObject;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by rsampaio on 01/08/14.

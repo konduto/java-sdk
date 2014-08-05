@@ -3,7 +3,7 @@ package com.konduto.sdk.exceptions;
 import com.konduto.sdk.models.KondutoCustomer;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by rsampaio on 31/07/14.

@@ -2,7 +2,8 @@ package com.konduto.sdk.exceptions;
 
 import org.json.JSONObject;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by rsampaio on 01/08/14.

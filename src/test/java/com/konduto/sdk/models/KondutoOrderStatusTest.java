@@ -1,7 +1,9 @@
 package com.konduto.sdk.models;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by rsampaio on 01/08/14.
