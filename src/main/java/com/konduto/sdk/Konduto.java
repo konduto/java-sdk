@@ -37,10 +37,6 @@ public final class Konduto {
 		Konduto.apiKey = apiKey;
 	}
 
-	public static JSONObject getRequestBody() {
-		return requestBody;
-	}
-
 	public static void setVersion(String version) {
 		Konduto.version = version;
 	}
@@ -97,7 +93,7 @@ public final class Konduto {
 		return order;
 	}
 
-	public static void sendOrder(KondutoOrder order, boolean analyze)
+	public static void analyze(KondutoOrder order)
 			throws KondutoInvalidEntityException, KondutoHTTPException {
 		HttpClient httpClient = new HttpClient();
 
@@ -105,7 +101,7 @@ public final class Konduto {
 
 		try {
 			StringRequestEntity requestEntity = new StringRequestEntity(
-					order.toJSON().put("analyze", analyze).toString(),
+					order.toJSON().toString(),
 					"application/json",
 					"UTF-8"
 			);
@@ -122,8 +118,6 @@ public final class Konduto {
 
 			KondutoOrder.fromJSON(order, responseBody);
 
-		} catch (HttpException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

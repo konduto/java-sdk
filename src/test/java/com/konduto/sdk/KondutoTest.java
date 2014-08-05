@@ -42,16 +42,6 @@ public class KondutoTest {
 	@Rule
 	public WireMockRule wireMockRule = new WireMockRule();
 
-	@Test
-	public void debugTest() {
-		Konduto.setApiKey("API_KEY");
-		Konduto.setVersion("1");
-		String expectedDebug = "API key: API_KEY\n" +
-				"version: 1\n";
-		String actualDebug = Konduto.debug();
-		assertTrue(expectedDebug.equalsIgnoreCase(actualDebug));
-	}
-
 	@Before
 	public void setupKonduto(){
 		Konduto.setEndpoint("http://localhost:8080");
@@ -100,7 +90,7 @@ public class KondutoTest {
 	}
 
 	@Test
-	public void sendOrderSuccessfullyTest() {
+	public void analyzeSuccessfullyTest() {
 		stubFor(post(urlEqualTo("/v1/orders")).
 				willReturn(aResponse()
 						.withStatus(200)
@@ -112,33 +102,22 @@ public class KondutoTest {
 		assertNull("basic order should have no recommendation", orderToSend.getRecommendation());
 
 		try {
-			Konduto.sendOrder(orderToSend, true); // do analyze
+			Konduto.analyze(orderToSend); // do analyze
 		} catch (KondutoInvalidEntityException e) {
 			fail("order should be valid");
 		} catch (KondutoHTTPException e) {
 			fail("server should respond with status 200");
 		}
 
-		assertTrue("analyze should be true", Konduto.getRequestBody().getBoolean("analyze"));
-
 		KondutoRecommendation actualRecommendation =
 				KondutoOrder.fromJSON(readJSONFromFile("__files/order.json")).getRecommendation();
 
 		assertEquals(orderToSend.getRecommendation(), actualRecommendation);
 
-		try {
-			Konduto.sendOrder(orderToSend, false); // do analyze
-		} catch (KondutoInvalidEntityException e) {
-			e.printStackTrace();
-		} catch (KondutoHTTPException e) {
-			e.printStackTrace();
-		}
-
-		assertFalse("analyze should be false", Konduto.getRequestBody().getBoolean("analyze"));
 	}
 
 	@Test
-	public void sendInvalidOrderTest(){
+	public void analyzeInvalidOrderTest(){
 		stubFor(post(urlEqualTo("/v1/orders")).
 				willReturn(aResponse()
 						.withStatus(200)
@@ -148,7 +127,7 @@ public class KondutoTest {
 		KondutoOrder order = new KondutoOrder();
 
 		try {
-			Konduto.sendOrder(order, true);
+			Konduto.analyze(order);
 			fail("KondutoInvalidEntityException should have been thrown");
 		} catch (KondutoInvalidEntityException e) {
 			// nothing to do, because exception was expected
@@ -159,7 +138,7 @@ public class KondutoTest {
 
 
 	@Test
-	public void sendOrderHTTPErrorTest(){
+	public void analyzeHTTPErrorTest(){
 		for(int httpStatus: HTTP_STATUSES) {
 			stubFor(post(urlEqualTo("/v1/orders"))
 					.willReturn(aResponse()
@@ -167,7 +146,7 @@ public class KondutoTest {
 							.withHeader("Content-Type", "application/json")
 							.withBody("{}")));
 			try {
-				Konduto.sendOrder(KondutoOrderFactory.basicOrder(), true);
+				Konduto.analyze(KondutoOrderFactory.basicOrder());
 				fail("Exception expected");
 			} catch (KondutoHTTPException e) {
 				// nothing to do, because exception was expected
