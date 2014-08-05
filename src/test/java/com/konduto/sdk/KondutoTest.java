@@ -3,8 +3,10 @@ package com.konduto.sdk;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.konduto.sdk.exceptions.KondutoHTTPException;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
+import com.konduto.sdk.exceptions.KondutoInvalidOrderStatusException;
 import com.konduto.sdk.factories.KondutoOrderFactory;
 import com.konduto.sdk.models.KondutoOrder;
+import com.konduto.sdk.models.KondutoOrderStatus;
 import com.konduto.sdk.models.KondutoRecommendation;
 import org.apache.commons.httpclient.HttpStatus;
 import org.json.JSONObject;
@@ -18,6 +20,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -153,6 +157,79 @@ public class KondutoTest {
 			} catch (KondutoInvalidEntityException e) {
 				fail("order should be valid");
 			}
+		}
+	}
+
+	@Test
+	public void updateSuccessfullyTest(){
+		stubFor(put(urlEqualTo("/v1/orders/" + ORDER_ID))
+				.withRequestBody(equalTo("{\"status\":\"approved\",\"comments\":\"no comments\"}"))
+				.willReturn(aResponse()
+						.withStatus(200)
+						.withHeader("Content-Type", "application/json")
+						.withBody("{\"old_status\":\"review\",\"new_status\":\"approved\"}")));
+
+		boolean updateSucceeded = false;
+
+		try {
+			updateSucceeded = Konduto.updateOrderStatus(ORDER_ID, KondutoOrderStatus.APPROVED, "no comments");
+		} catch (KondutoHTTPException e) {
+			fail("status update should succeed");
+		} catch (KondutoInvalidOrderStatusException kondutoInvalidOrderStatusException) {
+			fail("status update should succeed");
+		}
+
+		assertTrue("update should succeeded", updateSucceeded);
+
+	}
+
+	@Test
+	public void updateHTTPErrorTest(){
+		for(int httpStatus : HTTP_STATUSES){
+			stubFor(put(urlEqualTo("/v1/orders/" + ORDER_ID))
+					.willReturn(aResponse()
+							.withStatus(httpStatus)
+							.withHeader("Content-Type", "application/json")
+							.withBody("{}")));
+		}
+
+		try {
+			Konduto.updateOrderStatus(ORDER_ID, KondutoOrderStatus.APPROVED, "no comments");
+			fail("exception expected");
+		} catch (KondutoHTTPException e) {
+			// nothing to do, because exception was expected
+		} catch (KondutoInvalidOrderStatusException kondutoInvalidOrderStatusException) {
+			fail("KondutoHTTPException was expected");
+		}
+	}
+
+	@Test
+	public void invalidStatusWhenUpdatingTest(){
+		List<KondutoOrderStatus> forbiddenStatus = Arrays.asList(
+			KondutoOrderStatus.NOT_ANALYZED,
+			KondutoOrderStatus.PENDING
+		);
+
+		for (KondutoOrderStatus status : forbiddenStatus) {
+			try {
+				Konduto.updateOrderStatus(ORDER_ID, status, "");
+				fail("expected KondutoInvalidOrderStatus exception");
+			} catch (KondutoHTTPException e) {
+				fail("expected KondutoInvalidOrderStatus exception");
+			} catch (KondutoInvalidOrderStatusException kondutoInvalidOrderStatusException) {
+				// nothing to do, because exception was expected
+			}
+		}
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void nullCommentsWhenUpdatingTest(){
+		try {
+			Konduto.updateOrderStatus(ORDER_ID, KondutoOrderStatus.APPROVED, null);
+		} catch (KondutoHTTPException e) {
+			fail("expected NullPointerException");
+		} catch (KondutoInvalidOrderStatusException kondutoInvalidOrderStatusException) {
+			fail("expected NullPointerException");
 		}
 	}
 
