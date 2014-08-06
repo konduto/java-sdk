@@ -102,7 +102,7 @@ public final class KondutoOrder extends KondutoModel {
 			try {
 				json.put("customer", this.customer.toJSON());
 			} catch (KondutoInvalidEntityException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return json;
