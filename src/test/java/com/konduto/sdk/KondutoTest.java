@@ -49,11 +49,7 @@ public class KondutoTest {
 	@Before
 	public void setupKonduto(){
 		Konduto.setEndpoint(URI.create("http://localhost:8080/v1"));
-		try {
-			Konduto.setApiKey(API_KEY);
-		} catch (KondutoInvalidApiKeyException e) {
-			e.printStackTrace();
-		}
+		Konduto.setApiKey(API_KEY);
 	}
 
 	@Test
@@ -183,7 +179,7 @@ public class KondutoTest {
 
 		try {
 			Konduto.updateOrderStatus(ORDER_ID, KondutoOrderStatus.APPROVED, "no comments");
-		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException | KondutoInvalidOrderStatusException e) {
+		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("order update should have succeeded");
 		}
 
@@ -205,12 +201,12 @@ public class KondutoTest {
 			fail("exception expected");
 		} catch (KondutoHTTPException e) {
 			// nothing to do, because exception was expected
-		} catch (KondutoInvalidOrderStatusException | KondutoUnexpectedAPIResponseException e) {
+		} catch (KondutoUnexpectedAPIResponseException e) {
 			fail("KondutoHTTPException was expected");
 		}
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void invalidStatusWhenUpdatingTest(){
 		List<KondutoOrderStatus> forbiddenStatus = Arrays.asList(
 			KondutoOrderStatus.NOT_ANALYZED,
@@ -223,8 +219,6 @@ public class KondutoTest {
 				fail("expected KondutoInvalidOrderStatus exception");
 			} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 				fail("expected KondutoInvalidOrderStatus exception");
-			} catch (KondutoInvalidOrderStatusException kondutoInvalidOrderStatusException) {
-				// nothing to do, because exception was expected
 			}
 		}
 	}
@@ -233,13 +227,13 @@ public class KondutoTest {
 	public void nullCommentsWhenUpdatingTest(){
 		try {
 			Konduto.updateOrderStatus(ORDER_ID, KondutoOrderStatus.APPROVED, null);
-		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException | KondutoInvalidOrderStatusException e) {
+		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("expected NullPointerException");
 		}
 	}
 
-	@Test(expected = KondutoInvalidApiKeyException.class)
-	public void invalidApiKeyTest() throws KondutoInvalidApiKeyException {
+	@Test(expected = IllegalArgumentException.class)
+	public void invalidApiKeyTest() {
 		Konduto.setApiKey("invalid key");
 	}
 
