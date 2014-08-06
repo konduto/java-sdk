@@ -62,7 +62,7 @@ public class KondutoTest {
 						.withHeader("Content-Type", "application/json")
 						.withBodyFile("order.json")));
 
-		KondutoOrder expectedOrder = KondutoOrder.fromJSON(
+		KondutoOrder expectedOrder = new KondutoOrder(
 				readJSONFromFile("__files/order.json"));
 
 		KondutoOrder actualOrder = null;
@@ -119,7 +119,7 @@ public class KondutoTest {
 		}
 
 		KondutoRecommendation actualRecommendation =
-				KondutoOrder.fromJSON(readJSONFromFile("__files/order.json")).getRecommendation();
+				new KondutoOrder(readJSONFromFile("__files/order.json")).getRecommendation();
 
 		assertEquals(orderToSend.getRecommendation(), actualRecommendation);
 

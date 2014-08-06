@@ -16,6 +16,8 @@ public final class KondutoCustomer extends KondutoModel {
 	private Boolean isVip;
 	private Boolean isNew;
 
+	public KondutoCustomer() { }
+
 	@Override
 	public boolean isValid() {
 		errors.clear();
@@ -40,21 +42,18 @@ public final class KondutoCustomer extends KondutoModel {
 		return json;
 	}
 
-	public static KondutoCustomer fromJSON(JSONObject json) {
-		KondutoCustomer customer = new KondutoCustomer();
+	public KondutoCustomer(JSONObject json) {
 		// required
-		customer.setId(json.getString("id"));
-		customer.setName(json.getString("name"));
-		customer.setEmail(json.getString("email"));
+		this.id = json.getString("id");
+		this.name = json.getString("name");
+		this.email = json.getString("email");
 
 		// optional
-		if(json.has("tax_id")) { customer.setTaxId(json.getString("tax_id")); }
-		if(json.has("phone1")) { customer.setPhone1(json.getString("phone1")); }
-		if(json.has("phone2")) { customer.setPhone2(json.getString("phone2")); }
-		if(json.has("is_new")) { customer.setIsNew(json.getBoolean("is_new")); }
-		if(json.has("is_vip")) { customer.setIsVip(json.getBoolean("is_vip")); }
-
-		return customer;
+		if(json.has("tax_id")) { this.taxId = json.getString("tax_id"); }
+		if(json.has("phone1")) { this.phone1 = json.getString("phone1"); }
+		if(json.has("phone2")) { this.phone2 = json.getString("phone2"); }
+		if(json.has("is_new")) { this.isNew = json.getBoolean("is_new"); }
+		if(json.has("is_vip")) { this.isVip = json.getBoolean("is_vip"); }
 	}
 
 	@Override

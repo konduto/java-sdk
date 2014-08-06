@@ -139,7 +139,7 @@ public final class Konduto {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
 		}
 
-		return KondutoOrder.fromJSON(responseBody);
+		return new KondutoOrder(responseBody);
 	}
 
 	public static void analyze(KondutoOrder order)
@@ -153,7 +153,7 @@ public final class Konduto {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
 		}
 
-		KondutoOrder.fromJSON(order, responseBody);
+		order.fromJSON(responseBody);
 
 	}
 

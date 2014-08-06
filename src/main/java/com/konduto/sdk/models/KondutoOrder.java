@@ -20,6 +20,9 @@ public final class KondutoOrder extends KondutoModel {
 	private Double score;
 	private KondutoCustomer customer;
 	private KondutoRecommendation recommendation;
+	private KondutoGeolocation geolocation;
+	private KondutoAddress shippingAddress;
+	private KondutoAddress billingAddress;
 
 	public KondutoOrderStatus getOrderStatus() {
 		return orderStatus;
@@ -108,35 +111,60 @@ public final class KondutoOrder extends KondutoModel {
 		return json;
 	}
 
-	public static void fromJSON(KondutoOrder order, JSONObject json) {
+	public KondutoOrder(){}
+
+	public KondutoGeolocation getGeolocation() {
+		return geolocation;
+	}
+
+	public void setGeolocation(KondutoGeolocation geolocation) {
+		this.geolocation = geolocation;
+	}
+
+	public KondutoAddress getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(KondutoAddress shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+
+	public KondutoAddress getBillingAddress() {
+		return billingAddress;
+	}
+
+	public void setBillingAddress(KondutoAddress billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+
+	public KondutoOrder(JSONObject json){
+		this.fromJSON(json);
+	}
+
+	public void fromJSON(JSONObject json) {
 		if(json.has("order")) { json = json.getJSONObject("order"); } // unwrap if necessary
 
 		// required fields
-		order.setId(json.getString("id"));
-		order.setTotalAmount(json.getDouble("total_amount"));
-		order.setCustomer(KondutoCustomer.fromJSON(json.getJSONObject("customer")));
+		this.id = json.getString("id");
+		this.totalAmount = json.getDouble("total_amount");
+		this.customer = new KondutoCustomer(json.getJSONObject("customer"));
 
 		// optional fields
-		if(json.has("visitor")) { order.setVisitor(json.getString("visitor")); }
-		if(json.has("timestamp")) { order.setTimestamp(json.getLong("timestamp")); }
-		if(json.has("shipping_amount")) { order.setShippingAmount(json.getDouble("shipping_amount")); }
-		if(json.has("tax_amount")) { order.setTaxAmount(json.getDouble("tax_amount")); }
-		if(json.has("currency")) { order.setCurrency(json.getString("currency")); }
-		if(json.has("installments")) { order.setInstallments(json.getInt("installments")); }
-		if(json.has("ip")) { order.setIp(json.getString("ip")); }
-		if(json.has("score")) { order.setScore(json.getDouble("score")); }
+		if(json.has("visitor")) { this.visitor = json.getString("visitor"); }
+		if(json.has("timestamp")) { this.timestamp = json.getLong("timestamp"); }
+		if(json.has("shipping_amount")) { this.shippingAmount = json.getDouble("shipping_amount"); }
+		if(json.has("tax_amount")) { this.taxAmount = json.getDouble("tax_amount"); }
+		if(json.has("currency")) { this.currency = json.getString("currency"); }
+		if(json.has("installments")) { this.installments = json.getInt("installments"); }
+		if(json.has("ip")) { this.ip = json.getString("ip"); }
+		if(json.has("score")) { this.score = json.getDouble("score"); }
 		if(json.has("recommendation")) {
-			order.setRecommendation(KondutoRecommendation.fromString(json.getString("recommendation")));
+			this.recommendation = KondutoRecommendation.fromString(json.getString("recommendation"));
 		}
-		if(json.has("status")) { order.setOrderStatus(KondutoOrderStatus.fromString(json.getString("status"))); }
-	}
-
-	public static KondutoOrder fromJSON(JSONObject json) {
-		KondutoOrder order = new KondutoOrder();
-
-		fromJSON(order, json);
-
-		return order;
+		if(json.has("status")) { this.orderStatus = KondutoOrderStatus.fromString(json.getString("status")); }
+		if(json.has("geolocation")) { this.geolocation = new KondutoGeolocation(json.getJSONObject("geolocation")); }
+		if(json.has("shipping")) { this.shippingAddress = new KondutoAddress(json.getJSONObject("shipping")); }
+		if(json.has("billing")) { this.billingAddress = new KondutoAddress(json.getJSONObject("billing")); }
 	}
 
 

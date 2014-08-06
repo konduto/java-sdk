@@ -28,7 +28,7 @@ public class KondutoCustomerTest {
 		KondutoCustomer expectedCustomer = KondutoCustomerFactory.completeCustomer();
 		KondutoCustomer actualCustomer = null;
 		try {
-			actualCustomer = KondutoCustomer.fromJSON(expectedCustomer.toJSON());
+			actualCustomer = new KondutoCustomer(expectedCustomer.toJSON());
 		} catch (KondutoInvalidEntityException e) {
 			e.printStackTrace();
 		}
@@ -40,7 +40,7 @@ public class KondutoCustomerTest {
 		KondutoCustomer expectedCustomer = KondutoCustomerFactory.basicCustomer();
 		KondutoCustomer actualCustomer = null;
 		try {
-			actualCustomer = KondutoCustomer.fromJSON(expectedCustomer.toJSON());
+			actualCustomer = new KondutoCustomer(expectedCustomer.toJSON());
 		} catch (KondutoInvalidEntityException e) {
 			e.printStackTrace();
 		}

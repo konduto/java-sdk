@@ -38,7 +38,7 @@ public class KondutoOrderTest {
 		KondutoOrder expectedOrder = KondutoOrderFactory.completeOrder();
 		KondutoOrder actualOrder = null;
 		try {
-			actualOrder = KondutoOrder.fromJSON(expectedOrder.toJSON());
+			actualOrder = new KondutoOrder(expectedOrder.toJSON());
 		} catch (KondutoInvalidEntityException e) {
 			e.printStackTrace();
 		}
@@ -50,7 +50,7 @@ public class KondutoOrderTest {
 		KondutoOrder expectedOrder = KondutoOrderFactory.basicOrder();
 		KondutoOrder actualOrder = null;
 		try {
-			actualOrder = KondutoOrder.fromJSON(expectedOrder.toJSON());
+			actualOrder = new KondutoOrder(expectedOrder.toJSON());
 		} catch (KondutoInvalidEntityException e) {
 			e.printStackTrace();
 		}
