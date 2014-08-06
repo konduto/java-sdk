@@ -37,8 +37,10 @@ public final class Konduto {
 
 	private Konduto() { /* cannot be instantiated */  }
 
-	public static void setApiKey(String apiKey) throws KondutoInvalidApiKeyException {
-		if (apiKey == null || apiKey.length() != 21) { throw new KondutoInvalidApiKeyException(apiKey); }
+	public static void setApiKey(String apiKey) {
+		if (apiKey == null || apiKey.length() != 21) {
+			throw new IllegalArgumentException("Illegal API Key: " + apiKey);
+		}
 		Konduto.apiKey = apiKey;
 	}
 
@@ -156,7 +158,7 @@ public final class Konduto {
 	}
 
 	public static void updateOrderStatus(String orderId, KondutoOrderStatus status, String comments)
-			throws KondutoHTTPException, KondutoInvalidOrderStatusException, KondutoUnexpectedAPIResponseException {
+			throws KondutoHTTPException, KondutoUnexpectedAPIResponseException {
 
 		List<KondutoOrderStatus> allowedStatuses = Arrays.asList(
 				KondutoOrderStatus.APPROVED,
@@ -164,7 +166,7 @@ public final class Konduto {
 				KondutoOrderStatus.FRAUD
 		);
 
-		if (!allowedStatuses.contains(status)){ throw new KondutoInvalidOrderStatusException(status); }
+		if (!allowedStatuses.contains(status)){ throw new IllegalArgumentException("Illegal status: " + status); }
 		if (comments == null){ throw new NullPointerException("comments cannot be null"); }
 
 		PutMethod putMethod = new PutMethod(kondutoPutOrderUrl(orderId).toString());
