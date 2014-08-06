@@ -133,7 +133,13 @@ public final class Konduto {
 			throws KondutoHTTPException, KondutoUnexpectedAPIResponseException {
 		GetMethod getMethod = new GetMethod(kondutoGetOrderUrl(orderId).toString());
 
-		JSONObject responseBody = sendRequest(getMethod, null);
+		JSONObject responseBody;
+
+		try {
+			 responseBody = sendRequest(getMethod, null);
+		} catch(KondutoHTTPException e) {
+			throw e;
+		}
 
 		if(responseBody == null || !responseBody.has("order")) {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
@@ -147,7 +153,13 @@ public final class Konduto {
 
 		PostMethod postMethod = new PostMethod(kondutoPostOrderUrl().toString());
 
-		JSONObject responseBody = sendRequest(postMethod, order.toJSON());
+		JSONObject responseBody;
+
+		try {
+			responseBody = sendRequest(postMethod, order.toJSON());
+		} catch(KondutoHTTPException e) {
+			throw e;
+		}
 
 		if(responseBody == null || !responseBody.has("order")) {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
@@ -175,7 +187,13 @@ public final class Konduto {
 		requestBody.put("status", status.getText());
 		requestBody.put("comments", comments);
 
-		JSONObject responseBody = sendRequest(putMethod, requestBody);
+		JSONObject responseBody;
+
+		try {
+			responseBody = sendRequest(putMethod, requestBody);
+		} catch(KondutoHTTPException e) {
+			throw e;
+		}
 
 		if (responseBody == null || !responseBody.has("old_status") || !responseBody.has("new_status")) {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
