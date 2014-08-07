@@ -14,11 +14,6 @@ public class KondutoGeolocation extends KondutoModel {
 	public KondutoGeolocation() { }
 
 	@Override
-	public boolean isValid() {
-		return true;
-	}
-
-	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (!(o instanceof KondutoGeolocation)) return false;
@@ -30,14 +25,6 @@ public class KondutoGeolocation extends KondutoModel {
 		if (state != null ? !state.equals(that.state) : that.state != null) return false;
 
 		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = city != null ? city.hashCode() : 0;
-		result = 31 * result + (state != null ? state.hashCode() : 0);
-		result = 31 * result + (country != null ? country.hashCode() : 0);
-		return result;
 	}
 
 	@Override

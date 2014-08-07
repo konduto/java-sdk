@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import org.json.JSONObject;
 
@@ -15,11 +16,6 @@ public class KondutoAddress extends KondutoModel {
 	private KondutoGeolocation geolocation;
 
 	public KondutoAddress() { super(); }
-
-	@Override
-	public boolean isValid() {
-		return true;
-	}
 
 	@Override
 	public JSONObject toJSON() throws KondutoInvalidEntityException {
@@ -51,16 +47,6 @@ public class KondutoAddress extends KondutoModel {
 		if (zip != null ? !zip.equals(that.zip) : that.zip != null) return false;
 
 		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = name != null ? name.hashCode() : 0;
-		result = 31 * result + (address1 != null ? address1.hashCode() : 0);
-		result = 31 * result + (address2 != null ? address2.hashCode() : 0);
-		result = 31 * result + (zip != null ? zip.hashCode() : 0);
-		result = 31 * result + (geolocation != null ? geolocation.hashCode() : 0);
-		return result;
 	}
 
 	public KondutoAddress(JSONObject json) {

@@ -33,6 +33,8 @@ public class KondutoTest {
 	private static final String AUTH_HEADER = "Basic VDczOEQ1MTZGMDlDQUIzQTJDMUVF";
 	private static final String API_KEY = "T738D516F09CAB3A2C1EE";
 
+	private static final JSONObject JSON_FROM_FILE = readJSONFromFile("__files/order.json");
+
 	private static final int[] HTTP_STATUSES = {
 			HttpStatus.SC_UNAUTHORIZED, // 401
 			HttpStatus.SC_FORBIDDEN, // 403
@@ -62,8 +64,7 @@ public class KondutoTest {
 						.withHeader("Content-Type", "application/json")
 						.withBodyFile("order.json")));
 
-		KondutoOrder expectedOrder = new KondutoOrder(
-				readJSONFromFile("__files/order.json"));
+		KondutoOrder expectedOrder = new KondutoOrder(JSON_FROM_FILE);
 
 		KondutoOrder actualOrder = null;
 
@@ -118,8 +119,9 @@ public class KondutoTest {
 			fail("server should respond with status 200");
 		}
 
+
 		KondutoRecommendation actualRecommendation =
-				new KondutoOrder(readJSONFromFile("__files/order.json")).getRecommendation();
+				new KondutoOrder(JSON_FROM_FILE).getRecommendation();
 
 		assertEquals(orderToSend.getRecommendation(), actualRecommendation);
 
@@ -238,13 +240,15 @@ public class KondutoTest {
 	}
 
 
-	private JSONObject readJSONFromFile(String resourceName) {
+	private static JSONObject readJSONFromFile(String resourceName) {
 		try {
 			URL resource = Thread.currentThread().getContextClassLoader().getResource(resourceName);
 			if(resource != null) {
 				URI uri = resource.toURI();
 				byte[] bytes = Files.readAllBytes(Paths.get(uri));
 				return new JSONObject(new String(bytes, "UTF-8"));
+			} else {
+				throw new IllegalArgumentException(resourceName + " is an invalid resource name");
 			}
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();

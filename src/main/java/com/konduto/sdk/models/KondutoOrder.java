@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import org.json.JSONObject;
 
@@ -8,17 +9,18 @@ import org.json.JSONObject;
  */
 public final class KondutoOrder extends KondutoModel {
 
+	@Required
 	private String id;
 	private String visitor;
 	private Long timestamp;
-	private Double totalAmount;
+	@Required private Double totalAmount;
 	private Double shippingAmount;
 	private Double taxAmount;
 	private String currency;
 	private Integer installments;
 	private String ip;
 	private Double score;
-	private KondutoCustomer customer;
+	@Required private KondutoCustomer customer;
 	private KondutoRecommendation recommendation;
 	private KondutoGeolocation geolocation;
 	private KondutoAddress shippingAddress;
@@ -55,35 +57,6 @@ public final class KondutoOrder extends KondutoModel {
 		if (visitor != null ? !visitor.equals(that.visitor) : that.visitor != null) return false;
 
 		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = id.hashCode();
-		result = 31 * result + (visitor != null ? visitor.hashCode() : 0);
-		result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
-		result = 31 * result + totalAmount.hashCode();
-		result = 31 * result + (shippingAmount != null ? shippingAmount.hashCode() : 0);
-		result = 31 * result + (taxAmount != null ? taxAmount.hashCode() : 0);
-		result = 31 * result + (currency != null ? currency.hashCode() : 0);
-		result = 31 * result + (installments != null ? installments.hashCode() : 0);
-		result = 31 * result + (ip != null ? ip.hashCode() : 0);
-		result = 31 * result + (score != null ? score.hashCode() : 0);
-		result = 31 * result + customer.hashCode();
-		return result;
-	}
-
-	@Override
-	public boolean isValid() {
-		errors.clear();
-		if(this.id == null || this.id.isEmpty()) { isRequiredError("id"); }
-		if(this.totalAmount == null) { isRequiredError("totalAmount"); }
-		if(this.customer == null) {
-			isRequiredError("customer");
-		} else {
-			if(!this.customer.isValid()) { isInvalidError("customer"); }
-		}
-		return errors.isEmpty();
 	}
 
 	@Override
@@ -142,6 +115,7 @@ public final class KondutoOrder extends KondutoModel {
 	}
 
 	public void fromJSON(JSONObject json) {
+
 		if(json.has("order")) { json = json.getJSONObject("order"); } // unwrap if necessary
 
 		// required fields

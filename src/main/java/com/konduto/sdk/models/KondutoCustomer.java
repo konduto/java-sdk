@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import org.json.JSONObject;
 
@@ -7,9 +8,9 @@ import org.json.JSONObject;
  * Created by rsampaio on 31/07/14.
  */
 public final class KondutoCustomer extends KondutoModel {
-	private String id;
-	private String name;
-	private String email;
+	@Required private String id;
+	@Required private String name;
+	@Required private String email;
 	private String taxId;
 	private String phone1;
 	private String phone2;
@@ -17,15 +18,6 @@ public final class KondutoCustomer extends KondutoModel {
 	private Boolean isNew;
 
 	public KondutoCustomer() { }
-
-	@Override
-	public boolean isValid() {
-		errors.clear();
-		if(id == null) { isRequiredError("id"); }
-		if(name == null) { isRequiredError("name"); }
-		if(email == null) { isRequiredError("email"); }
-		return errors.isEmpty();
-	}
 
 	@Override
 	public JSONObject toJSON() throws KondutoInvalidEntityException {
@@ -76,19 +68,6 @@ public final class KondutoCustomer extends KondutoModel {
 		if (taxId != null ? !taxId.equals(that.taxId) : that.taxId != null) return false;
 
 		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		result = 31 * result + (taxId != null ? taxId.hashCode() : 0);
-		result = 31 * result + (phone1 != null ? phone1.hashCode() : 0);
-		result = 31 * result + (phone2 != null ? phone2.hashCode() : 0);
-		result = 31 * result + (email != null ? email.hashCode() : 0);
-		result = 31 * result + (isVip != null ? isVip.hashCode() : 0);
-		result = 31 * result + (isNew != null ? isNew.hashCode() : 0);
-		return result;
 	}
 
 	public String getName() {
