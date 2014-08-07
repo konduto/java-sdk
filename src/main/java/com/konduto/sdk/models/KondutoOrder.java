@@ -47,8 +47,8 @@ public final class KondutoOrder extends KondutoModel {
 	@SerializedName("billing")
 	private KondutoAddress billingAddress;
 
-	@SerializedName("payment")
-	private List<KondutoPayment> payments;
+//	@SerializedName("payment")
+//	private List<KondutoPayment> payments;
 
 	private KondutoOrderStatus status;
 
@@ -56,7 +56,6 @@ public final class KondutoOrder extends KondutoModel {
 	public KondutoOrder() {}
 
 	/* equals */
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

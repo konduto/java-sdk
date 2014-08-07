@@ -18,9 +18,19 @@ public class KondutoModelTest {
 
 		private KondutoDummyModelInternalModel internal = new KondutoDummyModelInternalModel();
 
+		@Override
+		public boolean equals(Object obj) {
+			return true;
+		}
+
 		private class KondutoDummyModelInternalModel extends KondutoModel {
 			@Required
 			private String internalModelDummyField;
+
+			@Override
+			public boolean equals(Object obj) {
+				return true;
+			}
 		}
 	}
 

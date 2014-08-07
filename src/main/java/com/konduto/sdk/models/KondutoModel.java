@@ -18,6 +18,9 @@ import java.util.List;
 public abstract class KondutoModel {
 	protected KondutoModel(){ }
 
+	@Override
+	public abstract boolean equals(Object obj);
+
 	/* Transient and static attributes won't be included in serialization */
 	protected static Gson gson = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
