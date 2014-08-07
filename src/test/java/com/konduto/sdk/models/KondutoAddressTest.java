@@ -2,9 +2,11 @@ package com.konduto.sdk.models;
 
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoAddressFactory;
+import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
@@ -12,47 +14,21 @@ import static org.junit.Assert.fail;
  */
 public class KondutoAddressTest {
 	@Test
-	public void serializationWithoutGeolocation(){
-		KondutoAddress expectedAddress = KondutoAddressFactory.addressWithoutGeolocation();
-		KondutoAddress actualAddress = null;
+	public void serializeTest(){
+		String expectedJSON = TestUtils.readJSONFromFile("address.json");
+		String actualJSON = null;
 
+		KondutoAddress address = KondutoAddressFactory.getAddress();
 		try {
-			actualAddress = new KondutoAddress(expectedAddress.toJSON());
+			actualJSON = address.toJSON();
 		} catch (KondutoInvalidEntityException e) {
-			fail("actual address should be valid");
+			fail("address should be valid");
 		}
 
-		assertEquals("address serialization should have succeeded", expectedAddress, actualAddress);
+		assertEquals("address serialization failed", expectedJSON, actualJSON);
 
+		KondutoAddress addressFromJSON = (KondutoAddress) KondutoModel.fromJSON(expectedJSON, KondutoAddress.class);
+
+		assertEquals("address deserialization failed", address, addressFromJSON);
 	}
-
-	@Test
-	public void serializationWithGeolocation() {
-		KondutoAddress expectedAddress = KondutoAddressFactory.addressWithGeolocation();
-		KondutoAddress actualAddress = null;
-
-		try {
-			actualAddress = new KondutoAddress(expectedAddress.toJSON());
-		} catch (KondutoInvalidEntityException e) {
-			fail("actual address should be valid");
-		}
-
-		assertEquals("address serialization should have succeeded", expectedAddress, actualAddress);
-
-	}
-
-	@Test
-	public void serializeGeolocation(){
-		KondutoGeolocation geolocation = KondutoAddressFactory.getGeolocation();
-		KondutoGeolocation actualGeolocation = null;
-
-		try {
-			actualGeolocation = new KondutoGeolocation(geolocation.toJSON());
-		} catch (KondutoInvalidEntityException e) {
-			fail("actual geolocation should be valid");
-		}
-
-		assertEquals("address serialization should have succeeded", geolocation, actualGeolocation);
-	}
-
 }

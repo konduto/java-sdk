@@ -10,7 +10,7 @@ import org.junit.Test;
 public class KondutoUnexpectedAPIResponseExceptionTest {
 	@Test
 	public void getMessageTest() {
-		JSONObject responseBody = new JSONObject();
+		String responseBody = "";
 		KondutoUnexpectedAPIResponseException e = new KondutoUnexpectedAPIResponseException(responseBody);
 		Assert.assertEquals("Unexpected API response: " + responseBody, e.getMessage());
 	}

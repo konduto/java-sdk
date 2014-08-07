@@ -1,7 +1,13 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoCustomerFactory;
+import com.konduto.sdk.factories.KondutoOrderFactory;
+import com.konduto.sdk.utils.TestUtils;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -24,27 +30,20 @@ public class KondutoCustomerTest {
 	}
 
 	@Test
-	public void serializationTest() {
-		KondutoCustomer expectedCustomer = KondutoCustomerFactory.completeCustomer();
-		KondutoCustomer actualCustomer = null;
+	public void serializationTest(){
+		KondutoCustomer customer = KondutoCustomerFactory.completeCustomer();
+		String customerJSON = TestUtils.readJSONFromFile("customer.json");
 		try {
-			actualCustomer = new KondutoCustomer(expectedCustomer.toJSON());
+			assertEquals("serialization failed", customerJSON, customer.toJSON());
 		} catch (KondutoInvalidEntityException e) {
 			e.printStackTrace();
 		}
-		assertEquals("actual customer should equal the expected customer", expectedCustomer, actualCustomer);
-	}
 
-	@Test
-	public void serializationWithOptFieldsTest() {
-		KondutoCustomer expectedCustomer = KondutoCustomerFactory.basicCustomer();
-		KondutoCustomer actualCustomer = null;
-		try {
-			actualCustomer = new KondutoCustomer(expectedCustomer.toJSON());
-		} catch (KondutoInvalidEntityException e) {
-			e.printStackTrace();
-		}
-		assertEquals("actual customer should equal the expected customer", expectedCustomer, actualCustomer);
+		KondutoCustomer deserializedCustomer = (KondutoCustomer)
+				KondutoModel.fromJSON(customerJSON, KondutoCustomer.class);
+
+		assertEquals("deserialization failed", customer, deserializedCustomer);
+
 	}
 
 	@Test(expected=KondutoInvalidEntityException.class)

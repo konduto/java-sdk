@@ -1,52 +1,29 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
-import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
-import org.json.JSONObject;
 
 /**
  * Created by rsampaio on 31/07/14.
  */
 public final class KondutoCustomer extends KondutoModel {
+
+	/* Attributes */
+
 	@Required private String id;
 	@Required private String name;
 	@Required private String email;
 	private String taxId;
 	private String phone1;
 	private String phone2;
-	private Boolean isVip;
-	private Boolean isNew;
+	@SerializedName("vip") private Boolean isVip;
+	@SerializedName("new") private Boolean isNew;
+
+	/* Constructors */
 
 	public KondutoCustomer() { }
 
-	@Override
-	public JSONObject toJSON() throws KondutoInvalidEntityException {
-		if(!this.isValid()){ throw new KondutoInvalidEntityException(this); }
-		JSONObject json = new JSONObject();
-		json.put("id", this.id);
-		json.put("name", this.name);
-		json.put("email", this.email);
-		json.put("tax_id", this.taxId);
-		json.put("phone1", this.phone1);
-		json.put("phone2", this.phone2);
-		json.put("is_vip", this.isVip);
-		json.put("is_new", this.isNew);
-		return json;
-	}
-
-	public KondutoCustomer(JSONObject json) {
-		// required
-		this.id = json.getString("id");
-		this.name = json.getString("name");
-		this.email = json.getString("email");
-
-		// optional
-		if(json.has("tax_id")) { this.taxId = json.getString("tax_id"); }
-		if(json.has("phone1")) { this.phone1 = json.getString("phone1"); }
-		if(json.has("phone2")) { this.phone2 = json.getString("phone2"); }
-		if(json.has("is_new")) { this.isNew = json.getBoolean("is_new"); }
-		if(json.has("is_vip")) { this.isVip = json.getBoolean("is_vip"); }
-	}
+	/* Equals */
 
 	@Override
 	public boolean equals(Object o) {
@@ -69,6 +46,8 @@ public final class KondutoCustomer extends KondutoModel {
 
 		return true;
 	}
+
+	/* Getters and Setters */
 
 	public String getName() {
 		return name;

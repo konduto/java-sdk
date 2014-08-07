@@ -3,21 +3,18 @@ package com.konduto.sdk;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.konduto.sdk.exceptions.*;
 import com.konduto.sdk.factories.KondutoOrderFactory;
+import com.konduto.sdk.models.KondutoModel;
 import com.konduto.sdk.models.KondutoOrder;
 import com.konduto.sdk.models.KondutoOrderStatus;
 import com.konduto.sdk.models.KondutoRecommendation;
+import com.konduto.sdk.utils.TestUtils;
 import org.apache.commons.httpclient.HttpStatus;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,15 +22,18 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.Assert.*;
 
 /**
- * Created by rsampaio on 30/07/14.
- */
+* Created by rsampaio on 30/07/14.
+*/
 public class KondutoTest {
 	private static final String ORDER_ID = "1406910391037";
 
 	private static final String AUTH_HEADER = "Basic VDczOEQ1MTZGMDlDQUIzQTJDMUVF";
 	private static final String API_KEY = "T738D516F09CAB3A2C1EE";
 
-	private static final JSONObject JSON_FROM_FILE = readJSONFromFile("__files/order.json");
+	private static final JSONObject JSON_FROM_FILE =
+			new JSONObject(TestUtils.readJSONFromFile("__files/order.json")).getJSONObject("order");
+	private static final KondutoOrder ORDER_FROM_FILE =
+			(KondutoOrder) KondutoModel.fromJSON(JSON_FROM_FILE.toString(), KondutoOrder.class);
 
 	private static final int[] HTTP_STATUSES = {
 			HttpStatus.SC_UNAUTHORIZED, // 401
@@ -64,8 +64,6 @@ public class KondutoTest {
 						.withHeader("Content-Type", "application/json")
 						.withBodyFile("order.json")));
 
-		KondutoOrder expectedOrder = new KondutoOrder(JSON_FROM_FILE);
-
 		KondutoOrder actualOrder = null;
 
 		try {
@@ -74,7 +72,8 @@ public class KondutoTest {
 			fail("[GET] should succeed");
 		}
 
-		assertEquals(expectedOrder, actualOrder);
+		assertEquals(ORDER_FROM_FILE, actualOrder);
+
 	}
 
 	@Test
@@ -120,10 +119,11 @@ public class KondutoTest {
 		}
 
 
-		KondutoRecommendation actualRecommendation =
-				new KondutoOrder(JSON_FROM_FILE).getRecommendation();
+		KondutoRecommendation actualRecommendation = ORDER_FROM_FILE.getRecommendation();
+		KondutoOrderStatus actualStatus = ORDER_FROM_FILE.getStatus();
 
 		assertEquals(orderToSend.getRecommendation(), actualRecommendation);
+		assertEquals(orderToSend.getStatus(), actualStatus);
 
 	}
 
@@ -237,23 +237,6 @@ public class KondutoTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void invalidApiKeyTest() {
 		Konduto.setApiKey("invalid key");
-	}
-
-
-	private static JSONObject readJSONFromFile(String resourceName) {
-		try {
-			URL resource = Thread.currentThread().getContextClassLoader().getResource(resourceName);
-			if(resource != null) {
-				URI uri = resource.toURI();
-				byte[] bytes = Files.readAllBytes(Paths.get(uri));
-				return new JSONObject(new String(bytes, "UTF-8"));
-			} else {
-				throw new IllegalArgumentException(resourceName + " is an invalid resource name");
-			}
-		} catch (IOException | URISyntaxException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 }

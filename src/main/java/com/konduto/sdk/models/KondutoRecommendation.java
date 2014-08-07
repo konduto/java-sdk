@@ -1,12 +1,18 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by rsampaio on 01/08/14.
  */
 public enum KondutoRecommendation {
+	@SerializedName("approve")
 	APPROVE("approve"),
+	@SerializedName("review")
 	REVIEW("review"),
+	@SerializedName("decline")
 	DECLINE("decline"),
+	@SerializedName("none")
 	NONE("none");
 
 	private String text;

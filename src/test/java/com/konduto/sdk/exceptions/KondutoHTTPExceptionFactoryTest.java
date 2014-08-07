@@ -32,7 +32,7 @@ public class KondutoHTTPExceptionFactoryTest {
 			JSONObject responseBody = new JSONObject();
 			responseBody.put("status_code", statusCode);
 			Class klass = entry.getValue();
-			KondutoHTTPException exception = KondutoHTTPExceptionFactory.buildException(statusCode, responseBody);
+			KondutoHTTPException exception = KondutoHTTPExceptionFactory.buildException(statusCode, responseBody.toString());
 			assertEquals(klass, exception.getClass());
 		}
 	}

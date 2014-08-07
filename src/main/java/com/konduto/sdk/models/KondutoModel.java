@@ -1,8 +1,10 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
-import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -14,8 +16,26 @@ import java.util.List;
  * Created by rsampaio on 31/07/14.
  */
 public abstract class KondutoModel {
-	protected List<String> errors = new ArrayList<>();
+	protected KondutoModel(){ }
 
+	/* Transient and static attributes won't be included in serialization */
+	protected static Gson gson = new GsonBuilder()
+			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+			.create();
+
+	protected transient List<String> errors = new ArrayList<>();
+
+	/* Serialization methods */
+	public String toJSON() throws KondutoInvalidEntityException{
+		if(!this.isValid()) { throw new KondutoInvalidEntityException(this); }
+		return gson.toJson(this);
+	}
+
+	public static KondutoModel fromJSON(String json, Class<?> klass){
+		return (KondutoModel) gson.fromJson(json, klass);
+	}
+
+	/* Error printing methods */
 	public String getErrors(){
 		StringBuilder errors = new StringBuilder();
 		for(String error : this.errors) {
@@ -24,8 +44,6 @@ public abstract class KondutoModel {
 		}
 		return this.getClass().getSimpleName() + errors.toString();
 	}
-
-	public abstract JSONObject toJSON() throws KondutoInvalidEntityException;
 
 	void addIsRequiredError(Field field, Object value) {
 		if(value != null) {
@@ -45,6 +63,8 @@ public abstract class KondutoModel {
 		this.errors.add(errors);
 	}
 
+
+	/* Validation method */
 	public boolean isValid() {
 		errors.clear();
 		Object value;
@@ -86,5 +106,4 @@ public abstract class KondutoModel {
 		return errors.isEmpty();
 
 	}
-
 }

@@ -8,7 +8,7 @@ import org.json.JSONObject;
 public abstract class KondutoHTTPException extends KondutoException {
 	private String message;
 
-	protected KondutoHTTPException(String message, JSONObject responseBody){
+	protected KondutoHTTPException(String message, String responseBody){
 		this.message = String.format("%s - Response body: %s", message, responseBody);
 	}
 

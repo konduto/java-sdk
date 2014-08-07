@@ -7,9 +7,9 @@ import org.json.JSONObject;
  * Created by rsampaio on 01/08/14.
  */
 public abstract class KondutoHTTPExceptionFactory {
-	private static JSONObject responseBody;
+	private static String responseBody;
 
-	public static KondutoHTTPException buildException(int statusCode, JSONObject responseBody) {
+	public static KondutoHTTPException buildException(int statusCode, String responseBody) {
 		KondutoHTTPExceptionFactory.responseBody = responseBody;
 		switch(statusCode) {
 			case HttpStatus.SC_BAD_REQUEST:

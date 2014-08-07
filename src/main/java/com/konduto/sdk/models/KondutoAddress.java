@@ -1,66 +1,53 @@
 package com.konduto.sdk.models;
 
-import com.konduto.sdk.annotations.Required;
-import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
-import org.json.JSONObject;
-
 /**
  * Created by rsampaio on 05/08/14.
  */
 public class KondutoAddress extends KondutoModel {
 
+	/* Attributes */
+
 	private String name;
 	private String address1;
 	private String address2;
 	private String zip;
-	private KondutoGeolocation geolocation;
+	private String city;
+	private String state;
+	private String country;
 
-	public KondutoAddress() { super(); }
+	/* Constructors */
 
-	@Override
-	public JSONObject toJSON() throws KondutoInvalidEntityException {
-		if(!isValid()) { throw new KondutoInvalidEntityException(this); }
-		JSONObject json = new JSONObject();
-		if(this.name != null) json.put("name", this.name);
-		if(this.address1 != null) json.put("address1", this.address1);
-		if(this.address2 != null) json.put("address2", this.address2);
-		if(this.geolocation != null) {
-			if(this.geolocation.getCity() != null) json.put("city", this.geolocation.getCity());
-			if(this.geolocation.getState() != null) json.put("state", this.geolocation.getState());
-			if(this.geolocation.getCountry() != null) json.put("country", this.geolocation.getCountry());
-		}
-		if(this.zip != null) json.put("zip", this.zip);
-		return json;
-	}
+	public KondutoAddress() { }
+
+	/* Equals */
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
+
 		if (!(o instanceof KondutoAddress)) return false;
 
 		KondutoAddress that = (KondutoAddress) o;
 
 		if (address1 != null ? !address1.equals(that.address1) : that.address1 != null) return false;
 		if (address2 != null ? !address2.equals(that.address2) : that.address2 != null) return false;
-		if (geolocation != null ? !geolocation.equals(that.geolocation) : that.geolocation != null) return false;
+		if (city != null ? !city.equals(that.city) : that.city != null) return false;
+		if (country != null ? !country.equals(that.country) : that.country != null) return false;
 		if (name != null ? !name.equals(that.name) : that.name != null) return false;
+		if (state != null ? !state.equals(that.state) : that.state != null) return false;
 		if (zip != null ? !zip.equals(that.zip) : that.zip != null) return false;
 
 		return true;
 	}
 
-	public KondutoAddress(JSONObject json) {
-		if(json != null) {
-			if(json.has("name")) this.name = json.getString("name");
-			if(json.has("address1")) this.address1 = json.getString("address1");
-			if(json.has("address2")) this.address2 = json.getString("address2");
-			if(json.has("zip")) this.zip = json.getString("zip");
-			if(json.has("city") || json.has("state") || json.has("country")) {
-				this.geolocation = new KondutoGeolocation(json);
-			} else if(json.has("geolocation")) {
-				this.geolocation = new KondutoGeolocation(json.getJSONObject("geolocation"));
-			}
-		}
+	/* Getters and Setters */
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAddress1() {
@@ -87,39 +74,27 @@ public class KondutoAddress extends KondutoModel {
 		this.zip = zip;
 	}
 
-	public String getName() {
-		return name;
+	public String getCity() {
+		return city;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public void setCity(String city){
-		if(this.geolocation == null) { this.geolocation = new KondutoGeolocation(); }
-		this.geolocation.setCity(city);
+	public String getState() {
+		return state;
 	}
 
-	public void setState(String state){
-		if(this.geolocation == null) { this.geolocation = new KondutoGeolocation(); }
-		this.geolocation.setState(state);
+	public void setState(String state) {
+		this.state = state;
 	}
 
-	public void setCountry(String country){
-		if(this.geolocation == null) { this.geolocation = new KondutoGeolocation(); }
-		this.geolocation.setCountry(country);
+	public String getCountry() {
+		return country;
 	}
 
-	public void getCity(){
-		this.geolocation.getCity();
+	public void setCountry(String country) {
+		this.country = country;
 	}
-
-	public void getState(){
-		this.geolocation.getState();
-	}
-
-	public void getCountry(){
-		this.geolocation.getCountry();
-	}
-
 }

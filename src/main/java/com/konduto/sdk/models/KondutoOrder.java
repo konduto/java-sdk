@@ -1,90 +1,108 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
-import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * Created by rsampaio on 31/07/14.
  */
 public final class KondutoOrder extends KondutoModel {
 
+	/* Attributes */
+
 	@Required
 	private String id;
+
 	private String visitor;
+
 	private Long timestamp;
-	@Required private Double totalAmount;
+
+	@Required
+	private Double totalAmount;
+
 	private Double shippingAmount;
+
 	private Double taxAmount;
+
 	private String currency;
+
 	private Integer installments;
+
 	private String ip;
+
 	private Double score;
-	@Required private KondutoCustomer customer;
+
+	@Required
+	private KondutoCustomer customer;
+
 	private KondutoRecommendation recommendation;
+
 	private KondutoGeolocation geolocation;
+
+	@SerializedName("shipping")
 	private KondutoAddress shippingAddress;
+
+	@SerializedName("billing")
 	private KondutoAddress billingAddress;
 
-	public KondutoOrderStatus getOrderStatus() {
-		return orderStatus;
-	}
+	private KondutoOrderStatus status;
 
-	protected void setOrderStatus(KondutoOrderStatus orderStatus) {
-		this.orderStatus = orderStatus;
-	}
+	/* Constructors */
+	public KondutoOrder() {}
 
-	private KondutoOrderStatus orderStatus;
+	/* equals */
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (!(o instanceof KondutoOrder)) return false;
 
-		KondutoOrder that = (KondutoOrder) o;
+		KondutoOrder order = (KondutoOrder) o;
 
-		if (currency != null ? !currency.equals(that.currency) : that.currency != null) return false;
-		if (!customer.equals(that.customer)) return false;
-		if (!id.equals(that.id)) return false;
-		if (installments != null ? !installments.equals(that.installments) : that.installments != null) return false;
-		if (ip != null ? !ip.equals(that.ip) : that.ip != null) return false;
-		if (score != null ? !score.equals(that.score) : that.score != null) return false;
-		if (shippingAmount != null ? !shippingAmount.equals(that.shippingAmount) : that.shippingAmount != null)
+		if (billingAddress != null ? !billingAddress.equals(order.billingAddress) : order.billingAddress != null)
 			return false;
-		if (taxAmount != null ? !taxAmount.equals(that.taxAmount) : that.taxAmount != null) return false;
-		if (timestamp != null ? !timestamp.equals(that.timestamp) : that.timestamp != null) return false;
-		if (!totalAmount.equals(that.totalAmount)) return false;
-		if (visitor != null ? !visitor.equals(that.visitor) : that.visitor != null) return false;
+		if (currency != null ? !currency.equals(order.currency) : order.currency != null) return false;
+		if (!customer.equals(order.customer)) return false;
+		if (geolocation != null ? !geolocation.equals(order.geolocation) : order.geolocation != null) return false;
+		if (!id.equals(order.id)) return false;
+		if (installments != null ? !installments.equals(order.installments) : order.installments != null) return false;
+		if (ip != null ? !ip.equals(order.ip) : order.ip != null) return false;
+		if (recommendation != order.recommendation) return false;
+		if (score != null ? !score.equals(order.score) : order.score != null) return false;
+		if (shippingAddress != null ? !shippingAddress.equals(order.shippingAddress) : order.shippingAddress != null)
+			return false;
+		if (shippingAmount != null ? !shippingAmount.equals(order.shippingAmount) : order.shippingAmount != null)
+			return false;
+		if (status != order.status) return false;
+		if (taxAmount != null ? !taxAmount.equals(order.taxAmount) : order.taxAmount != null) return false;
+		if (timestamp != null ? !timestamp.equals(order.timestamp) : order.timestamp != null) return false;
+		if (!totalAmount.equals(order.totalAmount)) return false;
+		if (visitor != null ? !visitor.equals(order.visitor) : order.visitor != null) return false;
 
 		return true;
 	}
 
 	@Override
-	public JSONObject toJSON() throws KondutoInvalidEntityException {
-		if(!this.isValid()){ throw new KondutoInvalidEntityException(this); }
-		JSONObject json = new JSONObject();
-		json.put("id", this.id);
-		json.put("visitor", this.visitor);
-		json.put("timestamp", this.timestamp);
-		json.put("total_amount", this.totalAmount);
-		json.put("shipping_amount", this.shippingAmount);
-		json.put("tax_amount", this.taxAmount);
-		json.put("currency", this.currency);
-		json.put("installments", this.installments);
-		json.put("ip", this.ip);
-		json.put("score", this.score);
-
-		if(this.customer != null) {
-			try {
-				json.put("customer", this.customer.toJSON());
-			} catch (KondutoInvalidEntityException e) {
-				throw e;
-			}
-		}
-		return json;
+	public int hashCode() {
+		int result = geolocation != null ? geolocation.hashCode() : 0;
+		result = 31 * result + (shippingAddress != null ? shippingAddress.hashCode() : 0);
+		result = 31 * result + (billingAddress != null ? billingAddress.hashCode() : 0);
+		result = 31 * result + (status != null ? status.hashCode() : 0);
+		return result;
 	}
 
-	public KondutoOrder(){}
+	/* getters and setters */
+	public KondutoOrderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(KondutoOrderStatus status) {
+		this.status = status;
+	}
 
 	public KondutoGeolocation getGeolocation() {
 		return geolocation;
@@ -109,38 +127,6 @@ public final class KondutoOrder extends KondutoModel {
 	public void setBillingAddress(KondutoAddress billingAddress) {
 		this.billingAddress = billingAddress;
 	}
-
-	public KondutoOrder(JSONObject json){
-		this.fromJSON(json);
-	}
-
-	public void fromJSON(JSONObject json) {
-
-		if(json.has("order")) { json = json.getJSONObject("order"); } // unwrap if necessary
-
-		// required fields
-		this.id = json.getString("id");
-		this.totalAmount = json.getDouble("total_amount");
-		this.customer = new KondutoCustomer(json.getJSONObject("customer"));
-
-		// optional fields
-		if(json.has("visitor")) { this.visitor = json.getString("visitor"); }
-		if(json.has("timestamp")) { this.timestamp = json.getLong("timestamp"); }
-		if(json.has("shipping_amount")) { this.shippingAmount = json.getDouble("shipping_amount"); }
-		if(json.has("tax_amount")) { this.taxAmount = json.getDouble("tax_amount"); }
-		if(json.has("currency")) { this.currency = json.getString("currency"); }
-		if(json.has("installments")) { this.installments = json.getInt("installments"); }
-		if(json.has("ip")) { this.ip = json.getString("ip"); }
-		if(json.has("score")) { this.score = json.getDouble("score"); }
-		if(json.has("recommendation")) {
-			this.recommendation = KondutoRecommendation.fromString(json.getString("recommendation"));
-		}
-		if(json.has("status")) { this.orderStatus = KondutoOrderStatus.fromString(json.getString("status")); }
-		if(json.has("geolocation")) { this.geolocation = new KondutoGeolocation(json.getJSONObject("geolocation")); }
-		if(json.has("shipping")) { this.shippingAddress = new KondutoAddress(json.getJSONObject("shipping")); }
-		if(json.has("billing")) { this.billingAddress = new KondutoAddress(json.getJSONObject("billing")); }
-	}
-
 
 	public KondutoRecommendation getRecommendation() {
 		return recommendation;
@@ -230,11 +216,11 @@ public final class KondutoOrder extends KondutoModel {
 		this.customer = customer;
 	}
 
-	protected void setScore(Double score) {
+	public void setScore(Double score) {
 		this.score = score;
 	}
 
-	protected void setRecommendation(KondutoRecommendation recommendation) {
+	public void setRecommendation(KondutoRecommendation recommendation) {
 		this.recommendation = recommendation;
 	}
 }

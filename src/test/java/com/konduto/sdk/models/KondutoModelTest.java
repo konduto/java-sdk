@@ -23,24 +23,6 @@ public class KondutoModelTest {
 		private class KondutoDummyModelInternalModel extends KondutoModel {
 			@Required
 			private String internalModelDummyField;
-
-			@Override
-			public JSONObject toJSON() throws KondutoInvalidEntityException {
-				return null;
-			}
-		}
-
-		@Override
-		public JSONObject toJSON() {
-			return null;
-		}
-
-		public String getDummyField() {
-			return dummyField;
-		}
-
-		public void setDummyField(String dummyField) {
-			this.dummyField = dummyField;
 		}
 	}
 

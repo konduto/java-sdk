@@ -1,8 +1,7 @@
 package com.konduto.sdk;
 
 import com.konduto.sdk.exceptions.*;
-import com.konduto.sdk.models.KondutoOrder;
-import com.konduto.sdk.models.KondutoOrderStatus;
+import com.konduto.sdk.models.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
@@ -27,8 +26,8 @@ import java.util.List;
 
 public final class Konduto {
 	private static String apiKey;
-	private static JSONObject requestBody;
-	private static JSONObject responseBody;
+	private static String requestBody;
+	private static String responseBody;
 	private static URI endpoint = URI.create("https://api.konduto.com/v1");
 
 	protected static void setEndpoint(URI endpoint) {
@@ -49,10 +48,10 @@ public final class Konduto {
 		sb.append(String.format("API Key: %s\n", Konduto.apiKey));
 		sb.append(String.format("Endpoint: %s\n", Konduto.endpoint.toString()));
 		if(Konduto.requestBody != null) {
-			sb.append(String.format("Request body: %s\n", Konduto.requestBody.toString()));
+			sb.append(String.format("Request body: %s\n", Konduto.requestBody));
 		}
 		if(Konduto.responseBody != null) {
-			sb.append(String.format("Response body: %s\n", Konduto.responseBody.toString()));
+			sb.append(String.format("Response body: %s\n", Konduto.responseBody));
 		}
 		return sb.toString();
 	}
@@ -69,26 +68,25 @@ public final class Konduto {
 		return URI.create(endpoint.toString().concat("/orders/" + orderId));
 	}
 
-	private static JSONObject extractResponse(HttpMethod method) throws IOException {
+	private static String extractResponse(HttpMethod method) throws IOException {
 		byte[] responseBodyAsByteArray = method.getResponseBody();
-		String responseBodyAsString = new String(responseBodyAsByteArray, "UTF-8");
-		return new JSONObject(responseBodyAsString);
+		return new String(responseBodyAsByteArray, "UTF-8");
 	}
 
-	private static StringRequestEntity getRequestEntity(JSONObject requestBody) throws UnsupportedEncodingException {
+	private static StringRequestEntity getRequestEntity(String requestBody) throws UnsupportedEncodingException {
 		return new StringRequestEntity(
-				requestBody.toString(),
+				requestBody,
 				"application/json",
 				"UTF-8"
 		);
 	}
 
 
-	private static JSONObject sendRequest(HttpMethod method, JSONObject requestBody) throws KondutoHTTPException {
+	private static String sendRequest(HttpMethod method, String requestBody) throws KondutoHTTPException {
 
 		if(apiKey == null) { throw new NullPointerException("API key cannot be null"); }
 
-		JSONObject responseBody;
+		String responseBody;
 
 		HttpClient httpClient = new HttpClient();
 
@@ -133,19 +131,19 @@ public final class Konduto {
 			throws KondutoHTTPException, KondutoUnexpectedAPIResponseException {
 		GetMethod getMethod = new GetMethod(kondutoGetOrderUrl(orderId).toString());
 
-		JSONObject responseBody;
+		String responseBody;
 
-		try {
-			 responseBody = sendRequest(getMethod, null);
-		} catch(KondutoHTTPException e) {
-			throw e;
-		}
+		responseBody = sendRequest(getMethod, null);
 
-		if(responseBody == null || !responseBody.has("order")) {
+		if(responseBody == null || !responseBody.contains("order")) {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
 		}
 
-		return new KondutoOrder(responseBody);
+		JSONObject responseBodyAsJSON = new JSONObject(responseBody).getJSONObject("order");
+
+		KondutoOrder order = (KondutoOrder) KondutoModel.fromJSON(responseBodyAsJSON.toString(), KondutoOrder.class);
+
+		return order;
 	}
 
 	public static void analyze(KondutoOrder order)
@@ -153,19 +151,41 @@ public final class Konduto {
 
 		PostMethod postMethod = new PostMethod(kondutoPostOrderUrl().toString());
 
-		JSONObject responseBody;
+		String responseBody;
 
-		try {
-			responseBody = sendRequest(postMethod, order.toJSON());
-		} catch(KondutoHTTPException e) {
-			throw e;
-		}
+		responseBody = sendRequest(postMethod, order.toJSON());
 
-		if(responseBody == null || !responseBody.has("order")) {
+		if(responseBody == null || !responseBody.contains("order")) {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
 		}
 
-		order.fromJSON(responseBody);
+		JSONObject responseBodyAsJSON = new JSONObject(responseBody).getJSONObject("order");
+
+		if(responseBodyAsJSON.has("status")){
+			order.setStatus(KondutoOrderStatus.fromString(responseBodyAsJSON.getString("status")));
+		}
+
+		if(responseBodyAsJSON.has("score")){
+			order.setScore(responseBodyAsJSON.getDouble("score"));
+		}
+
+		if(responseBodyAsJSON.has("recommendation")){
+			order.setRecommendation(KondutoRecommendation.fromString(responseBodyAsJSON.getString("recommendation")));
+		}
+
+		if(responseBodyAsJSON.has("geolocation")){
+			order.setGeolocation((KondutoGeolocation) KondutoModel.fromJSON(responseBody, KondutoGeolocation.class));
+
+		}
+
+//		if(responseBodyAsJSON.has("device")){
+//
+//		}
+//
+//
+//		if(responseBodyAsJSON.has("navigation")){
+//
+//		}
 
 	}
 
@@ -187,15 +207,11 @@ public final class Konduto {
 		requestBody.put("status", status.getText());
 		requestBody.put("comments", comments);
 
-		JSONObject responseBody;
+		String responseBody;
 
-		try {
-			responseBody = sendRequest(putMethod, requestBody);
-		} catch(KondutoHTTPException e) {
-			throw e;
-		}
+		responseBody = sendRequest(putMethod, requestBody.toString());
 
-		if (responseBody == null || !responseBody.has("old_status") || !responseBody.has("new_status")) {
+		if (responseBody == null || !responseBody.contains("old_status") || !responseBody.contains("new_status")) {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
 		}
 

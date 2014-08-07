@@ -1,6 +1,9 @@
 package com.konduto.sdk.factories;
 
+import com.konduto.sdk.models.KondutoGeolocation;
 import com.konduto.sdk.models.KondutoOrder;
+import com.konduto.sdk.models.KondutoOrderStatus;
+import com.konduto.sdk.models.KondutoRecommendation;
 
 /**
  * Created by rsampaio on 31/07/14.
@@ -17,6 +20,11 @@ public class KondutoOrderFactory {
 		order.setTaxAmount(3.0);
 		order.setTimestamp(123123123123L);
 		order.setCustomer(KondutoCustomerFactory.completeCustomer());
+		order.setShippingAddress(KondutoAddressFactory.getAddress());
+		order.setBillingAddress(KondutoAddressFactory.getAddress());
+		order.setGeolocation(KondutoGeolocationFactory.getGeolocation());
+		order.setStatus(KondutoOrderStatus.APPROVED);
+		order.setRecommendation(KondutoRecommendation.APPROVE);
 		return order;
 	}
 

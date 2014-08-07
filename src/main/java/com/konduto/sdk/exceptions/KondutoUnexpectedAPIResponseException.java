@@ -7,9 +7,9 @@ import org.json.JSONObject;
  */
 public class KondutoUnexpectedAPIResponseException extends KondutoException {
 
-	private JSONObject responseBody;
+	private String responseBody;
 
-	public KondutoUnexpectedAPIResponseException(JSONObject responseBody) {
+	public KondutoUnexpectedAPIResponseException(String responseBody) {
 		this.responseBody = responseBody;
 	}
 

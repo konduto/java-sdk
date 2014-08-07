@@ -1,18 +1,19 @@
 package com.konduto.sdk.models;
 
-import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
-import org.json.JSONObject;
-
 /**
  * Created by rsampaio on 06/08/14.
  */
 public class KondutoGeolocation extends KondutoModel {
+
+	/* Attributes */
 	String city;
 	String state;
 	String country;
 
+	/* Constructors */
 	public KondutoGeolocation() { }
 
+	/* Equals */
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -27,24 +28,7 @@ public class KondutoGeolocation extends KondutoModel {
 		return true;
 	}
 
-	@Override
-	public JSONObject toJSON() throws KondutoInvalidEntityException {
-		if(!this.isValid()){ throw new KondutoInvalidEntityException(this); }
-		JSONObject json = new JSONObject();
-		if(this.city != null) json.put("city", this.city);
-		if(this.state != null) json.put("state", this.state);
-		if(this.country != null) json.put("country", this.country);
-		return json;
-	}
-
-	public KondutoGeolocation(JSONObject json) {
-		if(json != null) {
-			if (json.has("city")) this.city = json.getString("city");
-			if (json.has("state")) this.state = json.getString("state");
-			if (json.has("country")) this.country = json.getString("country");
-		}
-	}
-
+	/* Getters and Setters */
 	public String getCountry() {
 		return country;
 	}

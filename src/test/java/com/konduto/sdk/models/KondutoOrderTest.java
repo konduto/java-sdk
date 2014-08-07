@@ -3,13 +3,14 @@ package com.konduto.sdk.models;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoCustomerFactory;
 import com.konduto.sdk.factories.KondutoOrderFactory;
+import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by rsampaio on 31/07/14.
- */
+* Created by rsampaio on 31/07/14.
+*/
 public class KondutoOrderTest {
 
 	@Test
@@ -35,26 +36,18 @@ public class KondutoOrderTest {
 
 	@Test
 	public void serializationTest() {
-		KondutoOrder expectedOrder = KondutoOrderFactory.completeOrder();
-		KondutoOrder actualOrder = null;
+		KondutoOrder order = KondutoOrderFactory.completeOrder();
+		String orderJSON = TestUtils.readJSONFromFile("order.json");
 		try {
-			actualOrder = new KondutoOrder(expectedOrder.toJSON());
+			assertEquals("serialization failed", orderJSON, order.toJSON());
 		} catch (KondutoInvalidEntityException e) {
-			e.printStackTrace();
+			fail("order should be valid");
 		}
-		assertEquals("actual order should equal the expected order", expectedOrder, actualOrder);
-	}
 
-	@Test
-	public void serializationWithOptFieldsTest() {
-		KondutoOrder expectedOrder = KondutoOrderFactory.basicOrder();
-		KondutoOrder actualOrder = null;
-		try {
-			actualOrder = new KondutoOrder(expectedOrder.toJSON());
-		} catch (KondutoInvalidEntityException e) {
-			e.printStackTrace();
-		}
-		assertEquals("actual order should equal the expected order", expectedOrder, actualOrder);
+		KondutoOrder deserializedOrder = (KondutoOrder) KondutoModel.fromJSON(orderJSON, KondutoOrder.class);
+
+		assertEquals("deserialization failed", order, deserializedOrder);
+
 	}
 
 	@Test(expected=KondutoInvalidEntityException.class)
