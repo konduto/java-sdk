@@ -1,6 +1,5 @@
 package com.konduto.sdk.factories;
 
-import com.konduto.sdk.models.KondutoGeolocation;
 import com.konduto.sdk.models.KondutoOrder;
 import com.konduto.sdk.models.KondutoOrderStatus;
 import com.konduto.sdk.models.KondutoRecommendation;

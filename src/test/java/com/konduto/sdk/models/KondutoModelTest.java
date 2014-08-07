@@ -1,8 +1,6 @@
 package com.konduto.sdk.models;
 
 import com.konduto.sdk.annotations.Required;
-import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
-import org.json.JSONObject;
 import org.junit.Test;
 
 import java.lang.reflect.Field;

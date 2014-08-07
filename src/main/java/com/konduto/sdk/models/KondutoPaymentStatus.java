@@ -7,29 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public enum KondutoPaymentStatus {
 	@SerializedName("approved")
-	APPROVED("approved"),
+	APPROVED,
 	@SerializedName("declined")
-	DECLINED("declined");
-
-	private String text;
-
-
-	KondutoPaymentStatus(String text) {
-		this.text = text;
-	}
-
-	public String getText(){
-		return this.text;
-	}
-
-	public static KondutoPaymentStatus fromString(String text) {
-		if (text != null) {
-			for (KondutoPaymentStatus paymentStatus : KondutoPaymentStatus.values()) {
-				if (text.equalsIgnoreCase(paymentStatus.text)) {
-					return paymentStatus;
-				}
-			}
-		}
-		return null;
-	}
+	DECLINED;
 }

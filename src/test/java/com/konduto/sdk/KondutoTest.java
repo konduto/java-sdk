@@ -1,7 +1,9 @@
 package com.konduto.sdk;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import com.konduto.sdk.exceptions.*;
+import com.konduto.sdk.exceptions.KondutoHTTPException;
+import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
+import com.konduto.sdk.exceptions.KondutoUnexpectedAPIResponseException;
 import com.konduto.sdk.factories.KondutoOrderFactory;
 import com.konduto.sdk.models.KondutoModel;
 import com.konduto.sdk.models.KondutoOrder;
@@ -68,9 +70,18 @@ public class KondutoTest {
 
 		try {
 			 actualOrder = Konduto.getOrder(ORDER_ID);
+
 		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("[GET] should succeed");
 		}
+
+		try {
+			System.out.println(ORDER_FROM_FILE.toJSON());
+			System.out.println(actualOrder.toJSON());
+		} catch (KondutoInvalidEntityException e) {
+			e.printStackTrace();
+		}
+
 
 		assertEquals(ORDER_FROM_FILE, actualOrder);
 

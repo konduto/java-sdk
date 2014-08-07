@@ -1,13 +1,8 @@
 package com.konduto.sdk.models;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoCustomerFactory;
-import com.konduto.sdk.factories.KondutoOrderFactory;
 import com.konduto.sdk.utils.TestUtils;
-import org.json.JSONObject;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

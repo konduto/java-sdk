@@ -1,7 +1,5 @@
 package com.konduto.sdk.exceptions;
 
-import org.json.JSONObject;
-
 /**
  * Created by rsampaio on 01/08/14.
  */

@@ -1,7 +1,6 @@
 package com.konduto.sdk.factories;
 
 import com.konduto.sdk.models.KondutoAddress;
-import com.konduto.sdk.models.KondutoGeolocation;
 
 /**
  * Created by rsampaio on 06/08/14.

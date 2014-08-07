@@ -7,35 +7,14 @@ import com.google.gson.annotations.SerializedName;
  */
 public enum KondutoOrderStatus {
 	@SerializedName("pending")
-	PENDING("pending"),
+	PENDING,
 	@SerializedName("approved")
-	APPROVED("approved"),
+	APPROVED,
 	@SerializedName("declined")
-	DECLINED("declined"),
+	DECLINED,
 	@SerializedName("fraud")
-	FRAUD("fraud"),
-	@SerializedName("not analyzed")
-	NOT_ANALYZED("not analyzed");
-
-	private String text;
-
-	KondutoOrderStatus(String text) {
-		this.text = text;
-	}
-
-	public String getText(){
-		return this.text;
-	}
-
-	public static KondutoOrderStatus fromString(String text) {
-		if (text != null) {
-			for (KondutoOrderStatus orderStatus : KondutoOrderStatus.values()) {
-				if (text.equalsIgnoreCase(orderStatus.text)) {
-					return orderStatus;
-				}
-			}
-		}
-		return null;
-	}
+	FRAUD,
+	@SerializedName("not_analyzed")
+	NOT_ANALYZED;
 
 }

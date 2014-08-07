@@ -2,10 +2,8 @@ package com.konduto.sdk.models;
 
 import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
-import org.json.JSONObject;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * Created by rsampaio on 31/07/14.
@@ -49,6 +47,9 @@ public final class KondutoOrder extends KondutoModel {
 	@SerializedName("billing")
 	private KondutoAddress billingAddress;
 
+	@SerializedName("payment")
+	private List<KondutoPayment> payments;
+
 	private KondutoOrderStatus status;
 
 	/* Constructors */
@@ -82,6 +83,8 @@ public final class KondutoOrder extends KondutoModel {
 		if (timestamp != null ? !timestamp.equals(order.timestamp) : order.timestamp != null) return false;
 		if (!totalAmount.equals(order.totalAmount)) return false;
 		if (visitor != null ? !visitor.equals(order.visitor) : order.visitor != null) return false;
+//		if (payments != null ? !payments.equals(order.payments) : order.payments != null)
+//			return false;
 
 		return true;
 	}

@@ -1,6 +1,9 @@
 package com.konduto.sdk;
 
-import com.konduto.sdk.exceptions.*;
+import com.konduto.sdk.exceptions.KondutoHTTPException;
+import com.konduto.sdk.exceptions.KondutoHTTPExceptionFactory;
+import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
+import com.konduto.sdk.exceptions.KondutoUnexpectedAPIResponseException;
 import com.konduto.sdk.models.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.HttpClient;
@@ -162,7 +165,7 @@ public final class Konduto {
 		JSONObject responseBodyAsJSON = new JSONObject(responseBody).getJSONObject("order");
 
 		if(responseBodyAsJSON.has("status")){
-			order.setStatus(KondutoOrderStatus.fromString(responseBodyAsJSON.getString("status")));
+			order.setStatus(KondutoOrderStatus.valueOf(responseBodyAsJSON.getString("status").toUpperCase()));
 		}
 
 		if(responseBodyAsJSON.has("score")){
@@ -170,7 +173,7 @@ public final class Konduto {
 		}
 
 		if(responseBodyAsJSON.has("recommendation")){
-			order.setRecommendation(KondutoRecommendation.fromString(responseBodyAsJSON.getString("recommendation")));
+			order.setRecommendation(KondutoRecommendation.valueOf(responseBodyAsJSON.getString("recommendation").toUpperCase()));
 		}
 
 		if(responseBodyAsJSON.has("geolocation")){
@@ -204,7 +207,7 @@ public final class Konduto {
 		PutMethod putMethod = new PutMethod(kondutoPutOrderUrl(orderId).toString());
 
 		JSONObject requestBody = new JSONObject();
-		requestBody.put("status", status.getText());
+		requestBody.put("status", status.toString().toLowerCase());
 		requestBody.put("comments", comments);
 
 		String responseBody;
