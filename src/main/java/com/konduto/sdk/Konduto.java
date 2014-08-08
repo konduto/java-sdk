@@ -182,9 +182,9 @@ public final class Konduto {
 
 		}
 
-//		if(responseBody.has("device")){
-//
-//		}
+		if(responseBody.has("device")){
+			order.setDevice((KondutoDevice) KondutoModel.fromJSON(responseBody, KondutoDevice.class));
+		}
 //
 //
 //		if(responseBody.has("navigation")){

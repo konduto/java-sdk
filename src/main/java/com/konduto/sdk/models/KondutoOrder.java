@@ -9,27 +9,44 @@ public final class KondutoOrder extends KondutoModel {
 	/* Attributes */
 	@Required
 	private String id;
+
 	private String visitor;
+
 	private Long timestamp;
+
 	@Required
 	private Double totalAmount;
+
 	private Double shippingAmount;
 	private Double taxAmount;
-	private String currency;
-	private Integer installments;
-	private String ip;
-	private Double score;
+
 	@Required
 	private KondutoCustomer customer;
-	private KondutoRecommendation recommendation;
-	private KondutoGeolocation geolocation;
+
+	private String currency;
+
+	private Integer installments;
+
+	private String ip;
+
+	private Double score;
+
 	@SerializedName("shipping")
 	private KondutoAddress shippingAddress;
+
 	@SerializedName("billing")
 	private KondutoAddress billingAddress;
+
+	private KondutoRecommendation recommendation;
+
+	private KondutoOrderStatus status;
+
+	private KondutoGeolocation geolocation;
+
 	@SerializedName("payment")
 	private KondutoPayment[] payments;
-	private KondutoOrderStatus status;
+
+	private KondutoDevice device;
 
 	/* Constructors */
 	public KondutoOrder() {}
@@ -76,9 +93,17 @@ public final class KondutoOrder extends KondutoModel {
 		if (payments != null ? !Arrays.equals(payments, order.payments) : order.payments != null)
 			return false;
 
+		if (device != null ? !device.equals(order.device) : order.device != null) return false;
+
 		return true;
 	}
 	/* getters and setters */
+	public KondutoDevice getDevice() {
+		return device;
+	}
+	public void setDevice(KondutoDevice device) {
+		this.device = device;
+	}
 	public KondutoPayment[] getPayments() {
 		return payments;
 	}
