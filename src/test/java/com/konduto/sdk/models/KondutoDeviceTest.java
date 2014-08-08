@@ -10,7 +10,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
- * Created by rsampaio on 08/08/14.
  */
 public class KondutoDeviceTest {
 	@Test

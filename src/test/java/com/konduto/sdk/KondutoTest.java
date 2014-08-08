@@ -21,7 +21,6 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.Assert.*;
 
 /**
-* Created by rsampaio on 30/07/14.
 */
 public class KondutoTest {
 	private static final String ORDER_ID = "1406910391037";

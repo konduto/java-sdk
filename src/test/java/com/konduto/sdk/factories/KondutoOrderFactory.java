@@ -5,7 +5,6 @@ import com.konduto.sdk.models.KondutoOrderStatus;
 import com.konduto.sdk.models.KondutoRecommendation;
 
 /**
- * Created by rsampaio on 31/07/14.
  */
 public class KondutoOrderFactory {
 

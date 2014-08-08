@@ -5,7 +5,6 @@ import com.konduto.sdk.models.KondutoCreditCardPaymentStatus;
 import com.konduto.sdk.models.KondutoPayment;
 
 /**
- * Created by rsampaio on 07/08/14.
  */
 public class KondutoPaymentFactory {
 	public static KondutoCreditCardPayment getCreditCardPayment(){

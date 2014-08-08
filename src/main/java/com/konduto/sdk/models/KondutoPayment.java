@@ -3,7 +3,11 @@ package com.konduto.sdk.models;
 import com.konduto.sdk.annotations.Required;
 
 /**
- * Created by rsampaio on 06/08/14.
+ *
+ * Payment model.
+ *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
+ *
  */
 public abstract class KondutoPayment extends KondutoModel {
 

@@ -6,7 +6,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by rsampaio on 31/07/14.
  */
 public class KondutoInvalidEntityExceptionTest {
 

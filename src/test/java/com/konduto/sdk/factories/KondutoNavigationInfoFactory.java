@@ -3,7 +3,6 @@ package com.konduto.sdk.factories;
 import com.konduto.sdk.models.KondutoNavigationInfo;
 
 /**
- * Created by rsampaio on 08/08/14.
  */
 public class KondutoNavigationInfoFactory {
 	public static KondutoNavigationInfo getNavigationInfo(){

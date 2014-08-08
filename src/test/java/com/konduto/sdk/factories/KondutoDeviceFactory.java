@@ -3,7 +3,6 @@ package com.konduto.sdk.factories;
 import com.konduto.sdk.models.KondutoDevice;
 
 /**
- * Created by rsampaio on 08/08/14.
  */
 public class KondutoDeviceFactory {
 	public static KondutoDevice getDevice(){

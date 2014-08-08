@@ -3,7 +3,6 @@ package com.konduto.sdk.factories;
 import com.konduto.sdk.models.KondutoCustomer;
 
 /**
- * Created by rsampaio on 31/07/14.
  */
 public class KondutoCustomerFactory {
 

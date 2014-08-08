@@ -8,7 +8,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by rsampaio on 08/08/14.
  */
 public class KondutoPaymentAdapterTest {
 	Gson gson = new GsonBuilder()

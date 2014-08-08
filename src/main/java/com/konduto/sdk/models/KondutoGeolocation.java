@@ -1,7 +1,10 @@
 package com.konduto.sdk.models;
 
 /**
- * Created by rsampaio on 06/08/14.
+ *
+ * Geolocation model.
+ *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public class KondutoGeolocation extends KondutoModel {
 

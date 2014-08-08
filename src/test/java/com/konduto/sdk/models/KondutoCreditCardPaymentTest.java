@@ -10,7 +10,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
- * Created by rsampaio on 07/08/14.
  */
 public class KondutoCreditCardPaymentTest {
 	@Test

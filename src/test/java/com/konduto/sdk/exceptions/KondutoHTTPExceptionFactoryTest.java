@@ -10,7 +10,6 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by rsampaio on 01/08/14.
  */
 public class KondutoHTTPExceptionFactoryTest {
 	private static final HashMap<Integer, Class> HTTP_STATUSES = new HashMap<Integer, Class>(){{

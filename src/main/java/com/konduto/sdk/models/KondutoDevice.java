@@ -1,7 +1,11 @@
 package com.konduto.sdk.models;
 
 /**
- * Created by rsampaio on 08/08/14.
+ *
+ * Device model.
+ *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
+ *
  */
 public class KondutoDevice extends KondutoModel {
 	private String userId;

@@ -3,7 +3,11 @@ package com.konduto.sdk.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by rsampaio on 08/08/14.
+ *
+ * Navigation info model.
+ *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
+ *
  */
 public class KondutoNavigationInfo extends KondutoModel {
 

@@ -4,7 +4,10 @@ import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
 /**
- * Created by rsampaio on 31/07/14.
+ *
+ * Customer model.
+ *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public final class KondutoCustomer extends KondutoModel {
 

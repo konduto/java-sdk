@@ -1,7 +1,11 @@
 package com.konduto.sdk.models;
 
 /**
- * Created by rsampaio on 07/08/14.
+ *
+ * Credit card model.
+ *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
+ *
  */
 public class KondutoCreditCardPayment extends KondutoPayment {
 

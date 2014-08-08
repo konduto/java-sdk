@@ -1,7 +1,10 @@
 package com.konduto.sdk.models;
 
 /**
- * Created by rsampaio on 05/08/14.
+ *
+ * Address model.
+ *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public class KondutoAddress extends KondutoModel {
 

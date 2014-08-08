@@ -3,7 +3,10 @@ package com.konduto.sdk.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by rsampaio on 01/08/14.
+ *
+ * Recommendation enum.
+ *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public enum KondutoRecommendation {
 	@SerializedName("approve")

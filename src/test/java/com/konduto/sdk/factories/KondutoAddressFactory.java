@@ -3,7 +3,6 @@ package com.konduto.sdk.factories;
 import com.konduto.sdk.models.KondutoAddress;
 
 /**
- * Created by rsampaio on 06/08/14.
  */
 public class KondutoAddressFactory {
 	public static KondutoAddress getAddress() {

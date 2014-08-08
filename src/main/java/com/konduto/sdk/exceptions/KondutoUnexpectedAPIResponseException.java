@@ -3,7 +3,9 @@ package com.konduto.sdk.exceptions;
 import com.google.gson.JsonObject;
 
 /**
- * Created by rsampaio on 05/08/14.
+ *
+ * This exception is thrown whenever Konduto's API responds something we cannot handle.
+ * Please contact our support team if this ever happens.
  */
 public class KondutoUnexpectedAPIResponseException extends KondutoException {
 

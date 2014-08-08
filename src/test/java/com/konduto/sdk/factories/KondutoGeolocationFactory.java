@@ -3,7 +3,6 @@ package com.konduto.sdk.factories;
 import com.konduto.sdk.models.KondutoGeolocation;
 
 /**
- * Created by rsampaio on 07/08/14.
  */
 public class KondutoGeolocationFactory {
 

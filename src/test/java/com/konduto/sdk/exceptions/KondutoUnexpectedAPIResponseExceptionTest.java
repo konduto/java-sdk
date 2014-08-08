@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by rsampaio on 05/08/14.
  */
 public class KondutoUnexpectedAPIResponseExceptionTest {
 	@Test

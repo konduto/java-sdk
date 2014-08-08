@@ -3,13 +3,21 @@ package com.konduto.sdk.exceptions;
 import com.google.gson.JsonObject;
 
 /**
- * Created by rsampaio on 01/08/14.
+ *
+ * This exception will be thrown whenever Konduto's API responds with an error HTTP status.
+ *
+ * @see com.konduto.sdk.Konduto#sendRequest
  */
 public abstract class KondutoHTTPException extends KondutoException {
 	private String message;
 
+	/**
+	 *
+	 * @param message instance's message
+	 * @param responseBody Konduto's API response
+	 */
 	protected KondutoHTTPException(String message, JsonObject responseBody){
-		this.message = String.format("%s - Response body: %s", message, responseBody.toString());
+		this.message = String.format("%s Response body: %s", message, responseBody.toString());
 	}
 
 	@Override

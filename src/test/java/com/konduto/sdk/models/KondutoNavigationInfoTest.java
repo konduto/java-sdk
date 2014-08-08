@@ -10,7 +10,6 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.*;
 
 /**
- * Created by rsampaio on 08/08/14.
  */
 public class KondutoNavigationInfoTest {
 

@@ -6,7 +6,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by rsampaio on 01/08/14.
  */
 public class KondutoHTTPExceptionTest {
 
@@ -21,6 +20,6 @@ public class KondutoHTTPExceptionTest {
 		String message = "fake message";
 		JsonObject json = new JsonObject();
 		KondutoFakeHTTPException fakeException = new KondutoFakeHTTPException(message, json);
-		assertEquals(fakeException.getMessage(), String.format("%s - Response body: %s", message, json));
+		assertEquals(fakeException.getMessage(), String.format("%s Response body: %s", message, json));
 	}
 }

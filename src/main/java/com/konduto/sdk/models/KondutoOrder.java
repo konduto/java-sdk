@@ -3,7 +3,11 @@ import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 import java.util.Arrays;
 /**
- * Created by rsampaio on 31/07/14.
+ *
+ * Order model.
+ *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
+ *
  */
 public final class KondutoOrder extends KondutoModel {
 	/* Attributes */

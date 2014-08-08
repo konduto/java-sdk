@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * Created by rsampaio on 07/08/14.
  */
 public class TestUtils {
 
