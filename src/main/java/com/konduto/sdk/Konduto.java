@@ -37,7 +37,7 @@ public final class Konduto {
 	 *
 	 * @param endpoint Konduto's API endpoint (default is https://api.konduto.com/v1)
 	 */
-	protected static void setEndpoint(URI endpoint) {
+	public static void setEndpoint(URI endpoint) {
 		Konduto.endpoint = endpoint;
 	}
 
@@ -192,13 +192,17 @@ public final class Konduto {
 
 		responseBody = sendRequest(getMethod, null);
 
-		if(responseBody == null || !responseBody.has("order")) {
+		if(responseBody == null) {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
 		}
 
-		responseBody = responseBody.getAsJsonObject("order"); // unwrapping
+		if(responseBody.has("order")) responseBody = responseBody.getAsJsonObject("order"); // unwrapping
 
-		return (KondutoOrder) KondutoModel.fromJSON(responseBody, KondutoOrder.class);
+		KondutoOrder order = (KondutoOrder) KondutoModel.fromJSON(responseBody, KondutoOrder.class);
+
+		if(order.getId() == null) { order.setId(orderId); }
+
+		return order ;
 	}
 
 	/**
@@ -221,11 +225,11 @@ public final class Konduto {
 
 		responseBody = sendRequest(postMethod, order.toJSON());
 
-		if(responseBody == null || !responseBody.has("order")) {
+		if(responseBody == null) {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
 		}
 
-		responseBody = responseBody.getAsJsonObject("order"); // unwrapping
+		if(responseBody.has("order")) responseBody = responseBody.getAsJsonObject("order"); // unwrapping
 
 		if(responseBody.has("status")){
 			order.setStatus(KondutoOrderStatus.valueOf(responseBody.get("status").getAsString().toUpperCase()));
@@ -291,6 +295,8 @@ public final class Konduto {
 		if (responseBody == null || !responseBody.has("old_status") || !responseBody.has("new_status")) {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
 		}
+
+
 
 	}
 }
