@@ -1,1 +1,55 @@
-{"id":"1","visitor":"a9031kdlas","timestamp":123123123123,"total_amount":120.5,"shipping_amount":5.0,"tax_amount":3.0,"currency":"USD","installments":1,"ip":"192.168.0.1","customer":{"id":"1","name":"José da Silva","email":"jose.silva@gmail.com","tax_id":"01234567890","phone1":"11987654321","phone2":"1133333333","vip":false,"new":false},"recommendation":"approve","geolocation":{"city":"São Paulo","state":"SP","country":"BR"},"shipping":{"name":"Konduto","address1":"R. Teodoro Sampaio, 2393","address2":"CJ. 111","zip":"05406-200","city":"São Paulo","state":"SP","country":"BR"},"billing":{"name":"Konduto","address1":"R. Teodoro Sampaio, 2393","address2":"CJ. 111","zip":"05406-200","city":"São Paulo","state":"SP","country":"BR"},"status":"approved"}
+{  
+   "id":"1",
+   "visitor":"a9031kdlas",
+   "timestamp":123123123123,
+   "total_amount":120.5,
+   "shipping_amount":5.0,
+   "tax_amount":3.0,
+   "currency":"USD",
+   "installments":1,
+   "ip":"192.168.0.1",
+   "customer":{  
+      "id":"1",
+      "name":"José da Silva",
+      "email":"jose.silva@gmail.com",
+      "tax_id":"01234567890",
+      "phone1":"11987654321",
+      "phone2":"1133333333",
+      "vip":false,
+      "new":false
+   },
+   "recommendation":"approve",
+   "geolocation":{  
+      "city":"São Paulo",
+      "state":"SP",
+      "country":"BR"
+   },
+   "shipping":{  
+      "name":"Konduto",
+      "address1":"R. Teodoro Sampaio, 2393",
+      "address2":"CJ. 111",
+      "zip":"05406-200",
+      "city":"São Paulo",
+      "state":"SP",
+      "country":"BR"
+   },
+   "billing":{  
+      "name":"Konduto",
+      "address1":"R. Teodoro Sampaio, 2393",
+      "address2":"CJ. 111",
+      "zip":"05406-200",
+      "city":"São Paulo",
+      "state":"SP",
+      "country":"BR"
+   },
+   "payment":[
+        {
+           "bin":"123",
+           "last4":"1234",
+           "expiration_date":"012014",
+           "status":"approved",
+           "type":"credit"
+        }
+   ],
+   "status":"approved"
+}

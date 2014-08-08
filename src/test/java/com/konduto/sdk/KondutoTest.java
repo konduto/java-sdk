@@ -1,6 +1,7 @@
 package com.konduto.sdk;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.google.gson.JsonObject;
 import com.konduto.sdk.exceptions.KondutoHTTPException;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.exceptions.KondutoUnexpectedAPIResponseException;
@@ -11,7 +12,6 @@ import com.konduto.sdk.models.KondutoOrderStatus;
 import com.konduto.sdk.models.KondutoRecommendation;
 import com.konduto.sdk.utils.TestUtils;
 import org.apache.commons.httpclient.HttpStatus;
-import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,10 +32,11 @@ public class KondutoTest {
 	private static final String AUTH_HEADER = "Basic VDczOEQ1MTZGMDlDQUIzQTJDMUVF";
 	private static final String API_KEY = "T738D516F09CAB3A2C1EE";
 
-	private static final JSONObject JSON_FROM_FILE =
-			new JSONObject(TestUtils.readJSONFromFile("__files/order.json")).getJSONObject("order");
+	private static final JsonObject JSON_FROM_FILE =
+			TestUtils.readJSONFromFile("__files/order.json").getAsJsonObject("order");
+
 	private static final KondutoOrder ORDER_FROM_FILE =
-			(KondutoOrder) KondutoModel.fromJSON(JSON_FROM_FILE.toString(), KondutoOrder.class);
+			(KondutoOrder) KondutoModel.fromJSON(JSON_FROM_FILE, KondutoOrder.class);
 
 	private static final int[] HTTP_STATUSES = {
 			HttpStatus.SC_UNAUTHORIZED, // 401
@@ -73,13 +74,6 @@ public class KondutoTest {
 
 		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("[GET] should succeed");
-		}
-
-		try {
-			System.out.println(ORDER_FROM_FILE.toJSON());
-			System.out.println(actualOrder.toJSON());
-		} catch (KondutoInvalidEntityException e) {
-			e.printStackTrace();
 		}
 
 

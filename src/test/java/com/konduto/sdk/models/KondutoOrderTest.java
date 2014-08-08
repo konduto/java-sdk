@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.JsonObject;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoCustomerFactory;
 import com.konduto.sdk.factories.KondutoOrderFactory;
@@ -37,7 +38,7 @@ public class KondutoOrderTest {
 	@Test
 	public void serializationTest() {
 		KondutoOrder order = KondutoOrderFactory.completeOrder();
-		String orderJSON = TestUtils.readJSONFromFile("order.json");
+		JsonObject orderJSON = TestUtils.readJSONFromFile("order.json");
 		try {
 			assertEquals("serialization failed", orderJSON, order.toJSON());
 		} catch (KondutoInvalidEntityException e) {

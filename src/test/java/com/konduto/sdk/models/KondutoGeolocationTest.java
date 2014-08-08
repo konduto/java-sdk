@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.JsonObject;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoGeolocationFactory;
 import com.konduto.sdk.utils.TestUtils;
@@ -16,7 +17,7 @@ public class KondutoGeolocationTest {
 	@Test
 	public void serializationTest(){
 		KondutoGeolocation geolocation = KondutoGeolocationFactory.getGeolocation();
-		String geolocationJSON = TestUtils.readJSONFromFile("geolocation.json");
+		JsonObject geolocationJSON = TestUtils.readJSONFromFile("geolocation.json");
 		try {
 			assertEquals("serialization failed", geolocationJSON, geolocation.toJSON());
 		} catch (KondutoInvalidEntityException e) {

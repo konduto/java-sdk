@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.JsonObject;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoAddressFactory;
 import com.konduto.sdk.utils.TestUtils;
@@ -14,8 +15,8 @@ import static org.junit.Assert.fail;
 public class KondutoAddressTest {
 	@Test
 	public void serializeTest(){
-		String expectedJSON = TestUtils.readJSONFromFile("address.json");
-		String actualJSON = null;
+		JsonObject expectedJSON = TestUtils.readJSONFromFile("address.json");
+		JsonObject actualJSON = null;
 
 		KondutoAddress address = KondutoAddressFactory.getAddress();
 		try {

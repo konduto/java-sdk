@@ -1,14 +1,15 @@
 package com.konduto.sdk.exceptions;
 
+import com.google.gson.JsonObject;
 import org.apache.commons.httpclient.HttpStatus;
 
 /**
  * Created by rsampaio on 01/08/14.
  */
 public abstract class KondutoHTTPExceptionFactory {
-	private static String responseBody;
+	private static JsonObject responseBody;
 
-	public static KondutoHTTPException buildException(int statusCode, String responseBody) {
+	public static KondutoHTTPException buildException(int statusCode, JsonObject responseBody) {
 		KondutoHTTPExceptionFactory.responseBody = responseBody;
 		switch(statusCode) {
 			case HttpStatus.SC_BAD_REQUEST:

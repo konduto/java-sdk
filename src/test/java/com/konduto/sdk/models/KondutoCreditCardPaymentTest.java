@@ -1,7 +1,8 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.JsonObject;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
-import com.konduto.sdk.factories.KondutoCreditCardPaymentFactory;
+import com.konduto.sdk.factories.KondutoPaymentFactory;
 import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
@@ -14,8 +15,8 @@ import static org.junit.Assert.fail;
 public class KondutoCreditCardPaymentTest {
 	@Test
 	public void serializeTest(){
-		KondutoPayment creditCardPayment = KondutoCreditCardPaymentFactory.getCreditCardPayment();
-		String creditCardJSON = TestUtils.readJSONFromFile("credit_card.json");
+		KondutoPayment creditCardPayment = KondutoPaymentFactory.getCreditCardPayment();
+		JsonObject creditCardJSON = TestUtils.readJSONFromFile("credit_card.json");
 		try {
 			assertEquals("serialization failed", creditCardJSON, creditCardPayment.toJSON());
 		} catch (KondutoInvalidEntityException e) {

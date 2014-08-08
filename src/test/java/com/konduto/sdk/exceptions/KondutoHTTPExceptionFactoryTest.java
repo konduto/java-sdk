@@ -1,7 +1,7 @@
 package com.konduto.sdk.exceptions;
 
+import com.google.gson.JsonObject;
 import org.apache.commons.httpclient.HttpStatus;
-import org.json.JSONObject;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -29,10 +29,10 @@ public class KondutoHTTPExceptionFactoryTest {
 	public void buildExceptionTest() {
 		for (Map.Entry<Integer, Class> entry : HTTP_STATUSES.entrySet()) {
 			int statusCode = entry.getKey();
-			JSONObject responseBody = new JSONObject();
-			responseBody.put("status_code", statusCode);
+			JsonObject responseBody = new JsonObject();
+			responseBody.addProperty("status_code", statusCode);
 			Class klass = entry.getValue();
-			KondutoHTTPException exception = KondutoHTTPExceptionFactory.buildException(statusCode, responseBody.toString());
+			KondutoHTTPException exception = KondutoHTTPExceptionFactory.buildException(statusCode, responseBody);
 			assertEquals(klass, exception.getClass());
 		}
 	}

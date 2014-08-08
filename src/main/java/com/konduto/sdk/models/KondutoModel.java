@@ -3,8 +3,11 @@ package com.konduto.sdk.models;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.konduto.sdk.adapters.KondutoPaymentAdapter;
 import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
+
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -23,18 +26,19 @@ public abstract class KondutoModel {
 
 	/* Transient and static attributes won't be included in serialization */
 	protected static Gson gson = new GsonBuilder()
+			.registerTypeAdapter(KondutoPayment.class, new KondutoPaymentAdapter())
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.create();
 
 	protected transient List<String> errors = new ArrayList<>();
 
 	/* Serialization methods */
-	public String toJSON() throws KondutoInvalidEntityException{
+	public JsonObject toJSON() throws KondutoInvalidEntityException{
 		if(!this.isValid()) { throw new KondutoInvalidEntityException(this); }
-		return gson.toJson(this);
+		return (JsonObject) gson.toJsonTree(this);
 	}
 
-	public static KondutoModel fromJSON(String json, Class<?> klass){
+	public static KondutoModel fromJSON(JsonObject json, Class<?> klass){
 		return (KondutoModel) gson.fromJson(json, klass);
 	}
 

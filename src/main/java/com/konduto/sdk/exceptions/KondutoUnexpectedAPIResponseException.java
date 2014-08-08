@@ -1,13 +1,15 @@
 package com.konduto.sdk.exceptions;
 
+import com.google.gson.JsonObject;
+
 /**
  * Created by rsampaio on 05/08/14.
  */
 public class KondutoUnexpectedAPIResponseException extends KondutoException {
 
-	private String responseBody;
+	private JsonObject responseBody;
 
-	public KondutoUnexpectedAPIResponseException(String responseBody) {
+	public KondutoUnexpectedAPIResponseException(JsonObject responseBody) {
 		this.responseBody = responseBody;
 	}
 
