@@ -78,3 +78,5 @@ com_crashlytics_export_strings.xml
 .idea
 *.sublime-*
 .nb-gradle
+
+TODO.txt
