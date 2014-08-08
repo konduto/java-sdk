@@ -11,3 +11,7 @@ dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'com.github.tomakehurst:wiremock:1.18'
 }
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
