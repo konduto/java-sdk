@@ -178,18 +178,16 @@ public final class Konduto {
 		}
 
 		if(responseBody.has("geolocation")){
-			order.setGeolocation((KondutoGeolocation) KondutoModel.fromJSON(responseBody, KondutoGeolocation.class));
-
+			order.setGeolocation((KondutoGeolocation) KondutoModel.fromJSON(responseBody.getAsJsonObject("geolocation"), KondutoGeolocation.class));
 		}
 
 		if(responseBody.has("device")){
-			order.setDevice((KondutoDevice) KondutoModel.fromJSON(responseBody, KondutoDevice.class));
+			order.setDevice((KondutoDevice) KondutoModel.fromJSON(responseBody.getAsJsonObject("device"), KondutoDevice.class));
 		}
-//
-//
-//		if(responseBody.has("navigation")){
-//
-//		}
+
+		if(responseBody.has("navigation")){
+			order.setNavigationInfo((KondutoNavigationInfo) KondutoModel.fromJSON(responseBody.getAsJsonObject("navigation"), KondutoNavigationInfo.class));
+		}
 
 	}
 

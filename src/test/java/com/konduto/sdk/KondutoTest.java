@@ -6,10 +6,7 @@ import com.konduto.sdk.exceptions.KondutoHTTPException;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.exceptions.KondutoUnexpectedAPIResponseException;
 import com.konduto.sdk.factories.KondutoOrderFactory;
-import com.konduto.sdk.models.KondutoModel;
-import com.konduto.sdk.models.KondutoOrder;
-import com.konduto.sdk.models.KondutoOrderStatus;
-import com.konduto.sdk.models.KondutoRecommendation;
+import com.konduto.sdk.models.*;
 import com.konduto.sdk.utils.TestUtils;
 import org.apache.commons.httpclient.HttpStatus;
 import org.junit.Before;
@@ -114,6 +111,11 @@ public class KondutoTest {
 		KondutoOrder orderToSend = KondutoOrderFactory.basicOrder();
 
 		assertNull("basic order should have no recommendation", orderToSend.getRecommendation());
+		assertNull("basic order should have no score", orderToSend.getScore());
+		assertNull("basic order should have no status", orderToSend.getStatus());
+		assertNull("basic order should have no geolocation", orderToSend.getGeolocation());
+		assertNull("basic order should have no device", orderToSend.getDevice());
+		assertNull("basic order should have no navigation info", orderToSend.getNavigationInfo());
 
 		try {
 			Konduto.analyze(orderToSend); // do analyze
@@ -124,11 +126,19 @@ public class KondutoTest {
 		}
 
 
+		Double actualScore = ORDER_FROM_FILE.getScore();
 		KondutoRecommendation actualRecommendation = ORDER_FROM_FILE.getRecommendation();
+		KondutoGeolocation actualGeolocation = ORDER_FROM_FILE.getGeolocation();
 		KondutoOrderStatus actualStatus = ORDER_FROM_FILE.getStatus();
+		KondutoDevice actualDevice = ORDER_FROM_FILE.getDevice();
+		KondutoNavigationInfo actualNavigationInfo = ORDER_FROM_FILE.getNavigationInfo();
 
+		assertEquals(orderToSend.getScore(), actualScore);
+		assertEquals(orderToSend.getGeolocation(), actualGeolocation);
 		assertEquals(orderToSend.getRecommendation(), actualRecommendation);
 		assertEquals(orderToSend.getStatus(), actualStatus);
+		assertEquals(orderToSend.getDevice(), actualDevice);
+		assertEquals(orderToSend.getNavigationInfo(), actualNavigationInfo);
 
 	}
 
