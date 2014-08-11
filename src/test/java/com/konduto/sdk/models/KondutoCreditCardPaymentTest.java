@@ -15,7 +15,7 @@ public class KondutoCreditCardPaymentTest {
 	@Test
 	public void serializeTest(){
 		KondutoPayment creditCardPayment = KondutoPaymentFactory.getCreditCardPayment();
-		JsonObject creditCardJSON = TestUtils.readJSONFromFile("credit_card.json");
+		JsonObject creditCardJSON = (JsonObject) TestUtils.readJSONFromFile("payments.json").getAsJsonArray().get(0);
 		try {
 			assertEquals("serialization failed", creditCardJSON, creditCardPayment.toJSON());
 		} catch (KondutoInvalidEntityException e) {

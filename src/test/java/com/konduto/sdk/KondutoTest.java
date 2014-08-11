@@ -29,7 +29,7 @@ public class KondutoTest {
 	private static final String API_KEY = "T738D516F09CAB3A2C1EE";
 
 	private static final JsonObject JSON_FROM_FILE =
-			TestUtils.readJSONFromFile("__files/order.json").getAsJsonObject("order");
+			((JsonObject) TestUtils.readJSONFromFile("__files/order.json")).getAsJsonObject("order");
 
 	private static final KondutoOrder ORDER_FROM_FILE =
 			(KondutoOrder) KondutoModel.fromJSON(JSON_FROM_FILE, KondutoOrder.class);
@@ -71,7 +71,6 @@ public class KondutoTest {
 		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("[GET] should succeed");
 		}
-
 
 		assertEquals(ORDER_FROM_FILE, actualOrder);
 

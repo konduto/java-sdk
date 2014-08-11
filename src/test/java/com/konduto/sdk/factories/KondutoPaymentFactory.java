@@ -4,6 +4,9 @@ import com.konduto.sdk.models.KondutoCreditCardPayment;
 import com.konduto.sdk.models.KondutoCreditCardPaymentStatus;
 import com.konduto.sdk.models.KondutoPayment;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 /**
  */
 public class KondutoPaymentFactory {
@@ -16,7 +19,9 @@ public class KondutoPaymentFactory {
 		return creditCardPayment;
 	}
 
-	public static KondutoPayment[] getPaymentArray() {
-		return new KondutoPayment[]{ getCreditCardPayment() };
+	public static Collection<KondutoPayment> getPayments() {
+		Collection<KondutoPayment> payments = new HashSet<>();
+		payments.add(getCreditCardPayment());
+		return payments;
 	}
 }

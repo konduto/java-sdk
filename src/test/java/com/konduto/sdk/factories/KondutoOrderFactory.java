@@ -23,7 +23,8 @@ public class KondutoOrderFactory {
 		order.setGeolocation(KondutoGeolocationFactory.getGeolocation());
 		order.setStatus(KondutoOrderStatus.APPROVED);
 		order.setRecommendation(KondutoRecommendation.APPROVE);
-		order.setPayments(KondutoPaymentFactory.getPaymentArray());
+		order.setPayments(KondutoPaymentFactory.getPayments());
+		order.setShoppingCart(KondutoItemFactory.getShoppingCart());
 		return order;
 	}
 

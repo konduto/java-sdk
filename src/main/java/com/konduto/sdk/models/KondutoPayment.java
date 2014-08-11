@@ -10,24 +10,16 @@ import com.konduto.sdk.annotations.Required;
  *
  */
 public abstract class KondutoPayment extends KondutoModel {
-
-	/* Attributes */
 	@Required
 	public KondutoPaymentType type;
-
-
-	/* Constructors */
-
-	/* Equals */
-
-	/* Getters and Setters */
 
 	public KondutoPaymentType getType(){
 		return this.type;
 	}
 
-
 	@Override
 	public abstract boolean equals(Object obj);
 
+	@Override
+	public abstract int hashCode();
 }

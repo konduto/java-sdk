@@ -1,7 +1,10 @@
 package com.konduto.sdk.models;
+
 import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
-import java.util.Arrays;
+
+import java.util.Collection;
+
 /**
  *
  * Order model.
@@ -48,7 +51,15 @@ public final class KondutoOrder extends KondutoModel {
 	private KondutoGeolocation geolocation;
 
 	@SerializedName("payment")
-	private KondutoPayment[] payments;
+	/**
+	 *  when deserialized, this collection is a HashSet by default.
+	 */
+	private Collection<KondutoPayment> payments;
+
+	/**
+	 *  when deserialized, this collection is an ArrayList by default.
+	 */
+	private Collection<KondutoItem> shoppingCart;
 
 	private KondutoDevice device;
 
@@ -97,7 +108,10 @@ public final class KondutoOrder extends KondutoModel {
 
 		if (visitor != null ? !visitor.equals(order.visitor) : order.visitor != null) return false;
 
-		if (payments != null ? !Arrays.equals(payments, order.payments) : order.payments != null)
+		if (payments != null ? !payments.equals(order.payments) : order.payments != null)
+			return false;
+
+		if (shoppingCart != null ? !shoppingCart.equals(order.shoppingCart) : order.shoppingCart != null)
 			return false;
 
 		if (device != null ? !device.equals(order.device) : order.device != null) return false;
@@ -120,10 +134,16 @@ public final class KondutoOrder extends KondutoModel {
 	public void setDevice(KondutoDevice device) {
 		this.device = device;
 	}
-	public KondutoPayment[] getPayments() {
+	public Collection<KondutoItem> getShoppingCart() {
+		return shoppingCart;
+	}
+	public void setShoppingCart(Collection<KondutoItem> shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
+	public Collection<KondutoPayment> getPayments() {
 		return payments;
 	}
-	public void setPayments(KondutoPayment[] payments) {
+	public void setPayments(Collection<KondutoPayment> payments) {
 		this.payments = payments;
 	}
 	public KondutoOrderStatus getStatus() {

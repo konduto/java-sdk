@@ -15,7 +15,7 @@ public class KondutoDeviceTest {
 	@Test
 	public void serializeTest(){
 		KondutoDevice device = KondutoDeviceFactory.getDevice();
-		JsonObject deviceJSON = TestUtils.readJSONFromFile("device.json");
+		JsonObject deviceJSON = (JsonObject) TestUtils.readJSONFromFile("device.json");
 
 		try {
 			assertEquals("serialization failed", deviceJSON, device.toJSON());

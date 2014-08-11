@@ -65,4 +65,14 @@ public class KondutoCreditCardPayment extends KondutoPayment {
 
 		return true;
 	}
+
+	/* This is required for correct deserialization since HashSet uses hashCode instead of equals. */
+	@Override
+	public int hashCode() {
+		int result = bin != null ? bin.hashCode() : 0;
+		result = 31 * result + (last4 != null ? last4.hashCode() : 0);
+		result = 31 * result + (expirationDate != null ? expirationDate.hashCode() : 0);
+		result = 31 * result + (status != null ? status.hashCode() : 0);
+		return result;
+	}
 }

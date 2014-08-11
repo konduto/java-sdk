@@ -27,7 +27,7 @@ public class KondutoCustomerTest {
 	@Test
 	public void serializationTest(){
 		KondutoCustomer customer = KondutoCustomerFactory.completeCustomer();
-		JsonObject customerJSON = TestUtils.readJSONFromFile("customer.json");
+		JsonObject customerJSON = (JsonObject) TestUtils.readJSONFromFile("customer.json");
 		try {
 			assertEquals("serialization failed", customerJSON, customer.toJSON());
 		} catch (KondutoInvalidEntityException e) {

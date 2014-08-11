@@ -1,6 +1,6 @@
 package com.konduto.sdk.utils;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.nio.file.Paths;
  */
 public class TestUtils {
 
-	public static JsonObject readJSONFromFile(String resourceName) {
+	public static JsonElement readJSONFromFile(String resourceName) {
 		try {
 			URL resource = Thread.currentThread().getContextClassLoader().getResource(resourceName);
 			if(resource != null) {
@@ -22,7 +22,7 @@ public class TestUtils {
 				byte[] bytes = Files.readAllBytes(Paths.get(uri));
 				String jsonString = new String(bytes, "UTF-8");
 				JsonParser parser = new JsonParser();
-				return (JsonObject) parser.parse(jsonString);
+				return parser.parse(jsonString);
 			} else {
 				throw new IllegalArgumentException(resourceName + " is an invalid resource name");
 			}

@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 public class KondutoAddressTest {
 	@Test
 	public void serializeTest(){
-		JsonObject expectedJSON = TestUtils.readJSONFromFile("address.json");
+		JsonObject expectedJSON = (JsonObject) TestUtils.readJSONFromFile("address.json");
 		JsonObject actualJSON = null;
 
 		KondutoAddress address = KondutoAddressFactory.getAddress();

@@ -7,7 +7,7 @@ import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 /**
  */
@@ -16,7 +16,7 @@ public class KondutoNavigationInfoTest {
 	@Test
 	public void serializationTest(){
 		KondutoNavigationInfo navigationInfo = KondutoNavigationInfoFactory.getNavigationInfo();
-		JsonObject navigationInfoJSON = TestUtils.readJSONFromFile("navigation.json");
+		JsonObject navigationInfoJSON = (JsonObject) TestUtils.readJSONFromFile("navigation.json");
 		try {
 			assertEquals("serialization failed", navigationInfoJSON ,navigationInfo.toJSON());
 		} catch (KondutoInvalidEntityException e) {

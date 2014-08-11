@@ -6,33 +6,40 @@ import com.konduto.sdk.models.KondutoPayment;
 import com.konduto.sdk.models.KondutoPaymentType;
 
 import java.lang.reflect.Type;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  *
- * This adapter is used to tell GSON how to serialize from/deserialize to {@link KondutoPayment} children instances.
+ * This adapter is used to tell GSON how to serialize/deserialize collections of KondutoPayments.
  *
  */
-public class KondutoPaymentAdapter implements JsonSerializer<KondutoPayment>, JsonDeserializer<KondutoPayment> {
+public class KondutoPaymentAdapter implements JsonSerializer<Collection<KondutoPayment>>, JsonDeserializer<Collection<KondutoPayment>> {
 
 	/**
-	 * Method to serialize a {@link KondutoPayment} into a JSON object.
+	 * Method to serialize a collection of KondutoPayments into a JSON object.
 	 *
-	 * @param src a KondutoPayment instance
+	 * @param payments a collection of KondutoPayment instances
 	 * @param typeOfSrc KondutoPayment class
 	 * @param context GSON serialization context
 	 * @return the object serialized
 	 */
 	@Override
-	public JsonElement serialize(KondutoPayment src, Type typeOfSrc, JsonSerializationContext context) {
-		switch (src.getType()){
-			case CREDIT:
-				return context.serialize(src, KondutoCreditCardPayment.class);
+	public JsonElement serialize(Collection<KondutoPayment> payments, Type typeOfSrc, JsonSerializationContext context) {
+		JsonArray paymentsJSON = new JsonArray();
+
+		for(KondutoPayment payment : payments) {
+			switch (payment.getType()){
+				case CREDIT:
+					paymentsJSON.add(context.serialize(payment, KondutoCreditCardPayment.class));
+			}
 		}
-		return null;
+
+		return paymentsJSON;
 	}
 
 	/**
-	 * Method to deserialize a JSON object into a {@link KondutoPayment} instance.
+	 * Method to deserialize a JSON object into a collection of KondutoPayments.
 	 *
 	 * @param json a serialized object
 	 * @param typeOfT the object type
@@ -41,15 +48,21 @@ public class KondutoPaymentAdapter implements JsonSerializer<KondutoPayment>, Js
 	 * @throws JsonParseException
 	 */
 	@Override
-	public KondutoPayment deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+	public Collection<KondutoPayment> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
-		KondutoPaymentType type =
-				KondutoPaymentType.valueOf(((JsonObject) json).get("type").getAsString().toUpperCase());
-		switch (type){
-			case CREDIT:
-				return context.deserialize(json, KondutoCreditCardPayment.class);
+
+		Collection<KondutoPayment> payments = new HashSet<>();
+
+		for(JsonElement je : json.getAsJsonArray()) {
+			KondutoPaymentType type =
+					KondutoPaymentType.valueOf(((JsonObject) je).get("type").getAsString().toUpperCase());
+			switch (type){
+				case CREDIT:
+					payments.add((KondutoCreditCardPayment) context.deserialize(je, KondutoCreditCardPayment.class));
+			}
 		}
-		return null;
+
+		return payments;
 	}
 }
 

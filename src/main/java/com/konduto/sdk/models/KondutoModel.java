@@ -4,15 +4,18 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.adapters.KondutoPaymentAdapter;
+import com.konduto.sdk.adapters.KondutoShoppingCartAdapter;
 import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
-
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -27,8 +30,12 @@ public abstract class KondutoModel {
 	public abstract boolean equals(Object obj);
 
 	/* Transient and static attributes won't be included in serialization */
+	private static Type paymentsType = new TypeToken<Collection<KondutoPayment>>(){}.getType();
+	private static Type shoppingCartType = new TypeToken<Collection<KondutoItem>>(){}.getType();
+
 	protected static Gson gson = new GsonBuilder()
-			.registerTypeAdapter(KondutoPayment.class, new KondutoPaymentAdapter())
+			.registerTypeAdapter(paymentsType, new KondutoPaymentAdapter())
+			.registerTypeAdapter(shoppingCartType, new KondutoShoppingCartAdapter())
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.create();
 

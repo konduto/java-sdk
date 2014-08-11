@@ -16,7 +16,7 @@ public class KondutoGeolocationTest {
 	@Test
 	public void serializationTest(){
 		KondutoGeolocation geolocation = KondutoGeolocationFactory.getGeolocation();
-		JsonObject geolocationJSON = TestUtils.readJSONFromFile("geolocation.json");
+		JsonObject geolocationJSON = (JsonObject) TestUtils.readJSONFromFile("geolocation.json");
 		try {
 			assertEquals("serialization failed", geolocationJSON, geolocation.toJSON());
 		} catch (KondutoInvalidEntityException e) {
