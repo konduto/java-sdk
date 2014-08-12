@@ -15,6 +15,21 @@ public class KondutoItem extends KondutoModel {
 	private Double quantity;
 	private Double discount;
 
+	/* Constructors */
+
+	public KondutoItem(){}
+
+	/**
+	 * Fluent constructor
+	 * @param attributeName the attribute name (e.g totalAmount)
+	 * @param attributeValue the attribute value (e.g 123.2)
+	 * @return a new instance
+	 */
+	@Override
+	public KondutoItem with(String attributeName, Object attributeValue) {
+		return (KondutoItem) super.with(attributeName, attributeValue);
+	}
+
 
 	/* Equals */
 

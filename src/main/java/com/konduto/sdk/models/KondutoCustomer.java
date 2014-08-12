@@ -13,7 +13,7 @@ public final class KondutoCustomer extends KondutoModel {
 
 	/* Attributes */
 
-	@Required private String id;
+	@Required private String id = "1";
 	@Required private String name;
 	@Required private String email;
 	private String taxId;
@@ -25,6 +25,17 @@ public final class KondutoCustomer extends KondutoModel {
 	/* Constructors */
 
 	public KondutoCustomer() { }
+
+	/**
+	 * Fluent constructor
+	 * @param attributeName the attribute name (e.g totalAmount)
+	 * @param attributeValue the attribute value (e.g 123.2)
+	 * @return a new instance
+	 */
+	@Override
+	public KondutoCustomer with(String attributeName, Object attributeValue) {
+		return (KondutoCustomer) super.with(attributeName, attributeValue);
+	}
 
 	/* Equals */
 

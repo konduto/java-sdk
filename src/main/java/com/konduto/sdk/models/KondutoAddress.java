@@ -22,6 +22,17 @@ public class KondutoAddress extends KondutoModel {
 
 	public KondutoAddress() { }
 
+	/**
+	 * Fluent constructor
+	 * @param attributeName the attribute name (e.g totalAmount)
+	 * @param attributeValue the attribute value (e.g 123.2)
+	 * @return a new instance
+	 */
+	@Override
+	public KondutoAddress with(String attributeName, Object attributeValue) {
+		return (KondutoAddress) super.with(attributeName, attributeValue);
+	}
+
 	/* Equals */
 
 	@Override

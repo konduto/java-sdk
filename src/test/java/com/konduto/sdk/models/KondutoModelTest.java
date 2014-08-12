@@ -4,6 +4,8 @@ import com.konduto.sdk.annotations.Required;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -11,7 +13,10 @@ import static org.junit.Assert.*;
  */
 public class KondutoModelTest {
 
-	private class KondutoDummyModel extends KondutoModel{
+	private class KondutoDummyModel extends KondutoModel {
+
+		public KondutoDummyModel(){}
+
 		@Required
 		private String dummyField = "";
 
@@ -58,6 +63,32 @@ public class KondutoModelTest {
 				"\tdummyField of class String is required but came ''\n" +
 				"KondutoDummyModelInternalModel\n" +
 				"\tinternalModelDummyField is required but came null", dummyModel.getErrors());
+	}
+
+	@Test
+	public void hashMapFactoryTest() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("name", "Raphael");
+		map.put("email", "raphael@konduto.com");
+		map.put("id", "1234");
+
+		KondutoCustomer c = (KondutoCustomer) KondutoModel.fromMap(map, KondutoCustomer.class);
+
+		assertEquals("map constructor did not work", "Raphael", c.getName());
+		assertEquals("map constructor did not work", "raphael@konduto.com", c.getEmail());
+		assertEquals("map constructor did not work", "1234", c.getId());
+	}
+
+	@Test
+	public void fluentTest() {
+		KondutoCustomer c = new KondutoCustomer()
+				.with("name", "Raphael")
+				.with("email", "raphael@konduto.com")
+				.with("id", "1234");
+
+		assertEquals("fluent constructor did not work", "Raphael", c.getName());
+		assertEquals("fluent constructor did not work", "raphael@konduto.com", c.getEmail());
+		assertEquals("fluent constructor did not work", "1234", c.getId());
 	}
 
 }

@@ -19,6 +19,8 @@ public class KondutoDevice extends KondutoModel {
 	private boolean flash;
 	private String ip;
 
+	public KondutoDevice(){}
+
 	/* Equals */
 
 	@Override

@@ -15,7 +15,7 @@ public class KondutoCreditCardPayment extends KondutoPayment {
 	private KondutoCreditCardPaymentStatus status;
 
 	public KondutoCreditCardPayment(){
-		this.type = KondutoPaymentType.CREDIT;
+		super(KondutoPaymentType.CREDIT);
 	}
 
 	public KondutoCreditCardPaymentStatus getStatus() {

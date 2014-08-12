@@ -14,9 +14,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -151,4 +149,114 @@ public abstract class KondutoModel {
 		return errors.isEmpty();
 
 	}
+
+
+	/**
+	 * Enables Map-based construction in KondutoModel children.
+	 *
+	 * @param attributes a {@link HashMap} containing attributes. For a field 'totalAmount' with type Long, we should
+	 *                   add the following entry to the map: 'totalAmount', 123L.
+	 */
+	public static KondutoModel fromMap(Map<String,Object> attributes, Class<?> klass){
+
+		KondutoModel model;
+
+		try {
+			model = (KondutoModel) klass.newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+			throw new RuntimeException("could not instantiate an object of " + klass);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException("constructor is not accessible in " + klass);
+		}
+
+
+
+		for(Map.Entry<String, Object> attribute : attributes.entrySet()) {
+
+			String attributeName = attribute.getKey();
+
+			try {
+				Field field = klass.getDeclaredField(attributeName);
+
+				Object value = attribute.getValue();
+
+				if(!relatedClasses(field.getType(), value.getClass())){
+					throw new IllegalArgumentException(String.format(
+							"Illegal value for attribute %s. Expected a value of class %s, but got a value of class %s",
+							field.getName(),
+							field.getType(),
+							value.getClass()
+					));
+				}
+
+				field.setAccessible(true);
+
+				field.set(model, value);
+
+			} catch (NoSuchFieldException e) {
+				throw new IllegalArgumentException(String.format("Attribute %s was not found.", attributeName));
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException("if field was found it should be accessible (via field.setAccessible(true))");
+			}
+		}
+
+		return model;
+
+	}
+
+	/**
+	 * Classes are related iff class1 is the same as class2 or if one of them is a wrapper for the other one
+	 * (e.g class1 is int.class and class2 is Integer.class)
+	 * @param class1 a class
+	 * @param class2 another class
+	 * @return whether class1 and class2 are related
+	 */
+	private static boolean relatedClasses(Class<?> class1, Class<?> class2) {
+		if(class1.equals(class2)) return true;
+		if(isWrapped(class1, class2)) return true;
+		if(isWrapped(class2, class1)) return true;
+		return false;
+	}
+
+	/**
+	 * Checks whether class1 is wrapped by class2.
+	 * @param class1 supposedly wrapped class.
+	 * @param class2 supposedly wrapper class.
+	 * @return true if class1 is wrapped by class2 or false otherwise.
+	 */
+	private static boolean isWrapped(Class<?> class1, Class<?> class2) {
+		if(class1.equals(boolean.class) && class2.equals(Boolean.class)) return true;
+		if(class1.equals(byte.class) && class2.equals(Byte.class)) return true;
+		if(class1.equals(short.class) && class2.equals(Short.class)) return true;
+		if(class1.equals(char.class) && class2.equals(Character.class)) return true;
+		if(class1.equals(int.class) && class2.equals(Integer.class)) return true;
+		if(class1.equals(long.class) && class2.equals(Long.class)) return true;
+		if(class1.equals(float.class) && class2.equals(Float.class)) return true;
+		if(class1.equals(double.class) && class2.equals(Double.class)) return true;
+		return false;
+	}
+
+	/**
+	 * Fluent constructor implementation
+	 * @param attributeName the attribute name (e.g greeting)
+	 * @param attributeValue the attribute value (e.g "Hello")
+	 * @return a new instance
+	 *
+	 * @see <a href=http://en.wikipedia.org/wiki/Fluent_interface>Fluent interface article</a>
+	 */
+	public KondutoModel with(String attributeName, Object attributeValue){
+		try {
+			Field field = this.getClass().getDeclaredField(attributeName);
+			field.setAccessible(true);
+			field.set(this, attributeValue);
+		} catch (NoSuchFieldException e) {
+			throw new RuntimeException("field " + attributeName + " was not found.");
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException("field " + attributeName + "was found. Therefore it should be accessible.");
+		}
+		return this;
+	}
+
+
 }
