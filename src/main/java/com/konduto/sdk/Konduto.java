@@ -260,8 +260,8 @@ public final class Konduto {
 	/**
 	 * Updates an order status.
 	 *
-	 * @param orderId the order identifier
-	 * @param status the new status
+	 * @param order the order to update
+	 * @param newStatus the new status (APPROVED, DECLINED or FRAUD)
 	 * @param comments some comments (an empty String is accepted, although we recommend setting it to at least a timestamp)
 	 * @throws KondutoHTTPException
 	 * @throws KondutoUnexpectedAPIResponseException
@@ -269,7 +269,7 @@ public final class Konduto {
 	 * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
 	 */
 
-	public static void updateOrderStatus(String orderId, KondutoOrderStatus status, String comments)
+	public static void updateOrderStatus(KondutoOrder order, KondutoOrderStatus newStatus, String comments)
 			throws KondutoHTTPException, KondutoUnexpectedAPIResponseException {
 
 		List<KondutoOrderStatus> allowedStatuses = Arrays.asList(
@@ -278,23 +278,27 @@ public final class Konduto {
 				KondutoOrderStatus.FRAUD
 		);
 
-		if (!allowedStatuses.contains(status)){ throw new IllegalArgumentException("Illegal status: " + status); }
+		if (!allowedStatuses.contains(newStatus)){ throw new IllegalArgumentException("Illegal status: " + newStatus); }
 		if (comments == null){ throw new NullPointerException("comments cannot be null"); }
 
-		PutMethod putMethod = new PutMethod(kondutoPutOrderUrl(orderId).toString());
+		PutMethod putMethod = new PutMethod(kondutoPutOrderUrl(order.getId()).toString());
 
 		JsonObject requestBody = new JsonObject();
 
-		requestBody.addProperty("status", status.toString().toLowerCase());
+		requestBody.addProperty("status", newStatus.toString().toLowerCase());
 		requestBody.addProperty("comments", comments);
 
 		JsonObject responseBody;
 
 		responseBody = sendRequest(putMethod, requestBody);
 
+		if(responseBody.has("order")) responseBody = responseBody.getAsJsonObject("order"); // unwrapping
+
 		if (responseBody == null || !responseBody.has("old_status") || !responseBody.has("new_status")) {
 			throw new KondutoUnexpectedAPIResponseException(responseBody);
 		}
+
+		order.setStatus(newStatus);
 
 
 

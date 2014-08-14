@@ -23,7 +23,6 @@ import static org.junit.Assert.*;
 /**
 */
 public class KondutoTest {
-	private static final String ORDER_ID = "1406910391037";
 
 	private static final String AUTH_HEADER = "Basic VDczOEQ1MTZGMDlDQUIzQTJDMUVF";
 	private static final String API_KEY = "T738D516F09CAB3A2C1EE";
@@ -33,6 +32,8 @@ public class KondutoTest {
 
 	private static final KondutoOrder ORDER_FROM_FILE =
 			(KondutoOrder) KondutoModel.fromJSON(JSON_FROM_FILE, KondutoOrder.class);
+
+	private static final String ORDER_ID = ORDER_FROM_FILE.getId();
 
 	private static final int[] HTTP_STATUSES = {
 			HttpStatus.SC_UNAUTHORIZED, // 401
@@ -190,10 +191,12 @@ public class KondutoTest {
 				.willReturn(aResponse()
 						.withStatus(200)
 						.withHeader("Content-Type", "application/json")
-						.withBody("{\"old_status\":\"review\",\"new_status\":\"approved\"}")));
+						.withBody(
+							"{ \"status\":\"ok\", \"order\": {\"old_status\":\"review\",\"new_status\":\"approved\"}}"
+						)));
 
 		try {
-			Konduto.updateOrderStatus(ORDER_ID, KondutoOrderStatus.APPROVED, "no comments");
+			Konduto.updateOrderStatus(ORDER_FROM_FILE, KondutoOrderStatus.APPROVED, "no comments");
 		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("order update should have succeeded");
 		}
@@ -212,7 +215,7 @@ public class KondutoTest {
 		}
 
 		try {
-			Konduto.updateOrderStatus(ORDER_ID, KondutoOrderStatus.APPROVED, "no comments");
+			Konduto.updateOrderStatus(ORDER_FROM_FILE, KondutoOrderStatus.APPROVED, "no comments");
 			fail("exception expected");
 		} catch (KondutoHTTPException e) {
 			// nothing to do, because exception was expected
@@ -230,7 +233,7 @@ public class KondutoTest {
 
 		for (KondutoOrderStatus status : forbiddenStatus) {
 			try {
-				Konduto.updateOrderStatus(ORDER_ID, status, "");
+				Konduto.updateOrderStatus(ORDER_FROM_FILE, status, "");
 				fail("expected KondutoInvalidOrderStatus exception");
 			} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 				fail("expected KondutoInvalidOrderStatus exception");
@@ -241,7 +244,7 @@ public class KondutoTest {
 	@Test(expected=NullPointerException.class)
 	public void nullCommentsWhenUpdatingTest(){
 		try {
-			Konduto.updateOrderStatus(ORDER_ID, KondutoOrderStatus.APPROVED, null);
+			Konduto.updateOrderStatus(ORDER_FROM_FILE, KondutoOrderStatus.APPROVED, null);
 		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("expected NullPointerException");
 		}
