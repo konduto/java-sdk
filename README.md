@@ -59,8 +59,9 @@ attributes.put("customer", customer);
 KondutoOrder order = (KondutoOrder) KondutoModel.fromMap(attributes, KondutoOrder.class);
 ```
 
-NOTICE: the order created above is really, really simple. 
-Remember: the more detail you provide, the more accurate Konduto's analysis will be. 
+>
+**NOTICE**: the order created above is really, really simple. The more detail you provide, more accurate Konduto's analysis will be.
+>
 
 ## Sending an order for analysis.
 
@@ -87,7 +88,7 @@ Notice that if the analysis fails, a KondutoException will be thrown. Handle it 
 
 Every KondutoModel instance (therefore any KondutoOrder instance) has a isValid method that checks if required fields
 are present and an errors array. When isValid is called, if there are any errors they will be added to the errors array.
-For reading errors, just call order.getErrors() and a pretty-printed message will be displayed.
+For reading errors, just call `order.getErrors()` and a pretty-printed message will be displayed.
 
 After the analysis, some order attributes will be filled. For example the recommendation.
 
