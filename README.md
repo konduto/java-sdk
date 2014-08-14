@@ -31,7 +31,6 @@ All entities involved in Konduto's analysis process (e.g customer, shopping cart
 from KondutoModel and are under the models package.
 
 ```java
-/* Code below creates an order and sends it for analysis */
 
 KondutoOrder order = new KondutoOrder()
 		.with("id","123")
