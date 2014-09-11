@@ -1,44 +1,56 @@
-# Konduto's Java SDK.
+## Intro
 
-Konduto is a service that receives orders from merchants and analyzes them, looking for fraud evidence.
+Welcome! This document will explain how to integrate with Konduto's anti-fraud service so you can begin to spot fraud on your e-commerce website.
 
-After the analysis, which is based on AI techniques over buying behavior, personal data, 
-fingerprinting and customized rules, the system responds with a score telling how suspicious the transaction is
-and with a recommendation, which is either approve, decline or review.
+Our service uses the visitor's behavior to analyze browsing patterns and detect fraud. You will need to add a **JavaScript** snippet to your website and tag your pages, so we can see your visitors, and call our **REST API** to send purchases, so we can analyze them.
 
-This SDK should be used by merchants who wish to integrate their Java-based e-commerce with Konduto's
-anti-fraud technology.
+This document refers to the **Java SDK** used for our API.
 
-## Setting up Konduto class.
+## Requirements
 
-This project contains a class named Konduto, which is able to send HTTP messages to Konduto's RESTful API
-and receive responses from it.
+* Java 7
+
+## Installation
+
+To get started add our SDK as a dependency in your **pom.xml**:
+
+```xml
+<dependency>
+	<groupId>com.konduto.sdk</groupId>
+	<artifactId>java-sdk</artifactId>
+	<version>1.0.0</version>
+</dependency>
+```
+
+## Getting Started
+
+When a customer makes a purchase you must send the order information to us so we can analyze it. We perform a real-time analysis and return you a **recommendation** of what to do next and a score, a numeric confidence level about that order.
+
+While many of the parameters we accept are optional we recommend you send all you can, because every data point matters for the analysis. The **billing address** and **credit card information** are specially important, though we understand there are cases where you don't have that information.
+
+
+## Set your API key
+
+You will need an API key to authenticate the requests. Luckily for you the examples below have been populated with a working key, so you can just copy and paste to see how it works.
 
 ```java
-/* setting up Konduto class */
-
-Konduto.setApiKey(YOUR_API_KEY); // your API key is visible at Konduto's Dashboard
-								 // if you have any difficulties obtaining it, send an 										 // email to support@konduto.com
+Konduto.setApiKey("T738D516F09CAB3A2C1EE");
 ```
 
 ## Creating an order
 
-Before sending an order for analysis we must create it.
-
-KondutoOrder is a class that models the attributes and behavior of an order.
+`KondutoOrder` is a class that models the attributes and behavior of an order.
 
 All entities involved in Konduto's analysis process (e.g customer, shopping cart, payment, etc.) inherit 
 from KondutoModel and are under the models package.
 
 ```java
-
 KondutoOrder order = new KondutoOrder()
 		.with("id","123")
 		.with("totalAmount", 123.4)
 		.with("customer", customer); // customer is an instance of KondutoCustomer
 ```		
-Besides this fluent way of initializing an order - and any instance of KondutoModel -, 
-one can use the more conventional set-based approach as seen below.
+One can also use the more conventional set-based approach as seen below.
 
 ```java
 KondutoOrder order = new KondutoOrder();
@@ -63,6 +75,160 @@ KondutoOrder order = (KondutoOrder) KondutoModel.fromMap(attributes, KondutoOrde
 **NOTICE**: the order created above is really, really simple. The more detail you provide, more accurate Konduto's analysis will be.
 >
 
+### Order parameters
+
+Parameter | Description 
+--- | ---
+id | _(required)_ Unique identifier for each order.
+visitor | _(required)_ Visitor identifier obtained from our JavaScript snippet.
+total_amount | _(required)_ Total order amount.
+shipping_amount | _(optional)_ Shipping and handling amount.
+tax_amount | _(optional)_ Taxes amount.
+currency | _(optional)_ Currency code with 3 letters (ISO-4712).
+installments | _(optional)_ Number of installments in the payment plan.
+ip | _(optional)_ Customer's IPv4 address.
+customer | _(required)_ Object containing the customer details.
+payment | _(optional)_ Array containing the payment methods.
+billing | _(optional)_ Object containing the billing information.
+shipping | _(optional)_ Object containing the shipping information.
+shopping_cart | _(optional)_ Array containing the items purchased.
+
+#### Customer information
+
+```php
+$customer = new KondutoModels\Customer(array(
+  "id"      => "28372",
+  "name"    => "Mary Jane",
+  "tax_id"  => "6253407",
+  "phone1"  => "212-555-1234",
+  "phone2"  => "202-555-6789",
+  "email"   => "mary.jane@example.com",
+  "new"     => true,
+  "vip"     => false
+));
+```
+
+
+Parameter | Description 
+--- | ---
+id | _(required)_ **Unique** identifier for each customer. Can be anything you like (counter, id, e-mail address) as long as it's consistent in future orders.
+name | _(required)_ Customer's full name.
+email | _(required)_ Customer's e-mail address
+tax_id | _(optional)_ Customer's tax id.
+phone1 | _(optional)_ Customer's primary phone number
+phone 2 | _(optional)_ Customer's secondary phone number
+new | _(optional)_ Boolean indicating if the customer is using a newly created account for this purchase.
+vip | _(optional)_ Boolean indicating if the customer is a VIP or frequent buyer.
+
+
+#### Payment information
+
+```php
+$creditCard = new KondutoModels\CreditCard(array(
+  "bin"             => "490172",
+  "last4"           => "0012",
+  "expiration_date" => "072015",
+  "status"          => "approved"
+));
+```
+
+
+Parameter | Description 
+--- | ---
+status | _(required)_ The status of the transaction returned by the payment processor. Accepts `approved`, `declined` or `pending` if the payment wasn't been processed yet.
+bin | _(optional)_ First six digits of the customer's credit card. Used to identify the type of card being sent.
+last4 | _(optional)_ Four last digits of the customer's credit card number.
+expiration_date | _(optional)_ Card's expiration date under MMYYYY format.
+
+
+#### Billing address
+
+```php
+$billing = new KondutoModels\Address(array(
+  "name"      => "Mary Jane",
+  "address1"  => "123 Main St.",
+  "address2"  => "Apartment 4",
+  "city"      => "New York City",
+  "state"     => "NY",
+  "zip"       => "10460",
+  "country"   => "US"
+));
+```
+
+
+Parameter | Description 
+--- | ---
+name | _(optional)_ Cardholder's full name.
+address1 | _(optional)_ Cardholder's billing address on file with the bank.
+address2 | _(optional)_ Additional cardholder address information.
+city | _(optional)_ Cardholder's city.
+state | _(optional)_ Cardholder's state.
+zip | _(optional)_ Cardholder's ZIP code.
+country | _(optional)_ Cardholder's country code (ISO 3166-2)
+
+
+#### Shipping address
+
+```php
+$billing = new KondutoModels\Address(array(
+  "name"      => "Mary Jane",
+  "address1"  => "123 Main St.",
+  "address2"  => "Apartment 4",
+  "city"      => "New York City",
+  "state"     => "NY",
+  "zip"       => "10460",
+  "country"   => "US"
+));
+```
+
+Parameter | Description 
+--- | ---
+name | _(optional)_ Recipient's full name.
+address1 | _(optional)_ Recipient's shipping address.
+address2 | _(optional)_ Additional recipient address information.
+city | _(optional)_ Recipient's city.
+state | _(optional)_ Recipient's state.
+zip | _(optional)_ Recipient's ZIP code.
+country | _(optional)_ Recipient's country code (ISO 3166-2)
+
+
+#### Shopping cart
+
+```php
+$item1 = new KondutoModels\Item(array(
+  "sku"           => "9919023",
+  "product_code"  => "123456789999",
+  "category"      => 201,
+  "name"          => "Green T-Shirt",
+  "description"   => "Male Green T-Shirt V Neck",
+  "unit_cost"     => 1999.99,
+  "quantity"      => 1
+);
+
+$item2 = new KondutoModels\Item(array(
+  "sku"         => "0017273",
+  "category"    => 202,
+  "name"        => "Yellow Socks",
+  "description" => "Pair of Yellow Socks",
+  "unit_cost"   => 29.90,
+  "quantity"    => 2,
+  "discount"    => 5.00
+);
+```
+
+
+Parameter | Description 
+--- | ---
+sku | _(optional)_ Product or service's SKU or inventory id.
+product_code | _(optional)_ Product or service's UPC, barcode or secondary id.
+category | _(optional)_ Category code for the item purchased. [See here](http://docs.konduto.com/#n-tables) for the list.
+name | _(optional)_ Name of the product or service.
+description | _(optional)_ Detailed description of the item.
+unit_cost | _(optional)_ Cost of a single unit of this item.
+quantity | _(optional)_ Number of units purchased.
+discount | _(optional)_ Discounted amount for this item.
+
+
 ## Sending an order for analysis.
 
 After creating the order, sending it to Konduto's analysis is very simple.
@@ -70,12 +236,11 @@ After creating the order, sending it to Konduto's analysis is very simple.
 ```java
 if(order.isValid()){
 	try {
-		Konduto.analyze(order); // order is an instance of KondutoOrder	
-	// a KondutoException will be thrown if Konduto responds with anything other than 200 OK.
+		Konduto.analyze(order);
+	// A KondutoException will be thrown if the response is anything other than 200 OK.
 	// You can catch more specific exceptions if you want to (e.g KondutoHTTPBadRequestException).
 	catch(KondutoException e) {
-		// Put any exception handling here. In the example below, one decided to print the stack trace,
-		// to persist the order in the database marking it as not analyzed and to keep the error message. 
+		// Put any exception handling here.
 		e.printStackTrace();
 		persistAsNotAnalyzed(order, e.getMessage());
 	}
@@ -84,11 +249,7 @@ if(order.isValid()){
 }
 ```
 
-Notice that if the analysis fails, a KondutoException will be thrown. Handle it as you wish.
-
-Every KondutoModel instance (therefore any KondutoOrder instance) has a isValid method that checks if required fields
-are present and an errors array. When isValid is called, if there are any errors they will be added to the errors array.
-For reading errors, just call `order.getErrors()` and a pretty-printed message will be displayed.
+Notice that if the analysis fails, a **KondutoException** will be thrown. Handle it as you wish.
 
 After the analysis, some order attributes will be filled. For example the recommendation.
 
@@ -120,11 +281,20 @@ try {
 }
 ```
 
+Parameter | Description 
+--- | ---
+status | _(required)_ New status for this transaction. Either `approved`, `declined` or `fraud`, when you have identified a fraud or chargeback.
+comments | _(required)_ Reason or comments about the status update.
+
+## Reference Tables
+
+Please [click here](http://docs.konduto.com/#n-tables) for the Currency and Category reference tables.
+
 ## Troubleshooting
 
 If you experience problems sending orders for analysis, querying orders or updating order status, it might be a good idea
 to call `Konduto.debug()`. This will print out the API Key, the endpoint, the request body and the response body.
 
-If you need help send an email to support@konduto.com
+## Support
 
-Feel free to suggest improvements or report bugs.
+Feel free to contact our [support team](mailto:support@konduto.com) if you have any questions or suggestions!
