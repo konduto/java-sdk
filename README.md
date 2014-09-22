@@ -95,20 +95,6 @@ shopping_cart | _(optional)_ Array containing the items purchased.
 
 #### Customer information
 
-```php
-$customer = new KondutoModels\Customer(array(
-  "id"      => "28372",
-  "name"    => "Mary Jane",
-  "tax_id"  => "6253407",
-  "phone1"  => "212-555-1234",
-  "phone2"  => "202-555-6789",
-  "email"   => "mary.jane@example.com",
-  "new"     => true,
-  "vip"     => false
-));
-```
-
-
 Parameter | Description 
 --- | ---
 id | _(required)_ **Unique** identifier for each customer. Can be anything you like (counter, id, e-mail address) as long as it's consistent in future orders.
@@ -123,16 +109,6 @@ vip | _(optional)_ Boolean indicating if the customer is a VIP or frequent buyer
 
 #### Payment information
 
-```php
-$creditCard = new KondutoModels\CreditCard(array(
-  "bin"             => "490172",
-  "last4"           => "0012",
-  "expiration_date" => "072015",
-  "status"          => "approved"
-));
-```
-
-
 Parameter | Description 
 --- | ---
 status | _(required)_ The status of the transaction returned by the payment processor. Accepts `approved`, `declined` or `pending` if the payment wasn't been processed yet.
@@ -142,19 +118,6 @@ expiration_date | _(optional)_ Card's expiration date under MMYYYY format.
 
 
 #### Billing address
-
-```php
-$billing = new KondutoModels\Address(array(
-  "name"      => "Mary Jane",
-  "address1"  => "123 Main St.",
-  "address2"  => "Apartment 4",
-  "city"      => "New York City",
-  "state"     => "NY",
-  "zip"       => "10460",
-  "country"   => "US"
-));
-```
-
 
 Parameter | Description 
 --- | ---
@@ -169,18 +132,6 @@ country | _(optional)_ Cardholder's country code (ISO 3166-2)
 
 #### Shipping address
 
-```php
-$billing = new KondutoModels\Address(array(
-  "name"      => "Mary Jane",
-  "address1"  => "123 Main St.",
-  "address2"  => "Apartment 4",
-  "city"      => "New York City",
-  "state"     => "NY",
-  "zip"       => "10460",
-  "country"   => "US"
-));
-```
-
 Parameter | Description 
 --- | ---
 name | _(optional)_ Recipient's full name.
@@ -193,29 +144,6 @@ country | _(optional)_ Recipient's country code (ISO 3166-2)
 
 
 #### Shopping cart
-
-```php
-$item1 = new KondutoModels\Item(array(
-  "sku"           => "9919023",
-  "product_code"  => "123456789999",
-  "category"      => 201,
-  "name"          => "Green T-Shirt",
-  "description"   => "Male Green T-Shirt V Neck",
-  "unit_cost"     => 1999.99,
-  "quantity"      => 1
-);
-
-$item2 = new KondutoModels\Item(array(
-  "sku"         => "0017273",
-  "category"    => 202,
-  "name"        => "Yellow Socks",
-  "description" => "Pair of Yellow Socks",
-  "unit_cost"   => 29.90,
-  "quantity"    => 2,
-  "discount"    => 5.00
-);
-```
-
 
 Parameter | Description 
 --- | ---
