@@ -18,7 +18,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>1.0.0</version>
+	<version>2.0.0</version>
 </dependency>
 ```
 
@@ -34,7 +34,8 @@ While many of the parameters we accept are optional we recommend you send all yo
 You will need an API key to authenticate the requests. Luckily for you the examples below have been populated with a working key, so you can just copy and paste to see how it works.
 
 ```java
-Konduto.setApiKey("T738D516F09CAB3A2C1EE");
+// creates a Konduto instance, which is a class that communicates with our API by using HTTP methods.
+Konduto konduto = new Konduto("T738D516F09CAB3A2C1EE"); // T738D516F09CAB3A2C1EE is the API key
 ```
 
 ## Creating an order
@@ -164,7 +165,7 @@ After creating the order, sending it to Konduto's analysis is very simple.
 ```java
 if(order.isValid()){
 	try {
-		Konduto.analyze(order);
+		konduto.analyze(order);
 	// A KondutoException will be thrown if the response is anything other than 200 OK.
 	// You can catch more specific exceptions if you want to (e.g KondutoHTTPBadRequestException).
 	catch(KondutoException e) {
@@ -192,7 +193,7 @@ In order to do that use the Konduto class in the following way:
 
 ```java
 try {
-	KondutoOrder order = Konduto.getOrder(orderId); // orderId is a String
+	KondutoOrder order = konduto.getOrder(orderId); // orderId is a String
 } catch (KondutoException e) {
 	// Exception handling code
 }
@@ -203,7 +204,7 @@ try {
 ```java
 try {
 	// the order status will be set to newStatus if the request succeeds.
-	Konduto.updateOrderStatus(order, newStatus, "some comments"); 
+	konduto.updateOrderStatus(order, newStatus, "some comments"); 
 } catch (KondutoException e) {
 	// Exception handling code
 }
@@ -221,7 +222,7 @@ Please [click here](http://docs.konduto.com/#n-tables) for the Currency and Cate
 ## Troubleshooting
 
 If you experience problems sending orders for analysis, querying orders or updating order status, it might be a good idea
-to call `Konduto.debug()`. This will print out the API Key, the endpoint, the request body and the response body.
+to call `konduto.debug()`. This will print out the API Key, the endpoint, the request body and the response body.
 
 ## Support
 
