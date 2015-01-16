@@ -10,7 +10,7 @@ import java.util.Collection;
 /**
  * Created by rsampaio on 11/08/14.
  *
- * Implements Collection<KondutoItem>, i.e shopping cart, serialization/deserialization.
+ * Shopping cart (collection of KondutoItem), serialization/deserialization.
  *
  */
 public class KondutoShoppingCartAdapter

@@ -45,13 +45,14 @@ public class KondutoTest {
 			HttpStatus.SC_INTERNAL_SERVER_ERROR // 500
 	};
 
+    private Konduto konduto = new Konduto(API_KEY);
+
 	@Rule
 	public WireMockRule wireMockRule = new WireMockRule();
 
 	@Before
 	public void setupKonduto(){
-		Konduto.setEndpoint(URI.create("http://localhost:8080/v1"));
-		Konduto.setApiKey(API_KEY);
+		konduto.setEndpoint(URI.create("http://localhost:8080/v1"));
 	}
 
 	@Test
@@ -67,7 +68,7 @@ public class KondutoTest {
 		KondutoOrder actualOrder = null;
 
 		try {
-			 actualOrder = Konduto.getOrder(ORDER_ID);
+			 actualOrder = konduto.getOrder(ORDER_ID);
 
 		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("[GET] should succeed");
@@ -87,7 +88,7 @@ public class KondutoTest {
 							.withHeader("Content-Type", "application/json")
 							.withBody("{}")));
 			try {
-				Konduto.getOrder(ORDER_ID);
+				konduto.getOrder(ORDER_ID);
 				fail("Exception expected");
 			} catch (KondutoHTTPException e) {
 				// nothing to do, because exception was expected
@@ -117,7 +118,7 @@ public class KondutoTest {
 		assertNull("basic order should have no navigation info", orderToSend.getNavigationInfo());
 
 		try {
-			Konduto.analyze(orderToSend); // do analyze
+			konduto.analyze(orderToSend); // do analyze
 		} catch (KondutoInvalidEntityException e) {
 			fail("order should be valid");
 		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
@@ -153,7 +154,7 @@ public class KondutoTest {
 		KondutoOrder order = new KondutoOrder();
 
 		try {
-			Konduto.analyze(order);
+			konduto.analyze(order);
 			fail("KondutoInvalidEntityException should have been thrown");
 		} catch (KondutoInvalidEntityException e) {
 			// nothing to do, because exception was expected
@@ -173,7 +174,7 @@ public class KondutoTest {
 							.withHeader("Content-Type", "application/json")
 							.withBody("{}")));
 			try {
-				Konduto.analyze(KondutoOrderFactory.basicOrder());
+				konduto.analyze(KondutoOrderFactory.basicOrder());
 				fail("Exception expected");
 			} catch (KondutoHTTPException e) {
 				// nothing to do, because exception was expected
@@ -196,7 +197,7 @@ public class KondutoTest {
 						)));
 
 		try {
-			Konduto.updateOrderStatus(ORDER_FROM_FILE, KondutoOrderStatus.APPROVED, "no comments");
+			konduto.updateOrderStatus(ORDER_FROM_FILE, KondutoOrderStatus.APPROVED, "no comments");
 		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("order update should have succeeded");
 		}
@@ -215,7 +216,7 @@ public class KondutoTest {
 		}
 
 		try {
-			Konduto.updateOrderStatus(ORDER_FROM_FILE, KondutoOrderStatus.APPROVED, "no comments");
+			konduto.updateOrderStatus(ORDER_FROM_FILE, KondutoOrderStatus.APPROVED, "no comments");
 			fail("exception expected");
 		} catch (KondutoHTTPException e) {
 			// nothing to do, because exception was expected
@@ -233,7 +234,7 @@ public class KondutoTest {
 
 		for (KondutoOrderStatus status : forbiddenStatus) {
 			try {
-				Konduto.updateOrderStatus(ORDER_FROM_FILE, status, "");
+				konduto.updateOrderStatus(ORDER_FROM_FILE, status, "");
 				fail("expected KondutoInvalidOrderStatus exception");
 			} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 				fail("expected KondutoInvalidOrderStatus exception");
@@ -244,7 +245,7 @@ public class KondutoTest {
 	@Test(expected=NullPointerException.class)
 	public void nullCommentsWhenUpdatingTest(){
 		try {
-			Konduto.updateOrderStatus(ORDER_FROM_FILE, KondutoOrderStatus.APPROVED, null);
+			konduto.updateOrderStatus(ORDER_FROM_FILE, KondutoOrderStatus.APPROVED, null);
 		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("expected NullPointerException");
 		}
@@ -252,7 +253,7 @@ public class KondutoTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void invalidApiKeyTest() {
-		Konduto.setApiKey("invalid key");
+		konduto.setApiKey("invalid key");
 	}
 
 }

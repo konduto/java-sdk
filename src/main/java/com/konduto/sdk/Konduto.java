@@ -10,6 +10,7 @@ import com.konduto.sdk.models.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
@@ -28,30 +29,34 @@ import java.util.List;
  */
 
 public final class Konduto {
-	private static String apiKey;
-	private static JsonObject requestBody;
-	private static JsonObject responseBody;
-	private static URI endpoint = URI.create("https://api.konduto.com/v1");
+	private String apiKey;
+	private JsonObject requestBody;
+	private JsonObject responseBody;
+	private URI endpoint = URI.create("https://api.konduto.com/v1");
 
-	/**
+    private static final HttpClient HTTP_CLIENT = new HttpClient(new MultiThreadedHttpConnectionManager());
+
+	public Konduto(String apiKey) {
+        setApiKey(apiKey);
+    }
+
+    /**
 	 *
 	 * @param endpoint Konduto's API endpoint (default is https://api.konduto.com/v1)
 	 */
-	public static void setEndpoint(URI endpoint) {
-		Konduto.endpoint = endpoint;
+	public void setEndpoint(URI endpoint) {
+		this.endpoint = endpoint;
 	}
-
-	private Konduto() { /* cannot be instantiated */  }
 
 	/**
 	 *
 	 * @param apiKey sets the merchant secret API key, which is required for Konduto's API authentication.
 	 */
-	public static void setApiKey(String apiKey) {
+	public void setApiKey(String apiKey) {
 		if (apiKey == null || apiKey.length() != 21) {
 			throw new IllegalArgumentException("Illegal API Key: " + apiKey);
 		}
-		Konduto.apiKey = apiKey;
+		this.apiKey = apiKey;
 	}
 
 
@@ -59,15 +64,15 @@ public final class Konduto {
 	 * Helper method to debug requests made to Konduto's API.
 	 * @return a String containing API Key, Konduto's API endpoint, request and response bodies.
 	 */
-	public static String debug() {
+	public String debug() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format("API Key: %s\n", Konduto.apiKey));
-		sb.append(String.format("Endpoint: %s\n", Konduto.endpoint.toString()));
-		if(Konduto.requestBody != null) {
-			sb.append(String.format("Request body: %s\n", Konduto.requestBody));
+		sb.append(String.format("API Key: %s\n", this.apiKey));
+		sb.append(String.format("Endpoint: %s\n", this.endpoint.toString()));
+		if(this.requestBody != null) {
+			sb.append(String.format("Request body: %s\n", this.requestBody));
 		}
-		if(Konduto.responseBody != null) {
-			sb.append(String.format("Response body: %s\n", Konduto.responseBody));
+		if(this.responseBody != null) {
+			sb.append(String.format("Response body: %s\n", this.responseBody));
 		}
 		return sb.toString();
 	}
@@ -76,14 +81,14 @@ public final class Konduto {
 	 * @param orderId the order identifier
 	 * @return [GET] order URI (ENDPOINT/orders/orderId)
 	 */
-	protected static URI kondutoGetOrderUrl(String orderId) {
+	protected URI kondutoGetOrderUrl(String orderId) {
 		return URI.create(endpoint.toString().concat("/orders/" + orderId));
 	}
 
 	/**
 	 * @return [POST] order URI (ENDPOINT/orders)
 	 */
-	protected static URI kondutoPostOrderUrl(){
+	protected URI kondutoPostOrderUrl(){
 		return URI.create(endpoint.toString().concat("/orders"));
 	}
 
@@ -92,7 +97,7 @@ public final class Konduto {
 	 * @param orderId the order identifier
 	 * @return [PUT] order URI (ENDPOINT/orders/orderId)
 	 */
-	protected static URI kondutoPutOrderUrl(String orderId) {
+	protected URI kondutoPutOrderUrl(String orderId) {
 		return URI.create(endpoint.toString().concat("/orders/" + orderId));
 	}
 
@@ -129,13 +134,11 @@ public final class Konduto {
 	 * @return the response coming from Konduto's API
 	 * @throws KondutoHTTPException when something goes wrong, i.e a non-200 OK response is answered
 	 */
-	private static JsonObject sendRequest(HttpMethod method, JsonObject requestBody) throws KondutoHTTPException {
+	private JsonObject sendRequest(HttpMethod method, JsonObject requestBody) throws KondutoHTTPException {
 
-		if(apiKey == null) { throw new NullPointerException("API key cannot be null"); }
+		if(this.apiKey == null) { throw new NullPointerException("API key cannot be null"); }
 
 		JsonObject responseBody;
-
-		HttpClient httpClient = new HttpClient();
 
 		String base64 = null;
 		try {
@@ -148,18 +151,18 @@ public final class Konduto {
 
 		try {
 			if(method instanceof PostMethod) {
-				Konduto.requestBody = requestBody; // set Konduto's request body for debugging purposes
+				this.requestBody = requestBody; // set Konduto's request body for debugging purposes
 				((PostMethod) method).setRequestEntity(getRequestEntity(requestBody));
 			} else if (method instanceof PutMethod) {
-				Konduto.requestBody = requestBody; // set Konduto's request body for debugging purposes
+				this.requestBody = requestBody; // set Konduto's request body for debugging purposes
 				((PutMethod) method).setRequestEntity(getRequestEntity(requestBody));
 			}
 
-			int statusCode = httpClient.executeMethod(method);
+			int statusCode = HTTP_CLIENT.executeMethod(method);
 
 			responseBody = extractResponse(method);
 
-			Konduto.responseBody = responseBody; // set Konduto's response body for debugging purposes
+			this.responseBody = responseBody; // set Konduto's response body for debugging purposes
 
 			if(statusCode != 200) { throw KondutoHTTPExceptionFactory.buildException(statusCode, responseBody); }
 
@@ -184,7 +187,7 @@ public final class Konduto {
 	 *
 	 * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
 	 */
-	public static KondutoOrder getOrder(String orderId)
+	public KondutoOrder getOrder(String orderId)
 			throws KondutoHTTPException, KondutoUnexpectedAPIResponseException {
 		GetMethod getMethod = new GetMethod(kondutoGetOrderUrl(orderId).toString());
 
@@ -216,7 +219,7 @@ public final class Konduto {
 	 *
 	 * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
 	 */
-	public static void analyze(KondutoOrder order)
+	public void analyze(KondutoOrder order)
 			throws KondutoInvalidEntityException, KondutoHTTPException, KondutoUnexpectedAPIResponseException {
 
 		PostMethod postMethod = new PostMethod(kondutoPostOrderUrl().toString());
@@ -269,7 +272,7 @@ public final class Konduto {
 	 * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
 	 */
 
-	public static void updateOrderStatus(KondutoOrder order, KondutoOrderStatus newStatus, String comments)
+	public void updateOrderStatus(KondutoOrder order, KondutoOrderStatus newStatus, String comments)
 			throws KondutoHTTPException, KondutoUnexpectedAPIResponseException {
 
 		List<KondutoOrderStatus> allowedStatuses = Arrays.asList(
