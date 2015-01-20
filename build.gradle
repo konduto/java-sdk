@@ -4,7 +4,14 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 group = 'com.konduto.sdk'
-version = '2.0.0'
+version = '2.0.1'
+
+sourceCompatibility = JavaVersion.VERSION_1_7
+
+compileJava {
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+
 
 repositories {
 	mavenCentral()
@@ -58,7 +65,7 @@ uploadArchives {
                 name 'Konduto\'s Java SDK'
                 packaging 'jar'
                 // optionally artifactId can be defined here
-                description 'A application used as an example on how to set up pushing  its components to the Central Repository.'
+                description 'Konduto\'s JAVA SDK'
                 url 'http://konduto.com'
 
                 scm {
