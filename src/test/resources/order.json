@@ -24,6 +24,7 @@
         "state":"SP",
         "country":"BR"
     },
+    "analyze":true,
     "shipping":{
         "name":"Konduto",
         "address1":"R. Teodoro Sampaio, 2393",

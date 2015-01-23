@@ -116,6 +116,7 @@ public class KondutoTest {
 		assertNull("basic order should have no geolocation", orderToSend.getGeolocation());
 		assertNull("basic order should have no device", orderToSend.getDevice());
 		assertNull("basic order should have no navigation info", orderToSend.getNavigationInfo());
+        assertTrue("basic order should have analyze set to true", orderToSend.getAnalyze());
 
 		try {
 			konduto.analyze(orderToSend); // do analyze
@@ -141,6 +142,31 @@ public class KondutoTest {
 		assertEquals(orderToSend.getNavigationInfo(), actualNavigationInfo);
 
 	}
+
+    @Test
+    public void sendOrderToKondutoButDoNotAnalyzeTest() {
+        stubFor(post(urlEqualTo("/v1/orders"))
+                .withHeader("Authorization", equalTo(AUTH_HEADER))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBodyFile("order_not_analyzed.json")));
+
+        KondutoOrder orderToSend = KondutoOrderFactory.basicOrder().with("analyze", false);
+        assertFalse("order analyze should be false", orderToSend.getAnalyze());
+
+        try {
+            konduto.analyze(orderToSend); // do analyze
+        } catch (KondutoInvalidEntityException e) {
+            fail("order should be valid");
+        } catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
+            fail("server should respond with status 200");
+        }
+
+        assertEquals(orderToSend.getScore(), new Double(-1));
+        assertEquals(orderToSend.getRecommendation(), KondutoRecommendation.NONE);
+
+    }
 
 	@Test
 	public void analyzeInvalidOrderTest(){

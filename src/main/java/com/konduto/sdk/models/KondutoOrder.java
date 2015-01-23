@@ -50,6 +50,8 @@ public final class KondutoOrder extends KondutoModel {
 
 	private KondutoGeolocation geolocation;
 
+    private boolean analyze = true;
+
 	@SerializedName("payment")
 	/**
 	 *  when deserialized, this collection is a HashSet by default.
@@ -253,4 +255,6 @@ public final class KondutoOrder extends KondutoModel {
 	public void setRecommendation(KondutoRecommendation recommendation) {
 		this.recommendation = recommendation;
 	}
+    public boolean getAnalyze() { return analyze; }
+    public void setAnalyze(boolean analyze) { this.analyze = analyze; }
 }
