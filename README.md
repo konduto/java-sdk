@@ -18,7 +18,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.0.0</version>
+	<version>2.0.2</version>
 </dependency>
 ```
 
@@ -93,7 +93,7 @@ payment | _(optional)_ Array containing the payment methods.
 billing | _(optional)_ Object containing the billing information.
 shipping | _(optional)_ Object containing the shipping information.
 shopping_cart | _(optional)_ Array containing the items purchased.
-analyze | _(optional)_ A boolean indicating whether the order should be analyzed. Defaults to **true**.
+analyze | _(optional)_ A boolean indicating if the order should be analyzed. Defaults to **true**.
 
 #### Customer information
 
