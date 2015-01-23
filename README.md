@@ -93,6 +93,7 @@ payment | _(optional)_ Array containing the payment methods.
 billing | _(optional)_ Object containing the billing information.
 shipping | _(optional)_ Object containing the shipping information.
 shopping_cart | _(optional)_ Array containing the items purchased.
+analyze | _(optional)_ A boolean indicating whether the order should be analyzed. Defaults to **true**.
 
 #### Customer information
 
