@@ -45,7 +45,7 @@ public class KondutoTest {
 			HttpStatus.SC_INTERNAL_SERVER_ERROR // 500
 	};
 
-    private Konduto konduto = new Konduto(API_KEY);
+	private Konduto konduto = new Konduto(API_KEY);
 
 	@Rule
 	public WireMockRule wireMockRule = new WireMockRule();

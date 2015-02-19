@@ -8,9 +8,8 @@ import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.exceptions.KondutoUnexpectedAPIResponseException;
 import com.konduto.sdk.models.*;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
@@ -39,6 +38,52 @@ public final class Konduto {
 	public Konduto(String apiKey) {
         setApiKey(apiKey);
     }
+
+	/**
+	 * Requests to Konduto API will go through a proxy if the proxy host is set
+	 *
+	 * Usage:
+	 * <code>
+	 *     String proxyHostname = "proxy.hostname";
+	 *     int proxyPort = 1234;
+	 *     Konduto konduto = new Konduto(API_KEY);
+	 *     konduto.setProxyHost(proxyHostname, proxyPort);
+	 *
+	 *     * use konduto API as usual *
+	 *     konduto.getOrder(ORDER_ID);
+	 *
+	 * </code>
+	 *
+	 * @param proxyHost the proxy host
+	 * @param proxyPort the proxy port
+	 * @see org.apache.commons.httpclient.HostConfiguration#setProxy
+	 */
+	public void setProxyHost(String proxyHost, int proxyPort) {
+		HTTP_CLIENT.getHostConfiguration().setProxy(proxyHost, proxyPort);
+	}
+
+	/**
+	 * Sets the proxy credentials if required.
+	 *
+	 * Usage:
+	 * <code>
+	 *     String proxyHostname = "proxy.hostname";
+	 *     int proxyPort = 1234;
+	 *     Konduto konduto = new Konduto(API_KEY);
+	 *     konduto.setProxyHost(proxyHostname, proxyPort);
+	 *     konduto.setProxyCredentials(new UsernamePasswordCredentials("username", "password"));
+	 *
+	 *     * use konduto API as usual *
+	 *     konduto.getOrder(ORDER_ID);
+	 *
+	 * </code>
+	 *
+	 * @param credentials the proxy credentials
+	 * @see org.apache.commons.httpclient.Credentials
+	 */
+	public void setProxyCredentials(Credentials credentials) {
+		HTTP_CLIENT.getState().setProxyCredentials(AuthScope.ANY, credentials);
+	}
 
     /**
 	 *
@@ -196,7 +241,7 @@ public final class Konduto {
 		responseBody = sendRequest(getMethod, null);
 
 		if(responseBody == null) {
-			throw new KondutoUnexpectedAPIResponseException(responseBody);
+			throw new KondutoUnexpectedAPIResponseException(null);
 		}
 
 		if(responseBody.has("order")) responseBody = responseBody.getAsJsonObject("order"); // unwrapping
@@ -229,7 +274,7 @@ public final class Konduto {
 		responseBody = sendRequest(postMethod, order.toJSON());
 
 		if(responseBody == null) {
-			throw new KondutoUnexpectedAPIResponseException(responseBody);
+			throw new KondutoUnexpectedAPIResponseException(null);
 		}
 
 		if(responseBody.has("order")) responseBody = responseBody.getAsJsonObject("order"); // unwrapping

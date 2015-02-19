@@ -4,7 +4,7 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 group = 'com.konduto.sdk'
-version = '2.0.2'
+version = '2.1.0'
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 
