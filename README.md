@@ -216,6 +216,21 @@ Parameter | Description
 status | _(required)_ New status for this transaction. Either `approved`, `declined` or `fraud`, when you have identified a fraud or chargeback.
 comments | _(required)_ Reason or comments about the status update.
 
+## Sending requests through a proxy
+To send requests through a proxy just build a new Konduto instance and set the proxy host passing both hostname and port as parameters of `setProxyHost` method. If the proxy requires username and password, set these credentials using the `setProxyCredentials` method.
+
+```java
+String proxyHostname = "proxy.hostname";
+int proxyPort = 1234;
+Konduto konduto = new Konduto(API_KEY);
+konduto.setProxyHost(proxyHostname, proxyPort);
+// any object of kind org.apache.commons.httpclient.Credentials works 
+// (as an example we use an instance of UsernamePasswordCredentials)
+konduto.setProxyCredentials(new UsernamePasswordCredentials("username", "password")); 
+// use Konduto's API as usual
+konduto.getOrder(ORDER_ID);
+```
+
 ## Reference Tables
 
 Please [click here](http://docs.konduto.com/#n-tables) for the Currency and Category reference tables.
