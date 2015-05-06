@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.adapters.KondutoPaymentAdapter;
 import com.konduto.sdk.adapters.KondutoShoppingCartAdapter;
 import com.konduto.sdk.annotations.Required;
+import com.konduto.sdk.annotations.ValidateFormat;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 
 import java.lang.reflect.Field;
@@ -35,6 +36,7 @@ public abstract class KondutoModel {
 			.registerTypeAdapter(paymentsType, new KondutoPaymentAdapter())
 			.registerTypeAdapter(shoppingCartType, new KondutoShoppingCartAdapter())
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .setDateFormat("yyyy-MM-dd")
 			.create();
 
 	protected transient List<String> errors = new ArrayList<>();
@@ -95,6 +97,12 @@ public abstract class KondutoModel {
 
 	}
 
+    private void addInvalidFormatError(Field field, Object value, String format) {
+        this.errors.add("" +
+                "\t" +
+                field.getName() + " value is " + value + " which format does not match " + '\'' + format + '\'');
+    }
+
 	/**
 	 *
 	 * @param errors a String containing a
@@ -130,6 +138,16 @@ public abstract class KondutoModel {
 						}
 					}
 
+                    if(f.isAnnotationPresent(ValidateFormat.class)){
+                        String format = f.getAnnotation(ValidateFormat.class).format();
+                        if (value != null) {
+                            boolean match = ((String) value).matches(format);
+                            if(!match) {
+                                addInvalidFormatError(f, value, format);
+                            }
+                        }
+                    }
+
 					// if the field is a KondutoModel, check if it is valid
 					if (value instanceof KondutoModel) {
 						if(!((KondutoModel) value).isValid()) {
@@ -151,7 +169,7 @@ public abstract class KondutoModel {
 	}
 
 
-	/**
+    /**
 	 * Enables Map-based construction in KondutoModel children.
 	 *
 	 * @param attributes a {@link HashMap} containing attributes. For a field 'totalAmount' with type Long, we should
