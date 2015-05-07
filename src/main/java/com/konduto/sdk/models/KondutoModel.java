@@ -97,6 +97,13 @@ public abstract class KondutoModel {
 
 	}
 
+	/**
+	 * Validates whether a string field's value matches a given regex.
+	 * If it doesn't then add an error to the errors collection.
+	 * @param field the field
+	 * @param value the value
+	 * @param format the format (a Java regex)
+	 */
     private void addInvalidFormatError(Field field, Object value, String format) {
         this.errors.add("" +
                 "\t" +

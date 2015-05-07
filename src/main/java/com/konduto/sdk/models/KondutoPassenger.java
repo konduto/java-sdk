@@ -4,10 +4,15 @@ import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.annotations.ValidateFormat;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by raphaelsampaio on 5/6/15.
+ * Passenger model.
+ *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  *
  */
 public class KondutoPassenger extends KondutoModel {
@@ -22,23 +27,28 @@ public class KondutoPassenger extends KondutoModel {
     @Required
     private KondutoDocumentType documentType;
 
-    @SerializedName("dob")
+    @SerializedName("dob") // format: yyyy-MM-dd (year-month-day)
     private Date dateOfBirth;
 
-    @ValidateFormat(format="\\w{2}")
+    @ValidateFormat(format="[A-Z]{2}") // e.g "BR", "US"
     private String nationality;
 
     private boolean frequentTraveler;
     private boolean specialNeeds;
-    private String loyaltyProgram;
-    private String loyaltyCategory;
+    private Loyalty loyalty;
+
+    private class Loyalty {
+        private String program;
+        private String category;
+        public Loyalty(){}
+    }
 
     /** Constructors */
     public KondutoPassenger() {}
 
     @Override
-    public KondutoModel with(String attributeName, Object attributeValue) {
-        return super.with(attributeName, attributeValue);
+    public KondutoPassenger with(String attributeName, Object attributeValue) {
+        return (KondutoPassenger) super.with(attributeName, attributeValue);
     }
 
     /** Equals and hashCode */
@@ -54,9 +64,9 @@ public class KondutoPassenger extends KondutoModel {
         if (dateOfBirth != null ? !dateOfBirth.equals(that.dateOfBirth) : that.dateOfBirth != null) return false;
         if (!document.equals(that.document)) return false;
         if (!documentType.equals(that.documentType)) return false;
-        if (loyaltyCategory != null ? !loyaltyCategory.equals(that.loyaltyCategory) : that.loyaltyCategory != null)
+        if (getLoyaltyCategory() != null ? !getLoyaltyCategory().equals(that.getLoyaltyCategory()) : that.getLoyaltyCategory() != null)
             return false;
-        if (loyaltyProgram != null ? !loyaltyProgram.equals(that.loyaltyProgram) : that.loyaltyProgram != null)
+        if (getLoyaltyProgram() != null ? !getLoyaltyProgram().equals(that.getLoyaltyProgram()) : that.getLoyaltyProgram() != null)
             return false;
         if (!name.equals(that.name)) return false;
         if (nationality != null ? !nationality.equals(that.nationality) : that.nationality != null) return false;
@@ -73,8 +83,8 @@ public class KondutoPassenger extends KondutoModel {
         result = 31 * result + (nationality != null ? nationality.hashCode() : 0);
         result = 31 * result + (frequentTraveler ? 1 : 0);
         result = 31 * result + (specialNeeds ? 1 : 0);
-        result = 31 * result + (loyaltyProgram != null ? loyaltyProgram.hashCode() : 0);
-        result = 31 * result + (loyaltyCategory != null ? loyaltyCategory.hashCode() : 0);
+        result = 31 * result + (getLoyaltyProgram() != null ? getLoyaltyProgram().hashCode() : 0);
+        result = 31 * result + (getLoyaltyCategory() != null ? getLoyaltyCategory().hashCode() : 0);
         return result;
     }
 
@@ -126,7 +136,7 @@ public class KondutoPassenger extends KondutoModel {
         this.frequentTraveler = frequentTraveler;
     }
 
-    public boolean isSpecialNeeds() {
+    public boolean hasSpecialNeeds() {
         return specialNeeds;
     }
 
@@ -135,18 +145,22 @@ public class KondutoPassenger extends KondutoModel {
     }
 
     public String getLoyaltyProgram() {
-        return loyaltyProgram;
+        if(loyalty == null) { return null;}
+        return loyalty.program;
     }
 
     public void setLoyaltyProgram(String loyaltyProgram) {
-        this.loyaltyProgram = loyaltyProgram;
+        if(loyalty == null) { loyalty = new Loyalty(); }
+        loyalty.program = loyaltyProgram;
     }
 
     public String getLoyaltyCategory() {
-        return loyaltyCategory;
+        if(loyalty == null) { return null; }
+        return loyalty.category;
     }
 
     public void setLoyaltyCategory(String loyaltyCategory) {
-        this.loyaltyCategory = loyaltyCategory;
+        if(loyalty == null) { loyalty = new Loyalty(); }
+        this.loyalty.category = loyaltyCategory;
     }
 }

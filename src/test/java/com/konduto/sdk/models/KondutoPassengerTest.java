@@ -8,15 +8,34 @@ import org.junit.Test;
 
 import java.text.ParseException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
- * Created by raphaelsampaio on 5/6/15.
  */
 public class KondutoPassengerTest {
     @Test
-    public void serializeTest() throws ParseException {
+    public void isValidTest() {
+        KondutoPassenger passenger = new KondutoPassenger();
+        // invalid without name
+        assertFalse(passenger.isValid());
+        passenger.setName("Milton Tavares");
+        // invalid without document
+        assertFalse(passenger.isValid());
+        passenger.setDocument("A1B2C3D4");
+        // invalid without document type
+        assertFalse(passenger.isValid());
+        passenger.setDocumentType(KondutoDocumentType.PASSPORT);
+        assertTrue(passenger.isValid());
+        // invalid if nationality is not a 2-character string (e.g. "US")
+        passenger.setNationality("123");
+        assertFalse(passenger.isValid());
+        passenger.setNationality("BR");
+        assertTrue(passenger.isValid());
+    }
+
+
+    @Test
+    public void serializeTest() throws Exception {
         JsonObject expectedJSON = (JsonObject) TestUtils.readJSONFromFile("passenger.json");
         JsonObject actualJSON = null;
 
@@ -28,6 +47,15 @@ public class KondutoPassengerTest {
             fail("address should be valid");
         }
 
-        System.out.println(actualJSON);
+        assertEquals(expectedJSON, actualJSON);
+    }
+
+    @Test
+    public void deserializeTest() throws Exception {
+        JsonObject passengerJson = (JsonObject) TestUtils.readJSONFromFile("passenger.json");
+        KondutoPassenger expectedPassenger = KondutoPassengerFactory.completePassenger();
+        KondutoPassenger actualPassenger = (KondutoPassenger)
+                KondutoModel.fromJSON(passengerJson, KondutoPassenger.class);
+        assertEquals(expectedPassenger, actualPassenger);
     }
 }
