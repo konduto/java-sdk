@@ -39,7 +39,7 @@ public class KondutoPassengerFactory {
         milton.setDocument("A1B2C3D4");
         milton.setDocumentType(KondutoDocumentType.PASSPORT);
         KondutoPassenger tom = basicPassenger();
-        tom.setName("Milton Tavares");
+        tom.setName("Tom Canabarro");
         tom.setDocument("A1B2C3D4");
         tom.setDocumentType(KondutoDocumentType.PASSPORT);
         List<KondutoPassenger> passengers = new ArrayList<>();
