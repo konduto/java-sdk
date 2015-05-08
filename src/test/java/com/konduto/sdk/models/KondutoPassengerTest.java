@@ -6,8 +6,6 @@ import com.konduto.sdk.factories.KondutoPassengerFactory;
 import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
-import java.text.ParseException;
-
 import static org.junit.Assert.*;
 
 /**

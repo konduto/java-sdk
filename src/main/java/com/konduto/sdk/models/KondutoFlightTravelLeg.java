@@ -4,7 +4,8 @@ import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.annotations.ValidateFormat;
 
 /**
- * Created by rsampaio on 07/05/15.
+ * Flight travel leg model.
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public class KondutoFlightTravelLeg extends KondutoTravelLeg {
     @ValidateFormat(format = "[A-Z]{3}")

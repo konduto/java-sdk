@@ -3,6 +3,8 @@ package com.konduto.sdk.models;
 import com.konduto.sdk.annotations.Required;
 
 /**
+ * Bus travel leg model.
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public class KondutoBusTravelLeg extends KondutoTravelLeg {
     @Required

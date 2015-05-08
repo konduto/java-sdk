@@ -7,8 +7,6 @@ import com.konduto.sdk.factories.KondutoOrderFactory;
 import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
-import java.text.ParseException;
-
 import static org.junit.Assert.*;
 
 /**

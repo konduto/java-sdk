@@ -1,12 +1,12 @@
 package com.konduto.sdk.models;
 
 import com.google.gson.annotations.SerializedName;
-import com.konduto.sdk.annotations.ValidateFormat;
 
 import java.util.Date;
 
 /**
- * Created by raphaelsampaio on 5/6/15.
+ * Travel leg model.
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public abstract class KondutoTravelLeg extends KondutoModel {
 
