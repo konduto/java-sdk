@@ -7,6 +7,8 @@ import com.konduto.sdk.factories.KondutoOrderFactory;
 import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
+import java.text.ParseException;
+
 import static org.junit.Assert.*;
 
 /**
@@ -35,7 +37,7 @@ public class KondutoOrderTest {
 	}
 
 	@Test
-	public void serializationTest() {
+	public void serializationTest() throws Exception {
 		KondutoOrder order = KondutoOrderFactory.completeOrder();
 		JsonObject orderJSON = (JsonObject) TestUtils.readJSONFromFile("order.json");
 		try {

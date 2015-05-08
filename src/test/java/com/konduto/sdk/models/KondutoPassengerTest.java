@@ -44,7 +44,7 @@ public class KondutoPassengerTest {
             actualJSON = passenger.toJSON();
         } catch (KondutoInvalidEntityException e) {
             System.out.println(passenger.getErrors());
-            fail("address should be valid");
+            fail("passenger should be valid");
         }
 
         assertEquals(expectedJSON, actualJSON);

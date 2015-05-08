@@ -68,6 +68,8 @@ public final class KondutoOrder extends KondutoModel {
 	@SerializedName("navigation")
 	private KondutoNavigationInfo navigationInfo;
 
+	private KondutoTravel travel;
+
 	/* Constructors */
 	public KondutoOrder() {}
 
@@ -130,6 +132,9 @@ public final class KondutoOrder extends KondutoModel {
 		if (device != null ? !device.equals(order.device) : order.device != null) return false;
 
 		if (navigationInfo != null ? !navigationInfo.equals(order.navigationInfo) : order.navigationInfo != null)
+			return false;
+
+		if (travel != null ? !travel.equals(order.travel) : order.travel != null)
 			return false;
 
 		return true;
@@ -257,4 +262,12 @@ public final class KondutoOrder extends KondutoModel {
 	}
     public boolean getAnalyze() { return analyze; }
     public void setAnalyze(boolean analyze) { this.analyze = analyze; }
+
+	public KondutoTravel getTravel() {
+		return travel;
+	}
+
+	public void setTravel(KondutoTravel travel) {
+		this.travel = travel;
+	}
 }
