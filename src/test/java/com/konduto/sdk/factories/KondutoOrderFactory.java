@@ -1,14 +1,14 @@
 package com.konduto.sdk.factories;
 
-import com.konduto.sdk.models.KondutoOrder;
-import com.konduto.sdk.models.KondutoOrderStatus;
-import com.konduto.sdk.models.KondutoRecommendation;
+import com.konduto.sdk.models.*;
+
+import java.text.ParseException;
 
 /**
  */
 public class KondutoOrderFactory {
 
-	public static KondutoOrder completeOrder(){
+	public static KondutoOrder completeOrder() throws ParseException {
 		KondutoOrder order = basicOrder();
 		order.setVisitor("a9031kdlas");
 		order.setCurrency("USD");
@@ -25,6 +25,12 @@ public class KondutoOrderFactory {
 		order.setRecommendation(KondutoRecommendation.APPROVE);
 		order.setPayments(KondutoPaymentFactory.getPayments());
 		order.setShoppingCart(KondutoItemFactory.getShoppingCart());
+		KondutoTravel travel = new KondutoTravel();
+		travel.setDepartureLeg(KondutoTravelLegFactory.departureFlight());
+		travel.setReturnLeg(KondutoTravelLegFactory.returnFlight());
+        travel.setPassengers(KondutoPassengerFactory.passengersList());
+        travel.setTravelType(KondutoTravelType.FLIGHT);
+		order.setTravel(travel);
 		return order;
 	}
 

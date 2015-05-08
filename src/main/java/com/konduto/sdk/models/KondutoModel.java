@@ -7,7 +7,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.adapters.KondutoPaymentAdapter;
 import com.konduto.sdk.adapters.KondutoShoppingCartAdapter;
+import com.konduto.sdk.adapters.KondutoTravelAdapter;
 import com.konduto.sdk.annotations.Required;
+import com.konduto.sdk.annotations.ValidateFormat;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 
 import java.lang.reflect.Field;
@@ -30,11 +32,14 @@ public abstract class KondutoModel {
 	/* Transient and static attributes won't be included in serialization */
 	private static Type paymentsType = new TypeToken<Collection<KondutoPayment>>(){}.getType();
 	private static Type shoppingCartType = new TypeToken<Collection<KondutoItem>>(){}.getType();
+    private static Type travelType = new TypeToken<KondutoTravel>(){}.getType();
 
 	protected static Gson gson = new GsonBuilder()
 			.registerTypeAdapter(paymentsType, new KondutoPaymentAdapter())
 			.registerTypeAdapter(shoppingCartType, new KondutoShoppingCartAdapter())
+			.registerTypeAdapter(travelType, new KondutoTravelAdapter())
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .setDateFormat("yyyy-MM-dd")
 			.create();
 
 	protected transient List<String> errors = new ArrayList<>();
@@ -96,6 +101,19 @@ public abstract class KondutoModel {
 	}
 
 	/**
+	 * Validates whether a string field's value matches a given regex.
+	 * If it doesn't then add an error to the errors collection.
+	 * @param field the field
+	 * @param value the value
+	 * @param format the format (a Java regex)
+	 */
+    private void addInvalidFormatError(Field field, Object value, String format) {
+        this.errors.add("" +
+                "\t" +
+                field.getName() + " value is " + value + " which format does not match " + '\'' + format + '\'');
+    }
+
+	/**
 	 *
 	 * @param errors a String containing a
 	 * {@link com.konduto.sdk.models.KondutoModel#errors KondutoModel instance errors}
@@ -130,6 +148,16 @@ public abstract class KondutoModel {
 						}
 					}
 
+                    if(f.isAnnotationPresent(ValidateFormat.class)){
+                        String format = f.getAnnotation(ValidateFormat.class).format();
+                        if (value != null) {
+                            boolean match = ((String) value).matches(format);
+                            if(!match) {
+                                addInvalidFormatError(f, value, format);
+                            }
+                        }
+                    }
+
 					// if the field is a KondutoModel, check if it is valid
 					if (value instanceof KondutoModel) {
 						if(!((KondutoModel) value).isValid()) {
@@ -151,7 +179,7 @@ public abstract class KondutoModel {
 	}
 
 
-	/**
+    /**
 	 * Enables Map-based construction in KondutoModel children.
 	 *
 	 * @param attributes a {@link HashMap} containing attributes. For a field 'totalAmount' with type Long, we should
