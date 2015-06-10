@@ -2,6 +2,8 @@ package com.konduto.sdk.factories;
 
 import com.konduto.sdk.models.KondutoCustomer;
 
+import java.util.Date;
+
 /**
  */
 public class KondutoCustomerFactory {
@@ -21,6 +23,7 @@ public class KondutoCustomerFactory {
 		customer.setPhone1("11987654321");
 		customer.setPhone2("1133333333");
 		customer.setTaxId("01234567890");
+		customer.setCreated_at(new Date(1433818800000L));
 		return customer;
 	}
 

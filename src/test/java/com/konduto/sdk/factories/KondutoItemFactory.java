@@ -4,6 +4,7 @@ import com.konduto.sdk.models.KondutoItem;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by rsampaio on 11/08/14.
@@ -35,6 +36,7 @@ public class KondutoItemFactory {
 		yellowSocks.setUnitCost(29.9);
 		yellowSocks.setQuantity(2d);
 		yellowSocks.setDiscount(5.0);
+		yellowSocks.setCreated_at(new Date(1433818800000L));
 		return yellowSocks;
 	}
 }

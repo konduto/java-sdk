@@ -3,6 +3,8 @@ package com.konduto.sdk.models;
 import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
+import java.util.Date;
+
 /**
  *
  * Customer model.
@@ -21,6 +23,8 @@ public final class KondutoCustomer extends KondutoModel {
 	private String phone2;
 	@SerializedName("vip") private Boolean isVip;
 	@SerializedName("new") private Boolean isNew;
+
+	private Date created_at;
 
 	/* Constructors */
 
@@ -57,6 +61,10 @@ public final class KondutoCustomer extends KondutoModel {
 		if (phone1 != null ? !phone1.equals(that.phone1) : that.phone1 != null) return false;
 		if (phone2 != null ? !phone2.equals(that.phone2) : that.phone2 != null) return false;
 		if (taxId != null ? !taxId.equals(that.taxId) : that.taxId != null) return false;
+		if (!nullSafeAreDatesEqual(created_at, that.created_at)){
+			return false;
+		}
+
 
 		return true;
 	}
@@ -126,4 +134,8 @@ public final class KondutoCustomer extends KondutoModel {
 	public void setIsNew(Boolean isNew) {
 		this.isNew = isNew;
 	}
+
+	public Date getCreated_at() { return created_at; }
+
+	public void setCreated_at(Date created_at) { this.created_at = created_at; }
 }

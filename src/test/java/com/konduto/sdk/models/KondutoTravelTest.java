@@ -62,7 +62,4 @@ public class KondutoTravelTest {
     public void deserializeTest() throws Exception {
         assertEquals(KondutoModel.fromJSON(TRAVEL_JSON, KondutoTravel.class), TRAVEL);
     }
-
-
-
 }

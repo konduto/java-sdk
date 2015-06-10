@@ -45,9 +45,7 @@ public class KondutoOrderTest {
 		}
 
 		KondutoOrder deserializedOrder = (KondutoOrder) KondutoModel.fromJSON(orderJSON, KondutoOrder.class);
-
 		assertEquals("deserialization failed", order, deserializedOrder);
-
 	}
 
 	@Test(expected=KondutoInvalidEntityException.class)

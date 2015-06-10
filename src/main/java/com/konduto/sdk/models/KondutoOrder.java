@@ -1,9 +1,12 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
-import java.util.Collection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  *
@@ -52,6 +55,15 @@ public final class KondutoOrder extends KondutoModel {
 
     private boolean analyze = true;
 
+	private Integer messages_exchanged;
+
+//	@ValidateFormat(format="^\\d{4}-\\d{2}-\\d{2}")
+	private String first_message;
+//	@ValidateFormat(format="^\\d{4}-\\d{2}-\\d{2}")
+	private String purchased_at;
+
+	private KondutoSeller seller;
+
 	@SerializedName("payment")
 	/**
 	 *  when deserialized, this collection is a HashSet by default.
@@ -94,19 +106,19 @@ public final class KondutoOrder extends KondutoModel {
 			return false;
 		if (currency != null ? !currency.equals(order.currency) : order.currency != null) return false;
 		if (!customer.equals(order.customer)) return false;
-		
+
 		if (geolocation != null ? !geolocation.equals(order.geolocation) : order.geolocation != null) return false;
-		
+
 		if (!id.equals(order.id)) return false;
-		
+
 		if (installments != null ? !installments.equals(order.installments) : order.installments != null) return false;
-		
+
 		if (ip != null ? !ip.equals(order.ip) : order.ip != null) return false;
-		
+
 		if (recommendation != order.recommendation) return false;
-		
+
 		if (score != null ? !score.equals(order.score) : order.score != null) return false;
-		
+
 		if (shippingAddress != null ? !shippingAddress.equals(order.shippingAddress) : order.shippingAddress != null)
 			return false;
 
@@ -137,8 +149,18 @@ public final class KondutoOrder extends KondutoModel {
 		if (travel != null ? !travel.equals(order.travel) : order.travel != null)
 			return false;
 
+		if (messages_exchanged != null ? messages_exchanged != order.messages_exchanged :
+				order.messages_exchanged != null)
+			return false;
+
+		if (first_message != null ? !first_message.equals(order.first_message) : order.first_message != null) return false;
+		if (purchased_at != null ? !purchased_at.equals(order.purchased_at) : order.purchased_at!= null) return false;
+
+		if (seller != null ? !seller.equals(order.seller) : order.seller != null) return false;
+
 		return true;
 	}
+
 	/* getters and setters */
 	public KondutoNavigationInfo getNavigationInfo() {
 		return navigationInfo;
@@ -262,12 +284,46 @@ public final class KondutoOrder extends KondutoModel {
 	}
     public boolean getAnalyze() { return analyze; }
     public void setAnalyze(boolean analyze) { this.analyze = analyze; }
-
+	public Integer getMessages_exchanged() { return messages_exchanged; }
+	public void setMessages_exchanged(Integer messages_exchanged) { this.messages_exchanged = messages_exchanged; }
 	public KondutoTravel getTravel() {
 		return travel;
 	}
-
 	public void setTravel(KondutoTravel travel) {
 		this.travel = travel;
+	}
+	public KondutoSeller getSeller() { return seller; }
+	public void setSeller(KondutoSeller seller) { this.seller = seller; }
+
+	public Date getFirst_message() {
+		return deserializeDate(first_message);
+	}
+	public Date getPurchased_at() {
+		return deserializeDate(purchased_at);
+	}
+	public void setFirst_message(Date first_message) {
+		this.first_message = serializeDate(first_message);
+	}
+	public void setPurchased_at(Date purchased_at) {
+		this.purchased_at = serializeDate(purchased_at);
+	}
+
+	public static final String dateFormat = "yyyy-MM-dd'T'HH:mmZ";
+
+	private Date deserializeDate(String date) throws JsonParseException {
+		try {
+			Calendar calendar = javax.xml.bind.DatatypeConverter.parseDateTime(date);
+			Date d = calendar.getTime();
+			return new SimpleDateFormat(dateFormat, Locale.US).parse(date);
+		} catch (ParseException e) {
+		}
+		throw new JsonParseException("Unparseable date: \"" + date
+				+ "\". Supported format: " + dateFormat);
+	}
+
+	private String serializeDate(Date src) {
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		return  sdf.format(src).replace("+0000", "Z");
 	}
 }
