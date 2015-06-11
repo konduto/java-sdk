@@ -24,6 +24,7 @@ public class KondutoShoppingCartAdapterTest {
 	Gson gson = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.registerTypeAdapter(shoppingCartType, new KondutoShoppingCartAdapter())
+			.setDateFormat("yyyy-MM-dd")
 			.create();
 
 	Collection<KondutoItem> shoppingCart = KondutoItemFactory.getShoppingCart();
