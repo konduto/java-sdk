@@ -55,12 +55,13 @@ public final class KondutoOrder extends KondutoModel {
 
     private boolean analyze = true;
 
-	private Integer messages_exchanged;
+	@SerializedName("messages_exchanged")
+	private Integer messagesExchanged;
 
-//	@ValidateFormat(format="^\\d{4}-\\d{2}-\\d{2}")
-	private String first_message;
-//	@ValidateFormat(format="^\\d{4}-\\d{2}-\\d{2}")
-	private String purchased_at;
+	@SerializedName("first_message")
+	private String firstMessage;
+	@SerializedName("purchased_at")
+	private String purchasedAt;
 
 	private KondutoSeller seller;
 
@@ -149,12 +150,12 @@ public final class KondutoOrder extends KondutoModel {
 		if (travel != null ? !travel.equals(order.travel) : order.travel != null)
 			return false;
 
-		if (messages_exchanged != null ? messages_exchanged != order.messages_exchanged :
-				order.messages_exchanged != null)
+		if (messagesExchanged != null ? messagesExchanged != order.messagesExchanged :
+				order.messagesExchanged != null)
 			return false;
 
-		if (first_message != null ? !first_message.equals(order.first_message) : order.first_message != null) return false;
-		if (purchased_at != null ? !purchased_at.equals(order.purchased_at) : order.purchased_at!= null) return false;
+		if (firstMessage != null ? !firstMessage.equals(order.firstMessage) : order.firstMessage != null) return false;
+		if (purchasedAt != null ? !purchasedAt.equals(order.purchasedAt) : order.purchasedAt != null) return false;
 
 		if (seller != null ? !seller.equals(order.seller) : order.seller != null) return false;
 
@@ -284,8 +285,8 @@ public final class KondutoOrder extends KondutoModel {
 	}
     public boolean getAnalyze() { return analyze; }
     public void setAnalyze(boolean analyze) { this.analyze = analyze; }
-	public Integer getMessages_exchanged() { return messages_exchanged; }
-	public void setMessages_exchanged(Integer messages_exchanged) { this.messages_exchanged = messages_exchanged; }
+	public Integer getMessagesExchanged() { return messagesExchanged; }
+	public void setMessagesExchanged(Integer messagesExchanged) { this.messagesExchanged = messagesExchanged; }
 	public KondutoTravel getTravel() {
 		return travel;
 	}
@@ -295,25 +296,23 @@ public final class KondutoOrder extends KondutoModel {
 	public KondutoSeller getSeller() { return seller; }
 	public void setSeller(KondutoSeller seller) { this.seller = seller; }
 
-	public Date getFirst_message() {
-		return deserializeDate(first_message);
+	public Date getFirstMessage() {
+		return deserializeDate(firstMessage);
 	}
-	public Date getPurchased_at() {
-		return deserializeDate(purchased_at);
+	public Date getPurchasedAt() {
+		return deserializeDate(purchasedAt);
 	}
-	public void setFirst_message(Date first_message) {
-		this.first_message = serializeDate(first_message);
+	public void setFirstMessage(Date first_message) {
+		this.firstMessage = serializeDate(first_message);
 	}
-	public void setPurchased_at(Date purchased_at) {
-		this.purchased_at = serializeDate(purchased_at);
+	public void setPurchasedAt(Date purchased_at) {
+		this.purchasedAt = serializeDate(purchased_at);
 	}
 
 	public static final String dateFormat = "yyyy-MM-dd'T'HH:mmZ";
 
 	private Date deserializeDate(String date) throws JsonParseException {
 		try {
-			Calendar calendar = javax.xml.bind.DatatypeConverter.parseDateTime(date);
-			Date d = calendar.getTime();
 			return new SimpleDateFormat(dateFormat, Locale.US).parse(date);
 		} catch (ParseException e) {
 		}

@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
 import java.util.Date;
@@ -16,7 +17,9 @@ public final class KondutoSeller extends KondutoModel {
 
     @Required private String id = "1";
     @Required private String name;
-    private Date created_at;
+
+    @SerializedName("created_at")
+    private Date createdAt;
 
 	/* Constructors */
 
@@ -47,7 +50,7 @@ public final class KondutoSeller extends KondutoModel {
         if (!name.equals(that.name)) return false;
 
         // optional
-        if (!nullSafeAreDatesEqual(created_at, that.created_at)){
+        if (!nullSafeAreDatesEqual(createdAt, that.createdAt)){
             return false;
         }
 
@@ -72,7 +75,7 @@ public final class KondutoSeller extends KondutoModel {
         this.id = id;
     }
 
-    public Date getCreated_at() { return created_at; }
+    public Date getCreatedAt() { return createdAt; }
 
-    public void setCreated_at(Date created_at) { this.created_at = created_at; }
+    public void setCreatedAt(Date created_at) { this.createdAt = created_at; }
 }

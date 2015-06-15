@@ -32,9 +32,9 @@ public class KondutoOrderFactory {
         travel.setPassengers(KondutoPassengerFactory.passengersList());
         travel.setTravelType(KondutoTravelType.FLIGHT);
 		order.setTravel(travel);
-		order.setFirst_message(new Date(1433874421000L));
-		order.setPurchased_at(new Date(1433874421000L));
-		order.setMessages_exchanged(2);
+		order.setFirstMessage(new Date(1433874421000L));
+		order.setPurchasedAt(new Date(1433874421000L));
+		order.setMessagesExchanged(2);
 		order.setSeller(KondutoSellerFactory.getKondutoSeller());
 
 		return order;

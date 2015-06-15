@@ -10,7 +10,7 @@ public class KondutoSellerFactory {
         KondutoSeller seller = new KondutoSeller();
         seller.setId("seller_id");
         seller.setName("Seller Name");
-        seller.setCreated_at(new Date(1433818800000L));
+        seller.setCreatedAt(new Date(1433818800000L));
         return seller;
     }
 }
