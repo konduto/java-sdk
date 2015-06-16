@@ -18,7 +18,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.1.0</version>
+	<version>2.3.0</version>
 </dependency>
 ```
 
@@ -94,6 +94,9 @@ billing | _(optional)_ Object containing the billing information.
 shipping | _(optional)_ Object containing the shipping information.
 shopping_cart | _(optional)_ Array containing the items purchased.
 analyze | _(optional)_ A boolean indicating if the order should be analyzed. Defaults to **true**.
+first_message | _(optional)_ Time when the first message was exchanged between customer and seller.
+messages_exchanged | _(optional)_ Number of messages exchanged between customer and seller.
+purchased_at | _(optional)_ Time when the customer purchased from the seller.
 
 #### Customer information
 
@@ -107,6 +110,7 @@ phone1 | _(optional)_ Customer's primary phone number
 phone 2 | _(optional)_ Customer's secondary phone number
 new | _(optional)_ Boolean indicating if the customer is using a newly created account for this purchase.
 vip | _(optional)_ Boolean indicating if the customer is a VIP or frequent buyer.
+created_at | _(optional)_ Date when customer was created.
 
 
 #### Payment information
@@ -157,6 +161,15 @@ description | _(optional)_ Detailed description of the item.
 unit_cost | _(optional)_ Cost of a single unit of this item.
 quantity | _(optional)_ Number of units purchased.
 discount | _(optional)_ Discounted amount for this item.
+created_at | _(optional)_ Date when this item was created.
+
+### Seller
+
+Parameter | Description
+--- | ---
+id | _(required)_ Seller's id
+name | _(optional)_ Sellers's name
+created_at | _(optional)_ Date when the seller was created
 
 
 ## Sending an order for analysis.
