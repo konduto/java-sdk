@@ -1,9 +1,12 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
-import java.util.Collection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  *
@@ -52,6 +55,16 @@ public final class KondutoOrder extends KondutoModel {
 
     private boolean analyze = true;
 
+	@SerializedName("messages_exchanged")
+	private Integer messagesExchanged;
+
+	@SerializedName("first_message")
+	private String firstMessage;
+	@SerializedName("purchased_at")
+	private String purchasedAt;
+
+	private KondutoSeller seller;
+
 	@SerializedName("payment")
 	/**
 	 *  when deserialized, this collection is a HashSet by default.
@@ -94,19 +107,19 @@ public final class KondutoOrder extends KondutoModel {
 			return false;
 		if (currency != null ? !currency.equals(order.currency) : order.currency != null) return false;
 		if (!customer.equals(order.customer)) return false;
-		
+
 		if (geolocation != null ? !geolocation.equals(order.geolocation) : order.geolocation != null) return false;
-		
+
 		if (!id.equals(order.id)) return false;
-		
+
 		if (installments != null ? !installments.equals(order.installments) : order.installments != null) return false;
-		
+
 		if (ip != null ? !ip.equals(order.ip) : order.ip != null) return false;
-		
+
 		if (recommendation != order.recommendation) return false;
-		
+
 		if (score != null ? !score.equals(order.score) : order.score != null) return false;
-		
+
 		if (shippingAddress != null ? !shippingAddress.equals(order.shippingAddress) : order.shippingAddress != null)
 			return false;
 
@@ -137,8 +150,18 @@ public final class KondutoOrder extends KondutoModel {
 		if (travel != null ? !travel.equals(order.travel) : order.travel != null)
 			return false;
 
+		if (messagesExchanged != null ? messagesExchanged != order.messagesExchanged :
+				order.messagesExchanged != null)
+			return false;
+
+		if (firstMessage != null ? !firstMessage.equals(order.firstMessage) : order.firstMessage != null) return false;
+		if (purchasedAt != null ? !purchasedAt.equals(order.purchasedAt) : order.purchasedAt != null) return false;
+
+		if (seller != null ? !seller.equals(order.seller) : order.seller != null) return false;
+
 		return true;
 	}
+
 	/* getters and setters */
 	public KondutoNavigationInfo getNavigationInfo() {
 		return navigationInfo;
@@ -262,12 +285,44 @@ public final class KondutoOrder extends KondutoModel {
 	}
     public boolean getAnalyze() { return analyze; }
     public void setAnalyze(boolean analyze) { this.analyze = analyze; }
-
+	public Integer getMessagesExchanged() { return messagesExchanged; }
+	public void setMessagesExchanged(Integer messagesExchanged) { this.messagesExchanged = messagesExchanged; }
 	public KondutoTravel getTravel() {
 		return travel;
 	}
-
 	public void setTravel(KondutoTravel travel) {
 		this.travel = travel;
+	}
+	public KondutoSeller getSeller() { return seller; }
+	public void setSeller(KondutoSeller seller) { this.seller = seller; }
+
+	public Date getFirstMessage() {
+		return deserializeDate(firstMessage);
+	}
+	public Date getPurchasedAt() {
+		return deserializeDate(purchasedAt);
+	}
+	public void setFirstMessage(Date first_message) {
+		this.firstMessage = serializeDate(first_message);
+	}
+	public void setPurchasedAt(Date purchased_at) {
+		this.purchasedAt = serializeDate(purchased_at);
+	}
+
+	public static final String dateFormat = "yyyy-MM-dd'T'HH:mmZ";
+
+	private Date deserializeDate(String date) throws JsonParseException {
+		try {
+			return new SimpleDateFormat(dateFormat, Locale.US).parse(date);
+		} catch (ParseException e) {
+		}
+		throw new JsonParseException("Unparseable date: \"" + date
+				+ "\". Supported format: " + dateFormat);
+	}
+
+	private String serializeDate(Date src) {
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		return  sdf.format(src).replace("+0000", "Z");
 	}
 }

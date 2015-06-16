@@ -286,5 +286,11 @@ public abstract class KondutoModel {
 		return this;
 	}
 
+	protected boolean nullSafeAreDatesEqual(Date one, Date two){
+		if ((one == null && two == null) ||
+				((one != null && two != null) && one.compareTo(two) == 0))
+			return true;
 
+		return false;
+	}
 }

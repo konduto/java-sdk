@@ -8,6 +8,9 @@
 	"currency":"USD",
 	"installments":1,
 	"ip":"192.168.0.1",
+    "first_message": "2015-06-09T18:27Z",
+    "messages_exchanged": 2,
+    "purchased_at": "2015-06-09T18:27Z",
     "customer":{
 		"id":"1",
         "name":"José da Silva",
@@ -16,7 +19,8 @@
         "phone1":"11987654321",
         "phone2":"1133333333",
         "vip":false,
-        "new":false
+        "new":false,
+        "created_at": "2015-06-09"
 	},
 	"recommendation":"approve",
 	"geolocation":{
@@ -69,7 +73,8 @@
             "description": "Pair of Yellow Socks",
 			"unit_cost": 29.90,
 			"quantity": 2,
-			"discount": 5.00
+			"discount": 5.00,
+            "created_at": "2015-06-09"
 		}
 	],
     "travel": {
@@ -110,6 +115,11 @@
                 "special_needs":false
             }
         ]
+    },
+    "seller":{
+        "id": "seller_id",
+        "name": "Seller Name",
+        "created_at": "2015-06-09"
     },
 	"status":"approved"
 }

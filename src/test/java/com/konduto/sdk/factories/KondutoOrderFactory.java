@@ -3,6 +3,7 @@ package com.konduto.sdk.factories;
 import com.konduto.sdk.models.*;
 
 import java.text.ParseException;
+import java.util.Date;
 
 /**
  */
@@ -31,6 +32,11 @@ public class KondutoOrderFactory {
         travel.setPassengers(KondutoPassengerFactory.passengersList());
         travel.setTravelType(KondutoTravelType.FLIGHT);
 		order.setTravel(travel);
+		order.setFirstMessage(new Date(1433874421000L));
+		order.setPurchasedAt(new Date(1433874421000L));
+		order.setMessagesExchanged(2);
+		order.setSeller(KondutoSellerFactory.getKondutoSeller());
+
 		return order;
 	}
 

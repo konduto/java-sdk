@@ -1,5 +1,7 @@
 package com.konduto.sdk.models;
 
+import java.util.Date;
+
 /**
  * Item model.
  *
@@ -14,6 +16,7 @@ public class KondutoItem extends KondutoModel {
 	private Double unitCost;
 	private Double quantity;
 	private Double discount;
+	private Date created_at;
 
 	/* Constructors */
 
@@ -48,7 +51,9 @@ public class KondutoItem extends KondutoModel {
 		if (quantity != null ? !quantity.equals(that.quantity) : that.quantity != null) return false;
 		if (sku != null ? !sku.equals(that.sku) : that.sku != null) return false;
 		if (unitCost != null ? !unitCost.equals(that.unitCost) : that.unitCost != null) return false;
-
+		if (!nullSafeAreDatesEqual(created_at, that.created_at)){
+			return false;
+		}
 		return true;
 	}
 
@@ -117,4 +122,8 @@ public class KondutoItem extends KondutoModel {
 	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
+
+	public Date getCreated_at() { return created_at; }
+
+	public void setCreated_at(Date created_at) { this.created_at = created_at; }
 }
