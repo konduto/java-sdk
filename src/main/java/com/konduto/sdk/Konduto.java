@@ -18,11 +18,14 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 /**
  *
@@ -31,10 +34,27 @@ import java.util.List;
  */
 
 public final class Konduto {
-	private String apiKey;
-	private JsonObject requestBody;
-	private JsonObject responseBody;
-	private URI endpoint = URI.create("https://api.konduto.com/v1");
+    private static final Properties PROPERTIES = new Properties();
+    static {
+        try {
+            FileInputStream propertiesFile = new FileInputStream("konduto.properties");
+            PROPERTIES.load(propertiesFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("File konduto.properties file does not exist.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Could not read properties from konduto.properties file.");
+        }
+    }
+
+    public static final String VERSION = PROPERTIES.getProperty("version");
+
+    private String apiKey;
+    private JsonObject requestBody;
+    private JsonObject responseBody;
+
+    private URI endpoint = URI.create("https://api.konduto.com/v1");
 
     private static final HttpClient HTTP_CLIENT = new HttpClient(new MultiThreadedHttpConnectionManager());
 
@@ -196,6 +216,8 @@ public final class Konduto {
 		} finally {
 			method.addRequestHeader("Authorization", "Basic " + base64);
 		}
+
+        method.addRequestHeader("X-Requested-With", "Konduto Java SDK " + VERSION);
 
 		try {
 			if(method instanceof PostMethod) {

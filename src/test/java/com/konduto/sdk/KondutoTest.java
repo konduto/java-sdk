@@ -74,6 +74,8 @@ public class KondutoTest {
 			fail("[GET] should succeed");
 		}
 
+        verify(getRequestedFor(urlMatching("/v1/orders/" + ORDER_ID)).withHeader("X-Requested-With",
+                matching("Konduto Java SDK " + Konduto.VERSION)));
 		assertEquals(ORDER_FROM_FILE, actualOrder);
 
 	}
@@ -134,8 +136,11 @@ public class KondutoTest {
 		KondutoDevice actualDevice = ORDER_FROM_FILE.getDevice();
 		KondutoNavigationInfo actualNavigationInfo = ORDER_FROM_FILE.getNavigationInfo();
 
+        verify(postRequestedFor(urlMatching("/v1/orders")).withHeader("X-Requested-With",
+                matching("Konduto Java SDK " + Konduto.VERSION)));
+
 		assertEquals(orderToSend.getScore(), actualScore);
-		assertEquals(orderToSend.getGeolocation(), actualGeolocation);
+        assertEquals(orderToSend.getGeolocation(), actualGeolocation);
 		assertEquals(orderToSend.getRecommendation(), actualRecommendation);
 		assertEquals(orderToSend.getStatus(), actualStatus);
 		assertEquals(orderToSend.getDevice(), actualDevice);
@@ -227,6 +232,9 @@ public class KondutoTest {
 		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
 			fail("order update should have succeeded");
 		}
+
+        verify(putRequestedFor(urlMatching("/v1/orders/" + ORDER_ID)).withHeader("X-Requested-With",
+                matching("Konduto Java SDK " + Konduto.VERSION)));
 
 	}
 

@@ -3,8 +3,11 @@ apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
+Properties props = new Properties()
+props.load(new FileInputStream("konduto.properties"))
+
 group = 'com.konduto.sdk'
-version = '2.3.0'
+version = props.getProperty("version")
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 
