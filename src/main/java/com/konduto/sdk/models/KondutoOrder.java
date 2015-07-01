@@ -309,7 +309,7 @@ public final class KondutoOrder extends KondutoModel {
 		this.purchasedAt = serializeDate(purchased_at);
 	}
 
-	public static final String dateFormat = "yyyy-MM-dd'T'HH:mmZ";
+	public static final String dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ";
 
 	private Date deserializeDate(String date) throws JsonParseException {
 		try {
