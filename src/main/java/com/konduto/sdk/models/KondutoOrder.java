@@ -150,7 +150,7 @@ public final class KondutoOrder extends KondutoModel {
 		if (travel != null ? !travel.equals(order.travel) : order.travel != null)
 			return false;
 
-		if (messagesExchanged != null ? messagesExchanged != order.messagesExchanged :
+		if (messagesExchanged != null ? !Objects.equals(messagesExchanged, order.messagesExchanged) :
 				order.messagesExchanged != null)
 			return false;
 
@@ -315,9 +315,10 @@ public final class KondutoOrder extends KondutoModel {
 		try {
 			return new SimpleDateFormat(dateFormat, Locale.US).parse(date);
 		} catch (ParseException e) {
+            e.printStackTrace();
+            throw new JsonParseException("Unparseable date: \"" + date
+                    + "\". Supported format: " + dateFormat);
 		}
-		throw new JsonParseException("Unparseable date: \"" + date
-				+ "\". Supported format: " + dateFormat);
 	}
 
 	private String serializeDate(Date src) {
