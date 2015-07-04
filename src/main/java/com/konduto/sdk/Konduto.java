@@ -1,12 +1,13 @@
 package com.konduto.sdk;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonObject; 
 import com.google.gson.JsonParser;
 import com.konduto.sdk.exceptions.KondutoHTTPException;
 import com.konduto.sdk.exceptions.KondutoHTTPExceptionFactory;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.exceptions.KondutoUnexpectedAPIResponseException;
 import com.konduto.sdk.models.*;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.HttpClient;
@@ -18,9 +19,9 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.Arrays;
@@ -37,7 +38,8 @@ public final class Konduto {
     private static final Properties PROPERTIES = new Properties();
     static {
         try {
-            FileInputStream propertiesFile = new FileInputStream("konduto.properties");
+            InputStream propertiesFile = Konduto.class.
+            		getResourceAsStream("/konduto.properties");
             PROPERTIES.load(propertiesFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
@@ -11,10 +12,14 @@ version = props.getProperty("version")
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 
+sourceSets.main.resources {
+    srcDir "$projectDir"
+    include "konduto.properties"
+}
+
 compileJava {
     targetCompatibility = JavaVersion.VERSION_1_7
 }
-
 
 repositories {
 	mavenCentral()
