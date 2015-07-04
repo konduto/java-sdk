@@ -10,6 +10,8 @@ import static org.junit.Assert.assertEquals;
 public class KondutoHTTPExceptionTest {
 
 	private class KondutoFakeHTTPException extends KondutoHTTPException {
+		private static final long serialVersionUID = -2329739425820280221L;
+
 		protected KondutoFakeHTTPException(String message, JsonObject responseBody) {
 			super(message, responseBody);
 		}

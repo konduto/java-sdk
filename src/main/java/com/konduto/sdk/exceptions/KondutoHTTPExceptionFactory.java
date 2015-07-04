@@ -45,6 +45,9 @@ public abstract class KondutoHTTPExceptionFactory {
 	 * HTTP 400 is answered when the client sent a bad request to Konduto's API.
 	 */
 	protected static class KondutoHTTPBadRequestException extends KondutoHTTPException {
+
+		private static final long serialVersionUID = 7455960684176084815L;
+
 		public KondutoHTTPBadRequestException() {
 			super("Your request is incorrect. Please review the parameters sent.", responseBody);
 		}
@@ -54,6 +57,9 @@ public abstract class KondutoHTTPExceptionFactory {
 	 * HTTP 401 is answered when Konduto's API fails to authenticate the merchant.
 	 */
 	protected static class KondutoHTTPUnauthorizedException extends KondutoHTTPException {
+		
+		private static final long serialVersionUID = 5742990822189252699L;
+
 		public KondutoHTTPUnauthorizedException() {
 			super("Invalid API Key", responseBody);
 		}
@@ -63,6 +69,9 @@ public abstract class KondutoHTTPExceptionFactory {
 	 * HTTP 403 is answered when the merchant is not authorized to use Konduto's API.
 	 */
 	protected static class KondutoHTTPForbiddenException extends KondutoHTTPException {
+		
+		private static final long serialVersionUID = 5528474291801124461L;
+
 		public KondutoHTTPForbiddenException() {
 			super("There are problems with your account. Please contact our support team.", responseBody);
 		}
@@ -72,6 +81,9 @@ public abstract class KondutoHTTPExceptionFactory {
 	 * HTTP 404 is answered when the resource is not found by Konduto's API.
 	 */
 	protected static class KondutoHTTPNotFoundException extends KondutoHTTPException{
+		
+		private static final long serialVersionUID = -4517266961113978929L;
+
 		public KondutoHTTPNotFoundException() {
 			super("The requested resource could not be found.", responseBody);
 		}
@@ -81,6 +93,9 @@ public abstract class KondutoHTTPExceptionFactory {
 	 * HTTP 405 is answered when the HTTP method is not allowed by Konduto's API.
 	 */
 	protected static class KondutoHTTPMethodNotAllowedException extends KondutoHTTPException {
+		
+		private static final long serialVersionUID = -5251448135799279299L;
+
 		public KondutoHTTPMethodNotAllowedException() {
 			super("Sorry, we don't accept this HTTP method.", responseBody);
 		}
@@ -90,6 +105,9 @@ public abstract class KondutoHTTPExceptionFactory {
 	 * HTTP 422 is RFU
 	 */
 	protected static class KondutoHTTPUnprocessableEntityException extends KondutoHTTPException {
+		
+		private static final long serialVersionUID = -5191769265138551575L;
+
 		public KondutoHTTPUnprocessableEntityException() {
 			super("Unprocessable entity", responseBody);
 		}
@@ -99,6 +117,9 @@ public abstract class KondutoHTTPExceptionFactory {
 	 * HTTP 429 is answered when a merchant who signed up for a free plan reaches the transaction limit.
 	 */
 	protected static class KondutoHTTPTooManyRequestsException extends KondutoHTTPException {
+		
+		private static final long serialVersionUID = 248742956768417840L;
+
 		public KondutoHTTPTooManyRequestsException() {
 			super("Your free plan reached the transactions limit.", responseBody);
 		}
@@ -108,6 +129,9 @@ public abstract class KondutoHTTPExceptionFactory {
 	 * HTTP 500 is answered when an internal error happens at Konduto's API.
 	 */
 	protected static class KondutoHTTPInternalErrorException extends KondutoHTTPException {
+		
+		private static final long serialVersionUID = -2378137230739295387L;
+
 		public KondutoHTTPInternalErrorException() {
 			super("Oh no...something wrong happened at our servers. Please contact our support team.", responseBody);
 		}

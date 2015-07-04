@@ -10,6 +10,8 @@ package com.konduto.sdk.exceptions;
  */
 public abstract class KondutoException extends Exception {
 
+	private static final long serialVersionUID = 1920403867720844824L;
+
 	public abstract String getMessage();
 
 }

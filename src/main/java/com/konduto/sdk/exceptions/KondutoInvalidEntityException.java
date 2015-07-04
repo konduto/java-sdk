@@ -7,6 +7,8 @@ import com.konduto.sdk.models.KondutoModel;
  * This exception is thrown when a {@link KondutoModel} instance is invalid.
  */
 public final class KondutoInvalidEntityException extends KondutoException {
+	
+	private static final long serialVersionUID = 4627487289664092129L;
 	private KondutoModel entity;
 
 	public KondutoInvalidEntityException(KondutoModel entity) {

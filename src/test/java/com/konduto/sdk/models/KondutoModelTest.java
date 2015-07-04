@@ -1,6 +1,7 @@
 package com.konduto.sdk.models;
 
 import com.konduto.sdk.annotations.Required;
+
 import org.junit.Test;
 
 import java.lang.reflect.Field;
@@ -20,6 +21,7 @@ public class KondutoModelTest {
 		@Required
 		private String dummyField = "";
 
+		@SuppressWarnings("unused")
 		private KondutoDummyModelInternalModel internal = new KondutoDummyModelInternalModel();
 
 		@Override

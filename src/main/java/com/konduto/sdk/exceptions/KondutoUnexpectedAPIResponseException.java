@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
  */
 public class KondutoUnexpectedAPIResponseException extends KondutoException {
 
+	private static final long serialVersionUID = 7090880437649169406L;
 	private JsonObject responseBody;
 
 	public KondutoUnexpectedAPIResponseException(JsonObject responseBody) {

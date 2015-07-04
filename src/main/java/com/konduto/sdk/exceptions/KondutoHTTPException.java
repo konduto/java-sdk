@@ -9,6 +9,8 @@ import com.google.gson.JsonObject;
  * @see com.konduto.sdk.Konduto#sendRequest
  */
 public abstract class KondutoHTTPException extends KondutoException {
+
+	private static final long serialVersionUID = -1046719551304454324L;
 	private String message;
 
 	/**
