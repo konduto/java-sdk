@@ -350,6 +350,7 @@ public final class Konduto {
 		List<KondutoOrderStatus> allowedStatuses = Arrays.asList(
 				KondutoOrderStatus.APPROVED,
 				KondutoOrderStatus.DECLINED,
+				KondutoOrderStatus.NOT_AUTHORIZED,
 				KondutoOrderStatus.FRAUD
 		);
 

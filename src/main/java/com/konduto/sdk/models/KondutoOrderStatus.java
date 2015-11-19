@@ -17,6 +17,8 @@ public enum KondutoOrderStatus {
 	DECLINED,
 	@SerializedName("fraud")
 	FRAUD,
+	@SerializedName("not_authorized")
+	NOT_AUTHORIZED,
 	@SerializedName("not_analyzed")
 	NOT_ANALYZED;
 
