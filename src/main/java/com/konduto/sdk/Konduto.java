@@ -351,6 +351,7 @@ public final class Konduto {
 				KondutoOrderStatus.APPROVED,
 				KondutoOrderStatus.DECLINED,
 				KondutoOrderStatus.NOT_AUTHORIZED,
+				KondutoOrderStatus.CANCELED,
 				KondutoOrderStatus.FRAUD
 		);
 

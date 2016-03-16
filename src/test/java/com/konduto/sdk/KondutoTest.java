@@ -262,8 +262,8 @@ public class KondutoTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void invalidStatusWhenUpdatingTest(){
 		List<KondutoOrderStatus> forbiddenStatus = Arrays.asList(
-			KondutoOrderStatus.NOT_ANALYZED,
-			KondutoOrderStatus.PENDING
+				KondutoOrderStatus.NOT_ANALYZED,
+				KondutoOrderStatus.PENDING
 		);
 
 		for (KondutoOrderStatus status : forbiddenStatus) {

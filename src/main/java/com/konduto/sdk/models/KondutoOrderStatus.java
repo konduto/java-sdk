@@ -20,6 +20,7 @@ public enum KondutoOrderStatus {
 	@SerializedName("not_authorized")
 	NOT_AUTHORIZED,
 	@SerializedName("not_analyzed")
-	NOT_ANALYZED;
-
+	NOT_ANALYZED,
+	@SerializedName("canceled")
+	CANCELED
 }
