@@ -58,7 +58,7 @@ public class KondutoTravelAdapter implements JsonDeserializer<KondutoTravel> {
         }
 
         JsonArray passengersJsonArray = json.getAsJsonArray("passengers");
-        List<KondutoPassenger> passengers = new ArrayList<>();
+        List<KondutoPassenger> passengers = new ArrayList<KondutoPassenger>();
         for(JsonElement jsonObject : passengersJsonArray) {
             KondutoPassenger passenger = (KondutoPassenger)
                     KondutoModel.fromJSON((JsonObject) jsonObject, KondutoPassenger.class);

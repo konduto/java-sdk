@@ -70,7 +70,9 @@ public class KondutoTest {
 		try {
 			 actualOrder = konduto.getOrder(ORDER_ID);
 
-		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
+		} catch (KondutoHTTPException e) {
+			fail("[GET] should succeed");
+		} catch (KondutoUnexpectedAPIResponseException e) {
 			fail("[GET] should succeed");
 		}
 
@@ -124,7 +126,9 @@ public class KondutoTest {
 			konduto.analyze(orderToSend); // do analyze
 		} catch (KondutoInvalidEntityException e) {
 			fail("order should be valid");
-		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
+		} catch (KondutoHTTPException e) {
+			fail("server should respond with status 200");
+		} catch (KondutoUnexpectedAPIResponseException e) {
 			fail("server should respond with status 200");
 		}
 
@@ -164,7 +168,9 @@ public class KondutoTest {
             konduto.analyze(orderToSend); // do analyze
         } catch (KondutoInvalidEntityException e) {
             fail("order should be valid");
-        } catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
+        } catch (KondutoUnexpectedAPIResponseException e) {
+            fail("server should respond with status 200");
+        } catch (KondutoHTTPException e) {
             fail("server should respond with status 200");
         }
 
@@ -189,7 +195,9 @@ public class KondutoTest {
 			fail("KondutoInvalidEntityException should have been thrown");
 		} catch (KondutoInvalidEntityException e) {
 			// nothing to do, because exception was expected
-		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
+		} catch (KondutoUnexpectedAPIResponseException e) {
+			fail("Expected KondutoInvalidEntityException, but got KondutoHTTPException");
+		} catch (KondutoHTTPException e) {
 			fail("Expected KondutoInvalidEntityException, but got KondutoHTTPException");
 		}
 	}
@@ -209,7 +217,9 @@ public class KondutoTest {
 				fail("Exception expected");
 			} catch (KondutoHTTPException e) {
 				// nothing to do, because exception was expected
-			} catch (KondutoInvalidEntityException | KondutoUnexpectedAPIResponseException e) {
+			} catch (KondutoInvalidEntityException e) {
+				fail("expected KondutoHTTPException");
+			} catch (KondutoUnexpectedAPIResponseException e) {
 				fail("expected KondutoHTTPException");
 			}
 		}
@@ -229,7 +239,9 @@ public class KondutoTest {
 
 		try {
 			konduto.updateOrderStatus(ORDER_FROM_FILE, KondutoOrderStatus.APPROVED, "no comments");
-		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
+		} catch (KondutoHTTPException e) {
+			fail("order update should have succeeded");
+		} catch (KondutoUnexpectedAPIResponseException e) {
 			fail("order update should have succeeded");
 		}
 
@@ -270,7 +282,9 @@ public class KondutoTest {
 			try {
 				konduto.updateOrderStatus(ORDER_FROM_FILE, status, "");
 				fail("expected KondutoInvalidOrderStatus exception");
-			} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
+			} catch (KondutoHTTPException e) {
+				fail("expected KondutoInvalidOrderStatus exception");
+			} catch (KondutoUnexpectedAPIResponseException e) {
 				fail("expected KondutoInvalidOrderStatus exception");
 			}
 		}
@@ -280,7 +294,11 @@ public class KondutoTest {
 	public void nullCommentsWhenUpdatingTest(){
 		try {
 			konduto.updateOrderStatus(ORDER_FROM_FILE, KondutoOrderStatus.APPROVED, null);
-		} catch (KondutoHTTPException | KondutoUnexpectedAPIResponseException e) {
+		} 
+		catch (KondutoUnexpectedAPIResponseException e) {
+			fail("expected NullPointerException");
+		} 
+		catch (KondutoHTTPException e) {
 			fail("expected NullPointerException");
 		}
 	}

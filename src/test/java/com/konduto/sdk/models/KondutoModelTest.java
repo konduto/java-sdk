@@ -48,7 +48,10 @@ public class KondutoModelTest {
 			Field f = dummyModel.getClass().getDeclaredField("dummyField");
 			f.setAccessible(true);
 			dummyModel.addIsRequiredError(f, f.get(dummyModel));
-		} catch (NoSuchFieldException | IllegalAccessException e) {
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+			fail("field must exist and be accessible");
+		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 			fail("field must exist and be accessible");
 		}
@@ -69,7 +72,7 @@ public class KondutoModelTest {
 
 	@Test
 	public void hashMapFactoryTest() {
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", "Raphael");
 		map.put("email", "raphael@konduto.com");
 		map.put("id", "1234");

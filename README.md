@@ -8,7 +8,7 @@ This document refers to the **Java SDK** used for our API.
 
 ## Requirements
 
-* Java 7
+* Java 6
 
 ## Installation
 
@@ -18,7 +18,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.4.3</version>
+	<version>2.5.0</version>
 </dependency>
 ```
 
@@ -64,7 +64,7 @@ Another way of initializing an instance of KondutoModel is to call KondutoModel'
 and pass a Map and the instance class as arguments.
 
 ```java
-Map<String, Object> attributes = new HashMap<>();
+Map<String, Object> attributes = new HashMap<String, Object>();
 attributes.put("id", "123"); 
 attributes.put("totalAmount", 123.4);
 attributes.put("customer", customer);

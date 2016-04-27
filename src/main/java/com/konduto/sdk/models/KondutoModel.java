@@ -42,7 +42,7 @@ public abstract class KondutoModel {
             .setDateFormat("yyyy-MM-dd")
 			.create();
 
-	protected transient List<String> errors = new ArrayList<>();
+	protected transient List<String> errors = new ArrayList<String>();
 
 	/* Serialization methods */
 
@@ -141,7 +141,7 @@ public abstract class KondutoModel {
 							addIsRequiredError(f, null);
 						} else {
 							Method isEmptyMethod = value.getClass().getMethod("isEmpty");
-							boolean isEmpty = (boolean) isEmptyMethod.invoke(value);
+							boolean isEmpty = (Boolean) isEmptyMethod.invoke(value);
 							if(isEmpty) {
 								addIsRequiredError(f, value);
 							}

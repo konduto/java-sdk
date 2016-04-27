@@ -51,7 +51,7 @@ public class KondutoPaymentAdapter implements JsonSerializer<Collection<KondutoP
 	public Collection<KondutoPayment> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
 
-		Collection<KondutoPayment> payments = new HashSet<>();
+		Collection<KondutoPayment> payments = new HashSet<KondutoPayment>();
 
 		for(JsonElement je : json.getAsJsonArray()) {
 			KondutoPaymentType type =
