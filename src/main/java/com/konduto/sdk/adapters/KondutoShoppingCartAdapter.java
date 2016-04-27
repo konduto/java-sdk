@@ -21,7 +21,7 @@ public class KondutoShoppingCartAdapter
 	public Collection<KondutoItem> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
 
-		Collection<KondutoItem> shoppingCart = new ArrayList<>();
+		Collection<KondutoItem> shoppingCart = new ArrayList<KondutoItem>();
 
 		for(JsonElement je : json.getAsJsonArray()) {
 			shoppingCart.add((KondutoItem) context.deserialize(je, KondutoItem.class));

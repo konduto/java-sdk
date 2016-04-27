@@ -20,7 +20,7 @@ public class KondutoPaymentFactory {
 	}
 
 	public static Collection<KondutoPayment> getPayments() {
-		Collection<KondutoPayment> payments = new HashSet<>();
+		Collection<KondutoPayment> payments = new HashSet<KondutoPayment>();
 		payments.add(getCreditCardPayment());
 		return payments;
 	}

@@ -1,12 +1,15 @@
 package com.konduto.sdk.models;
 
-import com.google.gson.JsonParseException;
+import com.google.gson.JsonParseException; 
 import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  *
@@ -150,7 +153,7 @@ public final class KondutoOrder extends KondutoModel {
 		if (travel != null ? !travel.equals(order.travel) : order.travel != null)
 			return false;
 
-		if (messagesExchanged != null ? !Objects.equals(messagesExchanged, order.messagesExchanged) :
+		if (messagesExchanged != null ? !messagesExchanged.equals(order.messagesExchanged) :
 				order.messagesExchanged != null)
 			return false;
 

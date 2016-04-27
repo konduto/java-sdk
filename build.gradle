@@ -10,7 +10,7 @@ props.load(new FileInputStream("konduto.properties"))
 group = 'com.konduto.sdk'
 version = props.getProperty("version")
 
-sourceCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_6
 
 sourceSets.main.resources {
     srcDir "$projectDir"
@@ -18,7 +18,7 @@ sourceSets.main.resources {
 }
 
 compileJava {
-    targetCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_6
 }
 
 repositories {
