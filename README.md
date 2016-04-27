@@ -8,7 +8,7 @@ This document refers to the **Java SDK** used for our API.
 
 ## Requirements
 
-* Java 7
+* Java 6
 
 ## Installation
 
