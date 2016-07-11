@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +14,7 @@ import static org.junit.Assert.*;
 public class KondutoBusTravelLegTest {
     private static final String ORIGIN_CITY = "São Paulo";
     private static final String DESTINATION_CITY = "Rio de Janeiro";
-    private static final String TRAVEL_DATE = "2015-05-07";
+    private static final String TRAVEL_DATE = "2015-05-07T12:00Z";
 
     private static final JsonObject BUS_TRAVEL_LEG_AS_JSON = new JsonObject();
     static {
@@ -28,7 +29,9 @@ public class KondutoBusTravelLegTest {
         BUS_TRAVEL_LEG.setOriginCity(ORIGIN_CITY);
         BUS_TRAVEL_LEG.setDestinationCity(DESTINATION_CITY);
         try {
-            BUS_TRAVEL_LEG.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(TRAVEL_DATE));
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+            format.setTimeZone(TimeZone.getTimeZone("UTC"));
+            BUS_TRAVEL_LEG.setDate(format.parse(TRAVEL_DATE));
         } catch (ParseException e) {
             e.printStackTrace();
         }

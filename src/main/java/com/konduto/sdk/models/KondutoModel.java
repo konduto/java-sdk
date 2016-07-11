@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.adapters.KondutoPaymentAdapter;
 import com.konduto.sdk.adapters.KondutoShoppingCartAdapter;
 import com.konduto.sdk.adapters.KondutoTravelAdapter;
+import com.konduto.sdk.adapters.TravelDateAdapter;
 import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.annotations.ValidateFormat;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
@@ -33,11 +34,13 @@ public abstract class KondutoModel {
 	private static Type paymentsType = new TypeToken<Collection<KondutoPayment>>(){}.getType();
 	private static Type shoppingCartType = new TypeToken<Collection<KondutoItem>>(){}.getType();
     private static Type travelType = new TypeToken<KondutoTravel>(){}.getType();
+    private static Type travelDateType = new TypeToken<KondutoTravelLeg.TravelDate>(){}.getType();
 
 	protected static Gson gson = new GsonBuilder()
 			.registerTypeAdapter(paymentsType, new KondutoPaymentAdapter())
 			.registerTypeAdapter(shoppingCartType, new KondutoShoppingCartAdapter())
 			.registerTypeAdapter(travelType, new KondutoTravelAdapter())
+			.registerTypeAdapter(travelDateType, new TravelDateAdapter())
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .setDateFormat("yyyy-MM-dd")
 			.create();

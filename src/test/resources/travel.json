@@ -5,7 +5,7 @@
     "destination_airport":"SDU",
     "origin_city":"São Paulo",
     "destination_city":"Rio de Janeiro",
-    "date":"2015-05-07",
+    "date": "2015-05-07T12:40Z",
     "number_of_connections":0,
     "class":"economy",
     "fare_basis":"Y"
@@ -15,7 +15,7 @@
     "destination_airport":"CGH",
     "origin_city":"Rio de Janeiro",
     "destination_city":"São Paulo",
-    "date":"2015-05-07",
+    "date": "2015-05-08T15:00Z",
     "number_of_connections":0,
     "class":"economy",
     "fare_basis":"Y"

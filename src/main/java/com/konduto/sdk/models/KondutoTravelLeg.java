@@ -11,11 +11,18 @@ import java.util.Date;
 public abstract class KondutoTravelLeg extends KondutoModel {
 
     /** Attributes */
-    private Date date; // format: yyyy-MM-ddT2018-12-25T18:00Z
+    private TravelDate date; // format: yyyy-MM-ddT2018-12-25T18:00Z
     private int numberOfConnections = 0;
     @SerializedName(value="class")
     private KondutoTravelClass travelClass;
     private String fareBasis;
+
+    // Has a specific serializer
+    static public class TravelDate extends Date {
+        TravelDate(Date date) {
+            super(date.getTime());
+        }
+    }
 
     /** Constructors */
 
@@ -60,12 +67,16 @@ public abstract class KondutoTravelLeg extends KondutoModel {
         return result;
     }
 
+    public static TravelDate buildTravelDate(Date aDate) {
+        return new TravelDate(aDate);
+    }
+
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = buildTravelDate(date);
     }
 
     public int getNumberOfConnections() {

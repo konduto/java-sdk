@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +16,7 @@ import static org.junit.Assert.*;
 public class KondutoFlightTravelLegTest {
     private static final String ORIGIN_AIRPORT = "CGH";
     private static final String DESTINATION_AIRPORT = "SDU";
-    private static final String TRAVEL_DATE = "2015-05-07";
+    private static final String TRAVEL_DATE = "2015-05-07T03:20Z";
     private static final String FARE_BASIS = "Y";
     private static final int NUMBER_OF_CONNECTIONS = 1;
     private static final KondutoTravelClass TRAVEL_CLASS = KondutoTravelClass.ECONOMY;
@@ -34,7 +36,9 @@ public class KondutoFlightTravelLegTest {
         FLIGHT_TRAVEL_LEG.setOriginAirport(ORIGIN_AIRPORT);
         FLIGHT_TRAVEL_LEG.setDestinationAirport(DESTINATION_AIRPORT);
         try {
-            FLIGHT_TRAVEL_LEG.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(TRAVEL_DATE));
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+            format.setTimeZone(TimeZone.getTimeZone("UTC"));
+            FLIGHT_TRAVEL_LEG.setDate(format.parse(TRAVEL_DATE));
         } catch (ParseException e) {
             e.printStackTrace();
         }
