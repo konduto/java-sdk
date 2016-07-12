@@ -7,6 +7,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.factories.KondutoPassengerFactory;
 import com.konduto.sdk.factories.KondutoTravelLegFactory;
+import com.konduto.sdk.models.KondutoBusTravelLeg;
+import com.konduto.sdk.models.KondutoFlightTravelLeg;
 import com.konduto.sdk.models.KondutoTravel;
 import com.konduto.sdk.models.KondutoTravelType;
 import com.konduto.sdk.utils.TestUtils;
@@ -23,10 +25,14 @@ import static org.junit.Assert.assertEquals;
  */
 public class KondutoTravelAdapterTest {
     Type travelType = new TypeToken<KondutoTravel>(){}.getType();
+    Type busTravelLegType = new TypeToken<KondutoBusTravelLeg>(){}.getType();
+    Type flightTravelLegType = new TypeToken<KondutoFlightTravelLeg>(){}.getType();
 
     Gson gson = new GsonBuilder()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .registerTypeAdapter(travelType, new KondutoTravelAdapter())
+            .registerTypeAdapter(busTravelLegType, new KondutoBusTravelLegAdapter())
+            .registerTypeAdapter(flightTravelLegType, new KondutoFlightTravelLegAdapter())
             .create();
 
     JsonObject travelJson = (JsonObject) TestUtils.readJSONFromFile("travel.json");

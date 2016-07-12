@@ -1,6 +1,8 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
+import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 
 import java.util.Date;
 
@@ -11,18 +13,11 @@ import java.util.Date;
 public abstract class KondutoTravelLeg extends KondutoModel {
 
     /** Attributes */
-    private TravelDate date; // format: yyyy-MM-ddT2018-12-25T18:00Z
-    private int numberOfConnections = 0;
+    private Date date; // format: yyyy-MM-ddT2018-12-25T18:00Z
+    private Integer numberOfConnections;
     @SerializedName(value="class")
     private KondutoTravelClass travelClass;
     private String fareBasis;
-
-    // Has a specific serializer
-    static public class TravelDate extends Date {
-        TravelDate(Date date) {
-            super(date.getTime());
-        }
-    }
 
     /** Constructors */
 
@@ -51,7 +46,7 @@ public abstract class KondutoTravelLeg extends KondutoModel {
 
         KondutoTravelLeg that = (KondutoTravelLeg) o;
 
-        if (numberOfConnections != that.numberOfConnections) return false;
+        if (!numberOfConnections.equals(that.numberOfConnections)) return false;
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
         if (travelClass != that.travelClass) return false;
         return !(fareBasis != null ? !fareBasis.equals(that.fareBasis) : that.fareBasis != null);
@@ -67,19 +62,15 @@ public abstract class KondutoTravelLeg extends KondutoModel {
         return result;
     }
 
-    public static TravelDate buildTravelDate(Date aDate) {
-        return new TravelDate(aDate);
-    }
-
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
-        this.date = buildTravelDate(date);
+        this.date = date;
     }
 
-    public int getNumberOfConnections() {
+    public Integer getNumberOfConnections() {
         return numberOfConnections;
     }
 

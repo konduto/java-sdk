@@ -55,7 +55,7 @@ public class KondutoTravelTest {
 
     @Test
     public void serializeTest() throws Exception {
-        assertEquals(TRAVEL.toJSON(), TRAVEL_JSON);
+        assertEquals(TRAVEL_JSON, TRAVEL.toJSON());
     }
 
     @Test

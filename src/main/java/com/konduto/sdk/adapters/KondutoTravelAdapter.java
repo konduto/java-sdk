@@ -1,17 +1,26 @@
 package com.konduto.sdk.adapters;
 
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.models.*;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * KondutoTravelAdapter to deserialize KondutoTravel objects.
  *
  */
 public class KondutoTravelAdapter implements JsonDeserializer<KondutoTravel> {
+
+    private static final Type BUS_TRAVEL_LEG_TYPE = new TypeToken<KondutoBusTravelLeg>(){}.getType();
+    private static final Type FLIGHT_TRAVEL_LEG_TYPE = new TypeToken<KondutoFlightTravelLeg>(){}.getType();
+
 
     /**
      * Gson invokes this call-back method during deserialization when it encounters a field of the
@@ -38,35 +47,26 @@ public class KondutoTravelAdapter implements JsonDeserializer<KondutoTravel> {
         JsonObject departureJson = json.getAsJsonObject("departure");
         JsonObject returnJson = json.has("return") ? json.getAsJsonObject("return") : null;
 
-        switch (travelType) {
-            case BUS:
-                travel.setDepartureLeg((KondutoTravelLeg)
-                        KondutoModel.fromJSON(departureJson, KondutoBusTravelLeg.class));
-                if(returnJson != null) {
-                    travel.setReturnLeg((KondutoTravelLeg)
-                            KondutoModel.fromJSON(returnJson, KondutoBusTravelLeg.class));
-                }
-                break;
-            case FLIGHT:
-                travel.setDepartureLeg((KondutoTravelLeg)
-                        KondutoModel.fromJSON(departureJson, KondutoFlightTravelLeg.class));
-                if(returnJson != null) {
-                    travel.setReturnLeg((KondutoTravelLeg)
-                            KondutoModel.fromJSON(returnJson, KondutoFlightTravelLeg.class));
-                }
-                break;
-        }
+        Type legType = travelType.equals(KondutoTravelType.BUS) ? BUS_TRAVEL_LEG_TYPE :
+                travelType.equals(KondutoTravelType.FLIGHT) ? FLIGHT_TRAVEL_LEG_TYPE : null;
 
-        JsonArray passengersJsonArray = json.getAsJsonArray("passengers");
+        if(legType == null) { throw new RuntimeException("Invalid travel type"); }
+
+        travel.setDepartureLeg((KondutoTravelLeg) context.deserialize(departureJson, legType));
+        travel.setReturnLeg((KondutoTravelLeg) context.deserialize(returnJson, legType));
+        setTravelPassengers(json.getAsJsonArray("passengers"), travel);
+        travel.setTravelType(travelType);
+        return travel;
+    }
+
+    private void setTravelPassengers(JsonArray passengersJsonArray, KondutoTravel travel) {
+        if(passengersJsonArray == null || passengersJsonArray.size() == 0) { return; }
         List<KondutoPassenger> passengers = new ArrayList<KondutoPassenger>();
         for(JsonElement jsonObject : passengersJsonArray) {
             KondutoPassenger passenger = (KondutoPassenger)
                     KondutoModel.fromJSON((JsonObject) jsonObject, KondutoPassenger.class);
             passengers.add(passenger);
         }
-
         travel.setPassengers(passengers);
-        travel.setTravelType(travelType);
-        return travel;
     }
 }

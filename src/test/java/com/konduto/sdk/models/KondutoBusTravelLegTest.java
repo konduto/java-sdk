@@ -28,6 +28,7 @@ public class KondutoBusTravelLegTest {
     static {
         BUS_TRAVEL_LEG.setOriginCity(ORIGIN_CITY);
         BUS_TRAVEL_LEG.setDestinationCity(DESTINATION_CITY);
+        BUS_TRAVEL_LEG.setNumberOfConnections(0);
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
             format.setTimeZone(TimeZone.getTimeZone("UTC"));

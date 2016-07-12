@@ -18,7 +18,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.5.0</version>
+	<version>2.6.0</version>
 </dependency>
 ```
 
@@ -163,7 +163,7 @@ quantity | _(optional)_ Number of units purchased.
 discount | _(optional)_ Discounted amount for this item.
 created_at | _(optional)_ Date when this item was created.
 
-### Seller
+#### Seller
 
 Parameter | Description
 --- | ---
@@ -171,6 +171,45 @@ id | _(required)_ Seller's id
 name | _(optional)_ Sellers's name
 created_at | _(optional)_ Date when the seller was created
 
+
+#### Travel
+Parameter | Description
+--- | ---
+type | _(required)_ The travel type (**flight** or **bus**).
+departure_leg | _(required)_ An instance of either *KondutoBusTravelLeg* (if **type** is **bus**) or *KondutoFlightTravelLeg* (if **type** is **flight**)
+return_leg | _(optional)_ An instance of either *KondutoBusTravelLeg* or *KondutoFlightTravelLeg*.
+passengers | _(optional)_ A list of *KondutoPassenger*
+
+##### Common travel leg attributes
+ Parameter | Description
+ --- | ---
+ date | _(required)_ The travel date
+ number_of_connections | _(optional)_ The number of connections
+ class | _(optional)_ see **KondutoTravelClass**
+ fare_basis | _(optional)_
+
+##### Bus travel leg specifics
+Parameter | Description
+--- | ---
+origin_city| _(required)_ The leg origin city
+destination_city | _(required)_ The leg destination city
+
+##### Flight travel leg specifics
+Parameter | Description
+--- | ---
+origin_airport| _(required)_ The leg origin airport IATA code (e.g: GRU, LAX)
+destination_airport | _(required)_ The leg destination airport IATA code
+origin_city| _(optional)_ The leg origin city
+destination_city | _(optional)_ The leg destination city
+
+##### Passenger
+Parameter | Description
+--- | ---
+name | _(required)_ The travel type (**flight** or **bus**)
+document | _(required)_ The passenger's document
+document_type | _(required)_ The passenger's document type (e.g passport). See **KondutoDocumentType**
+frequent_traveler | _(optional)_ A boolean. Is this passenger a frequent traveler?
+special_needs | _(optional)_ A boolean. Does the passenger have special needs?
 
 ## Sending an order for analysis.
 
