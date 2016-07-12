@@ -60,7 +60,6 @@ public class KondutoBusTravelLegAdapter extends KondutoTravelLegAdapter implemen
     /**
      * Gson invokes this call-back method during serialization when it encounters a field of the
      * specified type.
-     * <p/>
      * <p>In the implementation of this call-back method, you should consider invoking
      * {@link JsonSerializationContext#serialize(Object, Type)} method to create JsonElements for any
      * non-trivial field of the {@code src} object. However, you should never invoke it on the
