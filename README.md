@@ -219,6 +219,8 @@ After creating the order, sending it to Konduto's analysis is very simple.
 if(order.isValid()){
 	try {
 		konduto.analyze(order);
+		System.out.println("Konduto recommendation is to: " + order.getRecommendation());
+
 	// A KondutoException will be thrown if the response is anything other than 200 OK.
 	// You can catch more specific exceptions if you want to (e.g KondutoHTTPBadRequestException).
 	catch(KondutoException e) {
@@ -232,13 +234,6 @@ if(order.isValid()){
 ```
 
 Notice that if the analysis fails, a **KondutoException** will be thrown. Handle it as you wish.
-
-After the analysis, some order attributes will be filled. For example the recommendation.
-
-```java 
-// The command below should print something like "Konduto recommendation is to APPROVE".
-System.out.println("Konduto recommendation is to: " + order.getRecommendation());
-```
 
 ## Querying an order from our servers.
 
