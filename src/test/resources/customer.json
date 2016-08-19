@@ -7,5 +7,6 @@
    "phone2":"1133333333",
    "vip":false,
    "new":false,
-   "created_at":"2015-06-09"
+   "created_at":"2015-06-09",
+   "DOB":"1980-06-09"
 }

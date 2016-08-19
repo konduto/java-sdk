@@ -16,7 +16,7 @@ public class KondutoCustomerFactory {
 		return customer;
 	}
 
-	public static KondutoCustomer completeCustomer() {
+	public static KondutoCustomer completeCustomer(){
 		KondutoCustomer customer = basicCustomer();
 		customer.setIsNew(false);
 		customer.setIsVip(false);
@@ -24,6 +24,9 @@ public class KondutoCustomerFactory {
 		customer.setPhone2("1133333333");
 		customer.setTaxId("01234567890");
 		customer.setCreated_at(new Date(1433818800000L));
+
+		customer.setDOB(new Date(329367600000L));
+
 		return customer;
 	}
 

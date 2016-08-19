@@ -10,10 +10,7 @@ import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.annotations.ValidateFormat;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.*;
 
 /**
@@ -132,6 +129,7 @@ public abstract class KondutoModel {
 	public boolean isValid() {
 		errors.clear();
 		Object value;
+
 		for(Field f : this.getClass().getDeclaredFields()) {
 			if (!f.isSynthetic()) {
 				try {
@@ -180,7 +178,6 @@ public abstract class KondutoModel {
 		return errors.isEmpty();
 
 	}
-
 
     /**
 	 * Enables Map-based construction in KondutoModel children.
