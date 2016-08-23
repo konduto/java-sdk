@@ -130,7 +130,8 @@ public abstract class KondutoModel {
 		errors.clear();
 		Object value;
 
-		for(Field f : this.getClass().getDeclaredFields()) {
+//		for(Field f : this.getClass().getDeclaredFields()) {
+		for(Field f : getAllFields(new LinkedList<Field>(), this.getClass())) {
 			if (!f.isSynthetic()) {
 				try {
 					f.setAccessible(true);
@@ -177,6 +178,16 @@ public abstract class KondutoModel {
 
 		return errors.isEmpty();
 
+	}
+
+	public static List<Field> getAllFields(List<Field> fields, Class<?> type) {
+		fields.addAll(Arrays.asList(type.getDeclaredFields()));
+
+		if (type.getSuperclass() != null) {
+			fields = getAllFields(fields, type.getSuperclass());
+		}
+
+		return fields;
 	}
 
     /**
