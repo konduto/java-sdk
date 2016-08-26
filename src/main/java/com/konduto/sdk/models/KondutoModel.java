@@ -130,7 +130,6 @@ public abstract class KondutoModel {
 		errors.clear();
 		Object value;
 
-//		for(Field f : this.getClass().getDeclaredFields()) {
 		for(Field f : getAllFields(new LinkedList<Field>(), this.getClass())) {
 			if (!f.isSynthetic()) {
 				try {

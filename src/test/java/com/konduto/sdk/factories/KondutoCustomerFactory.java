@@ -2,6 +2,10 @@ package com.konduto.sdk.factories;
 
 import com.konduto.sdk.models.KondutoCustomer;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -16,7 +20,7 @@ public class KondutoCustomerFactory {
 		return customer;
 	}
 
-	public static KondutoCustomer completeCustomer(){
+	public static KondutoCustomer completeCustomer() throws ParseException {
 		KondutoCustomer customer = basicCustomer();
 		customer.setIsNew(false);
 		customer.setIsVip(false);
@@ -25,7 +29,9 @@ public class KondutoCustomerFactory {
 		customer.setTaxId("01234567890");
 		customer.setCreated_at(new Date(1433818800000L));
 
-		customer.setDOB(new Date(329367600000L));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Date dob = sdf.parse("27/12/1989");
+		customer.setDOB(dob);
 
 		return customer;
 	}

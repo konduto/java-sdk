@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 /**
@@ -30,11 +31,11 @@ public class KondutoCreditCardPaymentTest {
 	}
 
 	@Test
-	public void nullTypeIsValidFailTest(){
+	public void invalidCardTypeTest(){
 		KondutoPayment creditCardPayment = KondutoPaymentFactory.getCreditCardPayment();
 		creditCardPayment.type = null;
 
-		assertTrue(!creditCardPayment.isValid());
+		assertFalse(creditCardPayment.isValid());
 
 		creditCardPayment.type = KondutoPaymentType.CREDIT;
 

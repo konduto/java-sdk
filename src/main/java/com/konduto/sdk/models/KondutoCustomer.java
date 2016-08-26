@@ -25,7 +25,7 @@ public final class KondutoCustomer extends KondutoModel {
 	@SerializedName("new") private Boolean isNew;
 
 	private Date created_at;
-	@SerializedName("DOB") private Date DOB;
+	private Date dob;
 
 	/* Constructors */
 
@@ -65,7 +65,7 @@ public final class KondutoCustomer extends KondutoModel {
 		if (!nullSafeAreDatesEqual(created_at, that.created_at)){
 			return false;
 		}
-		if (!nullSafeAreDatesEqual(DOB, that.DOB)){
+		if (!nullSafeAreDatesEqual(dob, that.dob)){
 			return false;
 		}
 
@@ -142,7 +142,7 @@ public final class KondutoCustomer extends KondutoModel {
 
 	public void setCreated_at(Date created_at) { this.created_at = created_at; }
 
-	public Date getDOB() { return DOB; }
+	public Date getDOB() { return dob; }
 
-	public void setDOB(Date DOB) { this.DOB = DOB; }
+	public void setDOB(Date dob) { this.dob = dob; }
 }
