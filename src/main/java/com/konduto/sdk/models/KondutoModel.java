@@ -10,10 +10,7 @@ import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.annotations.ValidateFormat;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.*;
 
 /**
@@ -132,7 +129,8 @@ public abstract class KondutoModel {
 	public boolean isValid() {
 		errors.clear();
 		Object value;
-		for(Field f : this.getClass().getDeclaredFields()) {
+
+		for(Field f : getAllFields(new LinkedList<Field>(), this.getClass())) {
 			if (!f.isSynthetic()) {
 				try {
 					f.setAccessible(true);
@@ -181,6 +179,15 @@ public abstract class KondutoModel {
 
 	}
 
+	public static List<Field> getAllFields(List<Field> fields, Class<?> type) {
+		fields.addAll(Arrays.asList(type.getDeclaredFields()));
+
+		if (type.getSuperclass() != null) {
+			fields = getAllFields(fields, type.getSuperclass());
+		}
+
+		return fields;
+	}
 
     /**
 	 * Enables Map-based construction in KondutoModel children.

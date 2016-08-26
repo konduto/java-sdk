@@ -7,6 +7,8 @@ import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 /**
@@ -26,5 +28,17 @@ public class KondutoCreditCardPaymentTest {
 				(KondutoPayment) KondutoModel.fromJSON(creditCardJSON, KondutoCreditCardPayment.class);
 
 		assertEquals("deserialization failed", creditCardPayment, creditCardPaymentDeserialized);
+	}
+
+	@Test
+	public void invalidCardTypeTest(){
+		KondutoPayment creditCardPayment = KondutoPaymentFactory.getCreditCardPayment();
+		creditCardPayment.type = null;
+
+		assertFalse(creditCardPayment.isValid());
+
+		creditCardPayment.type = KondutoPaymentType.CREDIT;
+
+		assertTrue(creditCardPayment.isValid());
 	}
 }

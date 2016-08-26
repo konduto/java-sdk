@@ -32,8 +32,8 @@ public final class KondutoSeller extends KondutoModel {
      * @return a new instance
      */
     @Override
-    public KondutoCustomer with(String attributeName, Object attributeValue) {
-        return (KondutoCustomer) super.with(attributeName, attributeValue);
+    public KondutoSeller with(String attributeName, Object attributeValue) {
+        return (KondutoSeller) super.with(attributeName, attributeValue);
     }
 
 	/* Equals */

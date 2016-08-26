@@ -6,6 +6,8 @@ import com.konduto.sdk.factories.KondutoCustomerFactory;
 import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
+import java.text.ParseException;
+
 import static org.junit.Assert.*;
 
 /**
@@ -25,7 +27,7 @@ public class KondutoCustomerTest {
 	}
 
 	@Test
-	public void serializationTest(){
+	public void serializationTest() throws ParseException {
 		KondutoCustomer customer = KondutoCustomerFactory.completeCustomer();
 		JsonObject customerJSON = (JsonObject) TestUtils.readJSONFromFile("customer.json");
 		try {

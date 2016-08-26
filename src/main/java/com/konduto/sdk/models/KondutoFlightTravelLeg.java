@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.konduto.sdk.Konduto;
 import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.annotations.ValidateFormat;
 
@@ -18,6 +19,17 @@ public class KondutoFlightTravelLeg extends KondutoTravelLeg {
 
     private String originCity;
     private String destinationCity;
+
+    /**
+     * Fluent constructor
+     * @param attributeName the attribute name (e.g totalAmount)
+     * @param attributeValue the attribute value (e.g 123.2)
+     * @return a new instance
+     */
+    @Override
+    public KondutoFlightTravelLeg with(String attributeName, Object attributeValue) {
+        return (KondutoFlightTravelLeg) super.with(attributeName, attributeValue);
+    }
 
     @Override
     public boolean equals(Object o) {
