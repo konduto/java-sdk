@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
 /**
@@ -11,7 +12,9 @@ import com.konduto.sdk.annotations.Required;
  */
 public abstract class KondutoPayment extends KondutoModel {
 
-	public KondutoPayment(KondutoPaymentType type){ this.type = type; }
+
+	@Required
+	KondutoPaymentStatus status;
 
 	/**
 	 * Fluent constructor
@@ -24,16 +27,29 @@ public abstract class KondutoPayment extends KondutoModel {
 		return (KondutoPayment) super.with(attributeName, attributeValue);
 	}
 
-	@Required
-	public KondutoPaymentType type;
-
-	public KondutoPaymentType getType(){
-		return this.type;
+	public KondutoPaymentStatus getStatus() {
+		return status;
 	}
 
-	@Override
-	public abstract boolean equals(Object obj);
+	public void setStatus(KondutoPaymentStatus status) {
+		this.status = status;
+	}
+
+	abstract public KondutoPaymentType getType();
 
 	@Override
-	public abstract int hashCode();
+	public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof KondutoPayment)) return false;
+        KondutoPayment that = (KondutoPayment) obj;
+        if(this.getType() != that.getType()) { return false; }
+        return this.status.equals(that.status);
+    }
+
+	@Override
+	public int hashCode() {
+        int result = this.getType().hashCode();
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
 }

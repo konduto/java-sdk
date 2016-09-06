@@ -12,19 +12,6 @@ public class KondutoCreditCardPayment extends KondutoPayment {
 	private String bin;
 	private String last4;
 	private String expirationDate;
-	private KondutoCreditCardPaymentStatus status;
-
-	public KondutoCreditCardPayment(){
-		super(KondutoPaymentType.CREDIT);
-	}
-
-	public KondutoCreditCardPaymentStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(KondutoCreditCardPaymentStatus status) {
-		this.status = status;
-	}
 
 	public String getBin() {
 		return bin;
@@ -51,6 +38,11 @@ public class KondutoCreditCardPayment extends KondutoPayment {
 	}
 
 	@Override
+	public KondutoPaymentType getType() {
+		return KondutoPaymentType.CREDIT;
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (!(o instanceof KondutoCreditCardPayment)) return false;
@@ -73,6 +65,7 @@ public class KondutoCreditCardPayment extends KondutoPayment {
 		result = 31 * result + (last4 != null ? last4.hashCode() : 0);
 		result = 31 * result + (expirationDate != null ? expirationDate.hashCode() : 0);
 		result = 31 * result + (status != null ? status.hashCode() : 0);
+		result = 31 * result + (getType()!= null ? getType().hashCode() : 0);
 		return result;
 	}
 }

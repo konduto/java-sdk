@@ -11,6 +11,7 @@ import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertEquals;
  * Created by rsampaio on 11/08/14.
  */
 public class KondutoShoppingCartAdapterTest {
-	Type shoppingCartType = new TypeToken<Collection<KondutoItem>>(){}.getType();
+	Type shoppingCartType = new TypeToken<KondutoItem>(){}.getType();
 
 	Gson gson = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -33,7 +34,7 @@ public class KondutoShoppingCartAdapterTest {
 
 	@Test
 	public void serializeTest(){
-		assertEquals("serialization failed", shoppingCartJSON, gson.toJsonTree(shoppingCart));
+		assertEquals("serialization failed", shoppingCartJSON, gson.toJson(shoppingCart));
 	}
 
 	@Test

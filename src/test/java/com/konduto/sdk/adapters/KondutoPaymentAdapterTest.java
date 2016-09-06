@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class KondutoPaymentAdapterTest {
 
-	Type paymentsType = new TypeToken<Collection<KondutoPayment>>(){}.getType();
+	Type paymentsType = new TypeToken<KondutoPayment>(){}.getType();
 
 	Gson gson = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -32,6 +32,10 @@ public class KondutoPaymentAdapterTest {
 
 	@Test
 	public void serializeTest(){
+		Gson gson = new GsonBuilder()
+				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+				.registerTypeHierarchyAdapter(KondutoPayment.class, new KondutoPaymentAdapter())
+				.create();
 		assertEquals("serialization failed", paymentsJSON, gson.toJsonTree(payments));
 	}
 

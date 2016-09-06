@@ -29,16 +29,4 @@ public class KondutoCreditCardPaymentTest {
 
 		assertEquals("deserialization failed", creditCardPayment, creditCardPaymentDeserialized);
 	}
-
-	@Test
-	public void invalidCardTypeTest(){
-		KondutoPayment creditCardPayment = KondutoPaymentFactory.getCreditCardPayment();
-		creditCardPayment.type = null;
-
-		assertFalse(creditCardPayment.isValid());
-
-		creditCardPayment.type = KondutoPaymentType.CREDIT;
-
-		assertTrue(creditCardPayment.isValid());
-	}
 }

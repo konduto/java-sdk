@@ -13,8 +13,7 @@ import java.util.Collection;
  * Shopping cart (collection of KondutoItem), serialization/deserialization.
  *
  */
-public class KondutoShoppingCartAdapter
-		implements JsonSerializer<Collection<KondutoItem>>, JsonDeserializer<Collection<KondutoItem>> {
+public class KondutoShoppingCartAdapter implements JsonDeserializer<Collection<KondutoItem>> {
 
 
 	@Override
@@ -29,14 +28,14 @@ public class KondutoShoppingCartAdapter
 		return shoppingCart;
 	}
 
-	@Override
-	public JsonElement serialize(Collection<KondutoItem> shoppingCart, Type typeOfSrc, JsonSerializationContext context) {
-		JsonArray json = new JsonArray();
-
-		for(KondutoItem item : shoppingCart) {
-			json.add(context.serialize(item));
-		}
-
-		return json;
-	}
+//	@Override
+//	public JsonElement serialize(KondutoItem item, Type typeOfSrc, JsonSerializationContext context) {
+//		JsonArray json = new JsonArray();
+//
+//		for(KondutoItem item : shoppingCart) {
+//			json.add(context.serialize(item));
+//		}
+//
+//		return json;
+//	}
 }
