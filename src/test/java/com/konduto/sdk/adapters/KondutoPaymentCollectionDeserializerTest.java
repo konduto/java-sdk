@@ -16,14 +16,15 @@ import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 
 /**
+ * Testes payment collection deserialization.
  */
-public class KondutoPaymentAdapterTest {
+public class KondutoPaymentCollectionDeserializerTest {
 
-	Type paymentsType = new TypeToken<KondutoPayment>(){}.getType();
+	Type paymentsCollectionType = new TypeToken<Collection<KondutoPayment>>(){}.getType();
 
 	Gson gson = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-			.registerTypeAdapter(paymentsType, new KondutoPaymentAdapter())
+			.registerTypeAdapter(paymentsCollectionType, new KondutoPaymentCollectionDeserializer())
 			.create();
 
 	Collection<KondutoPayment> payments = KondutoPaymentFactory.getPayments();
@@ -31,16 +32,7 @@ public class KondutoPaymentAdapterTest {
 	JsonArray paymentsJSON = (JsonArray) TestUtils.readJSONFromFile("payments.json");
 
 	@Test
-	public void serializeTest(){
-		Gson gson = new GsonBuilder()
-				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-				.registerTypeHierarchyAdapter(KondutoPayment.class, new KondutoPaymentAdapter())
-				.create();
-		assertEquals("serialization failed", paymentsJSON, gson.toJsonTree(payments));
-	}
-
-	@Test
 	public void deserializeTest(){
-		assertEquals("deserialization failed", payments, gson.fromJson(paymentsJSON, paymentsType));
+		assertEquals("deserialization failed", payments, gson.fromJson(paymentsJSON, paymentsCollectionType));
 	}
 }

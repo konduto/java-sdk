@@ -4,9 +4,9 @@ import com.konduto.sdk.Konduto;
 import com.konduto.sdk.exceptions.KondutoHTTPException;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.exceptions.KondutoUnexpectedAPIResponseException;
-import com.konduto.sdk.models.*;
-
-import java.net.URI;
+import com.konduto.sdk.models.KondutoCustomer;
+import com.konduto.sdk.models.KondutoOrder;
+import com.konduto.sdk.models.KondutoOrderStatus;
 
 public class Main {
 

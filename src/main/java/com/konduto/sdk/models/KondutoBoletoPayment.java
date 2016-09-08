@@ -1,7 +1,7 @@
 package com.konduto.sdk.models;
 
-import com.konduto.sdk.annotations.Required;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -10,7 +10,11 @@ import java.util.Date;
  */
 public class KondutoBoletoPayment extends KondutoPayment {
 
-    @Required
+    private static final SimpleDateFormat BOLETO_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    static {
+        BOLETO_DATE_FORMAT.setLenient(false);
+    }
+
     private Date expirationDate;
 
     @Override
@@ -43,5 +47,13 @@ public class KondutoBoletoPayment extends KondutoPayment {
 
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDateAsStr) {
+        try {
+            this.setExpirationDate(BOLETO_DATE_FORMAT.parse(expirationDateAsStr));
+        } catch (ParseException e) {
+            throw new RuntimeException("Invalid boleto date format: " + expirationDateAsStr);
+        }
     }
 }

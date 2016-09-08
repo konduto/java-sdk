@@ -10,7 +10,10 @@ import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.annotations.ValidateFormat;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.*;
 
 /**
@@ -25,16 +28,15 @@ public abstract class KondutoModel {
 	public abstract boolean equals(Object obj);
 
 	/* Transient and static attributes won't be included in serialization */
-	private static Type paymentsType = new TypeToken<Collection<KondutoPayment>>(){}.getType();
-	private static Type shoppingCartType = new TypeToken<Collection<KondutoItem>>(){}.getType();
-    private static Type travelType = new TypeToken<KondutoTravel>(){}.getType();
+	private static Type paymentCollectionType = new TypeToken<Collection<KondutoPayment>>(){}.getType();
+	private static Type travelType = new TypeToken<KondutoTravel>(){}.getType();
     private static Type busTravelLegType = new TypeToken<KondutoBusTravelLeg>(){}.getType();
     private static Type flightTravelLegType = new TypeToken<KondutoFlightTravelLeg>(){}.getType();
 
 
 	protected static Gson gson = new GsonBuilder()
-			.registerTypeAdapter(paymentsType, new KondutoPaymentAdapter())
-			.registerTypeAdapter(shoppingCartType, new KondutoShoppingCartAdapter())
+			.registerTypeAdapter(paymentCollectionType, new KondutoPaymentCollectionDeserializer())
+			.registerTypeHierarchyAdapter(KondutoPayment.class, new KondutoPaymentSerializer())
 			.registerTypeAdapter(travelType, new KondutoTravelAdapter())
             .registerTypeAdapter(busTravelLegType, new KondutoBusTravelLegAdapter())
             .registerTypeAdapter(flightTravelLegType, new KondutoFlightTravelLegAdapter())

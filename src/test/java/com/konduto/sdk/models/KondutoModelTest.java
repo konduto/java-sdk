@@ -1,7 +1,6 @@
 package com.konduto.sdk.models;
 
 import com.konduto.sdk.annotations.Required;
-
 import org.junit.Test;
 
 import java.lang.reflect.Field;

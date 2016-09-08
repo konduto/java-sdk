@@ -5,12 +5,8 @@ import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.models.*;
 
 import java.lang.reflect.Type;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 /**
  * KondutoTravelAdapter to deserialize KondutoTravel objects.

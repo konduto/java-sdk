@@ -1,8 +1,6 @@
 package com.konduto.sdk.models;
 
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 
 import java.util.Date;
 

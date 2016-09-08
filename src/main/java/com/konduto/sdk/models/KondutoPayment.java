@@ -1,8 +1,5 @@
 package com.konduto.sdk.models;
 
-import com.google.gson.annotations.SerializedName;
-import com.konduto.sdk.annotations.Required;
-
 /**
  *
  * Payment model.
@@ -11,10 +8,6 @@ import com.konduto.sdk.annotations.Required;
  *
  */
 public abstract class KondutoPayment extends KondutoModel {
-
-
-	@Required
-	KondutoPaymentStatus status;
 
 	/**
 	 * Fluent constructor
@@ -27,14 +20,6 @@ public abstract class KondutoPayment extends KondutoModel {
 		return (KondutoPayment) super.with(attributeName, attributeValue);
 	}
 
-	public KondutoPaymentStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(KondutoPaymentStatus status) {
-		this.status = status;
-	}
-
 	abstract public KondutoPaymentType getType();
 
 	@Override
@@ -42,14 +27,16 @@ public abstract class KondutoPayment extends KondutoModel {
         if (this == obj) return true;
         if (!(obj instanceof KondutoPayment)) return false;
         KondutoPayment that = (KondutoPayment) obj;
-        if(this.getType() != that.getType()) { return false; }
-        return this.status.equals(that.status);
+        return this.getType() == that.getType();
     }
 
 	@Override
 	public int hashCode() {
-        int result = this.getType().hashCode();
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        return result;
+        return this.getType().hashCode();
+    }
+
+	public String getTypeAsString() {
+        if(getType() == null) { throw new RuntimeException("Payment type cannot be null"); }
+        return getType().toString().toLowerCase();
     }
 }

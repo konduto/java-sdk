@@ -2,10 +2,8 @@ package com.konduto.sdk.factories;
 
 import com.konduto.sdk.models.KondutoCustomer;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**

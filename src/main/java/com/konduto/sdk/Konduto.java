@@ -1,13 +1,12 @@
 package com.konduto.sdk;
 
-import com.google.gson.JsonObject; 
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.konduto.sdk.exceptions.KondutoHTTPException;
 import com.konduto.sdk.exceptions.KondutoHTTPExceptionFactory;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.exceptions.KondutoUnexpectedAPIResponseException;
 import com.konduto.sdk.models.*;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.HttpClient;

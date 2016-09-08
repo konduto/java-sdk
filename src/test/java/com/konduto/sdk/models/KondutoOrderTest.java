@@ -4,13 +4,8 @@ import com.google.gson.JsonObject;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoCustomerFactory;
 import com.konduto.sdk.factories.KondutoOrderFactory;
-import com.konduto.sdk.factories.KondutoPaymentFactory;
 import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 
 import static org.junit.Assert.*;
 

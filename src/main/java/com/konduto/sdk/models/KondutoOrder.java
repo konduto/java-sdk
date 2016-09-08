@@ -1,6 +1,6 @@
 package com.konduto.sdk.models;
 
-import com.google.gson.JsonParseException; 
+import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 

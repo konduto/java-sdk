@@ -1,6 +1,5 @@
 package com.konduto.sdk.models;
 
-import com.konduto.sdk.Konduto;
 import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.annotations.ValidateFormat;
 
