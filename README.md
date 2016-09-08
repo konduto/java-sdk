@@ -18,7 +18,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.7.0</version>
+	<version>2.8.0</version>
 </dependency>
 ```
 
@@ -115,6 +115,7 @@ created_at | _(optional)_ Date when customer was created.
 
 #### Payment information
 
+##### Credit card
 Parameter | Description 
 --- | ---
 status | _(required)_ The status of the transaction returned by the payment processor. Accepts `approved`, `declined` or `pending` if the payment wasn't been processed yet.
@@ -122,6 +123,15 @@ bin | _(optional)_ First six digits of the customer's credit card. Used to ident
 last4 | _(optional)_ Four last digits of the customer's credit card number.
 expiration_date | _(optional)_ Card's expiration date under MMYYYY format.
 
+##### Boleto
+Parameter | Description
+--- | ---
+expiration_date | _(optional)_ Boleto's expiration date (yyyy-MM-dd).
+
+##### Other payment types available
+* DEBIT
+* TRANSFER
+* VOUCHER
 
 #### Billing address
 
