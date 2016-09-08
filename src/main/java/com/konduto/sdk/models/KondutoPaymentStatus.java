@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
-public enum KondutoCreditCardPaymentStatus {
+public enum KondutoPaymentStatus {
 	@SerializedName("approved")
 	APPROVED,
 	@SerializedName("declined")

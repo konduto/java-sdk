@@ -1,5 +1,7 @@
 package com.konduto.sdk.models;
 
+import com.konduto.sdk.annotations.Required;
+
 /**
  *
  * Credit card model.
@@ -10,21 +12,25 @@ package com.konduto.sdk.models;
 public class KondutoCreditCardPayment extends KondutoPayment {
 
 	private String bin;
+
 	private String last4;
+
 	private String expirationDate;
-	private KondutoCreditCardPaymentStatus status;
 
-	public KondutoCreditCardPayment(){
-		super(KondutoPaymentType.CREDIT);
-	}
+    @Required private KondutoPaymentStatus status;
 
-	public KondutoCreditCardPaymentStatus getStatus() {
-		return status;
-	}
+    public KondutoPaymentStatus getStatus() {
+        return status;
+    }
 
-	public void setStatus(KondutoCreditCardPaymentStatus status) {
-		this.status = status;
-	}
+    public void setStatus(KondutoPaymentStatus status) {
+        this.status = status;
+    }
+
+    public String getStatusAsString() {
+        if(getStatus() == null) { throw new RuntimeException("Payment status cannot be null"); }
+        return getStatus().toString().toLowerCase();
+    }
 
 	public String getBin() {
 		return bin;
@@ -51,6 +57,11 @@ public class KondutoCreditCardPayment extends KondutoPayment {
 	}
 
 	@Override
+	public KondutoPaymentType getType() {
+		return KondutoPaymentType.CREDIT;
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (!(o instanceof KondutoCreditCardPayment)) return false;
@@ -61,10 +72,9 @@ public class KondutoCreditCardPayment extends KondutoPayment {
 		if (expirationDate != null ? !expirationDate.equals(that.expirationDate) : that.expirationDate != null)
 			return false;
 		if (last4 != null ? !last4.equals(that.last4) : that.last4 != null) return false;
-		if (status != that.status) return false;
+        return status == that.status;
 
-		return true;
-	}
+    }
 
 	/* This is required for correct deserialization since HashSet uses hashCode instead of equals. */
 	@Override
@@ -73,6 +83,7 @@ public class KondutoCreditCardPayment extends KondutoPayment {
 		result = 31 * result + (last4 != null ? last4.hashCode() : 0);
 		result = 31 * result + (expirationDate != null ? expirationDate.hashCode() : 0);
 		result = 31 * result + (status != null ? status.hashCode() : 0);
+		result = 31 * result + (getType()!= null ? getType().hashCode() : 0);
 		return result;
 	}
 }

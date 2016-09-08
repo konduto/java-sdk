@@ -2,7 +2,8 @@ package com.konduto.sdk.adapters;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.konduto.sdk.models.*;
+import com.konduto.sdk.models.KondutoTravelLeg;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

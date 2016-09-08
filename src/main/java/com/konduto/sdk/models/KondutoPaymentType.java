@@ -10,5 +10,5 @@ import com.google.gson.annotations.SerializedName;
  */
 public enum KondutoPaymentType {
 	@SerializedName("credit")
-	CREDIT;
+	CREDIT, BOLETO, TRANSFER, VOUCHER, DEBIT;
 }
