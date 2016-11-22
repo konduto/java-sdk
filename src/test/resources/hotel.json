@@ -5,8 +5,8 @@
       "number": "123",
       "code": "321",
       "type": "",
-      "check_in_date": "2015-04-07T12:40:00Z",
-      "check_out_date": "2015-05-07T12:40:00Z",
+      "check_in_date": "2015-04-07",
+      "check_out_date": "2015-05-07",
       "number_of_guests": 2,
       "board_basis": "board_basis",
       "guests": [
@@ -30,8 +30,8 @@
       "number": "456",
       "code": "987",
       "type": "",
-      "check_in_date": "2016-05-07T12:40:00Z",
-      "check_out_date": "2016-07-05T12:40:00Z",
+      "check_in_date": "2016-05-07",
+      "check_out_date": "2016-07-05",
       "number_of_guests": 2,
       "board_basis": "another_board_basis",
       "guests": [

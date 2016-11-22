@@ -71,7 +71,7 @@ public class KondutoHotelRoom extends KondutoModel {
 		return result;
 	}
 
-	public static final String dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ";
+	public static final String dateFormat = "yyyy-MM-dd";
 
 	private Date deserializeDate(String date) throws JsonParseException {
 		try {
