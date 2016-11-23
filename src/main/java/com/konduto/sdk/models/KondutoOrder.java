@@ -86,6 +86,9 @@ public final class KondutoOrder extends KondutoModel {
 
 	private KondutoTravel travel;
 
+	private KondutoOption options;
+	private KondutoHotel hotel;
+
 	/* Constructors */
 	public KondutoOrder() {}
 
@@ -161,6 +164,9 @@ public final class KondutoOrder extends KondutoModel {
 		if (purchasedAt != null ? !purchasedAt.equals(order.purchasedAt) : order.purchasedAt != null) return false;
 
 		if (seller != null ? !seller.equals(order.seller) : order.seller != null) return false;
+
+		if (options != null ? !options.equals(order.options) : order.options != null) return false;
+		if (hotel != null ? !hotel.equals(order.hotel) : order.hotel != null) return false;
 
 		return true;
 	}
@@ -310,6 +316,18 @@ public final class KondutoOrder extends KondutoModel {
 	}
 	public void setPurchasedAt(Date purchased_at) {
 		this.purchasedAt = serializeDate(purchased_at);
+	}
+	public KondutoOption getOptions() {
+		return options;
+	}
+	public void setOptions(KondutoOption options) {
+		this.options = options;
+	}
+	public KondutoHotel getHotel() {
+		return hotel;
+	}
+	public void setHotel(KondutoHotel hotel) {
+		this.hotel = hotel;
 	}
 
 	public static final String dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ";
