@@ -1,24 +1,33 @@
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-apply plugin: 'maven'
-apply plugin: 'signing'
-
-Properties props = new Properties()
-props.load(new FileInputStream("konduto.properties"))
-
-group = 'com.konduto.sdk'
-version = props.getProperty("version")
-
-sourceCompatibility = JavaVersion.VERSION_1_6
-
-sourceSets.main.resources {
-    srcDir "$projectDir"
-    include "konduto.properties"
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
 
-compileJava {
-    targetCompatibility = JavaVersion.VERSION_1_6
+def props = new Properties()
+file("src/main/resources/konduto.properties").withInputStream { props.load(it) }
+
+group = 'com.konduto.sdk'
+version = props["version"]
+sourceCompatibility = JavaVersion.VERSION_1_6
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+        resources {
+            srcDirs = ['src/test/resources']
+        }
+    }
 }
 
 repositories {
@@ -32,72 +41,81 @@ dependencies {
     testCompile 'com.github.tomakehurst:wiremock:1.18'
 }
 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    archiveClassifier = 'javadoc'
+}
+
 jar {
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from tasks.javadoc.destinationDir
-}
-
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allSource
-    classifier = 'sources'
-}
-
-artifacts {
-    archives jar
-    archives javadocJar
-    archives sourcesJar
-}
-
- signing {
-     required { gradle.taskGraph.hasTask("uploadArchives") }
-     sign configurations.archives
- }
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                name 'Konduto\'s Java SDK'
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description 'Konduto\'s JAVA SDK'
-                url 'http://konduto.com'
-
-                scm {
-                    connection 'https://github.com/konduto/java-sdk'
-                    developerConnection 'https://github.com/konduto/java-sdk'
-                    url 'https://github.com/konduto/java-sdk'
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'java-sdk'
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
                 }
-
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'Konduto\'s Java SDK'
+                description = 'Easily integrate with Konduto (https://konduto' +
+                        '.com), a fraud prevention service.'
+                url = 'https://konduto.com'
                 licenses {
                     license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
-
                 developers {
                     developer {
-                        id 'rsampaio'
-                        name 'Raphael Sampaio'
-                        email 'raphael@konduto.com'
+                        id = 'rsampaio'
+                        name = 'Raphael Sampaio'
+                        email = 'raphael@konduto.com'
                     }
+                }
+                scm {
+                    connection = 'https://github.com/konduto/java-sdk'
+                    developerConnection = 'https://github.com/konduto/java-sdk'
+                    url = 'https://github.com/konduto/java-sdk'
                 }
             }
         }
     }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
+            }
+        }
+    }
+}
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
 }

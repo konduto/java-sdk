@@ -37,7 +37,8 @@ public class KondutoOrderTest {
 	@Test
 	public void serializationTest() throws Exception {
 		KondutoOrder order = KondutoOrderFactory.completeOrder();
-		JsonObject orderJSON = (JsonObject) TestUtils.readJSONFromFile("order.json");
+		JsonObject orderJSON = (JsonObject) TestUtils.readJSONFromFile("order" +
+				".json");
 		try {
 			assertEquals("serialization failed", orderJSON, order.toJSON());
 		} catch (KondutoInvalidEntityException e) {

@@ -16,6 +16,7 @@ public abstract class KondutoTravelLeg extends KondutoModel {
     @SerializedName(value="class")
     private KondutoTravelClass travelClass;
     private String fareBasis;
+    private String company;
 
     /** Constructors */
 
@@ -90,5 +91,13 @@ public abstract class KondutoTravelLeg extends KondutoModel {
 
     public void setFareBasis(String fareBasis) {
         this.fareBasis = fareBasis;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }

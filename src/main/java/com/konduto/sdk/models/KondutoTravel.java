@@ -1,9 +1,13 @@
 package com.konduto.sdk.models;
 
 import com.google.gson.annotations.SerializedName;
+import com.konduto.sdk.DateFormat;
 import com.konduto.sdk.annotations.Required;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * KondutoTravel model.
@@ -21,6 +25,7 @@ public class KondutoTravel extends KondutoModel {
     private KondutoTravelLeg returnLeg;
     @Required
     private Collection<KondutoPassenger> passengers;
+    private String expirationDate;
 
     /** Constructors */
     public KondutoTravel(){}
@@ -94,5 +99,35 @@ public class KondutoTravel extends KondutoModel {
 
     public void setPassengers(Collection<KondutoPassenger> passengers) {
         this.passengers = passengers;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    /**
+     * Sets
+     * @param expirationDate
+     */
+    public void setExpirationDate(Date expirationDate) {
+        SimpleDateFormat sdf =
+                new SimpleDateFormat(DateFormat.ISO_DATETIME.getFormat());
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        this.expirationDate = sdf.format(expirationDate);
+    }
+
+    /**
+     * Sets the expiration date.
+     *
+     * ATTENTION: must be an ISO (UTC) datetime (yyyy-MM-ddTHH:mm:ssZ)
+     *
+     * @param expirationDate ISO datetime string
+     */
+    public void setExpirationDate(String expirationDate) {
+        if(expirationDate == null ||
+                !expirationDate.matches(DateFormat.ISO_DATETIME.getRegex())) {
+            throw new IllegalArgumentException("Invalid datetime: " + expirationDate);
+        }
+        this.expirationDate = expirationDate;
     }
 }

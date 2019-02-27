@@ -1,12 +1,12 @@
 package com.konduto.sdk.factories;
 
+import com.konduto.sdk.DateFormat;
 import com.konduto.sdk.models.KondutoFlightTravelLeg;
 import com.konduto.sdk.models.KondutoTravelClass;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
+
+import static com.konduto.sdk.utils.TestUtils.getDateFrom;
 
 /**
  * Created by rsampaio on 07/05/15.
@@ -20,8 +20,10 @@ public class KondutoTravelLegFactory {
         kondutoFlightTravelLeg.setDestinationCity("Rio de Janeiro");
         kondutoFlightTravelLeg.setTravelClass(KondutoTravelClass.ECONOMY);
         kondutoFlightTravelLeg.setNumberOfConnections(0);
-        kondutoFlightTravelLeg.setDate(getDateFrom("2015-05-07T12:40Z"));
+        kondutoFlightTravelLeg.setDate(getDateFrom("2015-05-07T12:40Z",
+                DateFormat.ISO_DATETIME_NO_SECONDS));
         kondutoFlightTravelLeg.setFareBasis("Y");
+        kondutoFlightTravelLeg.setCompany("Gol");
         return kondutoFlightTravelLeg;
     }
 
@@ -33,20 +35,11 @@ public class KondutoTravelLegFactory {
         kondutoFlightTravelLeg.setDestinationCity("São Paulo");
         kondutoFlightTravelLeg.setTravelClass(KondutoTravelClass.ECONOMY);
         kondutoFlightTravelLeg.setNumberOfConnections(0);
-        kondutoFlightTravelLeg.setDate(getDateFrom("2015-05-08T15:00Z"));
+        kondutoFlightTravelLeg.setDate(getDateFrom("2015-05-08T15:00Z",
+                DateFormat.ISO_DATETIME_NO_SECONDS));
         kondutoFlightTravelLeg.setFareBasis("Y");
+        kondutoFlightTravelLeg.setCompany("Gol");
         return kondutoFlightTravelLeg;
-    }
-
-    static Date getDateFrom(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-        format.setTimeZone(TimeZone.getTimeZone("UTC"));
-        try {
-            return format.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
 }

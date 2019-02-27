@@ -1,10 +1,8 @@
 package com.konduto.sdk.models;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import com.konduto.sdk.DateFormat;
 import com.konduto.sdk.adapters.*;
 import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.annotations.ValidateFormat;
@@ -14,6 +12,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -302,5 +302,21 @@ public abstract class KondutoModel {
 		return (one == null && two == null) ||
 				((one != null && two != null) && one.compareTo(two) == 0);
 
+	}
+
+	Date deserializeDate(String date) throws JsonParseException {
+		try {
+			return new SimpleDateFormat(DateFormat.ISO_DATETIME.getFormat()).parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new JsonParseException("Unparseable date: \"" + date
+					+ "\". Supported format: " + DateFormat.ISO_DATETIME);
+		}
+	}
+
+	String serializeDate(Date src) {
+		SimpleDateFormat sdf = new SimpleDateFormat(DateFormat.ISO_DATETIME.getFormat());
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		return  sdf.format(src).replace("+0000", "Z");
 	}
 }

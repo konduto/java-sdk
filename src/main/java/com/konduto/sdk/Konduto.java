@@ -18,7 +18,6 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -35,21 +34,29 @@ import java.util.Properties;
 
 public final class Konduto {
     private static final Properties PROPERTIES = new Properties();
-    static {
-        try {
-            InputStream propertiesFile = Konduto.class.
-            		getResourceAsStream("/konduto.properties");
-            PROPERTIES.load(propertiesFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException("File konduto.properties file does not exist.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Could not read properties from konduto.properties file.");
-        }
-    }
+	private static final ClassLoader contextClassLoader =
+			Konduto.class.getClassLoader();
+	private static final InputStream propertiesStream = contextClassLoader.getResourceAsStream("konduto.properties");
+	static {
+		if (propertiesStream != null) {
+			try {
+				PROPERTIES.load(propertiesStream);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				propertiesStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println(contextClassLoader);
+			throw new RuntimeException("Properties stream is null. Context " +
+					"class loader: " + contextClassLoader);
+		}
+	}
 
-    public static final String VERSION = PROPERTIES.getProperty("version");
+    static final String VERSION = PROPERTIES.getProperty("version");
 
     private String apiKey;
     private JsonObject requestBody;
