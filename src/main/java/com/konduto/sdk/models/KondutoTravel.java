@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * KondutoTravel model.
@@ -21,6 +22,7 @@ public class KondutoTravel extends KondutoModel {
     private KondutoTravelLeg returnLeg;
     @Required
     private Collection<KondutoPassenger> passengers;
+    private String expirationDate;
 
     /** Constructors */
     public KondutoTravel(){}
@@ -94,5 +96,14 @@ public class KondutoTravel extends KondutoModel {
 
     public void setPassengers(Collection<KondutoPassenger> passengers) {
         this.passengers = passengers;
+    }
+
+    public Date getExpirationDate() {
+        return deserializeDate(expirationDate);
+    }
+
+    void setExpirationDate(Date expirationDate) {
+        this.expirationDate = serializeDate(expirationDate
+        );
     }
 }

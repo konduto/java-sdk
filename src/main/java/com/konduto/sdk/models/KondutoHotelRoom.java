@@ -2,6 +2,7 @@ package com.konduto.sdk.models;
 
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.JsonParseException;
+import com.konduto.sdk.DateFormat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -71,20 +72,19 @@ public class KondutoHotelRoom extends KondutoModel {
 		return result;
 	}
 
-	public static final String dateFormat = "yyyy-MM-dd";
-
-	private Date deserializeDate(String date) throws JsonParseException {
+	Date deserializeDate(String date) throws JsonParseException {
 		try {
-			return new SimpleDateFormat(dateFormat, Locale.US).parse(date);
+			return new SimpleDateFormat(DateFormat.DATE.getFormat(),
+					Locale.US).parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 			throw new JsonParseException("Unparseable date: \"" + date
-					+ "\". Supported format: " + dateFormat);
+					+ "\". Supported format: " + DateFormat.DATE.getFormat());
 		}
 	}
 
-	private String serializeDate(Date src) {
-		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+	String serializeDate(Date src) {
+		SimpleDateFormat sdf = new SimpleDateFormat(DateFormat.DATE.getFormat());
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		return  sdf.format(src).replace("+0000", "Z");
 	}

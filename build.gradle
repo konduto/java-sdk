@@ -4,17 +4,31 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-Properties props = new Properties()
-props.load(new FileInputStream("konduto.properties"))
+def props = new Properties()
+file("src/main/resources/konduto.properties").withInputStream { props.load(it) }
 
 group = 'com.konduto.sdk'
-version = props.getProperty("version")
+version = props["version"]
 
 sourceCompatibility = JavaVersion.VERSION_1_6
 
-sourceSets.main.resources {
-    srcDir "$projectDir"
-    include "konduto.properties"
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', 'java-sdk-test/src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+        resources {
+            srcDirs = ['src/test/resources']
+        }
+    }
 }
 
 compileJava {
@@ -52,10 +66,10 @@ artifacts {
     archives sourcesJar
 }
 
- signing {
-     required { gradle.taskGraph.hasTask("uploadArchives") }
-     sign configurations.archives
- }
+signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
 
 uploadArchives {
     repositories {

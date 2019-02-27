@@ -1,15 +1,10 @@
 package com.konduto.sdk.models;
 
-import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  *
@@ -328,23 +323,5 @@ public final class KondutoOrder extends KondutoModel {
 	}
 	public void setHotel(KondutoHotel hotel) {
 		this.hotel = hotel;
-	}
-
-	public static final String dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ";
-
-	private Date deserializeDate(String date) throws JsonParseException {
-		try {
-			return new SimpleDateFormat(dateFormat, Locale.US).parse(date);
-		} catch (ParseException e) {
-            e.printStackTrace();
-            throw new JsonParseException("Unparseable date: \"" + date
-                    + "\". Supported format: " + dateFormat);
-		}
-	}
-
-	private String serializeDate(Date src) {
-		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-		return  sdf.format(src).replace("+0000", "Z");
 	}
 }

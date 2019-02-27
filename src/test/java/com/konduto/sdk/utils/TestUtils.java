@@ -2,11 +2,16 @@ package com.konduto.sdk.utils;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.konduto.sdk.DateFormat;
 
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  */
@@ -48,6 +53,17 @@ public class TestUtils {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public static Date getDateFrom(String date, DateFormat dateFormat) {
+		SimpleDateFormat format = new SimpleDateFormat(dateFormat.getFormat());
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		try {
+			return format.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 }

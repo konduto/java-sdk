@@ -1,17 +1,13 @@
 package com.konduto.sdk.models;
 
 import com.google.gson.JsonObject;
+import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoOptionFactory;
 import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
-import com.google.gson.JsonObject;
-import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
-
-import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
-
-import com.konduto.sdk.factories.KondutoOptionFactory;
+import static org.junit.Assert.fail;
 
 /**
  */

@@ -1,6 +1,5 @@
 {
   "type":"flight",
-  "expiration_date": "2019-02-01T23:23:23Z",
   "departure":{
     "origin_airport":"CGH",
     "destination_airport":"SDU",
@@ -9,8 +8,7 @@
     "date": "2015-05-07T12:40Z",
     "number_of_connections":0,
     "class":"economy",
-    "fare_basis":"Y",
-    "company": "Gol"
+    "fare_basis":"Y"
   },
   "return":{
     "origin_airport":"SDU",
@@ -20,8 +18,7 @@
     "date": "2015-05-08T15:00Z",
     "number_of_connections":0,
     "class":"economy",
-    "fare_basis":"Y",
-    "company": "Gol"
+    "fare_basis":"Y"
   },
   "passengers":[
     {

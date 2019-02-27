@@ -1,6 +1,7 @@
 package com.konduto.sdk.models;
 
 import com.google.gson.JsonObject;
+import com.konduto.sdk.DateFormat;
 import com.konduto.sdk.factories.KondutoPassengerFactory;
 import com.konduto.sdk.factories.KondutoTravelLegFactory;
 import com.konduto.sdk.utils.TestUtils;
@@ -9,6 +10,7 @@ import org.junit.Test;
 import java.text.ParseException;
 import java.util.List;
 
+import static com.konduto.sdk.utils.TestUtils.getDateFrom;
 import static org.junit.Assert.*;
 
 /**
@@ -27,9 +29,12 @@ public class KondutoTravelTest {
         }
         TRAVEL.setPassengers(KondutoPassengerFactory.passengersList());
         TRAVEL.setTravelType(KondutoTravelType.FLIGHT);
+        TRAVEL.setExpirationDate(getDateFrom("2019-02-01T23:23:23Z",
+                DateFormat.ISO_DATETIME));
     }
 
-    private static final JsonObject TRAVEL_JSON = (JsonObject) TestUtils.readJSONFromFile("travel.json");
+    private static final JsonObject TRAVEL_JSON =
+            (JsonObject) TestUtils.readJSONFromFile("travel.json");
 
 
     @Test

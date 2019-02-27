@@ -1,0 +1,107 @@
+{
+	"status": "ok",
+	"order": {
+		"id": "1406910391037",
+		"visitor": "f10e2821bbbea527ea02200352313bc059445190",
+		"timestamp": 1389047680,
+		"score": 0.75,
+		"recommendation": "review",
+		"status": "declined",
+		"ip": "170.149.100.10",
+		"total_amount":100.00,
+		"tax_amount":3.45,
+		"shipping_amount":20.00,
+		"installments":2,
+		"currency":"USD",
+		"device": {
+			"user_id": "405961fab293600daeed93ae561",
+		    "fingerprint": "e4f2c690951038a8f77aa583847",
+		    "platform": "MacIntel",
+			"browser": "Chrome",
+			"language": "en_US",
+			"timezone": "GMT -1",
+			"cookie": true,
+			"javascript":  true,
+			"flash": true
+		},
+		"geolocation": {
+			"city": "New York City",
+		    "state": "NY",
+		    "country": "US"
+		},
+		"navigation": {
+			"session_time": 12,
+		    "referrer": "http://www.google.com?q=buy+shirt",
+		    "time_site_1d": 26,
+		    "new_accounts_1d": 2,
+		    "password_resets_1d": 0,
+		    "sales_declined_1d": 1,
+		    "sessions_1d": 4,
+		    "time_site_7d": 58,
+		    "time_per_page_7d": 7,
+		    "new_accounts_7d": 9,
+		    "password_resets_7d": 3,
+		    "checkout_count_7d": 4,
+		    "sales_declined_7d": 5,
+		    "sessions_7d": 12,
+		    "time_since_last_sale": 4
+		},
+		"payment": [
+		    {
+				"type": "credit",
+				"bin": "490172",
+		        "last4": "1234",
+		        "expiration_date": "102015",
+		        "status": "approved"
+		    }
+		],
+		"customer": {
+			"id": "28372",
+		    "name": "Mary Jane",
+		    "tax_id": "6253407",
+		    "phone1": "212-555-1234",
+		    "phone2": "202-555-6789",
+		    "email": "mary.jane@example.com",
+		    "ip": "170.149.100.10",
+		    "new": false,
+		    "vip": false
+		},
+		"billing": {
+			"name": "Mary Jane",
+		    "address1": "123 Main St.",
+		    "address2": "Apartment 4",
+		    "city": "New York City",
+		    "state": "NY",
+		    "zip": "10460",
+		    "country": "US"
+		},
+		"shipping": {
+			"name": "Mary Jane",
+		    "address1": "123 Main St.",
+		    "city": "New York City",
+		    "state": "NY",
+		    "zip": "10460",
+		    "country": "US"
+		},
+		"shopping_cart": [
+			{
+				"sku": "9919023",
+		        "product_code": "123456789999",
+		        "category": 201,
+		        "name": "Green T-Shirt",
+		        "description": "Male Green T-Shirt V Neck",
+		        "unit_cost": 1999.99,
+		        "quantity": 1
+		    },
+		    {
+				"sku": "0017273",
+				"category": 202,
+				"name": "Yellow Socks",
+				"description": "Pair of Yellow Socks",
+				"unit_cost": 29.90,
+				"quantity": 2,
+				"discount": 5.00
+		    }
+		]
+	}
+}

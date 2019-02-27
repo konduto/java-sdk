@@ -10,7 +10,7 @@ import com.konduto.sdk.models.KondutoOrderStatus;
 
 public class Main {
 
-    private static final String ORDER_ID = "order_test_5";
+    private static final String ORDER_ID = "order_test_2_10_2";
 
     public static void main(String[] args) {
         Konduto konduto = new Konduto("TF284100286E2838BF754");
@@ -58,6 +58,8 @@ public class Main {
         }
 
         assert kondutoOrder.getStatus().equals(KondutoOrderStatus.FRAUD);
+
+        System.out.println("Congrats. The SDK works!");
 
     }
 }
