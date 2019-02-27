@@ -306,7 +306,7 @@ public abstract class KondutoModel {
 
 	Date deserializeDate(String date) throws JsonParseException {
 		try {
-			return new SimpleDateFormat(DateFormat.ISO_DATETIME.getFormat(), Locale.US).parse(date);
+			return new SimpleDateFormat(DateFormat.ISO_DATETIME.getFormat()).parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 			throw new JsonParseException("Unparseable date: \"" + date

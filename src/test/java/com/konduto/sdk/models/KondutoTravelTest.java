@@ -8,7 +8,10 @@ import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import static com.konduto.sdk.utils.TestUtils.getDateFrom;
 import static org.junit.Assert.*;
@@ -66,5 +69,23 @@ public class KondutoTravelTest {
     @Test
     public void deserializeTest() throws Exception {
         assertEquals(KondutoModel.fromJSON(TRAVEL_JSON, KondutoTravel.class), TRAVEL);
+    }
+
+    @Test
+    public void setExpirationDate() throws ParseException {
+        String expectedDateAsString = "2019-01-01T13:30:03Z";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date expectedDate = sdf.parse(expectedDateAsString);
+        TRAVEL.setExpirationDate(expectedDateAsString);
+        assertEquals(expectedDateAsString, TRAVEL.getExpirationDate());
+        TRAVEL.setExpirationDate(expectedDate);
+        assertEquals(expectedDateAsString, TRAVEL.getExpirationDate());
+        try {
+            TRAVEL.setExpirationDate("2019-01-01 13:30:03");
+            throw new RuntimeException("fail!");
+        } catch(IllegalArgumentException exception) {
+            // do nothing since the date was invalid
+        }
     }
 }
