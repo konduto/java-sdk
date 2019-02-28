@@ -1,3 +1,5 @@
+[![Maven Central](https://img.shields.io/maven-central/v/com.konduto.sdk/java-sdk.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.konduto.sdk%22%20AND%20a:%22java-sdk%22)
+
 ## Intro
 
 Welcome! This document will explain how to integrate with Konduto's anti-fraud service so you can begin to spot fraud on your e-commerce website.
