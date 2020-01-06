@@ -74,6 +74,8 @@ public final class KondutoOrder extends KondutoModel {
 	 */
 	private Collection<KondutoItem> shoppingCart;
 
+	private Collection<KondutoBureauQuery> bureauxQueries;
+
 	private KondutoDevice device;
 
 	@SerializedName("navigation")
