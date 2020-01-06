@@ -16,6 +16,8 @@ public class KondutoPaymentFactory {
 		creditCardPayment.setExpirationDate("012017");
 		creditCardPayment.setLast4("1234");
 		creditCardPayment.setStatus(KondutoPaymentStatus.APPROVED);
+		creditCardPayment.setDescription("pagamento via cartão de crédito");
+		creditCardPayment.setAmount(12.39);
 		return creditCardPayment;
 	}
 
