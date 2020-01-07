@@ -5,6 +5,8 @@ import com.konduto.sdk.factories.KondutoPaymentFactory;
 import com.konduto.sdk.models.KondutoCreditCardPayment;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -23,6 +25,12 @@ public class KondutoCreditCardPaymentSerializerTest {
         assertEquals(paymentAsJSON.get("expiration_date").getAsString(), creditCardPayment.getExpirationDate());
         assertEquals(paymentAsJSON.get("status").getAsString(), creditCardPayment.getStatus().toString().toLowerCase());
         assertEquals(paymentAsJSON.get("type").getAsString(), "credit");
+        assertEquals(paymentAsJSON.get("description").getAsString(),
+                creditCardPayment.getDescription());
+        assertEquals(paymentAsJSON.get("amount").getAsBigDecimal().setScale(2
+                , BigDecimal.ROUND_HALF_UP).doubleValue(),
+                creditCardPayment.getAmount()
+                , 0.00001);
     }
 
     @Test

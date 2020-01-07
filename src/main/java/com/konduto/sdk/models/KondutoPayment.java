@@ -9,6 +9,9 @@ package com.konduto.sdk.models;
  */
 public abstract class KondutoPayment extends KondutoModel {
 
+	private String description;
+	private Double amount;
+
 	/**
 	 * Fluent constructor
 	 * @param attributeName the attribute name (e.g totalAmount)
@@ -23,12 +26,14 @@ public abstract class KondutoPayment extends KondutoModel {
 	abstract public KondutoPaymentType getType();
 
 	@Override
-	public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof KondutoPayment)) return false;
-        KondutoPayment that = (KondutoPayment) obj;
-        return this.getType() == that.getType();
-    }
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		KondutoPayment that = (KondutoPayment) o;
+		return this.getType() == that.getType() &&
+				equals(this.getDescription(), that.getDescription()) &&
+				equals(this.getAmount(), that.getAmount());
+ 	}
 
 	@Override
 	public int hashCode() {
@@ -39,4 +44,20 @@ public abstract class KondutoPayment extends KondutoModel {
         if(getType() == null) { throw new RuntimeException("Payment type cannot be null"); }
         return getType().toString().toLowerCase();
     }
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDescription() {
+		return description;
+	}
 }

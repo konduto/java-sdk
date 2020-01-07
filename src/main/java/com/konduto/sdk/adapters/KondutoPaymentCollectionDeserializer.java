@@ -30,28 +30,17 @@ public class KondutoPaymentCollectionDeserializer implements JsonDeserializer<Co
 		Collection<KondutoPayment> payments = new ArrayList<KondutoPayment>();
 
 		for(JsonElement je : json.getAsJsonArray()) {
-			KondutoPaymentType type =
-					KondutoPaymentType.valueOf(((JsonObject) je).get("type").getAsString().toUpperCase());
-			switch (type){
-				case BOLETO:
-					KondutoBoletoPayment boletoPayment = new KondutoBoletoPayment();
-					String expirationDateAsStr = ((JsonObject) je).get("expiration_date").getAsString();
-					boletoPayment.setExpirationDate(expirationDateAsStr);
-                    payments.add(boletoPayment);
-					break;
-				case CREDIT:
-					payments.add((KondutoCreditCardPayment) context.deserialize(je, KondutoCreditCardPayment.class));
-					break;
-				case DEBIT:
-					payments.add((KondutoDebitPayment) context.deserialize(je, KondutoDebitPayment.class));
-					break;
-				case TRANSFER:
-					payments.add((KondutoTransferPayment) context.deserialize(je, KondutoTransferPayment.class));
-					break;
-				case VOUCHER:
-					payments.add((KondutoVoucherPayment) context.deserialize(je, KondutoVoucherPayment.class));
-					break;
+			JsonObject jo = (JsonObject) je;
+			String pmtTypeUpper = jo.get("type").getAsString().toUpperCase();
+			KondutoPaymentType type = KondutoPaymentType.valueOf(pmtTypeUpper);
+			KondutoPayment pmt = type.deserialize(jo, context);
+			if(jo.has("description")) {
+				pmt.setDescription(jo.get("description").getAsString());
 			}
+			if(jo.has("amount")) {
+				pmt.setAmount(jo.get("amount").getAsDouble());
+			}
+			payments.add(pmt);
 		}
 
 		return payments;
