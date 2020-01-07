@@ -137,5 +137,14 @@
                 "special_needs": false
             }
         ]
-    }
+    },
+    "bureaux_queries": [
+        {
+            "service": "emailage",
+            "response": {
+                "advice": "Lower Fraud Risk",
+                "email_domain_exists": true
+            }
+        }
+    ]
 }

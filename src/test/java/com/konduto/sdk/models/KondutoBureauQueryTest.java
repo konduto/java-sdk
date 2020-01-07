@@ -1,44 +1,33 @@
 package com.konduto.sdk.models;
 
 import com.google.gson.JsonObject;
-import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
-import org.junit.Before;
+import com.google.gson.JsonParser;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class KondutoBureauQueryTest {
-    JsonObject expectedQuery = new JsonObject();
-    KondutoBureauQuery bureauQuery = new KondutoBureauQuery();
-
-    @Before
-    public void setUp() {
-        expectedQuery.addProperty("service", "emailage");
-        JsonObject expectedResponse = new JsonObject();
-        expectedResponse.addProperty("advice", "Lower Fraud Risk");
-        expectedResponse.addProperty("email_domain_exists", true);
-        expectedQuery.add("response", expectedResponse);
-
-        bureauQuery.setService(KondutoBureauService.EMAIL_AGE);
-        Map<String, Object> response = new HashMap<String, Object>();
-        response.put(KondutoBureauResponseField.ADVICE.toString().toLowerCase(), "Lower " +
-                "Fraud Risk");
-        response.put(KondutoBureauResponseField.EMAIL_DOMAIN_EXISTS.toString().toLowerCase(), true);
-        bureauQuery.setResponse(response);
-    }
+    private JsonParser jsonParser = new JsonParser();
+    private static final String BUREAU_QUERY_AS_JSON_STRING =
+        "{" +
+            "\"service\": \"emailage\"," +
+            "\"response\": {" +
+                "\"advice\": \"Lower Fraud Risk\"," +
+                "\"email_domain_exists\": true" +
+            "}" +
+        "}";
+    private JsonObject bureauQueryAsJsonObject =
+            (JsonObject) jsonParser.parse(BUREAU_QUERY_AS_JSON_STRING);
 
     @Test
-    public void testBureauQuerySerialization() throws KondutoInvalidEntityException {
-        assertEquals(expectedQuery, bureauQuery.toJSON());
-    }
-
-    @Test
-    public void testBureauQueryDeserialization() throws KondutoInvalidEntityException {
-        System.out.println(bureauQuery.toJSON());
-        System.out.println(KondutoBureauQuery.fromJSON(bureauQuery.toJSON(),
-                KondutoBureauQuery.class));
+    public void testBureauQueryDeserialization() {
+        KondutoBureauQuery bureauQuery =
+                (KondutoBureauQuery) KondutoModel.fromJSON(
+                        bureauQueryAsJsonObject, KondutoBureauQuery.class);
+        assertEquals(KondutoBureauService.EMAIL_AGE, bureauQuery.getService());
+        assertEquals("Lower Fraud Risk",
+                bureauQuery.getAttribute(KondutoBureauResponseField.ADVICE));
+        assertTrue((Boolean) bureauQuery.getAttribute(KondutoBureauResponseField.EMAIL_DOMAIN_EXISTS));
+        assertNull(bureauQuery.getAttribute(KondutoBureauResponseField.EMAIL));
     }
 }

@@ -326,4 +326,7 @@ public final class KondutoOrder extends KondutoModel {
 	public void setHotel(KondutoHotel hotel) {
 		this.hotel = hotel;
 	}
+	public void setBureauxQueries(Collection<KondutoBureauQuery> bureauxQueries) {
+		this.bureauxQueries = bureauxQueries;
+	}
 }
