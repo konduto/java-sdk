@@ -329,4 +329,8 @@ public final class KondutoOrder extends KondutoModel {
 	public void setBureauxQueries(Collection<KondutoBureauQuery> bureauxQueries) {
 		this.bureauxQueries = bureauxQueries;
 	}
+
+	public Collection<KondutoBureauQuery> getBureauxQueries() {
+		return bureauxQueries;
+	}
 }
