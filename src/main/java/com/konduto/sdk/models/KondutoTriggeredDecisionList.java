@@ -1,6 +1,6 @@
 package com.konduto.sdk.models;
 
-class KondutoTriggeredDecisionList extends KondutoModel {
+public class KondutoTriggeredDecisionList extends KondutoModel {
     private KondutoDecisionListType type;
     private KondutoDecisionListTrigger trigger;
     private KondutoRecommendation decision;

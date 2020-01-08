@@ -338,4 +338,12 @@ public final class KondutoOrder extends KondutoModel {
 	public Collection<KondutoBureauQuery> getBureauxQueries() {
 		return bureauxQueries;
 	}
+
+	public Collection<KondutoTriggeredRule> getTriggeredRules() {
+		return triggeredRules;
+	}
+
+	public Collection<KondutoTriggeredDecisionList> getDecisionListEntries() {
+		return decisionListEntries;
+	}
 }

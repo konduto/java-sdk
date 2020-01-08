@@ -1,6 +1,6 @@
 package com.konduto.sdk.models;
 
-class KondutoTriggeredRule extends KondutoModel {
+public class KondutoTriggeredRule extends KondutoModel {
     private String name;
     private KondutoRecommendation decision;
 
