@@ -74,6 +74,8 @@ public final class KondutoOrder extends KondutoModel {
 	 */
 	private Collection<KondutoItem> shoppingCart;
 
+	private Collection<KondutoBureauQuery> bureauxQueries;
+
 	private Collection<KondutoTriggeredRule> triggeredRules;
 
 	@SerializedName("triggered_decision_list")
@@ -328,5 +330,12 @@ public final class KondutoOrder extends KondutoModel {
 	}
 	public void setHotel(KondutoHotel hotel) {
 		this.hotel = hotel;
+	}
+	public void setBureauxQueries(Collection<KondutoBureauQuery> bureauxQueries) {
+		this.bureauxQueries = bureauxQueries;
+	}
+
+	public Collection<KondutoBureauQuery> getBureauxQueries() {
+		return bureauxQueries;
 	}
 }
