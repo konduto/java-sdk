@@ -35,24 +35,27 @@ repositories {
 }
 
 dependencies {
-    compile 'commons-httpclient:commons-httpclient:3.1'
-    compile 'com.google.code.gson:gson:2.2.4'
-    testCompile 'junit:junit:4.11'
-    testCompile 'com.github.tomakehurst:wiremock:1.18'
+    implementation 'commons-httpclient:commons-httpclient:3.1'
+    implementation 'com.google.code.gson:gson:2.2.4'
+    testImplementation 'junit:junit:4.11'
+    testImplementation 'com.github.tomakehurst:wiremock:1.18'
 }
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
-    archiveClassifier = 'sources'
+    archiveClassifier.set('sources')
 }
 
 task javadocJar(type: Jar) {
     from javadoc
-    archiveClassifier = 'javadoc'
+    archiveClassifier.set('javadoc')
 }
 
 jar {
-    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from configurations.compileClasspath.collect {
+        it.isDirectory() ? it : zipTree(it)
+    }
 }
 
 publishing {

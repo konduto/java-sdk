@@ -60,7 +60,9 @@
             "status": "approved",
             "bin": "406655",
             "last4": "1234",
-            "expiration_date": "012017"
+            "expiration_date": "012017",
+            "description": "pagamento via cartão de crédito",
+            "amount": 12.39
         },
         {
             "type": "boleto",
@@ -137,5 +139,14 @@
                 "special_needs": false
             }
         ]
-    }
+    },
+    "bureaux_queries": [
+        {
+            "service": "emailage",
+            "response": {
+                "advice": "Lower Fraud Risk",
+                "email_domain_exists": true
+            }
+        }
+    ]
 }

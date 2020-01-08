@@ -36,7 +36,7 @@ public class KondutoOrderFactory {
 		order.setPurchasedAt(new Date(1433874421000L));
 		order.setMessagesExchanged(2);
 		order.setSeller(KondutoSellerFactory.getKondutoSeller());
-
+		order.setBureauxQueries(KondutoBureauQueryFactory.getQueries());
 		return order;
 	}
 

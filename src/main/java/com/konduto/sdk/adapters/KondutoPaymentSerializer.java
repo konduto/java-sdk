@@ -10,6 +10,8 @@ import com.konduto.sdk.models.KondutoPayment;
 import com.konduto.sdk.models.KondutoPaymentType;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Created by rsampaio on 9/8/16.
@@ -28,6 +30,14 @@ public class KondutoPaymentSerializer implements JsonSerializer<KondutoPayment> 
     public JsonElement serialize(KondutoPayment payment, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject paymentAsJson = new JsonObject();
         paymentAsJson.addProperty("type", payment.getTypeAsString());
+        if(payment.getDescription() != null) {
+            paymentAsJson.addProperty("description", payment.getDescription());
+        }
+        if(payment.getAmount() != null) {
+            paymentAsJson.addProperty("amount",
+                    BigDecimal.valueOf(payment.getAmount()).setScale(2,
+                            RoundingMode.HALF_UP));
+        }
         if(payment.getType().equals(KondutoPaymentType.CREDIT)) {
             KondutoCreditCardPaymentSerializer creditCardPaymentSerializer = new KondutoCreditCardPaymentSerializer();
             return creditCardPaymentSerializer.completeSerialization(paymentAsJson, (KondutoCreditCardPayment) payment);
