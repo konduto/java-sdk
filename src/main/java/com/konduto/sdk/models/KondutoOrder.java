@@ -76,6 +76,11 @@ public final class KondutoOrder extends KondutoModel {
 
 	private Collection<KondutoBureauQuery> bureauxQueries;
 
+	private Collection<KondutoTriggeredRule> triggeredRules;
+
+	@SerializedName("triggered_decision_list")
+	private Collection<KondutoTriggeredDecisionList> decisionListEntries;
+
 	private KondutoDevice device;
 
 	@SerializedName("navigation")

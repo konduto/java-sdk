@@ -181,6 +181,16 @@ public abstract class KondutoModel {
 
 	}
 
+	/**
+	 * Verify if two objects are equal
+	 * @param a an object
+	 * @param b another object
+	 * @return whether they are equal
+	 */
+	public static boolean equals(Object a, Object b) {
+		return (a == b) || (a != null && a.equals(b));
+	}
+
 	public static List<Field> getAllFields(List<Field> fields, Class<?> type) {
 		fields.addAll(Arrays.asList(type.getDeclaredFields()));
 

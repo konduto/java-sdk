@@ -20,7 +20,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.11.0</version>
+	<version>2.12.0</version>
 </dependency>
 ```
 
@@ -89,7 +89,7 @@ shipping_amount | _(optional)_ Shipping and handling amount.
 tax_amount | _(optional)_ Taxes amount.
 currency | _(optional)_ Currency code with 3 letters (ISO-4712).
 installments | _(optional)_ Number of installments in the payment plan.
-ip | _(optional)_ Customer's IPv4 address.
+ip | _(optional)_ Customer's IPv4 or IPV6 address.
 customer | _(required)_ Object containing the customer details.
 payment | _(optional)_ Array containing the payment methods.
 billing | _(optional)_ Object containing the billing information.
@@ -116,6 +116,12 @@ created_at | _(optional)_ Date when customer was created.
 
 
 #### Payment information
+
+Payments may contain a `description` and a `amount` field. The former is a
+ description of the payment, for example: "Thanksgiving discount voucher". 
+ The latter is the amount that was charged in that specific payment type. For
+  example, a transaction total amount could be 100.00, of which 10.00 are
+   paid via a discount voucher and 90.00 via credit card.
 
 ##### Credit card
 Parameter | Description 

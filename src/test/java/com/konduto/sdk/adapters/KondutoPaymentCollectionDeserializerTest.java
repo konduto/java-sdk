@@ -32,7 +32,8 @@ public class KondutoPaymentCollectionDeserializerTest {
 	JsonArray paymentsJSON = (JsonArray) TestUtils.readJSONFromFile("payments.json");
 
 	@Test
-	public void deserializeTest(){
-		assertEquals("deserialization failed", payments, gson.fromJson(paymentsJSON, paymentsCollectionType));
+	public void deserializeTest() {
+		assertEquals("deserialization failed", payments,
+				gson.fromJson(paymentsJSON, paymentsCollectionType));
 	}
 }
