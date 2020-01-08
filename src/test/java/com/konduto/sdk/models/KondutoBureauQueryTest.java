@@ -24,10 +24,10 @@ public class KondutoBureauQueryTest {
         KondutoBureauQuery bureauQuery =
                 (KondutoBureauQuery) KondutoModel.fromJSON(
                         bureauQueryAsJsonObject, KondutoBureauQuery.class);
-        assertEquals(KondutoBureauService.EMAIL_AGE, bureauQuery.getService());
+        assertEquals("emailage", bureauQuery.getService());
         assertEquals("Lower Fraud Risk",
-                bureauQuery.getAttribute(KondutoBureauResponseField.ADVICE));
-        assertTrue((Boolean) bureauQuery.getAttribute(KondutoBureauResponseField.EMAIL_DOMAIN_EXISTS));
-        assertNull(bureauQuery.getAttribute(KondutoBureauResponseField.EMAIL));
+                bureauQuery.getAttribute("advice"));
+        assertTrue((Boolean) bureauQuery.getAttribute("email_domain_exists"));
+        assertNull(bureauQuery.getAttribute("email"));
     }
 }

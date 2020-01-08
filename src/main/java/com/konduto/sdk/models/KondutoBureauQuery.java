@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class KondutoBureauQuery extends KondutoModel {
     @SerializedName("service")
-    private KondutoBureauService kondutoBureauService;
+    private String kondutoBureauService;
     @SerializedName("response")
     private Map<String, Object> kondutoBureauResponse;
 
@@ -19,11 +19,11 @@ public class KondutoBureauQuery extends KondutoModel {
                 this.kondutoBureauResponse.equals(that.kondutoBureauResponse);
     }
 
-    public KondutoBureauService getService() {
+    public String getService() {
         return kondutoBureauService;
     }
 
-    public void setService(KondutoBureauService kondutoBureauService) {
+    public void setService(String kondutoBureauService) {
         this.kondutoBureauService = kondutoBureauService;
     }
 
@@ -42,15 +42,15 @@ public class KondutoBureauQuery extends KondutoModel {
      * @param field what field to look for
      * @return the value of that field
      */
-    public Object getAttribute(KondutoBureauResponseField field) {
+    public Object getAttribute(String field) {
         if(field == null || this.kondutoBureauResponse == null) { return null; }
-        return this.kondutoBureauResponse.get(field.toString().toLowerCase());
+        return this.kondutoBureauResponse.get(field);
     }
 
-    public void setAttribute(KondutoBureauResponseField key, Object value) {
+    public void setAttribute(String key, Object value) {
         if(this.kondutoBureauResponse == null) {
             this.kondutoBureauResponse = new HashMap<String, Object>();
         }
-        this.kondutoBureauResponse.put(key.toString().toLowerCase(), value);
+        this.kondutoBureauResponse.put(key, value);
     }
 }

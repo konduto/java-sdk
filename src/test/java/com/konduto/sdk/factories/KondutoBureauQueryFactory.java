@@ -1,8 +1,6 @@
 package com.konduto.sdk.factories;
 
 import com.konduto.sdk.models.KondutoBureauQuery;
-import com.konduto.sdk.models.KondutoBureauResponseField;
-import com.konduto.sdk.models.KondutoBureauService;
 
 import java.util.*;
 
@@ -16,11 +14,9 @@ public class KondutoBureauQueryFactory {
 
     public static KondutoBureauQuery getQuery() {
         KondutoBureauQuery query = new KondutoBureauQuery();
-        query.setService(KondutoBureauService.EMAIL_AGE);
-        query.setAttribute(KondutoBureauResponseField.ADVICE, "Lower " +
-                "Fraud Risk");
-        query.setAttribute(KondutoBureauResponseField.EMAIL_DOMAIN_EXISTS,
-                true);
+        query.setService("emailage");
+        query.setAttribute("advice", "Lower Fraud Risk");
+        query.setAttribute("email_domain_exists", true);
         return query;
     }
 }
