@@ -9,6 +9,11 @@ public class KondutoVehicleOwner extends KondutoModel {
     private String name;
 
     @Override
+    public KondutoVehicleOwner with(String attributeName, Object attributeValue) {
+        return (KondutoVehicleOwner) super.with(attributeName, attributeValue);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
