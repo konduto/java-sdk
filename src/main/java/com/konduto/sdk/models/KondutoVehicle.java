@@ -18,10 +18,9 @@ public class KondutoVehicle extends KondutoModel {
 
     private String vid;
 
-//    NEXT COMMIT
-//    private VehicleType type;
+    private KondutoVehicleType type;
 
-//    private VehicleUsage usage;
+    private KondutoVehicleUsage usage;
 
     public KondutoVehicleOwner getOwner() {
         return owner;
@@ -69,6 +68,22 @@ public class KondutoVehicle extends KondutoModel {
 
     public void setVid(String vid) {
         this.vid = vid;
+    }
+
+    public KondutoVehicleType getType() {
+        return type;
+    }
+
+    public void setType(KondutoVehicleType type) {
+        this.type = type;
+    }
+
+    public KondutoVehicleUsage getUsage() {
+        return usage;
+    }
+
+    public void setUsage(KondutoVehicleUsage usage) {
+        this.usage = usage;
     }
 
     @Override
