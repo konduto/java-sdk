@@ -1,6 +1,7 @@
 package com.konduto.sdk.models;
 
 import com.konduto.sdk.annotations.Required;
+import com.konduto.sdk.annotations.ValidateFormat;
 
 public class KondutoVehicle extends KondutoModel {
     @Required
@@ -16,6 +17,7 @@ public class KondutoVehicle extends KondutoModel {
 
     private String registration;
 
+    @ValidateFormat(format = "[a-zA-Z0-9]{17}")
     private String vid;
 
     private KondutoVehicleType type;
