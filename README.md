@@ -238,8 +238,8 @@ renavam | _(optional)_ Brazilian RENAVAM identifier.
 registration | _(optional)_ License plate for cars, registration for aircraft or boats.
 make | _(required)_ Name of the vehicle manufacturer company (e.g. Fiat).
 model | _(required)_ Name of the vehicle model (e.g. Camaro).
-type | _(optional)_ One of the following: __car, bus, truck, bicycle, aircraft, boat, motorcycle__
-usage | _(optional)_ One of the following: __private, commercial, instruction, experimental, government, military__
+type | _(optional)_ Enum containing several vehicle types such as CAR, AIRCRAFT, BUS, etc. See **KondutoVehicleType**.
+usage | _(optional)_ Enum containing several usage scenarios for vehicles such as PRIVATE, GOVERNMENT, etc. See **KondutoVehicleUsage**.
 owner | _(required)_ Object containing information regarding the owner of the vehicle. See **Vehicle Owner** below.
 
 ##### Vehicle Owner
