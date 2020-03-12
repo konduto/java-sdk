@@ -109,4 +109,9 @@ public class KondutoVehicle extends KondutoModel {
         return anotherVehicle.vid != null && vid != null
                 && anotherVehicle.vid.equals(vid);
     }
+
+    @Override
+    public boolean isValid() {
+        return super.isValid() && owner.isValid();
+    }
 }

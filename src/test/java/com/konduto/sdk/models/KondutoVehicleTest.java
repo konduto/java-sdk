@@ -4,23 +4,54 @@ import com.google.gson.JsonObject;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoVehicleFactory;
 import com.konduto.sdk.utils.TestUtils;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 public class KondutoVehicleTest {
+
+    private KondutoVehicle fullVehicle;
+    private static JsonObject expectedJSON;
+
+    @BeforeClass
+    public static void initializeJson() {
+        expectedJSON = (JsonObject) TestUtils.readJSONFromFile("vehicle.json");
+    }
+
+    @Before
+    public void restartVehicle() {
+        fullVehicle = KondutoVehicleFactory.getVehicle();
+    }
+
     @Test
-    public void serializeTest() {
-        JsonObject expectedJSON = (JsonObject) TestUtils.readJSONFromFile("vehicle.json");
+    public void serializeTest() throws KondutoInvalidEntityException {
+        assertEquals(expectedJSON, fullVehicle.toJSON());
+    }
 
-        KondutoVehicle vehicle = KondutoVehicleFactory.getVehicle();
+    @Test(expected = KondutoInvalidEntityException.class)
+    public void invalidVid() throws KondutoInvalidEntityException {
+        fullVehicle
+                .with(
+                        "vid",
+                        "invalid vid (contains space AND is larger than 17 alphanumeric)"
+                )
+                .toJSON();
+    }
 
-        try {
-            vehicle.isValid();
-            assertEquals(expectedJSON, vehicle.toJSON());
-        } catch (KondutoInvalidEntityException e) {
-            fail("address should be valid");
-        }
+    @Test(expected = KondutoInvalidEntityException.class)
+    public void invalidOwner() throws KondutoInvalidEntityException {
+        fullVehicle
+                .with("owner", new KondutoVehicleOwner())
+                .toJSON();
+    }
+
+    @Test(expected = KondutoInvalidEntityException.class)
+    public void incompleteVehicle() throws KondutoInvalidEntityException {
+        fullVehicle
+                .with("make", null)
+                .with("model", null)
+                .toJSON();
     }
 }
