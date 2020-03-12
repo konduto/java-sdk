@@ -2,12 +2,23 @@ package com.konduto.sdk.models;
 
 import com.konduto.sdk.annotations.Required;
 
+/**
+ * KondutoVehicleOwner model, a model associated with KondutoVehicle, required by default.
+ *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
+ */
 public class KondutoVehicleOwner extends KondutoModel {
     @Required
     private String taxId;
 
     private String name;
 
+    /**
+     * Fluent constructor
+     * @param attributeName the attribute name (e.g totalAmount)
+     * @param attributeValue the attribute value (e.g 123.2)
+     * @return a new instance
+     */
     @Override
     public KondutoVehicleOwner with(String attributeName, Object attributeValue) {
         return (KondutoVehicleOwner) super.with(attributeName, attributeValue);
