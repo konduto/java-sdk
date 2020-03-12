@@ -91,6 +91,8 @@ public final class KondutoOrder extends KondutoModel {
 	private KondutoOption options;
 	private KondutoHotel hotel;
 
+	private KondutoVehicle vehicle;
+
 	/* Constructors */
 	public KondutoOrder() {}
 
@@ -345,5 +347,13 @@ public final class KondutoOrder extends KondutoModel {
 
 	public Collection<KondutoTriggeredDecisionList> getDecisionListEntries() {
 		return decisionListEntries;
+	}
+
+	public KondutoVehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(KondutoVehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 }

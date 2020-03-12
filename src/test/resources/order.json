@@ -148,5 +148,18 @@
                 "email_domain_exists": true
             }
         }
-    ]
+    ],
+    "vehicle": {
+        "make": "Bentley",
+        "model": "Bacalar",
+        "renavam": "144003058",
+        "registration": "ABC1234",
+        "vid": "5GZCZ43D13S812715",
+        "type": "car",
+        "usage": "private",
+        "owner": {
+            "tax_id": "540.830.640-21",
+            "name": "Cicero"
+        }
+    }
 }
