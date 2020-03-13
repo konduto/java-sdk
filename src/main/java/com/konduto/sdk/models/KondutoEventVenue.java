@@ -9,9 +9,9 @@ import com.konduto.sdk.annotations.ValidateFormat;
  */
 public class KondutoEventVenue extends KondutoModel {
 
-    private Integer capacity;
-
     private String name;
+
+    private Integer capacity;
 
     private String address;
 

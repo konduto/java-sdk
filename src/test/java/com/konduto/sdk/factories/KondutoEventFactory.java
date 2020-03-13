@@ -38,7 +38,7 @@ public class KondutoEventFactory {
                                         ),
                                 new KondutoEventTicket()
                                         .with("category", KondutoEventTicketCategory.STUDENT)
-                                        .with("premium", true)
+                                        .with("premium", false)
 
                         )
                 );

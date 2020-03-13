@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
 /**
@@ -10,12 +11,13 @@ import com.konduto.sdk.annotations.Required;
  */
 public class KondutoEventTicketAttendee extends KondutoModel {
 
-    private KondutoEventTicketAttendeeDocumentType documentType;
-
-    private String dateOfBirth;
-
     @Required
     private String document;
+
+    private KondutoEventTicketAttendeeDocumentType documentType;
+
+    @SerializedName("dob")
+    private String dateOfBirth;
 
     private String name;
 

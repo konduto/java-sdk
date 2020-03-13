@@ -14,10 +14,10 @@ public class KondutoEventTicket extends KondutoModel {
     @Required
     private KondutoEventTicketCategory category;
 
-    private String section;
-
     @Required
     private Boolean premium;
+
+    private String section;
 
     private KondutoEventTicketAttendee attendee;
 
