@@ -51,6 +51,18 @@ public class KondutoEvent extends KondutoModel {
         return date.equals(that.date);
     }
 
+    @Override
+    public boolean isValid() {
+        boolean isValid = true;
+        if (tickets != null) {
+            for (KondutoEventTicket ticket : tickets) {
+                isValid &= ticket.isValid();
+            }
+        }
+
+        return isValid && super.isValid();
+    }
+
     public String getName() {
         return name;
     }
