@@ -5,6 +5,7 @@ import com.konduto.sdk.annotations.Required;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -90,6 +91,8 @@ public final class KondutoOrder extends KondutoModel {
 
 	private KondutoOption options;
 	private KondutoHotel hotel;
+
+	private List<KondutoEvent> events;
 
 	/* Constructors */
 	public KondutoOrder() {}
@@ -345,5 +348,13 @@ public final class KondutoOrder extends KondutoModel {
 
 	public Collection<KondutoTriggeredDecisionList> getDecisionListEntries() {
 		return decisionListEntries;
+	}
+
+	public List<KondutoEvent> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<KondutoEvent> events) {
+		this.events = events;
 	}
 }

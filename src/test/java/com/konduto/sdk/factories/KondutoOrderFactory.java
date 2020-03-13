@@ -37,6 +37,7 @@ public class KondutoOrderFactory {
 		order.setMessagesExchanged(2);
 		order.setSeller(KondutoSellerFactory.getKondutoSeller());
 		order.setBureauxQueries(KondutoBureauQueryFactory.getQueries());
+		order.setEvents(KondutoEventFactory.getMultipleEvents());
 		return order;
 	}
 

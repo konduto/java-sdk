@@ -3,6 +3,7 @@ package com.konduto.sdk.factories;
 import com.konduto.sdk.models.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class KondutoEventFactory {
 
@@ -32,9 +33,9 @@ public class KondutoEventFactory {
                                         .with(
                                                 "attendee",
                                                 new KondutoEventTicketAttendee()
-                                                .with("document","12345678900")
-                                                .with("documentType", KondutoEventTicketAttendeeDocumentType.CPF)
-                                                .with("dateOfBirth", "1990-10-28")
+                                                        .with("document","12345678900")
+                                                        .with("documentType", KondutoEventTicketAttendeeDocumentType.CPF)
+                                                        .with("dateOfBirth", "1990-10-28")
                                         ),
                                 new KondutoEventTicket()
                                         .with("category", KondutoEventTicketCategory.STUDENT)
@@ -42,6 +43,31 @@ public class KondutoEventFactory {
 
                         )
                 );
+    }
+
+    public static List<KondutoEvent> getMultipleEvents() {
+        return Arrays.asList(
+                getSingleEvent(),
+                new KondutoEvent()
+                        .with("name", "Heat @ Knicks")
+                        .with("date", "2020-11-21T01:00:00Z")
+                        .with("type", KondutoEventType.SPORTS)
+                        .with("subtype", "NBA")
+                        .with(
+                                "tickets",
+                                Arrays.asList(
+                                        new KondutoEventTicket()
+                                                .with("category", KondutoEventTicketCategory.REGULAR)
+                                                .with("premium", true)
+                                                .with("section", "general"),
+                                        new KondutoEventTicket()
+                                                .with("category", KondutoEventTicketCategory.REGULAR)
+                                                .with("premium", true)
+                                                .with("section", "general")
+
+                                )
+                        )
+        );
     }
 
 }
