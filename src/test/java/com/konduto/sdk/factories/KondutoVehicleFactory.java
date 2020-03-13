@@ -16,7 +16,7 @@ public class KondutoVehicleFactory {
         return new KondutoVehicle()
                 .with("make", "Bentley")
                 .with("model", "Bacalar")
-                .with("renavam", "144003058")
+                .with("renavam", "12312312312")
                 .with("registration", "ABC1234")
                 .with("vid", "5GZCZ43D13S812715")
                 .with("type", KondutoVehicleType.CAR)

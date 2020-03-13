@@ -18,6 +18,7 @@ public class KondutoVehicle extends KondutoModel {
     @Required
     private String model;
 
+    @ValidateFormat(format = "[a-zA-Z0-9]{11}")
     private String renavam;
 
     private String registration;

@@ -48,6 +48,21 @@ public class KondutoVehicleTest {
     }
 
     @Test(expected = KondutoInvalidEntityException.class)
+    public void renavamLargerThanExpected() throws KondutoInvalidEntityException {
+        fullVehicle
+                .with("renavam", "12312312312312312312312312312312312312312312312312312312312")
+                .toJSON();
+    }
+
+    @Test(expected = KondutoInvalidEntityException.class)
+    public void renavamSmallerThanExpected() throws KondutoInvalidEntityException {
+        fullVehicle
+                .with("renavam", "11")
+                .toJSON();
+    }
+
+
+    @Test(expected = KondutoInvalidEntityException.class)
     public void incompleteVehicle() throws KondutoInvalidEntityException {
         fullVehicle
                 .with("make", null)
