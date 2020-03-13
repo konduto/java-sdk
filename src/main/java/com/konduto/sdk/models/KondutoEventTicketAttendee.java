@@ -18,7 +18,7 @@ public class KondutoEventTicketAttendee extends KondutoModel {
     private KondutoEventTicketAttendeeDocumentType documentType;
 
     @SerializedName("dob")
-    @ValidateFormat(format = "(\\d{4}-(10|11|12|0\\d)-(30|31|[0-2]\\d)")
+    @ValidateFormat(format = "\\d{4}-(10|11|12|0\\d)-(30|31|[0-2]\\d)")
     private String dateOfBirth;
 
     private String name;
