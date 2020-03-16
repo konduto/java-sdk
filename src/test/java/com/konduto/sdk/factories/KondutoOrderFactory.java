@@ -38,6 +38,7 @@ public class KondutoOrderFactory {
 		order.setSeller(KondutoSellerFactory.getKondutoSeller());
 		order.setBureauxQueries(KondutoBureauQueryFactory.getQueries());
 		order.setEvents(KondutoEventFactory.getMultipleEvents());
+		order.setVehicle(KondutoVehicleFactory.getVehicle());
 		return order;
 	}
 
