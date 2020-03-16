@@ -20,7 +20,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.12.0</version>
+	<version>2.13.0</version>
 </dependency>
 ```
 
@@ -99,6 +99,7 @@ analyze | _(optional)_ A boolean indicating if the order should be analyzed. Def
 first_message | _(optional)_ Time when the first message was exchanged between customer and seller.
 messages_exchanged | _(optional)_ Number of messages exchanged between customer and seller.
 purchased_at | _(optional)_ Time when the customer purchased from the seller.
+vehicle | _(optional)_ Object containing information regarding vehicles.
 
 #### Customer information
 
@@ -228,6 +229,62 @@ document | _(required)_ The passenger's document
 document_type | _(required)_ The passenger's document type (e.g passport). See **KondutoDocumentType**
 frequent_traveler | _(optional)_ A boolean. Is this passenger a frequent traveler?
 special_needs | _(optional)_ A boolean. Does the passenger have special needs?
+
+
+##### Events
+Parameter | Description
+--- | ---
+name | _(required)_ The name of the event
+date | _(required)_ When the event is going to happen
+type | _(optional)_ The type of the event (e.g., show, sports, theater, etc). For the complete list, see **KondutoEventType** enum.
+subtype | _(optional)_ 
+venue | _(optional)_ The event's location address. See **Event Venue** bellow.
+tickets | _(optional)_ A list of tickets for the given event. See **Event Ticket** below.
+
+##### Event Venue
+Parameter | Description
+--- | ---
+name | _(optional)_ The name of the place (e.g. Wembley Stadium, World Trade Center).
+capacity | _(optional)_ The total amount of available tickets for sale.
+address | _(optional)_ The specific location.
+city | _(optional)_
+state | _(optional)_
+country | _(optional)_ The country abbreviation code (e.g., BR, US, AU, etc)
+
+##### Event Ticket
+Parameter | Description
+--- | ---
+id | _(optional)_ A unique identifier for the ticket.
+category | _(required)_ The ticket type, such as senior, student or regular. For the complete list, see **KondutoEventTicketCategory** enum.
+section | _(optional)_ The location of the ticket (e.g., lower seats, upper seats, unseated, etc).
+premium | _(required)_ Boolean that indicates if the ticket is a premium one.
+attendee | _(optional)_ Information about the ticket owner. See **KondutoEventTicketAttendee** bellow.
+
+##### Event Ticket Attendee
+Parameter | Description
+--- | ---
+name | _(optional)_ The attendee's name.
+document | _(required)_ The attendee document value.
+documentType | _(optional)_ The type of document informed, such as CPF, CNPJ, passport, etc. For the complete list, see **KondutoEventTicketAttendeeDocumentType** enum.
+dateOfBirth | _(optional)_ A string with the attendee's date of birth.
+=======
+##### Vehicle
+Parameter | Description
+--- | ---
+vid | _(optional)_ Vehicle's ISO unique identifier.
+renavam | _(optional)_ Brazilian RENAVAM identifier.
+registration | _(optional)_ License plate for cars, registration for aircraft or boats.
+make | _(required)_ Name of the vehicle manufacturer company (e.g. Fiat).
+model | _(required)_ Name of the vehicle model (e.g. Camaro).
+type | _(optional)_ Enum containing several vehicle types such as CAR, AIRCRAFT, BUS, etc. See **KondutoVehicleType**.
+usage | _(optional)_ Enum containing several usage scenarios for vehicles such as PRIVATE, GOVERNMENT, etc. See **KondutoVehicleUsage**.
+owner | _(required)_ Object containing information regarding the owner of the vehicle. See **Vehicle Owner** below.
+
+##### Vehicle Owner
+Parameter | Description
+--- | ---
+tax_id | _(required)_ Vehicle owner's tax id.
+name | _(optional)_ Vehicle owner's name.
 
 ## Sending an order for analysis.
 
