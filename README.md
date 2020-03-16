@@ -20,7 +20,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.12.0</version>
+	<version>2.13.0</version>
 </dependency>
 ```
 
@@ -99,6 +99,7 @@ analyze | _(optional)_ A boolean indicating if the order should be analyzed. Def
 first_message | _(optional)_ Time when the first message was exchanged between customer and seller.
 messages_exchanged | _(optional)_ Number of messages exchanged between customer and seller.
 purchased_at | _(optional)_ Time when the customer purchased from the seller.
+vehicle | _(optional)_ Object containing information regarding vehicles.
 
 #### Customer information
 
@@ -228,6 +229,24 @@ document | _(required)_ The passenger's document
 document_type | _(required)_ The passenger's document type (e.g passport). See **KondutoDocumentType**
 frequent_traveler | _(optional)_ A boolean. Is this passenger a frequent traveler?
 special_needs | _(optional)_ A boolean. Does the passenger have special needs?
+
+##### Vehicle
+Parameter | Description
+--- | ---
+vid | _(optional)_ Vehicle's ISO unique identifier.
+renavam | _(optional)_ Brazilian RENAVAM identifier.
+registration | _(optional)_ License plate for cars, registration for aircraft or boats.
+make | _(required)_ Name of the vehicle manufacturer company (e.g. Fiat).
+model | _(required)_ Name of the vehicle model (e.g. Camaro).
+type | _(optional)_ Enum containing several vehicle types such as CAR, AIRCRAFT, BUS, etc. See **KondutoVehicleType**.
+usage | _(optional)_ Enum containing several usage scenarios for vehicles such as PRIVATE, GOVERNMENT, etc. See **KondutoVehicleUsage**.
+owner | _(required)_ Object containing information regarding the owner of the vehicle. See **Vehicle Owner** below.
+
+##### Vehicle Owner
+Parameter | Description
+--- | ---
+tax_id | _(required)_ Vehicle owner's tax id.
+name | _(optional)_ Vehicle owner's name.
 
 ## Sending an order for analysis.
 
