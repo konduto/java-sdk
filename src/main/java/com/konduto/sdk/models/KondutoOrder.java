@@ -5,6 +5,7 @@ import com.konduto.sdk.annotations.Required;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -91,7 +92,9 @@ public final class KondutoOrder extends KondutoModel {
 	private KondutoOption options;
 	private KondutoHotel hotel;
 
-	private KondutoVehicle vehicle;
+	private List<KondutoEvent> events;
+
+  private KondutoVehicle vehicle;
 
 	/* Constructors */
 	public KondutoOrder() {}
@@ -296,8 +299,8 @@ public final class KondutoOrder extends KondutoModel {
 	public void setRecommendation(KondutoRecommendation recommendation) {
 		this.recommendation = recommendation;
 	}
-    public boolean getAnalyze() { return analyze; }
-    public void setAnalyze(boolean analyze) { this.analyze = analyze; }
+  public boolean getAnalyze() { return analyze; }
+  public void setAnalyze(boolean analyze) { this.analyze = analyze; }
 	public Integer getMessagesExchanged() { return messagesExchanged; }
 	public void setMessagesExchanged(Integer messagesExchanged) { this.messagesExchanged = messagesExchanged; }
 	public KondutoTravel getTravel() {
@@ -349,6 +352,14 @@ public final class KondutoOrder extends KondutoModel {
 		return decisionListEntries;
 	}
 
+	public List<KondutoEvent> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<KondutoEvent> events) {
+		this.events = events;
+  }
+  
 	public KondutoVehicle getVehicle() {
 		return vehicle;
 	}
@@ -356,4 +367,5 @@ public final class KondutoOrder extends KondutoModel {
 	public void setVehicle(KondutoVehicle vehicle) {
 		this.vehicle = vehicle;
 	}
+  
 }

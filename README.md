@@ -230,6 +230,44 @@ document_type | _(required)_ The passenger's document type (e.g passport). See *
 frequent_traveler | _(optional)_ A boolean. Is this passenger a frequent traveler?
 special_needs | _(optional)_ A boolean. Does the passenger have special needs?
 
+
+##### Events
+Parameter | Description
+--- | ---
+name | _(required)_ The name of the event
+date | _(required)_ When the event is going to happen
+type | _(optional)_ The type of the event (e.g., show, sports, theater, etc). For the complete list, see **KondutoEventType** enum.
+subtype | _(optional)_ 
+venue | _(optional)_ The event's location address. See **Event Venue** bellow.
+tickets | _(optional)_ A list of tickets for the given event. See **Event Ticket** below.
+
+##### Event Venue
+Parameter | Description
+--- | ---
+name | _(optional)_ The name of the place (e.g. Wembley Stadium, World Trade Center).
+capacity | _(optional)_ The total amount of available tickets for sale.
+address | _(optional)_ The specific location.
+city | _(optional)_
+state | _(optional)_
+country | _(optional)_ The country abbreviation code (e.g., BR, US, AU, etc)
+
+##### Event Ticket
+Parameter | Description
+--- | ---
+id | _(optional)_ A unique identifier for the ticket.
+category | _(required)_ The ticket type, such as senior, student or regular. For the complete list, see **KondutoEventTicketCategory** enum.
+section | _(optional)_ The location of the ticket (e.g., lower seats, upper seats, unseated, etc).
+premium | _(required)_ Boolean that indicates if the ticket is a premium one.
+attendee | _(optional)_ Information about the ticket owner. See **KondutoEventTicketAttendee** bellow.
+
+##### Event Ticket Attendee
+Parameter | Description
+--- | ---
+name | _(optional)_ The attendee's name.
+document | _(required)_ The attendee document value.
+documentType | _(optional)_ The type of document informed, such as CPF, CNPJ, passport, etc. For the complete list, see **KondutoEventTicketAttendeeDocumentType** enum.
+dateOfBirth | _(optional)_ A string with the attendee's date of birth.
+=======
 ##### Vehicle
 Parameter | Description
 --- | ---

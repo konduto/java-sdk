@@ -149,6 +149,56 @@
             }
         }
     ],
+    "events": [
+        {
+            "name": "Safadão no Maracanã",
+            "date": "2021-01-01T03:00:00Z",
+            "type": "show",
+            "subtype": "sertanejo",
+            "venue": {
+                "name": "Estádio do Maracanã",
+                "capacity": 80000,
+                "address": "Av. Maracanã s/n",
+                "city": "Rio de Janeiro",
+                "state": "RJ",
+                "country": "BR"
+            },
+            "tickets": [
+                {
+                    "category": "regular",
+                    "premium": true,
+                    "section": "Pista Premium",
+                    "attendee": {
+                        "document": "12345678900",
+                        "document_type": "cpf",
+                        "dob": "1990-10-28"
+                    }
+                },
+                {
+                    "category": "student",
+                    "premium": false
+                }
+            ]
+        },
+        {
+            "name": "Heat @ Knicks",
+            "date": "2020-11-21T01:00:00Z",
+            "type": "sports",
+            "subtype": "NBA",
+            "tickets": [
+                {
+                    "category": "regular",
+                    "premium": true,
+                    "section": "general"
+                },
+                {
+                    "category": "regular",
+                    "section": "general",
+                    "premium": true
+                }
+            ]
+        }
+    ],
     "vehicle": {
         "make": "Bentley",
         "model": "Bacalar",
