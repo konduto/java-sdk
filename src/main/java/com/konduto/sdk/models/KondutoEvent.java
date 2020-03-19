@@ -21,6 +21,7 @@ public class KondutoEvent extends KondutoModel {
     )
     private String date;
 
+    @Required
     private KondutoEventType type;
 
     private String subtype;

@@ -20,7 +20,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.13.0</version>
+	<version>2.13.1</version>
 </dependency>
 ```
 
@@ -236,7 +236,7 @@ Parameter | Description
 --- | ---
 name | _(required)_ The name of the event
 date | _(required)_ When the event is going to happen
-type | _(optional)_ The type of the event (e.g., show, sports, theater, etc). For the complete list, see **KondutoEventType** enum.
+type | _(required)_ The type of the event (e.g., show, sports, theater, etc). For the complete list, see **KondutoEventType** enum.
 subtype | _(optional)_ 
 venue | _(optional)_ The event's location address. See **Event Venue** bellow.
 tickets | _(optional)_ A list of tickets for the given event. See **Event Ticket** below.
