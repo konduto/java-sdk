@@ -20,7 +20,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.13.1</version>
+	<version>2.14.0</version>
 </dependency>
 ```
 
@@ -80,40 +80,40 @@ KondutoOrder order = (KondutoOrder) KondutoModel.fromMap(attributes, KondutoOrde
 
 ### Order parameters
 
-Parameter | Description 
---- | ---
-id | _(required)_ Unique identifier for each order.
-visitor | _(required)_ Visitor identifier obtained from our JavaScript snippet.
-total_amount | _(required)_ Total order amount.
-shipping_amount | _(optional)_ Shipping and handling amount.
-tax_amount | _(optional)_ Taxes amount.
-currency | _(optional)_ Currency code with 3 letters (ISO-4712).
-installments | _(optional)_ Number of installments in the payment plan.
-ip | _(optional)_ Customer's IPv4 or IPV6 address.
-customer | _(required)_ Object containing the customer details.
-payment | _(optional)_ Array containing the payment methods.
-billing | _(optional)_ Object containing the billing information.
-shipping | _(optional)_ Object containing the shipping information.
-shopping_cart | _(optional)_ Array containing the items purchased.
-analyze | _(optional)_ A boolean indicating if the order should be analyzed. Defaults to **true**.
-first_message | _(optional)_ Time when the first message was exchanged between customer and seller.
-messages_exchanged | _(optional)_ Number of messages exchanged between customer and seller.
-purchased_at | _(optional)_ Time when the customer purchased from the seller.
-vehicle | _(optional)_ Object containing information regarding vehicles.
+| Parameter          | Description                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| id                 | _(required)_ Unique identifier for each order.                                           |
+| visitor            | _(required)_ Visitor identifier obtained from our JavaScript snippet.                    |
+| total_amount       | _(required)_ Total order amount.                                                         |
+| shipping_amount    | _(optional)_ Shipping and handling amount.                                               |
+| tax_amount         | _(optional)_ Taxes amount.                                                               |
+| currency           | _(optional)_ Currency code with 3 letters (ISO-4712).                                    |
+| installments       | _(optional)_ Number of installments in the payment plan.                                 |
+| ip                 | _(optional)_ Customer's IPv4 or IPV6 address.                                            |
+| customer           | _(required)_ Object containing the customer details.                                     |
+| payment            | _(optional)_ Array containing the payment methods.                                       |
+| billing            | _(optional)_ Object containing the billing information.                                  |
+| shipping           | _(optional)_ Object containing the shipping information.                                 |
+| shopping_cart      | _(optional)_ Array containing the items purchased.                                       |
+| analyze            | _(optional)_ A boolean indicating if the order should be analyzed. Defaults to **true**. |
+| first_message      | _(optional)_ Time when the first message was exchanged between customer and seller.      |
+| messages_exchanged | _(optional)_ Number of messages exchanged between customer and seller.                   |
+| purchased_at       | _(optional)_ Time when the customer purchased from the seller.                           |
+| vehicle            | _(optional)_ Object containing information regarding vehicles.                           |
 
 #### Customer information
 
-Parameter | Description 
---- | ---
-id | _(required)_ **Unique** identifier for each customer. Can be anything you like (counter, id, e-mail address) as long as it's consistent in future orders.
-name | _(required)_ Customer's full name.
-email | _(required)_ Customer's e-mail address
-tax_id | _(optional)_ Customer's tax id.
-phone1 | _(optional)_ Customer's primary phone number
-phone 2 | _(optional)_ Customer's secondary phone number
-new | _(optional)_ Boolean indicating if the customer is using a newly created account for this purchase.
-vip | _(optional)_ Boolean indicating if the customer is a VIP or frequent buyer.
-created_at | _(optional)_ Date when customer was created.
+| Parameter  | Description                                                                                                                                               |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id         | _(required)_ **Unique** identifier for each customer. Can be anything you like (counter, id, e-mail address) as long as it's consistent in future orders. |
+| name       | _(required)_ Customer's full name.                                                                                                                        |
+| email      | _(required)_ Customer's e-mail address                                                                                                                    |
+| tax_id     | _(optional)_ Customer's tax id.                                                                                                                           |
+| phone1     | _(optional)_ Customer's primary phone number                                                                                                              |
+| phone 2    | _(optional)_ Customer's secondary phone number                                                                                                            |
+| new        | _(optional)_ Boolean indicating if the customer is using a newly created account for this purchase.                                                       |
+| vip        | _(optional)_ Boolean indicating if the customer is a VIP or frequent buyer.                                                                               |
+| created_at | _(optional)_ Date when customer was created.                                                                                                              |
 
 
 #### Payment information
@@ -125,17 +125,17 @@ Payments may contain a `description` and a `amount` field. The former is a
    paid via a discount voucher and 90.00 via credit card.
 
 ##### Credit card
-Parameter | Description 
---- | ---
-status | _(required)_ The status of the transaction returned by the payment processor. Accepts `approved`, `declined` or `pending` if the payment wasn't been processed yet.
-bin | _(optional)_ First six digits of the customer's credit card. Used to identify the type of card being sent.
-last4 | _(optional)_ Four last digits of the customer's credit card number.
-expiration_date | _(optional)_ Card's expiration date under MMYYYY format.
+| Parameter       | Description                                                                                                                                                         |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| status          | _(required)_ The status of the transaction returned by the payment processor. Accepts `approved`, `declined` or `pending` if the payment wasn't been processed yet. |
+| bin             | _(optional)_ First six digits of the customer's credit card. Used to identify the type of card being sent.                                                          |
+| last4           | _(optional)_ Four last digits of the customer's credit card number.                                                                                                 |
+| expiration_date | _(optional)_ Card's expiration date under MMYYYY format.                                                                                                            |
 
 ##### Boleto
-Parameter | Description
---- | ---
-expiration_date | _(optional)_ Boleto's expiration date (yyyy-MM-dd).
+| Parameter       | Description                                         |
+| --------------- | --------------------------------------------------- |
+| expiration_date | _(optional)_ Boleto's expiration date (yyyy-MM-dd). |
 
 ##### Other payment types available
 * DEBIT
@@ -144,147 +144,147 @@ expiration_date | _(optional)_ Boleto's expiration date (yyyy-MM-dd).
 
 #### Billing address
 
-Parameter | Description 
---- | ---
-name | _(optional)_ Cardholder's full name.
-address1 | _(optional)_ Cardholder's billing address on file with the bank.
-address2 | _(optional)_ Additional cardholder address information.
-city | _(optional)_ Cardholder's city.
-state | _(optional)_ Cardholder's state.
-zip | _(optional)_ Cardholder's ZIP code.
-country | _(optional)_ Cardholder's country code (ISO 3166-2)
+| Parameter | Description                                                      |
+| --------- | ---------------------------------------------------------------- |
+| name      | _(optional)_ Cardholder's full name.                             |
+| address1  | _(optional)_ Cardholder's billing address on file with the bank. |
+| address2  | _(optional)_ Additional cardholder address information.          |
+| city      | _(optional)_ Cardholder's city.                                  |
+| state     | _(optional)_ Cardholder's state.                                 |
+| zip       | _(optional)_ Cardholder's ZIP code.                              |
+| country   | _(optional)_ Cardholder's country code (ISO 3166-2)              |
 
 
 #### Shipping address
 
-Parameter | Description 
---- | ---
-name | _(optional)_ Recipient's full name.
-address1 | _(optional)_ Recipient's shipping address.
-address2 | _(optional)_ Additional recipient address information.
-city | _(optional)_ Recipient's city.
-state | _(optional)_ Recipient's state.
-zip | _(optional)_ Recipient's ZIP code.
-country | _(optional)_ Recipient's country code (ISO 3166-2)
+| Parameter | Description                                            |
+| --------- | ------------------------------------------------------ |
+| name      | _(optional)_ Recipient's full name.                    |
+| address1  | _(optional)_ Recipient's shipping address.             |
+| address2  | _(optional)_ Additional recipient address information. |
+| city      | _(optional)_ Recipient's city.                         |
+| state     | _(optional)_ Recipient's state.                        |
+| zip       | _(optional)_ Recipient's ZIP code.                     |
+| country   | _(optional)_ Recipient's country code (ISO 3166-2)     |
 
 
 #### Shopping cart
 
-Parameter | Description 
---- | ---
-sku | _(optional)_ Product or service's SKU or inventory id.
-product_code | _(optional)_ Product or service's UPC, barcode or secondary id.
-category | _(optional)_ Category code for the item purchased. [See here](http://docs.konduto.com/#n-tables) for the list.
-name | _(optional)_ Name of the product or service.
-description | _(optional)_ Detailed description of the item.
-unit_cost | _(optional)_ Cost of a single unit of this item.
-quantity | _(optional)_ Number of units purchased.
-discount | _(optional)_ Discounted amount for this item.
-created_at | _(optional)_ Date when this item was created.
+| Parameter    | Description                                                                                                    |
+| ------------ | -------------------------------------------------------------------------------------------------------------- |
+| sku          | _(optional)_ Product or service's SKU or inventory id.                                                         |
+| product_code | _(optional)_ Product or service's UPC, barcode or secondary id.                                                |
+| category     | _(optional)_ Category code for the item purchased. [See here](http://docs.konduto.com/#n-tables) for the list. |
+| name         | _(optional)_ Name of the product or service.                                                                   |
+| description  | _(optional)_ Detailed description of the item.                                                                 |
+| unit_cost    | _(optional)_ Cost of a single unit of this item.                                                               |
+| quantity     | _(optional)_ Number of units purchased.                                                                        |
+| discount     | _(optional)_ Discounted amount for this item.                                                                  |
+| created_at   | _(optional)_ Date when this item was created.                                                                  |
 
 #### Seller
 
-Parameter | Description
---- | ---
-id | _(required)_ Seller's id
-name | _(optional)_ Sellers's name
-created_at | _(optional)_ Date when the seller was created
+| Parameter  | Description                                   |
+| ---------- | --------------------------------------------- |
+| id         | _(required)_ Seller's id                      |
+| name       | _(optional)_ Sellers's name                   |
+| created_at | _(optional)_ Date when the seller was created |
 
 
 #### Travel
-Parameter | Description
---- | ---
-type | _(required)_ The travel type (**flight** or **bus**).
-departure_leg | _(required)_ An instance of either *KondutoBusTravelLeg* (if **type** is **bus**) or *KondutoFlightTravelLeg* (if **type** is **flight**)
-return_leg | _(optional)_ An instance of either *KondutoBusTravelLeg* or *KondutoFlightTravelLeg*.
-passengers | _(optional)_ A list of *KondutoPassenger*
+| Parameter     | Description                                                                                                                               |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| type          | _(required)_ The travel type (**flight** or **bus**).                                                                                     |
+| departure_leg | _(required)_ An instance of either *KondutoBusTravelLeg* (if **type** is **bus**) or *KondutoFlightTravelLeg* (if **type** is **flight**) |
+| return_leg    | _(optional)_ An instance of either *KondutoBusTravelLeg* or *KondutoFlightTravelLeg*.                                                     |
+| passengers    | _(optional)_ A list of *KondutoPassenger*                                                                                                 |
 
 ##### Common travel leg attributes
- Parameter | Description
- --- | ---
- date | _(required)_ The travel date
- number_of_connections | _(optional)_ The number of connections
- class | _(optional)_ see **KondutoTravelClass**
- fare_basis | _(optional)_
+ | Parameter             | Description                             |
+ | --------------------- | --------------------------------------- |
+ | date                  | _(required)_ The travel date            |
+ | number_of_connections | _(optional)_ The number of connections  |
+ | class                 | _(optional)_ see **KondutoTravelClass** |
+ | fare_basis            | _(optional)_                            |
 
 ##### Bus travel leg specifics
-Parameter | Description
---- | ---
-origin_city| _(required)_ The leg origin city
-destination_city | _(required)_ The leg destination city
+| Parameter        | Description                           |
+| ---------------- | ------------------------------------- |
+| origin_city      | _(required)_ The leg origin city      |
+| destination_city | _(required)_ The leg destination city |
 
 ##### Flight travel leg specifics
-Parameter | Description
---- | ---
-origin_airport| _(required)_ The leg origin airport IATA code (e.g: GRU, LAX)
-destination_airport | _(required)_ The leg destination airport IATA code
-origin_city| _(optional)_ The leg origin city
-destination_city | _(optional)_ The leg destination city
+| Parameter           | Description                                                   |
+| ------------------- | ------------------------------------------------------------- |
+| origin_airport      | _(required)_ The leg origin airport IATA code (e.g: GRU, LAX) |
+| destination_airport | _(required)_ The leg destination airport IATA code            |
+| origin_city         | _(optional)_ The leg origin city                              |
+| destination_city    | _(optional)_ The leg destination city                         |
 
 ##### Passenger
-Parameter | Description
---- | ---
-name | _(required)_ The travel type (**flight** or **bus**)
-document | _(required)_ The passenger's document
-document_type | _(required)_ The passenger's document type (e.g passport). See **KondutoDocumentType**
-frequent_traveler | _(optional)_ A boolean. Is this passenger a frequent traveler?
-special_needs | _(optional)_ A boolean. Does the passenger have special needs?
+| Parameter         | Description                                                                            |
+| ----------------- | -------------------------------------------------------------------------------------- |
+| name              | _(required)_ The travel type (**flight** or **bus**)                                   |
+| document          | _(required)_ The passenger's document                                                  |
+| document_type     | _(required)_ The passenger's document type (e.g passport). See **KondutoDocumentType** |
+| frequent_traveler | _(optional)_ A boolean. Is this passenger a frequent traveler?                         |
+| special_needs     | _(optional)_ A boolean. Does the passenger have special needs?                         |
 
 
 ##### Events
-Parameter | Description
---- | ---
-name | _(required)_ The name of the event
-date | _(required)_ When the event is going to happen
-type | _(required)_ The type of the event (e.g., show, sports, theater, etc). For the complete list, see **KondutoEventType** enum.
-subtype | _(optional)_ 
-venue | _(optional)_ The event's location address. See **Event Venue** bellow.
-tickets | _(optional)_ A list of tickets for the given event. See **Event Ticket** below.
+| Parameter | Description                                                                                                                  |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| name      | _(required)_ The name of the event                                                                                           |
+| date      | _(required)_ When the event is going to happen                                                                               |
+| type      | _(required)_ The type of the event (e.g., show, sports, theater, etc). For the complete list, see **KondutoEventType** enum. |
+| subtype   | _(optional)_                                                                                                                 |
+| venue     | _(optional)_ The event's location address. See **Event Venue** bellow.                                                       |
+| tickets   | _(optional)_ A list of tickets for the given event. See **Event Ticket** below.                                              |
 
 ##### Event Venue
-Parameter | Description
---- | ---
-name | _(optional)_ The name of the place (e.g. Wembley Stadium, World Trade Center).
-capacity | _(optional)_ The total amount of available tickets for sale.
-address | _(optional)_ The specific location.
-city | _(optional)_
-state | _(optional)_
-country | _(optional)_ The country abbreviation code (e.g., BR, US, AU, etc)
+| Parameter | Description                                                                    |
+| --------- | ------------------------------------------------------------------------------ |
+| name      | _(optional)_ The name of the place (e.g. Wembley Stadium, World Trade Center). |
+| capacity  | _(optional)_ The total amount of available tickets for sale.                   |
+| address   | _(optional)_ The specific location.                                            |
+| city      | _(optional)_                                                                   |
+| state     | _(optional)_                                                                   |
+| country   | _(optional)_ The country abbreviation code (e.g., BR, US, AU, etc)             |
 
 ##### Event Ticket
-Parameter | Description
---- | ---
-id | _(optional)_ A unique identifier for the ticket.
-category | _(required)_ The ticket type, such as senior, student or regular. For the complete list, see **KondutoEventTicketCategory** enum.
-section | _(optional)_ The location of the ticket (e.g., lower seats, upper seats, unseated, etc).
-premium | _(required)_ Boolean that indicates if the ticket is a premium one.
-attendee | _(optional)_ Information about the ticket owner. See **KondutoEventTicketAttendee** bellow.
+| Parameter | Description                                                                                                                       |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| id        | _(optional)_ A unique identifier for the ticket.                                                                                  |
+| category  | _(required)_ The ticket type, such as senior, student or regular. For the complete list, see **KondutoEventTicketCategory** enum. |
+| section   | _(optional)_ The location of the ticket (e.g., lower seats, upper seats, unseated, etc).                                          |
+| premium   | _(required)_ Boolean that indicates if the ticket is a premium one.                                                               |
+| attendee  | _(optional)_ Information about the ticket owner. See **KondutoEventTicketAttendee** bellow.                                       |
 
 ##### Event Ticket Attendee
-Parameter | Description
---- | ---
-name | _(optional)_ The attendee's name.
-document | _(required)_ The attendee document value.
-documentType | _(optional)_ The type of document informed, such as CPF, CNPJ, passport, etc. For the complete list, see **KondutoEventTicketAttendeeDocumentType** enum.
-dateOfBirth | _(optional)_ A string with the attendee's date of birth.
+| Parameter    | Description                                                                                                                                               |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name         | _(optional)_ The attendee's name.                                                                                                                         |
+| document     | _(required)_ The attendee document value.                                                                                                                 |
+| documentType | _(optional)_ The type of document informed, such as CPF, CNPJ, passport, etc. For the complete list, see **KondutoEventTicketAttendeeDocumentType** enum. |
+| dateOfBirth  | _(optional)_ A string with the attendee's date of birth.                                                                                                  |
 =======
 ##### Vehicle
-Parameter | Description
---- | ---
-vid | _(optional)_ Vehicle's ISO unique identifier.
-renavam | _(optional)_ Brazilian RENAVAM identifier.
-registration | _(optional)_ License plate for cars, registration for aircraft or boats.
-make | _(required)_ Name of the vehicle manufacturer company (e.g. Fiat).
-model | _(required)_ Name of the vehicle model (e.g. Camaro).
-type | _(optional)_ Enum containing several vehicle types such as CAR, AIRCRAFT, BUS, etc. See **KondutoVehicleType**.
-usage | _(optional)_ Enum containing several usage scenarios for vehicles such as PRIVATE, GOVERNMENT, etc. See **KondutoVehicleUsage**.
-owner | _(required)_ Object containing information regarding the owner of the vehicle. See **Vehicle Owner** below.
+| Parameter    | Description                                                                                                                      |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| vid          | _(optional)_ Vehicle's ISO unique identifier.                                                                                    |
+| renavam      | _(optional)_ Brazilian RENAVAM identifier.                                                                                       |
+| registration | _(optional)_ License plate for cars, registration for aircraft or boats.                                                         |
+| make         | _(required)_ Name of the vehicle manufacturer company (e.g. Fiat).                                                               |
+| model        | _(required)_ Name of the vehicle model (e.g. Camaro).                                                                            |
+| type         | _(optional)_ Enum containing several vehicle types such as CAR, AIRCRAFT, BUS, etc. See **KondutoVehicleType**.                  |
+| usage        | _(optional)_ Enum containing several usage scenarios for vehicles such as PRIVATE, GOVERNMENT, etc. See **KondutoVehicleUsage**. |
+| owner        | _(required)_ Object containing information regarding the owner of the vehicle. See **Vehicle Owner** below.                      |
 
 ##### Vehicle Owner
-Parameter | Description
---- | ---
-tax_id | _(required)_ Vehicle owner's tax id.
-name | _(optional)_ Vehicle owner's name.
+| Parameter | Description                          |
+| --------- | ------------------------------------ |
+| tax_id    | _(required)_ Vehicle owner's tax id. |
+| name      | _(optional)_ Vehicle owner's name.   |
 
 ## Sending an order for analysis.
 
@@ -333,10 +333,10 @@ try {
 }
 ```
 
-Parameter | Description 
---- | ---
-status | _(required)_ New status for this transaction. Either `approved`, `declined` or `fraud`, when you have identified a fraud or chargeback.
-comments | _(required)_ Reason or comments about the status update.
+| Parameter | Description                                                                                                                             |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| status    | _(required)_ New status for this transaction. Either `approved`, `declined` or `fraud`, when you have identified a fraud or chargeback. |
+| comments  | _(required)_ Reason or comments about the status update.                                                                                |
 
 ## Sending requests through a proxy
 To send requests through a proxy just build a new Konduto instance and set the proxy host passing both hostname and port as parameters of `setProxyHost` method. If the proxy requires username and password, set these credentials using the `setProxyCredentials` method.
