@@ -35,10 +35,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'commons-httpclient:commons-httpclient:3.1'
-    implementation 'com.google.code.gson:gson:2.2.4'
-    testImplementation 'junit:junit:4.11'
-    testImplementation 'com.github.tomakehurst:wiremock:1.18'
+    implementation 'commons-httpclient:commons-httpclient:3.+'
+    implementation 'com.google.code.gson:gson:2.+'
+    testImplementation 'junit:junit:4.+'
+    testImplementation 'com.github.tomakehurst:wiremock:1.+'
 }
 
 task sourcesJar(type: Jar) {
