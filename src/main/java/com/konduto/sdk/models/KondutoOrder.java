@@ -8,73 +8,103 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ *
  * Order model.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
+ *
  */
 public final class KondutoOrder extends KondutoModel {
     /* Attributes */
     @Required
     private String id;
+
     private String visitor;
+
     private Long timestamp;
+
     @Required
     private Double totalAmount;
+
     private Double shippingAmount;
     private Double taxAmount;
+
     @Required
     private KondutoCustomer customer;
+
     private String currency;
+
     private Integer installments;
+
     private String ip;
+
     private Double score;
+
     @SerializedName("shipping")
     private KondutoAddress shippingAddress;
+
     @SerializedName("billing")
     private KondutoAddress billingAddress;
+
     private KondutoRecommendation recommendation;
+
     private KondutoOrderStatus status;
+
     private KondutoGeolocation geolocation;
+
     private boolean analyze = true;
+
     @SerializedName("messages_exchanged")
     private Integer messagesExchanged;
+
     @SerializedName("first_message")
     private String firstMessage;
     @SerializedName("purchased_at")
     private String purchasedAt;
+
     private KondutoSeller seller;
-    /**
-     * when deserialized, this collection is a HashSet by default.
-     */
+
     @SerializedName("payment")
-    private Collection<KondutoPayment> payments;
     /**
-     * when deserialized, this collection is an ArrayList by default.
+     *  when deserialized, this collection is a HashSet by default.
+     */
+    private Collection<KondutoPayment> payments;
+
+    /**
+     *  when deserialized, this collection is an ArrayList by default.
      */
     private Collection<KondutoItem> shoppingCart;
+
     private Collection<KondutoBureauQuery> bureauxQueries;
+
     private Collection<KondutoTriggeredRule> triggeredRules;
+
     @SerializedName("triggered_decision_list")
     private Collection<KondutoTriggeredDecisionList> decisionListEntries;
+
     private KondutoDevice device;
+
     @SerializedName("navigation")
     private KondutoNavigationInfo navigationInfo;
+
     private KondutoTravel travel;
+
     private KondutoOption options;
     private KondutoHotel hotel;
+
     private List<KondutoEvent> events;
+
     private KondutoVehicle vehicle;
+
     @SerializedName("delivery")
     private KondutoDelivery delivery;
 
     /* Constructors */
-    public KondutoOrder() {
-    }
+    public KondutoOrder() {}
 
     /**
      * Fluent constructor
-     *
-     * @param attributeName  the attribute name (e.g totalAmount)
+     * @param attributeName the attribute name (e.g totalAmount)
      * @param attributeValue the attribute value (e.g 123.2)
      * @return a new instance
      */
@@ -156,227 +186,160 @@ public final class KondutoOrder extends KondutoModel {
     public KondutoNavigationInfo getNavigationInfo() {
         return navigationInfo;
     }
-
     public void setNavigationInfo(KondutoNavigationInfo navigationInfo) {
         this.navigationInfo = navigationInfo;
     }
-
     public KondutoDevice getDevice() {
         return device;
     }
-
     public void setDevice(KondutoDevice device) {
         this.device = device;
     }
-
     public Collection<KondutoItem> getShoppingCart() {
         return shoppingCart;
     }
-
     public void setShoppingCart(Collection<KondutoItem> shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
-
     public Collection<KondutoPayment> getPayments() {
         return payments;
     }
-
     public void setPayments(Collection<KondutoPayment> payments) {
         this.payments = payments;
     }
-
     public KondutoOrderStatus getStatus() {
         return status;
     }
-
     public void setStatus(KondutoOrderStatus status) {
         this.status = status;
     }
-
     public KondutoGeolocation getGeolocation() {
         return geolocation;
     }
-
     public void setGeolocation(KondutoGeolocation geolocation) {
         this.geolocation = geolocation;
     }
-
     public KondutoAddress getShippingAddress() {
         return shippingAddress;
     }
-
     public void setShippingAddress(KondutoAddress shippingAddress) {
         this.shippingAddress = shippingAddress;
     }
-
     public KondutoAddress getBillingAddress() {
         return billingAddress;
     }
-
     public void setBillingAddress(KondutoAddress billingAddress) {
         this.billingAddress = billingAddress;
     }
-
     public KondutoRecommendation getRecommendation() {
         return recommendation;
     }
-
     public Double getScore() {
         return score;
     }
-
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
     public String getVisitor() {
         return visitor;
     }
-
     public void setVisitor(String visitor) {
         this.visitor = visitor;
     }
-
     public Long getTimestamp() {
         return timestamp;
     }
-
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
-
     public Double getTotalAmount() {
         return totalAmount;
     }
-
     public void setTotalAmount(Double totalAmount) {
         this.totalAmount = totalAmount;
     }
-
     public Double getShippingAmount() {
         return shippingAmount;
     }
-
     public void setShippingAmount(Double shippingAmount) {
         this.shippingAmount = shippingAmount;
     }
-
     public Double getTaxAmount() {
         return taxAmount;
     }
-
     public void setTaxAmount(Double taxAmount) {
         this.taxAmount = taxAmount;
     }
-
     public String getCurrency() {
         return currency;
     }
-
     public void setCurrency(String currency) {
         this.currency = currency;
     }
-
     public Integer getInstallments() {
         return installments;
     }
-
     public void setInstallments(Integer installments) {
         this.installments = installments;
     }
-
     public String getIp() {
         return ip;
     }
-
     public void setIp(String ip) {
         this.ip = ip;
     }
-
     public KondutoCustomer getCustomer() {
         return customer;
     }
-
     public void setCustomer(KondutoCustomer customer) {
         this.customer = customer;
     }
-
     public void setScore(Double score) {
         this.score = score;
     }
-
     public void setRecommendation(KondutoRecommendation recommendation) {
         this.recommendation = recommendation;
     }
-
-    public boolean getAnalyze() {
-        return analyze;
-    }
-
-    public void setAnalyze(boolean analyze) {
-        this.analyze = analyze;
-    }
-
-    public Integer getMessagesExchanged() {
-        return messagesExchanged;
-    }
-
-    public void setMessagesExchanged(Integer messagesExchanged) {
-        this.messagesExchanged = messagesExchanged;
-    }
-
+    public boolean getAnalyze() { return analyze; }
+    public void setAnalyze(boolean analyze) { this.analyze = analyze; }
+    public Integer getMessagesExchanged() { return messagesExchanged; }
+    public void setMessagesExchanged(Integer messagesExchanged) { this.messagesExchanged = messagesExchanged; }
     public KondutoTravel getTravel() {
         return travel;
     }
-
     public void setTravel(KondutoTravel travel) {
         this.travel = travel;
     }
-
-    public KondutoSeller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(KondutoSeller seller) {
-        this.seller = seller;
-    }
+    public KondutoSeller getSeller() { return seller; }
+    public void setSeller(KondutoSeller seller) { this.seller = seller; }
 
     public Date getFirstMessage() {
         return deserializeDate(firstMessage);
     }
-
     public Date getPurchasedAt() {
         return deserializeDate(purchasedAt);
     }
-
     public void setFirstMessage(Date first_message) {
         this.firstMessage = serializeDate(first_message);
     }
-
     public void setPurchasedAt(Date purchased_at) {
         this.purchasedAt = serializeDate(purchased_at);
     }
-
     public KondutoOption getOptions() {
         return options;
     }
-
     public void setOptions(KondutoOption options) {
         this.options = options;
     }
-
     public KondutoHotel getHotel() {
         return hotel;
     }
-
     public void setHotel(KondutoHotel hotel) {
         this.hotel = hotel;
     }
-
     public void setBureauxQueries(Collection<KondutoBureauQuery> bureauxQueries) {
         this.bureauxQueries = bureauxQueries;
     }
