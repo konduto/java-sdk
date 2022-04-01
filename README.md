@@ -286,6 +286,15 @@ Payments may contain a `description` and a `amount` field. The former is a
 | tax_id    | _(required)_ Vehicle owner's tax id. |
 | name      | _(optional)_ Vehicle owner's name.   |
 
+##### Delivery
+| Parameter               | Description                                                                              |
+|-------------------------|------------------------------------------------------------------------------------------|
+| delivery_company        | _(optional)_ Adds the name of the company that will deliver the product to the customer. |
+| delivery_method         | _(optional)_ Details the type of withdrawal type, if applicable.                         |
+| estimated_shipping_date | _(optional)_ Informs the shipping date of the product.                                   |
+| estimated_delivery_date | _(optional)_ Informs the delivery date of the product.                                   |
+
+
 ## Sending an order for analysis.
 
 After creating the order, sending it to Konduto's analysis is very simple.
