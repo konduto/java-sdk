@@ -10,7 +10,7 @@ This document refers to the **Java SDK** used for our API.
 
 ## Requirements
 
-* Java 6
+* Java 8
 
 ## Installation
 
@@ -20,7 +20,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.14.0</version>
+	<version>2.15.0</version>
 </dependency>
 ```
 
