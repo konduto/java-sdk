@@ -99,6 +99,9 @@ public final class KondutoOrder extends KondutoModel {
     @SerializedName("delivery")
     private KondutoDelivery delivery;
 
+    @SerializedName("pointOfSale")
+    private KondutoPointOfSale pointOfSale;
+
     /* Constructors */
     public KondutoOrder() {}
 
@@ -178,6 +181,7 @@ public final class KondutoOrder extends KondutoModel {
         if (options != null ? !options.equals(order.options) : order.options != null) return false;
         if (hotel != null ? !hotel.equals(order.hotel) : order.hotel != null) return false;
         if (delivery != null ? !delivery.equals(order.delivery) : order.delivery != null) return false;
+        if (pointOfSale != null ? !pointOfSale.equals(order.pointOfSale) : order.pointOfSale != null) return false;
 
         return true;
     }
@@ -379,4 +383,12 @@ public final class KondutoOrder extends KondutoModel {
     public void setDelivery(KondutoDelivery delivery) {
         this.delivery = delivery;
     }
+
+    public KondutoPointOfSale getPointOfSale() {
+        return pointOfSale;
+    }
+    public void setPointOfSale(KondutoPointOfSale pointOfSale){
+        this.pointOfSale = pointOfSale;
+    }
+
 }
