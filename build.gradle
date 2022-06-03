@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'java'
     id 'maven-publish'
     id 'signing'
 }
@@ -9,7 +10,8 @@ file("src/main/resources/konduto.properties").withInputStream { props.load(it) }
 
 group = 'com.konduto.sdk'
 version = props["version"]
-sourceCompatibility = JavaVersion.VERSION_1_6
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 sourceSets {
     main {
@@ -43,12 +45,12 @@ dependencies {
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
-    archiveClassifier.set('sources')
+    classifier "sources"
 }
 
 task javadocJar(type: Jar) {
     from javadoc
-    archiveClassifier.set('javadoc')
+    classifier "javadoc"
 }
 
 jar {
@@ -106,8 +108,8 @@ publishing {
             def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
-                username = ossrhUsername
-                password = ossrhPassword
+                username = props.getProperty('ossrhUsername')
+                password = props.getProperty('ossrhPassword')
             }
         }
     }
