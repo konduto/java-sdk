@@ -20,7 +20,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.15.0</version>
+	<version>2.17.0</version>
 </dependency>
 ```
 
@@ -107,9 +107,9 @@ KondutoOrder order = (KondutoOrder) KondutoModel.fromMap(attributes, KondutoOrde
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | id         | _(required)_ **Unique** identifier for each customer. Can be anything you like (counter, id, e-mail address) as long as it's consistent in future orders. |
 | name       | _(required)_ Customer's full name.                                                                                                                        |
-| email      | _(required)_ Customer's e-mail address                                                                                                                    |
+| login      | _(required)_ Customer's e-mail address                                                                                                                    |
 | tax_id     | _(optional)_ Customer's tax id.                                                                                                                           |
-| phone1     | _(optional)_ Customer's primary phone number                                                                                                              |
+| category     | _(optional)_ Customer's primary phone number                                                                                                              |
 | phone 2    | _(optional)_ Customer's secondary phone number                                                                                                            |
 | new        | _(optional)_ Boolean indicating if the customer is using a newly created account for this purchase.                                                       |
 | vip        | _(optional)_ Boolean indicating if the customer is a VIP or frequent buyer.                                                                               |
@@ -147,8 +147,8 @@ Payments may contain a `description` and a `amount` field. The former is a
 | Parameter | Description                                                      |
 | --------- | ---------------------------------------------------------------- |
 | name      | _(optional)_ Cardholder's full name.                             |
-| address1  | _(optional)_ Cardholder's billing address on file with the bank. |
-| address2  | _(optional)_ Additional cardholder address information.          |
+| lat  | _(optional)_ Cardholder's billing address on file with the bank. |
+| lon  | _(optional)_ Additional cardholder address information.          |
 | city      | _(optional)_ Cardholder's city.                                  |
 | state     | _(optional)_ Cardholder's state.                                 |
 | zip       | _(optional)_ Cardholder's ZIP code.                              |
@@ -158,10 +158,10 @@ Payments may contain a `description` and a `amount` field. The former is a
 #### Shipping address
 
 | Parameter | Description                                            |
-| --------- | ------------------------------------------------------ |
+|-----------| ------------------------------------------------------ |
 | name      | _(optional)_ Recipient's full name.                    |
-| address1  | _(optional)_ Recipient's shipping address.             |
-| address2  | _(optional)_ Additional recipient address information. |
+| lat       | _(optional)_ Recipient's shipping address.             |
+| lon       | _(optional)_ Additional recipient address information. |
 | city      | _(optional)_ Recipient's city.                         |
 | state     | _(optional)_ Recipient's state.                        |
 | zip       | _(optional)_ Recipient's ZIP code.                     |
@@ -293,7 +293,31 @@ Payments may contain a `description` and a `amount` field. The former is a
 | delivery_method         | _(optional)_ Details the type of withdrawal type, if applicable.                         |
 | estimated_shipping_date | _(optional)_ Informs the shipping date of the product.                                   |
 | estimated_delivery_date | _(optional)_ Informs the delivery date of the product.                                   |
+<br>
 
+##### Physical store (point_of_sale)
+| Parameter               | Description                                                                              |
+|-------------------------|------------------------------------------------------------------------------------------|
+| id                      | _(required)_ A Unique identifier of the physical store.                                  |
+| name                    | _(required)_ Full name of the physical store.                                            |
+| lat                     | _(optional)_ Latitude of the physical store. We currently use maximum: -90, maximum: 90. |
+| lon                     | _(optional)_ Length of the physical store. We currently use maximum: -180, maximum: 180. |
+| address                 | _(optional)_ Physical store address.                                                     |
+| city                    | _(optional)_ Physical store city.                                                        |
+| state                   | _(optional)_ State of the physical store.                                                |
+| zip                     | _(optional)_ Physical store zip code.                                                    |
+| contry                  | _(optional)_ Country code of holder (ISO 3166-2).                                        |
+
+##### Agent (Seller)
+| Parameter               | Description                                                                                                                       |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| id                      | _(required)_ A Seller's unique identifier.                                                                                        |
+| login                   | _(optional)_ Seller login.                                                                                                        |
+| name                    | _(required)_ Seller's full name.                                                                                                  |
+| tax_id                  | _(optional)_ Seller's tax document number (CPF, etc).                                                                             |
+| dob                     | _(optional)_ Seller's date of birth in YYYY-MM-DD format (ISO 8601).                                                              |
+| category                | _(optional)_ Category code of the product sold.                                                                                   |
+| created_at              | _(optional)_ Date of creation of the account or registration of the seller on the website, <br/> in YYYY-MM-DD format (ISO 8601). |
 
 ## Sending an order for analysis.
 
