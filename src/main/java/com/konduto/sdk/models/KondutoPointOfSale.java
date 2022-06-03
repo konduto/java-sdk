@@ -2,8 +2,6 @@ package com.konduto.sdk.models;
 
 import com.konduto.sdk.annotations.Required;
 
-import java.util.Objects;
-
 /**
  *
  * Address model.

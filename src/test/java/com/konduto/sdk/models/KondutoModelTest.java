@@ -95,4 +95,16 @@ public class KondutoModelTest {
 		assertEquals("fluent constructor did not work", "1234", c.getId());
 	}
 
+	@Test
+	public void AgentTest() {
+		KondutoAgentSeller c = new KondutoAgentSeller()
+				.with("name", "Igor F Rodrigues")
+				.with("login", "igor.rodrigues")
+				.with("id", "1234");
+
+		assertEquals("Agent constructor did not work", "Igor F Rodrigues", c.getName());
+		assertEquals("Agent constructor did not work", "igor.rodrigues", c.getLogin());
+		assertEquals("Agent constructor did not work", "1234", c.getId());
+	}
+
 }

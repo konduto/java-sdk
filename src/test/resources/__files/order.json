@@ -119,6 +119,15 @@
       "state": "SP",
       "zip": "01001-001",
       "country": "BR"
+    },
+    "agent_seller": {
+      "id": "1",
+      "login": "igor.rodrigues",
+      "name": "Igor F Rodrigues",
+      "tax_id": "012014567890",
+      "category": "",
+      "created_at": "2015-06-09",
+      "dob": "1992-08-25"
     }
   }
 }

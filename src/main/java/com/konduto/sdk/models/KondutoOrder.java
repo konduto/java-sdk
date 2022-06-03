@@ -101,6 +101,8 @@ public final class KondutoOrder extends KondutoModel {
 
     @SerializedName("pointOfSale")
     private KondutoPointOfSale pointOfSale;
+    @SerializedName("agentSeller")
+    private KondutoAgentSeller agent;
 
     /* Constructors */
     public KondutoOrder() {}
@@ -182,6 +184,7 @@ public final class KondutoOrder extends KondutoModel {
         if (hotel != null ? !hotel.equals(order.hotel) : order.hotel != null) return false;
         if (delivery != null ? !delivery.equals(order.delivery) : order.delivery != null) return false;
         if (pointOfSale != null ? !pointOfSale.equals(order.pointOfSale) : order.pointOfSale != null) return false;
+        if ( agent != null ? ! agent.equals(order.agent) : order.agent != null) return false;
 
         return true;
     }
@@ -390,5 +393,10 @@ public final class KondutoOrder extends KondutoModel {
     public void setPointOfSale(KondutoPointOfSale pointOfSale){
         this.pointOfSale = pointOfSale;
     }
-
+    public KondutoAgentSeller getAgent() {
+        return  agent;
+    }
+    public void setAgent(KondutoAgentSeller agent){
+        this.agent = agent;
+    }
 }
