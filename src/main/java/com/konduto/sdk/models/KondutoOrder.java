@@ -101,8 +101,13 @@ public final class KondutoOrder extends KondutoModel {
 
     @SerializedName("pointOfSale")
     private KondutoPointOfSale pointOfSale;
-    @SerializedName("agentSeller")
+    @SerializedName("agent")
     private KondutoAgentSeller agent;
+
+    @SerializedName(value = "origin_account")
+    private KondutoOriginAccount originAccount;
+    @SerializedName(value = "destination_accounts")
+    private Collection<KondutoDestinationAccount> destinationAccounts;
 
     /* Constructors */
     public KondutoOrder() {}
@@ -182,14 +187,20 @@ public final class KondutoOrder extends KondutoModel {
 
         if (options != null ? !options.equals(order.options) : order.options != null) return false;
         if (hotel != null ? !hotel.equals(order.hotel) : order.hotel != null) return false;
+
         if (delivery != null ? !delivery.equals(order.delivery) : order.delivery != null) return false;
         if (pointOfSale != null ? !pointOfSale.equals(order.pointOfSale) : order.pointOfSale != null) return false;
-        if ( agent != null ? ! agent.equals(order.agent) : order.agent != null) return false;
+        if (agent != null ? !agent.equals(order.agent) : order.agent != null) return false;
+
+        if (originAccount != null ? !originAccount.equals(order.originAccount) : order.originAccount != null)
+            return false;
+        if (destinationAccounts != null ? !destinationAccounts.equals(order.destinationAccounts) : order.destinationAccounts != null)
+            return false;
 
         return true;
     }
 
-    /* getters and setters */
+    /** getters and setters **/
     public KondutoNavigationInfo getNavigationInfo() {
         return navigationInfo;
     }
@@ -398,5 +409,18 @@ public final class KondutoOrder extends KondutoModel {
     }
     public void setAgent(KondutoAgentSeller agent){
         this.agent = agent;
+    }
+
+    public KondutoOriginAccount getOriginAccount() {
+        return originAccount;
+    }
+    public void setOriginAccount(KondutoOriginAccount originAccount) {
+        this.originAccount = originAccount;
+    }
+    public Collection<KondutoDestinationAccount> getDestinationAccounts() {
+        return destinationAccounts;
+    }
+    public void setDestinationAccounts(Collection<KondutoDestinationAccount> destinationAccounts) {
+        this.destinationAccounts = destinationAccounts;
     }
 }

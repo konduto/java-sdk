@@ -265,7 +265,7 @@ Payments may contain a `description` and a `amount` field. The former is a
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name         | _(optional)_ The attendee's name.                                                                                                                         |
 | document     | _(required)_ The attendee document value.                                                                                                                 |
-| documentType | _(optional)_ The type of document informed, such as CPF, CNPJ, passport, etc. For the complete list, see **KondutoEventTicketAttendeeDocumentType** enum. |
+| keyType | _(optional)_ The type of document informed, such as CPF, CNPJ, passport, etc. For the complete list, see **KondutoEventTicketAttendeeDocumentType** enum. |
 | dateOfBirth  | _(optional)_ A string with the attendee's date of birth.                                                                                                  |
 =======
 ##### Vehicle
