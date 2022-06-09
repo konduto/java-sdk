@@ -32,6 +32,7 @@ public abstract class KondutoModel {
 	private static Type travelType = new TypeToken<KondutoTravel>(){}.getType();
     private static Type busTravelLegType = new TypeToken<KondutoBusTravelLeg>(){}.getType();
     private static Type flightTravelLegType = new TypeToken<KondutoFlightTravelLeg>(){}.getType();
+	private static Type originAccountType = new TypeToken<KondutoBankOriginAccount>(){}.getType();
 
 
 	protected static Gson gson = new GsonBuilder()
@@ -40,6 +41,7 @@ public abstract class KondutoModel {
 			.registerTypeAdapter(travelType, new KondutoTravelAdapter())
             .registerTypeAdapter(busTravelLegType, new KondutoBusTravelLegAdapter())
             .registerTypeAdapter(flightTravelLegType, new KondutoFlightTravelLegAdapter())
+			.registerTypeAdapter(originAccountType , new KondutoBankOriginAccountAdapter())
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .setDateFormat("yyyy-MM-dd")
 			.create();

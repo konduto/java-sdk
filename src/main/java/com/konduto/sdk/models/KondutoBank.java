@@ -8,12 +8,12 @@ import java.util.Objects;
  * Bank Accounts model.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
- *
  */
 public abstract class KondutoBank extends KondutoModel {
 
-    /** Attributes
-     *
+    /**
+     * Attributes
+     * <p>
      * id
      * key_type	(ENUM).
      * key_value.
@@ -25,8 +25,7 @@ public abstract class KondutoBank extends KondutoModel {
      * bank_account.
      * balance.
      * amount.
-     *
-     * */
+     */
 
     private String id;
     @SerializedName("key_type")
@@ -46,15 +45,20 @@ public abstract class KondutoBank extends KondutoModel {
     @SerializedName("bank_account")
     private String bankAccount;
 
-    /** Constructors */
-    public KondutoBank(){}
+    /**
+     * Constructors
+     */
+    public KondutoBank() {
+    }
 
     @Override
     public KondutoBank with(String attributeName, Object attributeValue) {
         return (KondutoBank) super.with(attributeName, attributeValue);
     }
 
-    /** Equals and hashCode */
+    /**
+     * Equals and hashCode
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,14 +80,16 @@ public abstract class KondutoBank extends KondutoModel {
 
     }
 
-/*    @Override
+    @Override
     public int hashCode() {
         return Objects.hash(getId(), getKeyType(), getKeyValue(), getHolderName(),
                 getHolderTaxId(), getBankCode(), getBankName(), getBankBranch(),
                 getBankAccount());
-    }*/
+    }
 
-    /** Getters/setters */
+    /**
+     * Getters/setters
+     */
 
     public String getId() {
         return id;

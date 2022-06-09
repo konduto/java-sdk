@@ -1,7 +1,9 @@
 package com.konduto.sdk.factories;
 
 import com.konduto.sdk.models.KondutoBankDocumentType;
-import com.konduto.sdk.models.KondutoOriginAccount;
+import com.konduto.sdk.models.KondutoBankOriginAccount;
+
+import java.text.ParseException;
 
 /**
  *
@@ -21,9 +23,9 @@ import com.konduto.sdk.models.KondutoOriginAccount;
  * }
  *
  */
-public class KondutoOriginAccountFactory {
-	public static KondutoOriginAccount getOriginAccount() {
-		KondutoOriginAccount originAccount = new KondutoOriginAccount();
+public class KondutoBankOriginAccountFactory {
+	public static KondutoBankOriginAccount getOriginAccount() throws ParseException {
+		KondutoBankOriginAccount originAccount = new KondutoBankOriginAccount();
 		originAccount.setId("ABC123DEF");
 		originAccount.setBalance(250.0);
 		originAccount.setKeyType(KondutoBankDocumentType.PIX_PHONE);

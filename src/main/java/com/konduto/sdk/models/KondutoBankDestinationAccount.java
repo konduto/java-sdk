@@ -6,12 +6,12 @@ package com.konduto.sdk.models;
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  *
  */
-public class KondutoDestinationAccount extends KondutoBank {
+public class KondutoBankDestinationAccount extends KondutoBank {
 
     private Double amount;
 
     /** Constructors */
-    public KondutoDestinationAccount(){}
+    public KondutoBankDestinationAccount(){}
 
     /**
      * Fluent constructor implementation
@@ -22,8 +22,8 @@ public class KondutoDestinationAccount extends KondutoBank {
      * @see <a href=http://en.wikipedia.org/wiki/Fluent_interface>Fluent interface article</a>
      */
     @Override
-    public KondutoDestinationAccount with(String attributeName, Object attributeValue) {
-        return (KondutoDestinationAccount) super.with(attributeName, attributeValue);
+    public KondutoBankDestinationAccount with(String attributeName, Object attributeValue) {
+        return (KondutoBankDestinationAccount) super.with(attributeName, attributeValue);
     }
 
     /** Equals and hashCode */
@@ -32,7 +32,7 @@ public class KondutoDestinationAccount extends KondutoBank {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        KondutoDestinationAccount that = (KondutoDestinationAccount) o;
+        KondutoBankDestinationAccount that = (KondutoBankDestinationAccount) o;
 
         if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
 

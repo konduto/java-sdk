@@ -105,9 +105,9 @@ public final class KondutoOrder extends KondutoModel {
     private KondutoAgentSeller agent;
 
     @SerializedName(value = "origin_account")
-    private KondutoOriginAccount originAccount;
+    private KondutoBankOriginAccount originAccount;
     @SerializedName(value = "destination_accounts")
-    private Collection<KondutoDestinationAccount> destinationAccounts;
+    private Collection<KondutoBankDestinationAccount> destinationAccounts;
 
     /* Constructors */
     public KondutoOrder() {}
@@ -411,16 +411,16 @@ public final class KondutoOrder extends KondutoModel {
         this.agent = agent;
     }
 
-    public KondutoOriginAccount getOriginAccount() {
+    public KondutoBankOriginAccount getOriginAccount() {
         return originAccount;
     }
-    public void setOriginAccount(KondutoOriginAccount originAccount) {
+    public void setOriginAccount(KondutoBankOriginAccount originAccount) {
         this.originAccount = originAccount;
     }
-    public Collection<KondutoDestinationAccount> getDestinationAccounts() {
+    public Collection<KondutoBankDestinationAccount> getDestinationAccounts() {
         return destinationAccounts;
     }
-    public void setDestinationAccounts(Collection<KondutoDestinationAccount> destinationAccounts) {
+    public void setDestinationAccounts(Collection<KondutoBankDestinationAccount> destinationAccounts) {
         this.destinationAccounts = destinationAccounts;
     }
 }
