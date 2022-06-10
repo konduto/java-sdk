@@ -3,6 +3,7 @@ package com.konduto.sdk.factories;
 import com.konduto.sdk.models.KondutoPointOfSale;
 
 /**
+ * Created by igor.rodrigues (nickname: igor.francesco) 02/06/2022.
  * {
  *         "point_of_sale":{
  *         "id":000500,

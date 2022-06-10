@@ -9,12 +9,11 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.konduto.sdk.models.KondutoBankDocumentType;
 import com.konduto.sdk.models.KondutoBankOriginAccount;
-import com.konduto.sdk.models.KondutoFlightTravelLeg;
 
 import java.lang.reflect.Type;
 
 /**
- * Created by rsampaio on 7/12/16.
+ * Created by igor.rodrigues (nickname: igor.francesco) 09/06/2022.
  */
 public class KondutoBankOriginAccountAdapter extends KondutoBankAdapter implements JsonSerializer<KondutoBankOriginAccount>, JsonDeserializer<KondutoBankOriginAccount> {
 

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * Created by igor.rodrigues (nickname: igor.francesco) 03/06/2022.
  */
 public class KondutoAgentSellerFactory {
 

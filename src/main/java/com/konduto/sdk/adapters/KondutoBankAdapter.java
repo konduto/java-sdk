@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.konduto.sdk.models.KondutoBank;
 
 /**
+ * Created by igor.rodrigues (nickname: igor.francesco) 09/06/2022.
  * KondutoBanKAdapter to deserialize KondutoBank objects.
  */
 public class KondutoBankAdapter {

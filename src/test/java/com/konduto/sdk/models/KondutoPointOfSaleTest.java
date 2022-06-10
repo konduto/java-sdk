@@ -14,6 +14,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
+ * Created by igor.rodrigues (nickname: igor.francesco) 02/06/2022.
  */
 public class KondutoPointOfSaleTest {
 

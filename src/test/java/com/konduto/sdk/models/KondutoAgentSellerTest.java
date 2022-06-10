@@ -13,6 +13,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
+ * Created by igor.rodrigues (nickname: igor.francesco) 03/06/2022.
  */
 public class KondutoAgentSellerTest {
 

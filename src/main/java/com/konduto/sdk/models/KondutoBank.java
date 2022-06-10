@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
 /**
+ * Created by igor.rodrigues (nickname: igor.francesco) 08/06/2022.
  * Bank Accounts model.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>

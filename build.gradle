@@ -88,9 +88,9 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = 'rsampaio'
-                        name = 'Raphael Sampaio'
-                        email = 'raphael@konduto.com'
+                        id = 'danilo.carmo'
+                        name = 'Danilo Carmo'
+                        email = 'danilo.carmo@boavistascpc.com.br'
                     }
                 }
                 scm {

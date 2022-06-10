@@ -5,8 +5,8 @@ import com.konduto.sdk.annotations.Required;
 import java.util.Date;
 
 /**
- *
- * Customer model.
+ * Created by igor.rodrigues (nickname: igor.francesco) 03/06/2022.
+ * Agent Seller model.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */

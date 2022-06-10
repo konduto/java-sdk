@@ -1,7 +1,8 @@
 package com.konduto.sdk.models;
 
 /**
- * KondutoSafeBank model.
+ * Created by igor.rodrigues (nickname: igor.francesco) 08/06/2022.
+ * Konduto Bank destination accounts model.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  *

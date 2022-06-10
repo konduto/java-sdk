@@ -3,7 +3,7 @@ package com.konduto.sdk.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by andrealves on 11/22/16.
+ * Created by igor.rodrigues (nickname: igor.francesco) 08/06/2022.
  */
 public enum KondutoBankDocumentType {
 

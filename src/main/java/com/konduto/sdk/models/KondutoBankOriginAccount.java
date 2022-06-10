@@ -1,6 +1,7 @@
 package com.konduto.sdk.models;
 
 /**
+ * Created by igor.rodrigues (nickname: igor.francesco) 08/06/2022.
  * Bank Origin Account  model.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
