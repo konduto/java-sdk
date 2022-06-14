@@ -164,4 +164,18 @@ public abstract class KondutoBank extends KondutoModel {
         this.bankAccount = bankAccount;
     }
 
+    @Override
+    public String toString() {
+        return "KondutoBank{" +
+                "id='" + id + '\'' +
+                ", keyType=" + keyType +
+                ", keyValue='" + keyValue + '\'' +
+                ", holderName='" + holderName + '\'' +
+                ", holderTaxId='" + holderTaxId + '\'' +
+                ", bankCode='" + bankCode + '\'' +
+                ", bankName='" + bankName + '\'' +
+                ", bankBranch='" + bankBranch + '\'' +
+                ", bankAccount='" + bankAccount + '\'' +
+                '}';
+    }
 }

@@ -1,9 +1,19 @@
 package com.konduto.sdk.models;
 
-import com.google.gson.*;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.DateFormat;
-import com.konduto.sdk.adapters.*;
+import com.konduto.sdk.adapters.KondutoBankDestinationAccountAdapter;
+import com.konduto.sdk.adapters.KondutoBankOriginAccountAdapter;
+import com.konduto.sdk.adapters.KondutoBusTravelLegAdapter;
+import com.konduto.sdk.adapters.KondutoFlightTravelLegAdapter;
+import com.konduto.sdk.adapters.KondutoPaymentCollectionDeserializer;
+import com.konduto.sdk.adapters.KondutoPaymentSerializer;
+import com.konduto.sdk.adapters.KondutoTravelAdapter;
 import com.konduto.sdk.annotations.Required;
 import com.konduto.sdk.annotations.ValidateFormat;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
@@ -14,7 +24,15 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
 /**
  *
@@ -33,7 +51,7 @@ public abstract class KondutoModel {
     private static Type busTravelLegType = new TypeToken<KondutoBusTravelLeg>(){}.getType();
     private static Type flightTravelLegType = new TypeToken<KondutoFlightTravelLeg>(){}.getType();
 	private static Type originAccountType = new TypeToken<KondutoBankOriginAccount>(){}.getType();
-	private static Type destinationAccountType = new TypeToken<KondutoBankDestinationAccount>(){}.getType();
+	private static Type destinationAccountsType = new TypeToken<Collection<KondutoBankDestinationAccount>>(){}.getType();
 
 
 	protected static Gson gson = new GsonBuilder()
@@ -43,7 +61,7 @@ public abstract class KondutoModel {
             .registerTypeAdapter(busTravelLegType, new KondutoBusTravelLegAdapter())
             .registerTypeAdapter(flightTravelLegType, new KondutoFlightTravelLegAdapter())
 			.registerTypeAdapter(originAccountType , new KondutoBankOriginAccountAdapter())
-			.registerTypeAdapter(destinationAccountType , new KondutoBankDestinationAccountAdapter())
+			.registerTypeAdapter(destinationAccountsType, new KondutoBankDestinationAccountAdapter())
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .setDateFormat("yyyy-MM-dd")
 			.create();

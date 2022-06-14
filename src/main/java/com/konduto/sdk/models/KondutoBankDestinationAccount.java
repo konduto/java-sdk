@@ -1,5 +1,7 @@
 package com.konduto.sdk.models;
 
+import java.util.Objects;
+
 /**
  * Created by igor.rodrigues (nickname: igor.francesco) 08/06/2022.
  * Konduto Bank destination accounts model.
@@ -41,6 +43,11 @@ public class KondutoBankDestinationAccount extends KondutoBank {
 
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getAmount());
+    }
+
     /** Getters/setters */
 
     public Double getAmount() {
@@ -51,4 +58,10 @@ public class KondutoBankDestinationAccount extends KondutoBank {
         this.amount = amount;
     }
 
+    @Override
+    public String toString() {
+        return "KondutoBankDestinationAccount{" +
+                "amount=" + amount +
+                '}';
+    }
 }

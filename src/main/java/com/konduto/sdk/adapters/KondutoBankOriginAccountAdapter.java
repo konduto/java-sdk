@@ -90,33 +90,6 @@ public class KondutoBankOriginAccountAdapter extends KondutoBankAdapter implemen
     public JsonElement serialize(KondutoBankOriginAccount originAccount, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject json = (JsonObject) super.serialize(originAccount);
 
-//        if (originAccount.getId() != null) {
-//            json.addProperty("id", originAccount.getId());
-//        }
-//        if (originAccount.getKeyType() != null) {
-//            json.addProperty("key_type", originAccount.getKeyType().toString().toLowerCase());
-//        }
-//        if (originAccount.getKeyValue() != null) {
-//            json.addProperty("key_value", originAccount.getKeyValue());
-//        }
-//        if (originAccount.getHolderName() != null) {
-//            json.addProperty("holder_name", originAccount.getHolderName());
-//        }
-//        if (originAccount.getHolderTaxId() != null) {
-//            json.addProperty("holder_tax_id", originAccount.getHolderTaxId());
-//        }
-//        if (originAccount.getBankCode() != null) {
-//            json.addProperty("bank_code", originAccount.getBankCode());
-//        }
-//        if (originAccount.getBankName() != null) {
-//            json.addProperty("bank_name", originAccount.getBankName());
-//        }
-//        if (originAccount.getBankBranch() != null) {
-//            json.addProperty("bank_branch", originAccount.getBankBranch());
-//        }
-//        if (originAccount.getBankAccount() != null) {
-//            json.addProperty("bank_account", originAccount.getBankAccount());
-//        }
         if (originAccount.getBalance() != null) {
             json.addProperty("balance", originAccount.getBalance());
         }

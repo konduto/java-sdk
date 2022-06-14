@@ -99,12 +99,10 @@ public final class KondutoOrder extends KondutoModel {
     @SerializedName("delivery")
     private KondutoDelivery delivery;
 
-    @SerializedName("pointOfSale")
     private KondutoPointOfSale pointOfSale;
-    @SerializedName("agent")
+
     private KondutoAgentSeller agent;
 
-    @SerializedName(value = "origin_account")
     private KondutoBankOriginAccount originAccount;
     @SerializedName(value = "destination_accounts")
     private Collection<KondutoBankDestinationAccount> destinationAccounts;

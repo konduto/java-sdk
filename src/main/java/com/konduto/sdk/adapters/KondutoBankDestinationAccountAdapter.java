@@ -11,11 +11,13 @@ import com.konduto.sdk.models.KondutoBankDestinationAccount;
 import com.konduto.sdk.models.KondutoBankDocumentType;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by igor.rodrigues (nickname: igor.francesco) 10/06/2022.
  */
-public class KondutoBankDestinationAccountAdapter extends KondutoBankAdapter implements JsonSerializer<KondutoBankDestinationAccount>, JsonDeserializer<KondutoBankDestinationAccount> {
+public class KondutoBankDestinationAccountAdapter extends KondutoBankAdapter implements JsonSerializer<KondutoBankDestinationAccount>, JsonDeserializer<Collection<KondutoBankDestinationAccount>> {
 
     /**
      * Gson invokes this call-back method during deserialization when it encounters a field of the
@@ -33,43 +35,51 @@ public class KondutoBankDestinationAccountAdapter extends KondutoBankAdapter imp
      * @throws JsonParseException if json is not in the expected format of {@code typeofT}
      */
     @Override
-    public KondutoBankDestinationAccount deserialize(JsonElement je, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        JsonObject json = (JsonObject) je;
+    public Collection<KondutoBankDestinationAccount> deserialize(JsonElement je, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 
-        KondutoBankDestinationAccount destinationAccount = new KondutoBankDestinationAccount();
+        Collection<KondutoBankDestinationAccount> destinationAccounts = new ArrayList<KondutoBankDestinationAccount>();
+        for (JsonElement jsonElement : je.getAsJsonArray()) {
+            JsonObject json = (JsonObject) jsonElement;
 
-        if (json.has("id")) {
-            destinationAccount.setId(json.get("id").getAsString());
+            KondutoBankDestinationAccount account = setDeserialize(json, context);
+            if (json.has("id")) {
+                account.setId(json.get("id").getAsString());
+            }
+            if (json.has("key_type")) {
+                account.setKeyType(KondutoBankDocumentType.valueOf(json.get("key_type").getAsString().toUpperCase()));
+            }
+            if (json.has("key_value")) {
+                account.setKeyValue(json.get("key_value").getAsString());
+            }
+            if (json.has("holder_name")) {
+                account.setHolderName(json.get("holder_name").getAsString());
+            }
+            if (json.has("holder_tax_id")) {
+                account .setHolderTaxId(json.get("holder_tax_id").getAsString());
+            }
+            if (json.has("bank_code")) {
+                account .setBankCode(json.get("bank_code").getAsString());
+            }
+            if (json.has("bank_name")) {
+                account .setBankName(json.get("bank_name").getAsString());
+            }
+            if (json.has("bank_branch")) {
+                account .setBankBranch(json.get("bank_branch").getAsString());
+            }
+            if (json.has("bank_account")) {
+                account .setBankAccount(json.get("bank_account").getAsString());
+            }
+            if (json.has("amount")) {
+                account .setAmount(json.get("amount").getAsDouble());
+            }
+            destinationAccounts.add(account);
         }
-        if (json.has("key_type")) {
-            destinationAccount.setKeyType(KondutoBankDocumentType.valueOf(json.get("key_type").getAsString().toUpperCase()));
-        }
-        if (json.has("key_value")) {
-            destinationAccount.setKeyValue(json.get("key_value").getAsString());
-        }
-        if (json.has("holder_name")) {
-            destinationAccount.setHolderName(json.get("holder_name").getAsString());
-        }
-        if (json.has("holder_tax_id")) {
-            destinationAccount.setHolderTaxId(json.get("holder_tax_id").getAsString());
-        }
-        if (json.has("bank_code")) {
-            destinationAccount.setBankCode(json.get("bank_code").getAsString());
-        }
-        if (json.has("bank_name")) {
-            destinationAccount.setBankName(json.get("bank_name").getAsString());
-        }
-        if (json.has("bank_branch")) {
-            destinationAccount.setBankBranch(json.get("bank_branch").getAsString());
-        }
-        if (json.has("bank_account")) {
-            destinationAccount.setBankAccount(json.get("bank_account").getAsString());
-        }
-        if (json.has("amount")) {
-            destinationAccount.setAmount(json.get("amount").getAsDouble());
-        }
+        return destinationAccounts;
+    }
 
-        return destinationAccount;
+    public KondutoBankDestinationAccount setDeserialize(JsonObject je,
+                                      JsonDeserializationContext context) {
+        return context.deserialize(je, KondutoBankDestinationAccount.class);
     }
 
     /**
@@ -89,34 +99,34 @@ public class KondutoBankDestinationAccountAdapter extends KondutoBankAdapter imp
     @Override
     public JsonElement serialize(KondutoBankDestinationAccount destinationAccount, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject json = (JsonObject) super.serialize(destinationAccount);
-//
-//        if (destinationAccount.getId() != null) {
-//            json.addProperty("id", destinationAccount.getId());
-//        }
-//        if (destinationAccount.getKeyType() != null) {
-//            json.addProperty("key_type", destinationAccount.getKeyType().toString().toLowerCase());
-//        }
-//        if (destinationAccount.getKeyValue() != null) {
-//            json.addProperty("key_value", destinationAccount.getKeyValue());
-//        }
-//        if (destinationAccount.getHolderName() != null) {
-//            json.addProperty("holder_name", destinationAccount.getHolderName());
-//        }
-//        if (destinationAccount.getHolderTaxId() != null) {
-//            json.addProperty("holder_tax_id", destinationAccount.getHolderTaxId());
-//        }
-//        if (destinationAccount.getBankCode() != null) {
-//            json.addProperty("bank_code", destinationAccount.getBankCode());
-//        }
-//        if (destinationAccount.getBankName() != null) {
-//            json.addProperty("bank_name", destinationAccount.getBankName());
-//        }
-//        if (destinationAccount.getBankBranch() != null) {
-//            json.addProperty("bank_branch", destinationAccount.getBankBranch());
-//        }
-//        if (destinationAccount.getBankAccount() != null) {
-//            json.addProperty("bank_account", destinationAccount.getBankAccount());
-//        }
+
+        if (destinationAccount.getId() != null) {
+            json.addProperty("id", destinationAccount.getId());
+        }
+        if (destinationAccount.getKeyType() != null) {
+            json.addProperty("key_type", destinationAccount.getKeyType().toString().toLowerCase());
+        }
+        if (destinationAccount.getKeyValue() != null) {
+            json.addProperty("key_value", destinationAccount.getKeyValue());
+        }
+        if (destinationAccount.getHolderName() != null) {
+            json.addProperty("holder_name", destinationAccount.getHolderName());
+        }
+        if (destinationAccount.getHolderTaxId() != null) {
+            json.addProperty("holder_tax_id", destinationAccount.getHolderTaxId());
+        }
+        if (destinationAccount.getBankCode() != null) {
+            json.addProperty("bank_code", destinationAccount.getBankCode());
+        }
+        if (destinationAccount.getBankName() != null) {
+            json.addProperty("bank_name", destinationAccount.getBankName());
+        }
+        if (destinationAccount.getBankBranch() != null) {
+            json.addProperty("bank_branch", destinationAccount.getBankBranch());
+        }
+        if (destinationAccount.getBankAccount() != null) {
+            json.addProperty("bank_account", destinationAccount.getBankAccount());
+        }
         if (destinationAccount.getAmount() != null) {
             json.addProperty("amount", destinationAccount.getAmount());
         }
