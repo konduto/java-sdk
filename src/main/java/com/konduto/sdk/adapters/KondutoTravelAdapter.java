@@ -1,8 +1,19 @@
 package com.konduto.sdk.adapters;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
-import com.konduto.sdk.models.*;
+import com.konduto.sdk.models.KondutoBusTravelLeg;
+import com.konduto.sdk.models.KondutoFlightTravelLeg;
+import com.konduto.sdk.models.KondutoModel;
+import com.konduto.sdk.models.KondutoPassenger;
+import com.konduto.sdk.models.KondutoTravel;
+import com.konduto.sdk.models.KondutoTravelLeg;
+import com.konduto.sdk.models.KondutoTravelType;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
