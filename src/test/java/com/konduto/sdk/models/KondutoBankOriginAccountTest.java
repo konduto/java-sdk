@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.adapters.KondutoBankOriginAccountAdapter;
-import com.konduto.sdk.adapters.KondutoFlightTravelLegAdapter;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.factories.KondutoBankOriginAccountFactory;
 import com.konduto.sdk.utils.TestUtils;

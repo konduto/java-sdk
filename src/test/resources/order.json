@@ -211,5 +211,69 @@
       "tax_id": "540.830.640-21",
       "name": "Cicero"
     }
+  },
+  "delivery": {
+    "delivery_company": "GFL",
+    "delivery_method": "retira_loja",
+    "estimated_shipping_date": "2021-05-06",
+    "estimated_delivery_date": "2021-05-06"
+  },
+  "point_of_sale": {
+    "id": "000500",
+    "name": "Capital Representações",
+    "lat": -23.5677666,
+    "lon": -46.6487763,
+    "address": "Rua Dez de Abril, 23",
+    "city": "São Paulo",
+    "state": "SP",
+    "zip": "01001-001",
+    "country": "BR"
+  },
+  "agent": {
+    "id": "1",
+    "login": "igor.rodrigues",
+    "name": "Igor F Rodrigues",
+    "tax_id": "012014567890",
+    "category": "",
+    "created_at": "2015-06-09",
+    "dob": "1992-08-25"
+  },
+  "origin_account": {
+    "id": "ABC123DEF",
+    "balance": 250.0,
+    "key_type": "pix_phone",
+    "key_value": "+5511912341234",
+    "bank_code": "00000000",
+    "bank_name": "Banco do Brasil",
+    "bank_branch": "0001",
+    "bank_account": "123123",
+    "holder_name": "Alberto Armando",
+    "holder_tax_id": "123.456.789-09"
   }
+ /* "destination_accounts": [
+    {
+      "id": "Conta 003",
+      "key_type": "pix_evp",
+      "key_value": "123e4567-e89b-12d3-a456-426655440000",
+      "bank_code": "17298092",
+      "bank_name": "Itaú BBA",
+      "bank_branch": "0001",
+      "bank_account": "01234-5",
+      "holder_name": "Igor Francesco",
+      "holder_tax_id": "123.456-789-09",
+      "amount": 200.0
+    },
+    {
+      "id": "Conta 007",
+      "key_type": "pix_phone",
+      "key_value": "(11) 911112222",
+      "bank_code": "60872504",
+      "bank_name": "Banco Itaú",
+      "bank_branch": "0001",
+      "bank_account": "12345-6",
+      "holder_name": "Ana Luna",
+      "holder_tax_id": "046.123.123-13",
+      "amount": 500.0
+    }
+  ]*/
 }
