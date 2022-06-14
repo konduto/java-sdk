@@ -2,15 +2,22 @@ package com.konduto.sdk.adapters;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.konduto.sdk.models.KondutoBank;
+import com.konduto.sdk.models.KondutoBankDestinationAccount;
+import com.konduto.sdk.models.KondutoBankOriginAccount;
+
+import java.lang.reflect.Type;
 
 /**
  * Created by igor.rodrigues (nickname: igor.francesco) 09/06/2022.
  * KondutoBanKAdapter to deserialize KondutoBank objects.
  */
-public class KondutoBankAdapter {
+public class KondutoBankAdapter implements JsonSerializer<KondutoBank> {
 
-    JsonElement serialize(KondutoBank bank) {
+    @Override
+    public JsonElement serialize(KondutoBank bank, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject json = new JsonObject();
         if (bank.getId() != null) {
             json.addProperty("id", bank.getId());
@@ -38,6 +45,14 @@ public class KondutoBankAdapter {
         }
         if (bank.getBankAccount() != null) {
             json.addProperty("bank_account", bank.getBankAccount());
+        }
+        if(bank.getClass().equals(KondutoBankDestinationAccount.class)){
+            KondutoBankDestinationAccountAdapter destinationAccountAdapter = new KondutoBankDestinationAccountAdapter();
+            return destinationAccountAdapter.completeSerialization(json, (KondutoBankDestinationAccount) bank);
+        }
+        if(bank.getClass().equals(KondutoBankOriginAccount.class)){
+            KondutoBankOriginAccountAdapter originAccountAdapter = new KondutoBankOriginAccountAdapter();
+            return originAccountAdapter.completeSerialization(json, (KondutoBankOriginAccount) bank);
         }
 
         return json;

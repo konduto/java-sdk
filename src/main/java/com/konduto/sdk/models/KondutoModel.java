@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.DateFormat;
+import com.konduto.sdk.adapters.KondutoBankAdapter;
 import com.konduto.sdk.adapters.KondutoBankDestinationAccountAdapter;
 import com.konduto.sdk.adapters.KondutoBankOriginAccountAdapter;
 import com.konduto.sdk.adapters.KondutoBusTravelLegAdapter;
@@ -52,6 +53,7 @@ public abstract class KondutoModel {
     private static Type flightTravelLegType = new TypeToken<KondutoFlightTravelLeg>(){}.getType();
 	private static Type originAccountType = new TypeToken<KondutoBankOriginAccount>(){}.getType();
 	private static Type destinationAccountsType = new TypeToken<Collection<KondutoBankDestinationAccount>>(){}.getType();
+	private static  Type bank = new TypeToken<KondutoBank>(){}.getType();
 
 
 	protected static Gson gson = new GsonBuilder()
@@ -60,6 +62,7 @@ public abstract class KondutoModel {
 			.registerTypeAdapter(travelType, new KondutoTravelAdapter())
             .registerTypeAdapter(busTravelLegType, new KondutoBusTravelLegAdapter())
             .registerTypeAdapter(flightTravelLegType, new KondutoFlightTravelLegAdapter())
+			.registerTypeAdapter(bank, new KondutoBankAdapter())
 			.registerTypeAdapter(originAccountType , new KondutoBankOriginAccountAdapter())
 			.registerTypeAdapter(destinationAccountsType, new KondutoBankDestinationAccountAdapter())
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)

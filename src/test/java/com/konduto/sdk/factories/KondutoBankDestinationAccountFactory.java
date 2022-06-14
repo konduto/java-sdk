@@ -3,8 +3,9 @@ package com.konduto.sdk.factories;
 import com.konduto.sdk.models.KondutoBankDestinationAccount;
 import com.konduto.sdk.models.KondutoBankDocumentType;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by igor.rodrigues (nickname: igor.francesco) 10/06/2022.
@@ -12,7 +13,10 @@ import java.util.Collection;
 public class KondutoBankDestinationAccountFactory {
 
     public static Collection<KondutoBankDestinationAccount> getDestinationAccounts() {
-        return Arrays.asList(getSenderAccount(), getReceiverAccount());
+        List<KondutoBankDestinationAccount> accounts = new ArrayList<>();
+        accounts.add(getSenderAccount());
+        accounts.add(getReceiverAccount());
+        return accounts;
     }
 
     //sender and receiver

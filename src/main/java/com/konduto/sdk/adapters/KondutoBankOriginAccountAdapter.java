@@ -5,8 +5,6 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 import com.konduto.sdk.models.KondutoBankDocumentType;
 import com.konduto.sdk.models.KondutoBankOriginAccount;
 
@@ -15,7 +13,7 @@ import java.lang.reflect.Type;
 /**
  * Created by igor.rodrigues (nickname: igor.francesco) 09/06/2022.
  */
-public class KondutoBankOriginAccountAdapter extends KondutoBankAdapter implements JsonSerializer<KondutoBankOriginAccount>, JsonDeserializer<KondutoBankOriginAccount> {
+public class KondutoBankOriginAccountAdapter extends KondutoBankAdapter implements JsonDeserializer<KondutoBankOriginAccount> {
 
     /**
      * Gson invokes this call-back method during deserialization when it encounters a field of the
@@ -72,23 +70,8 @@ public class KondutoBankOriginAccountAdapter extends KondutoBankAdapter implemen
         return originAccount;
     }
 
-    /**
-     * Gson invokes this call-back method during serialization when it encounters a field of the
-     * specified type.
-     * <p>In the implementation of this call-back method, you should consider invoking
-     * {@link JsonSerializationContext#serialize(Object, Type)} method to create JsonElements for any
-     * non-trivial field of the {@code src} object. However, you should never invoke it on the
-     * {@code src} object itself since that will cause an infinite loop (Gson will call your
-     * call-back method again).</p>
-     *
-     * @param originAccount the object that needs to be converted to Json.
-     * @param typeOfSrc the actual type (fully genericized version) of the source object.
-     * @param context
-     * @return a JsonElement corresponding to the specified object.
-     */
-    @Override
-    public JsonElement serialize(KondutoBankOriginAccount originAccount, Type typeOfSrc, JsonSerializationContext context) {
-        JsonObject json = (JsonObject) super.serialize(originAccount);
+
+    public JsonElement completeSerialization(JsonObject json, KondutoBankOriginAccount originAccount){
 
         if (originAccount.getBalance() != null) {
             json.addProperty("balance", originAccount.getBalance());

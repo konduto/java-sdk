@@ -1,5 +1,7 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by igor.rodrigues (nickname: igor.francesco) 08/06/2022.
  * Bank Origin Account  model.
@@ -8,7 +10,7 @@ package com.konduto.sdk.models;
  *
  */
 public class KondutoBankOriginAccount extends KondutoBank {
-
+    @SerializedName(value = "balance")
     private Double balance;
 
     /** Constructors */

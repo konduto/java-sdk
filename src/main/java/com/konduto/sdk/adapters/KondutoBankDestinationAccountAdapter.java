@@ -5,19 +5,19 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 import com.konduto.sdk.models.KondutoBankDestinationAccount;
 import com.konduto.sdk.models.KondutoBankDocumentType;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  * Created by igor.rodrigues (nickname: igor.francesco) 10/06/2022.
  */
-public class KondutoBankDestinationAccountAdapter extends KondutoBankAdapter implements JsonSerializer<KondutoBankDestinationAccount>, JsonDeserializer<Collection<KondutoBankDestinationAccount>> {
+public class KondutoBankDestinationAccountAdapter extends KondutoBankAdapter implements JsonDeserializer<Collection<KondutoBankDestinationAccount>> {
 
     /**
      * Gson invokes this call-back method during deserialization when it encounters a field of the
@@ -82,55 +82,12 @@ public class KondutoBankDestinationAccountAdapter extends KondutoBankAdapter imp
         return context.deserialize(je, KondutoBankDestinationAccount.class);
     }
 
-    /**
-     * Gson invokes this call-back method during serialization when it encounters a field of the
-     * specified type.
-     * <p>In the implementation of this call-back method, you should consider invoking
-     * {@link JsonSerializationContext#serialize(Object, Type)} method to create JsonElements for any
-     * non-trivial field of the {@code src} object. However, you should never invoke it on the
-     * {@code src} object itself since that will cause an infinite loop (Gson will call your
-     * call-back method again).</p>
-     *
-     * @param destinationAccount the object that needs to be converted to Json.
-     * @param typeOfSrc          the actual type (fully genericized version) of the source object.
-     * @param context
-     * @return a JsonElement corresponding to the specified object.
-     */
-    @Override
-    public JsonElement serialize(KondutoBankDestinationAccount destinationAccount, Type typeOfSrc, JsonSerializationContext context) {
-        JsonObject json = (JsonObject) super.serialize(destinationAccount);
+    public JsonElement completeSerialization(JsonObject json, KondutoBankDestinationAccount destinationAccount){
 
-        if (destinationAccount.getId() != null) {
-            json.addProperty("id", destinationAccount.getId());
-        }
-        if (destinationAccount.getKeyType() != null) {
-            json.addProperty("key_type", destinationAccount.getKeyType().toString().toLowerCase());
-        }
-        if (destinationAccount.getKeyValue() != null) {
-            json.addProperty("key_value", destinationAccount.getKeyValue());
-        }
-        if (destinationAccount.getHolderName() != null) {
-            json.addProperty("holder_name", destinationAccount.getHolderName());
-        }
-        if (destinationAccount.getHolderTaxId() != null) {
-            json.addProperty("holder_tax_id", destinationAccount.getHolderTaxId());
-        }
-        if (destinationAccount.getBankCode() != null) {
-            json.addProperty("bank_code", destinationAccount.getBankCode());
-        }
-        if (destinationAccount.getBankName() != null) {
-            json.addProperty("bank_name", destinationAccount.getBankName());
-        }
-        if (destinationAccount.getBankBranch() != null) {
-            json.addProperty("bank_branch", destinationAccount.getBankBranch());
-        }
-        if (destinationAccount.getBankAccount() != null) {
-            json.addProperty("bank_account", destinationAccount.getBankAccount());
-        }
         if (destinationAccount.getAmount() != null) {
-            json.addProperty("amount", destinationAccount.getAmount());
+            json.addProperty("amount", BigDecimal.valueOf(destinationAccount.getAmount()).setScale(2,
+                    RoundingMode.HALF_UP));
         }
-
         return json;
     }
 

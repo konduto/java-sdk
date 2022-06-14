@@ -1,5 +1,7 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 /**
@@ -7,14 +9,16 @@ import java.util.Objects;
  * Konduto Bank destination accounts model.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
- *
  */
 public class KondutoBankDestinationAccount extends KondutoBank {
-
+    @SerializedName(value = "amount")
     private Double amount;
 
-    /** Constructors */
-    public KondutoBankDestinationAccount(){}
+    /**
+     * Constructors
+     */
+    public KondutoBankDestinationAccount() {
+    }
 
     /**
      * Fluent constructor implementation
@@ -29,7 +33,9 @@ public class KondutoBankDestinationAccount extends KondutoBank {
         return (KondutoBankDestinationAccount) super.with(attributeName, attributeValue);
     }
 
-    /** Equals and hashCode */
+    /**
+     * Equals and hashCode
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,7 +54,9 @@ public class KondutoBankDestinationAccount extends KondutoBank {
         return Objects.hash(super.hashCode(), getAmount());
     }
 
-    /** Getters/setters */
+    /**
+     * Getters/setters
+     */
 
     public Double getAmount() {
         return amount;
