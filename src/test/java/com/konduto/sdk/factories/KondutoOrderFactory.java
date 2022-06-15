@@ -48,6 +48,7 @@ public class KondutoOrderFactory {
 		order.setAgent(KondutoAgentSellerFactory.getAgentSeller());
 		order.setOriginAccount(KondutoBankOriginAccountFactory.getOriginAccount());
 		order.setDestinationAccounts(KondutoBankDestinationAccountFactory.getDestinationAccounts());
+		order.setTenant(KondutoTenantFactory.getKondutoTenant());
 		return order;
 	}
 

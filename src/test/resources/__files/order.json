@@ -167,5 +167,10 @@
       "holder_tax_id": "046.123.123-13",
       "amount": 500.0
     }
-  ]
+  ],
+  "tenant": {
+    "id": "seller_id",
+    "name": "Seller Name",
+    "created_at": "2015-06-09"
+  }
 }

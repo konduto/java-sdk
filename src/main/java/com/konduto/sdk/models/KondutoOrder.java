@@ -107,6 +107,8 @@ public final class KondutoOrder extends KondutoModel {
     @SerializedName(value = "destination_accounts")
     private List<KondutoBankDestinationAccount> destinationAccounts;
 
+    private KondutoTenant tenant;
+
     /* Constructors */
     public KondutoOrder() {}
 
@@ -194,6 +196,7 @@ public final class KondutoOrder extends KondutoModel {
             return false;
         if (destinationAccounts != null ? !destinationAccounts.equals(order.destinationAccounts) : order.destinationAccounts != null)
             return false;
+        if (tenant != null ? !tenant.equals(order.tenant) : order.tenant != null) return false;
 
         return true;
     }
@@ -420,5 +423,11 @@ public final class KondutoOrder extends KondutoModel {
     }
     public void setDestinationAccounts(List<KondutoBankDestinationAccount> destinationAccounts) {
         this.destinationAccounts = destinationAccounts;
+    }
+    public KondutoTenant getTenant() {
+        return tenant;
+    }
+    public void setTenant(KondutoTenant tenant) {
+        this.tenant = tenant;
     }
 }
