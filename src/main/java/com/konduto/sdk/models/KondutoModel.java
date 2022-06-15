@@ -52,7 +52,7 @@ public abstract class KondutoModel {
     private static Type busTravelLegType = new TypeToken<KondutoBusTravelLeg>(){}.getType();
     private static Type flightTravelLegType = new TypeToken<KondutoFlightTravelLeg>(){}.getType();
 	private static Type originAccountType = new TypeToken<KondutoBankOriginAccount>(){}.getType();
-	private static Type destinationAccountsType = new TypeToken<Collection<KondutoBankDestinationAccount>>(){}.getType();
+	private static Type destinationAccountsType = new TypeToken<List<KondutoBankDestinationAccount>>(){}.getType();
 	private static  Type bank = new TypeToken<KondutoBank>(){}.getType();
 
 

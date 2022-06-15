@@ -152,7 +152,7 @@
       "bank_branch": "0001",
       "bank_account": "01234-5",
       "holder_name": "Igor Francesco",
-      "holder_tax_id": "123.456-789-09",
+      "holder_tax_id": "123.456.789-09",
       "amount": 200.0
     },
     {

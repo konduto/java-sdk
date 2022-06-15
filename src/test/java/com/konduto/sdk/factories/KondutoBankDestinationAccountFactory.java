@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class KondutoBankDestinationAccountFactory {
 
-    public static Collection<KondutoBankDestinationAccount> getDestinationAccounts() {
+    public static List<KondutoBankDestinationAccount> getDestinationAccounts() {
         List<KondutoBankDestinationAccount> accounts = new ArrayList<>();
         accounts.add(getSenderAccount());
         accounts.add(getReceiverAccount());

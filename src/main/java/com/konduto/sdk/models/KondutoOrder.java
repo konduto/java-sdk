@@ -105,7 +105,7 @@ public final class KondutoOrder extends KondutoModel {
 
     private KondutoBankOriginAccount originAccount;
     @SerializedName(value = "destination_accounts")
-    private Collection<KondutoBankDestinationAccount> destinationAccounts;
+    private List<KondutoBankDestinationAccount> destinationAccounts;
 
     /* Constructors */
     public KondutoOrder() {}
@@ -415,10 +415,10 @@ public final class KondutoOrder extends KondutoModel {
     public void setOriginAccount(KondutoBankOriginAccount originAccount) {
         this.originAccount = originAccount;
     }
-    public Collection<KondutoBankDestinationAccount> getDestinationAccounts() {
+    public List<KondutoBankDestinationAccount> getDestinationAccounts() {
         return destinationAccounts;
     }
-    public void setDestinationAccounts(Collection<KondutoBankDestinationAccount> destinationAccounts) {
+    public void setDestinationAccounts(List<KondutoBankDestinationAccount> destinationAccounts) {
         this.destinationAccounts = destinationAccounts;
     }
 }
