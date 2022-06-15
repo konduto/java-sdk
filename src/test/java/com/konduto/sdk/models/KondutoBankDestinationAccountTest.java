@@ -25,12 +25,10 @@ import static org.junit.Assert.fail;
 public class KondutoBankDestinationAccountTest {
 
 	Type bankDestinatioAccounts = new TypeToken<Collection<KondutoBankDestinationAccount>>(){}.getType();
-	Type bank = new TypeToken<Collection<KondutoBankAdapter>>(){}.getType();
 
 	Gson gson = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.registerTypeAdapter(bankDestinatioAccounts, new KondutoBankDestinationAccountAdapter())
-			.registerTypeAdapter(bank, new KondutoBankAdapter())
 			.create();
 	List<KondutoBankDestinationAccount> accounts = KondutoBankDestinationAccountFactory.getDestinationAccounts();
 	JsonArray accountsJSON =

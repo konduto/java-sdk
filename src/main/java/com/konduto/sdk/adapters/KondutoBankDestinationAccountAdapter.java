@@ -1,23 +1,27 @@
 package com.konduto.sdk.adapters;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.models.KondutoBankDestinationAccount;
 import com.konduto.sdk.models.KondutoBankDocumentType;
 
 import java.lang.reflect.Type;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  * Created by igor.rodrigues (nickname: igor.francesco) 10/06/2022.
  */
-public class KondutoBankDestinationAccountAdapter extends KondutoBankAdapter implements JsonDeserializer<Collection<KondutoBankDestinationAccount>> {
+public class KondutoBankDestinationAccountAdapter implements JsonSerializer<Collection<KondutoBankDestinationAccount>>, JsonDeserializer<Collection<KondutoBankDestinationAccount>> {
 
     /**
      * Gson invokes this call-back method during deserialization when it encounters a field of the
@@ -55,22 +59,22 @@ public class KondutoBankDestinationAccountAdapter extends KondutoBankAdapter imp
                 account.setHolderName(json.get("holder_name").getAsString());
             }
             if (json.has("holder_tax_id")) {
-                account .setHolderTaxId(json.get("holder_tax_id").getAsString());
+                account.setHolderTaxId(json.get("holder_tax_id").getAsString());
             }
             if (json.has("bank_code")) {
-                account .setBankCode(json.get("bank_code").getAsString());
+                account.setBankCode(json.get("bank_code").getAsString());
             }
             if (json.has("bank_name")) {
-                account .setBankName(json.get("bank_name").getAsString());
+                account.setBankName(json.get("bank_name").getAsString());
             }
             if (json.has("bank_branch")) {
-                account .setBankBranch(json.get("bank_branch").getAsString());
+                account.setBankBranch(json.get("bank_branch").getAsString());
             }
             if (json.has("bank_account")) {
-                account .setBankAccount(json.get("bank_account").getAsString());
+                account.setBankAccount(json.get("bank_account").getAsString());
             }
             if (json.has("amount")) {
-                account .setAmount(json.get("amount").getAsDouble());
+                account.setAmount(json.get("amount").getAsDouble());
             }
             destinationAccounts.add(account);
         }
@@ -78,17 +82,18 @@ public class KondutoBankDestinationAccountAdapter extends KondutoBankAdapter imp
     }
 
     public KondutoBankDestinationAccount setDeserialize(JsonObject je,
-                                      JsonDeserializationContext context) {
+                                                        JsonDeserializationContext context) {
         return context.deserialize(je, KondutoBankDestinationAccount.class);
     }
 
-    public JsonElement completeSerialization(JsonObject json, KondutoBankDestinationAccount destinationAccount){
+    @Override
+    public JsonElement serialize(Collection<KondutoBankDestinationAccount> src, Type typeOfSrc, JsonSerializationContext context) {
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .registerTypeAdapter(typeOfSrc, new KondutoBankDestinationAccountAdapter())
+                .create();
 
-        if (destinationAccount.getAmount() != null) {
-            json.addProperty("amount", BigDecimal.valueOf(destinationAccount.getAmount()).setScale(2,
-                    RoundingMode.HALF_UP));
-        }
-        return json;
+        return gson.toJsonTree(src);
     }
 
 }

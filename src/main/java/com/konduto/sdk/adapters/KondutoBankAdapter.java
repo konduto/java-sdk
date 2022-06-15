@@ -46,10 +46,10 @@ public class KondutoBankAdapter implements JsonSerializer<KondutoBank> {
         if (bank.getBankAccount() != null) {
             json.addProperty("bank_account", bank.getBankAccount());
         }
-        if(bank.getClass().equals(KondutoBankDestinationAccount.class)){
-            KondutoBankDestinationAccountAdapter destinationAccountAdapter = new KondutoBankDestinationAccountAdapter();
-            return destinationAccountAdapter.completeSerialization(json, (KondutoBankDestinationAccount) bank);
-        }
+//        if(bank.getClass().equals(KondutoBankDestinationAccount.class)){
+//            KondutoBankDestinationAccountAdapter destinationAccountAdapter = new KondutoBankDestinationAccountAdapter();
+//            return destinationAccountAdapter.completeSerialization(json, (KondutoBankDestinationAccount) bank);
+//        }
         if(bank.getClass().equals(KondutoBankOriginAccount.class)){
             KondutoBankOriginAccountAdapter originAccountAdapter = new KondutoBankOriginAccountAdapter();
             return originAccountAdapter.completeSerialization(json, (KondutoBankOriginAccount) bank);

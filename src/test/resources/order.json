@@ -249,8 +249,8 @@
     "bank_account": "123123",
     "holder_name": "Alberto Armando",
     "holder_tax_id": "123.456.789-09"
-  }
- /* "destination_accounts": [
+  },
+  "destination_accounts": [
     {
       "id": "Conta 003",
       "key_type": "pix_evp",
@@ -275,5 +275,5 @@
       "holder_tax_id": "046.123.123-13",
       "amount": 500.0
     }
-  ]*/
+  ]
 }
