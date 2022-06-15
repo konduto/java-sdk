@@ -169,8 +169,8 @@
     }
   ],
   "tenant": {
-    "id": "seller_id",
-    "name": "Seller Name",
+    "id": "0001",
+    "name": "TikPay",
     "created_at": "2015-06-09"
   }
 }

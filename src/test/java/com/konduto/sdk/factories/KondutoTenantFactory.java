@@ -8,8 +8,8 @@ public class KondutoTenantFactory {
 
     public static KondutoTenant getKondutoTenant(){
         KondutoTenant tenant = new KondutoTenant();
-        tenant.setId("seller_id");
-        tenant.setName("Seller Name");
+        tenant.setId("0001");
+        tenant.setName("TikPay");
         tenant.setCreatedAt(new Date(1433818800000L));
         return tenant;
     }
