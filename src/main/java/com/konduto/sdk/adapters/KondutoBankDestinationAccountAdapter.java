@@ -10,7 +10,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.google.gson.reflect.TypeToken;
 import com.konduto.sdk.models.KondutoBankDestinationAccount;
 import com.konduto.sdk.models.KondutoBankDocumentType;
 

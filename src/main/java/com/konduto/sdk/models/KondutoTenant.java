@@ -24,7 +24,7 @@ public final class KondutoTenant extends KondutoModel {
      */
 
     @Required
-    private String id = "1";
+    private String id;
     @Required
     private String name;
 

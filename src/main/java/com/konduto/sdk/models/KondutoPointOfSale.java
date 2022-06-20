@@ -13,7 +13,7 @@ public class KondutoPointOfSale extends KondutoModel {
     /* Attributes */
 
     @Required
-    private String id = "1";
+    private String id;
     @Required
     private String name;
     private Double lat;

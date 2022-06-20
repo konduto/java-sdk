@@ -1,7 +1,12 @@
 package com.konduto.sdk.adapters;
 
-import com.google.gson.*;
-import com.konduto.sdk.models.*;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.konduto.sdk.models.KondutoPayment;
+import com.konduto.sdk.models.KondutoPaymentType;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

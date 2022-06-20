@@ -14,7 +14,7 @@ public final class KondutoAgentSeller extends KondutoModel {
 
 	/* Attributes */
 
-	@Required private String id = "1";
+	@Required private String id;
 	private String login;
 	@Required private String name;
 	private String taxId;
