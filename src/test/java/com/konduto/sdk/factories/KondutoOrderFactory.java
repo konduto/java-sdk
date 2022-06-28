@@ -1,6 +1,10 @@
 package com.konduto.sdk.factories;
 
-import com.konduto.sdk.models.*;
+import com.konduto.sdk.models.KondutoOrder;
+import com.konduto.sdk.models.KondutoOrderStatus;
+import com.konduto.sdk.models.KondutoRecommendation;
+import com.konduto.sdk.models.KondutoTravel;
+import com.konduto.sdk.models.KondutoTravelType;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -39,6 +43,12 @@ public class KondutoOrderFactory {
 		order.setBureauxQueries(KondutoBureauQueryFactory.getQueries());
 		order.setEvents(KondutoEventFactory.getMultipleEvents());
 		order.setVehicle(KondutoVehicleFactory.getVehicle());
+		order.setDelivery(KondutoDeliveryFactory.getDelivery());
+		order.setPointOfSale(KondutoPointOfSaleFactory.getPointOfSale());
+		order.setAgent(KondutoAgentSellerFactory.getAgentSeller());
+		order.setOriginAccount(KondutoBankOriginAccountFactory.getOriginAccount());
+		order.setDestinationAccounts(KondutoBankDestinationAccountFactory.getDestinationAccounts());
+		order.setTenant(KondutoTenantFactory.getKondutoTenant());
 		return order;
 	}
 

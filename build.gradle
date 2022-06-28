@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'java'
     id 'maven-publish'
     id 'signing'
 }
@@ -9,7 +10,8 @@ file("src/main/resources/konduto.properties").withInputStream { props.load(it) }
 
 group = 'com.konduto.sdk'
 version = props["version"]
-sourceCompatibility = JavaVersion.VERSION_1_6
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 sourceSets {
     main {
@@ -35,20 +37,20 @@ repositories {
 }
 
 dependencies {
-    implementation 'commons-httpclient:commons-httpclient:3.+'
-    implementation 'com.google.code.gson:gson:2.+'
-    testImplementation 'junit:junit:4.+'
-    testImplementation 'com.github.tomakehurst:wiremock:1.+'
+    implementation 'commons-httpclient:commons-httpclient:3.1'
+    implementation 'com.google.code.gson:gson:2.9.0'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
 }
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
-    archiveClassifier.set('sources')
+    classifier "sources"
 }
 
 task javadocJar(type: Jar) {
     from javadoc
-    archiveClassifier.set('javadoc')
+    classifier "javadoc"
 }
 
 jar {
@@ -86,9 +88,9 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = 'rsampaio'
-                        name = 'Raphael Sampaio'
-                        email = 'raphael@konduto.com'
+                        id = 'danilo.carmo'
+                        name = 'Danilo Carmo'
+                        email = 'danilo.carmo@boavistascpc.com.br'
                     }
                 }
                 scm {
@@ -106,8 +108,8 @@ publishing {
             def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
-                username = ossrhUsername
-                password = ossrhPassword
+                username = props.getProperty('ossrhUsername')
+                password = props.getProperty('ossrhPassword')
             }
         }
     }

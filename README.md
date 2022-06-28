@@ -20,7 +20,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.15.0</version>
+	<version>2.16.0</version>
 </dependency>
 ```
 
@@ -103,17 +103,17 @@ KondutoOrder order = (KondutoOrder) KondutoModel.fromMap(attributes, KondutoOrde
 
 #### Customer information
 
-| Parameter  | Description                                                                                                                                               |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id         | _(required)_ **Unique** identifier for each customer. Can be anything you like (counter, id, e-mail address) as long as it's consistent in future orders. |
-| name       | _(required)_ Customer's full name.                                                                                                                        |
-| email      | _(required)_ Customer's e-mail address                                                                                                                    |
-| tax_id     | _(optional)_ Customer's tax id.                                                                                                                           |
-| phone1     | _(optional)_ Customer's primary phone number                                                                                                              |
-| phone 2    | _(optional)_ Customer's secondary phone number                                                                                                            |
-| new        | _(optional)_ Boolean indicating if the customer is using a newly created account for this purchase.                                                       |
-| vip        | _(optional)_ Boolean indicating if the customer is a VIP or frequent buyer.                                                                               |
-| created_at | _(optional)_ Date when customer was created.                                                                                                              |
+| Parameter   | Description                                                                                                                                               |
+|-------------| --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id          | _(required)_ **Unique** identifier for each customer. Can be anything you like (counter, id, e-mail address) as long as it's consistent in future orders. |
+| name        | _(required)_ Customer's full name.                                                                                                                        |
+| login       | _(required)_ Customer's e-mail address                                                                                                                    |
+| tax_id      | _(optional)_ Customer's tax id.                                                                                                                           |
+| category    | _(optional)_ Customer's primary phone number                                                                                                              |
+| phone 2     | _(optional)_ Customer's secondary phone number                                                                                                            |
+| new         | _(optional)_ Boolean indicating if the customer is using a newly created account for this purchase.                                                       |
+| vip         | _(optional)_ Boolean indicating if the customer is a VIP or frequent buyer.                                                                               |
+| created_at  | _(optional)_ Date when customer was created.                                                                                                              |
 
 
 #### Payment information
@@ -145,10 +145,10 @@ Payments may contain a `description` and a `amount` field. The former is a
 #### Billing address
 
 | Parameter | Description                                                      |
-| --------- | ---------------------------------------------------------------- |
+|-----------| ---------------------------------------------------------------- |
 | name      | _(optional)_ Cardholder's full name.                             |
-| address1  | _(optional)_ Cardholder's billing address on file with the bank. |
-| address2  | _(optional)_ Additional cardholder address information.          |
+| lat       | _(optional)_ Cardholder's billing address on file with the bank. |
+| long      | _(optional)_ Additional cardholder address information.          |
 | city      | _(optional)_ Cardholder's city.                                  |
 | state     | _(optional)_ Cardholder's state.                                 |
 | zip       | _(optional)_ Cardholder's ZIP code.                              |
@@ -158,10 +158,10 @@ Payments may contain a `description` and a `amount` field. The former is a
 #### Shipping address
 
 | Parameter | Description                                            |
-| --------- | ------------------------------------------------------ |
+|-----------| ------------------------------------------------------ |
 | name      | _(optional)_ Recipient's full name.                    |
-| address1  | _(optional)_ Recipient's shipping address.             |
-| address2  | _(optional)_ Additional recipient address information. |
+| lat       | _(optional)_ Recipient's shipping address.             |
+| long      | _(optional)_ Additional recipient address information. |
 | city      | _(optional)_ Recipient's city.                         |
 | state     | _(optional)_ Recipient's state.                        |
 | zip       | _(optional)_ Recipient's ZIP code.                     |
@@ -261,12 +261,12 @@ Payments may contain a `description` and a `amount` field. The former is a
 | attendee  | _(optional)_ Information about the ticket owner. See **KondutoEventTicketAttendee** bellow.                                       |
 
 ##### Event Ticket Attendee
-| Parameter    | Description                                                                                                                                               |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name         | _(optional)_ The attendee's name.                                                                                                                         |
-| document     | _(required)_ The attendee document value.                                                                                                                 |
-| documentType | _(optional)_ The type of document informed, such as CPF, CNPJ, passport, etc. For the complete list, see **KondutoEventTicketAttendeeDocumentType** enum. |
-| dateOfBirth  | _(optional)_ A string with the attendee's date of birth.                                                                                                  |
+| Parameter   | Description                                                                                                                                               |
+|-------------| --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name        | _(optional)_ The attendee's name.                                                                                                                         |
+| document    | _(required)_ The attendee document value.                                                                                                                 |
+| keyType     | _(optional)_ The type of document informed, such as CPF, CNPJ, passport, etc. For the complete list, see **KondutoEventTicketAttendeeDocumentType** enum. |
+| dateOfBirth | _(optional)_ A string with the attendee's date of birth.                                                                                                  |
 =======
 ##### Vehicle
 | Parameter    | Description                                                                                                                      |
@@ -293,7 +293,75 @@ Payments may contain a `description` and a `amount` field. The former is a
 | delivery_method         | _(optional)_ Details the type of withdrawal type, if applicable.                         |
 | estimated_shipping_date | _(optional)_ Informs the shipping date of the product.                                   |
 | estimated_delivery_date | _(optional)_ Informs the delivery date of the product.                                   |
+<br/>
 
+##### Physical store (point_of_sale)
+| Parameter       | Description                                                                              |
+|-----------------|------------------------------------------------------------------------------------------|
+| id              | _(required)_ A Unique identifier of the physical store.                                  |
+| name            | _(required)_ Full name of the physical store.                                            |
+| lat             | _(optional)_ Latitude of the physical store. We currently use maximum: -90, maximum: 90. |
+| long            | _(optional)_ Length of the physical store. We currently use maximum: -180, maximum: 180. |
+| address         | _(optional)_ Physical store address.                                                     |
+| city            | _(optional)_ Physical store city.                                                        |
+| state           | _(optional)_ State of the physical store.                                                |
+| zip             | _(optional)_ Physical store zip code.                                                    |
+| contry          | _(optional)_ Country code of holder (ISO 3166-2).                                        |
+
+##### Agent (Seller)
+| Parameter               | Description                                                                                                                       |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| id                      | _(required)_ A Seller's unique identifier.                                                                                        |
+| login                   | _(optional)_ Seller login.                                                                                                        |
+| name                    | _(required)_ Seller's full name.                                                                                                  |
+| tax_id                  | _(optional)_ Seller's tax document number (CPF, etc).                                                                             |
+| dob                     | _(optional)_ Seller's date of birth in YYYY-MM-DD format (ISO 8601).                                                              |
+| category                | _(optional)_ Category code of the product sold.                                                                                   |
+| created_at              | _(optional)_ Date of creation of the account or registration of the seller on the website, <br/> in YYYY-MM-DD format (ISO 8601). |
+
+<br/>
+
+#### Safe Banking at Konduto
+
+Safebank spans multiple nodes, the first node `origin_account`, which represents the source account in the balance and pix 
+packets. The `destination_accounts` node brings a list that represents the destination accounts in payments of type amount and pix. 
+The `tenant` node represents the platform (or marketplace) on which the pix transaction is 
+taking place which can be declared within this `tenant` node.
+
+##### Origin Account
+| Parameter         | Description                                                                                                                                                 |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id                | _(optional)_ Unique account identifier.                                                                                                                     |
+| key_type          | _(optional)_ Key type used to identify the account.<br/> We currently support `pix_cpf`, `pix_cnpj`, `pix_phone`, `pix_email`, `pix_evp`, `p2p` and `none`. |
+| key_value         | _(optional)_ Key value used to identify the account.                                                                                                        |
+| holder_name       | _(optional)_ Name of the account holder.                                                                                                                    |
+| holder_tax_id     | _(optional)_ CPF/CNPJ of the account holder.                                                                                                                |
+| bank_code         | _(optional)_ Code of the bank to which the account is linked.                                                                                               |
+| bank_name         | _(optional)_ Name of the bank to which the account is linked.                                                                                               |
+| bank_branch       | _(optional)_ Branch of the bank to which the account is linked.                                                                                             |
+| bank_account      | _(optional)_ Account number.                                                                                                                                |
+| balance           | _(optional)_ Current account balance.                                                                                                                       |
+
+##### Destination Accounts
+| Parameter          | Description                                                                                                                                                |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id                 | _(optional)_ Unique account identifier.                                                                                                                    |
+| key_type           | _(optional)_ Key type used to identify the account.<br> We currently support `pix_cpf`, `pix_cnpj`, `pix_phone`, `pix_email`, `pix_evp`, `p2p` and `none`. |
+| key_value          | _(optional)_ Key value used to identify the account.                                                                                                       |
+| holder_name        | _(optional)_ Name of the account holder.                                                                                                                   |
+| holder_tax_id      | _(optional)_ CPF/CNPJ of the account holder.                                                                                                               |
+| bank_code          | _(optional)_ Code of the bank to which the account is linked.                                                                                              |
+| bank_name          | _(optional)_ Name of the bank to which the account is linked.                                                                                              |
+| bank_branch        | _(optional)_ Branch of the bank to which the account is linked.                                                                                            |
+| bank_account       | _(optional)_ Account number.                                                                                                                               |
+| amount             | _(optional)_ Amount sent to account.                                                                                                                       |
+
+#### Tenant
+| Parameter         | Description                                                           |
+|-------------------|-----------------------------------------------------------------------|
+| id                | _(required)_ unique platform identifier.                              |
+| name              | _(optional)_ Platform name.                                           |
+| created_at        | _(optional)_ Platform creation date, in YYYY-MM-DD format (ISO 8601). |
 
 ## Sending an order for analysis.
 

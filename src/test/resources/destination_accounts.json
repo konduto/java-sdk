@@ -1,0 +1,27 @@
+[
+  {
+    "id": "Conta 003",
+    "key_type": "pix_evp",
+    "key_value": "123e4567-e89b-12d3-a456-426655440000",
+    "bank_code": "17298092",
+    "bank_name": "Itaú BBA",
+    "bank_branch": "0001",
+    "bank_account": "01234-5",
+    "holder_name": "Igor Francesco",
+    "holder_tax_id": "123.456.789-09",
+    "amount": 200.0
+  },
+  {
+    "id": "Conta 007",
+    "key_type": "pix_phone",
+    "key_value": "(11) 911112222",
+    "bank_code": "60872504",
+    "bank_name": "Banco Itaú",
+    "bank_branch": "0001",
+    "bank_account": "12345-6",
+    "holder_name": "Ana Luna",
+    "holder_tax_id": "046.123.123-13",
+    "amount": 500.0
+  }
+]
+

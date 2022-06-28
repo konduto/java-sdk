@@ -98,6 +98,16 @@ public final class KondutoOrder extends KondutoModel {
 
     @SerializedName("delivery")
     private KondutoDelivery delivery;
+    @SerializedName("point_of_sale")
+    private KondutoPointOfSale pointOfSale;
+
+    private KondutoAgentSeller agent;
+
+    private KondutoBankOriginAccount originAccount;
+    @SerializedName(value = "destination_accounts")
+    private List<KondutoBankDestinationAccount> destinationAccounts;
+
+    private KondutoTenant tenant;
 
     /* Constructors */
     public KondutoOrder() {}
@@ -177,12 +187,21 @@ public final class KondutoOrder extends KondutoModel {
 
         if (options != null ? !options.equals(order.options) : order.options != null) return false;
         if (hotel != null ? !hotel.equals(order.hotel) : order.hotel != null) return false;
+
         if (delivery != null ? !delivery.equals(order.delivery) : order.delivery != null) return false;
+        if (pointOfSale != null ? !pointOfSale.equals(order.pointOfSale) : order.pointOfSale != null) return false;
+        if (agent != null ? !agent.equals(order.agent) : order.agent != null) return false;
+
+        if (originAccount != null ? !originAccount.equals(order.originAccount) : order.originAccount != null)
+            return false;
+        if (destinationAccounts != null ? !destinationAccounts.equals(order.destinationAccounts) : order.destinationAccounts != null)
+            return false;
+        if (tenant != null ? !tenant.equals(order.tenant) : order.tenant != null) return false;
 
         return true;
     }
 
-    /* getters and setters */
+    /** getters and setters **/
     public KondutoNavigationInfo getNavigationInfo() {
         return navigationInfo;
     }
@@ -378,5 +397,37 @@ public final class KondutoOrder extends KondutoModel {
 
     public void setDelivery(KondutoDelivery delivery) {
         this.delivery = delivery;
+    }
+
+    public KondutoPointOfSale getPointOfSale() {
+        return pointOfSale;
+    }
+    public void setPointOfSale(KondutoPointOfSale pointOfSale){
+        this.pointOfSale = pointOfSale;
+    }
+    public KondutoAgentSeller getAgent() {
+        return  agent;
+    }
+    public void setAgent(KondutoAgentSeller agent){
+        this.agent = agent;
+    }
+
+    public KondutoBankOriginAccount getOriginAccount() {
+        return originAccount;
+    }
+    public void setOriginAccount(KondutoBankOriginAccount originAccount) {
+        this.originAccount = originAccount;
+    }
+    public List<KondutoBankDestinationAccount> getDestinationAccounts() {
+        return destinationAccounts;
+    }
+    public void setDestinationAccounts(List<KondutoBankDestinationAccount> destinationAccounts) {
+        this.destinationAccounts = destinationAccounts;
+    }
+    public KondutoTenant getTenant() {
+        return tenant;
+    }
+    public void setTenant(KondutoTenant tenant) {
+        this.tenant = tenant;
     }
 }

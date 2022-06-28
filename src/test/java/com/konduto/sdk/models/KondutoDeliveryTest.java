@@ -2,7 +2,6 @@ package com.konduto.sdk.models;
 
 import com.google.gson.JsonObject;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
-import com.konduto.sdk.factories.KondutoAddressFactory;
 import com.konduto.sdk.factories.KondutoDeliveryFactory;
 import com.konduto.sdk.utils.TestUtils;
 import org.junit.Test;
