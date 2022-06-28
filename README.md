@@ -148,7 +148,7 @@ Payments may contain a `description` and a `amount` field. The former is a
 |-----------| ---------------------------------------------------------------- |
 | name      | _(optional)_ Cardholder's full name.                             |
 | lat       | _(optional)_ Cardholder's billing address on file with the bank. |
-| lon       | _(optional)_ Additional cardholder address information.          |
+| long      | _(optional)_ Additional cardholder address information.          |
 | city      | _(optional)_ Cardholder's city.                                  |
 | state     | _(optional)_ Cardholder's state.                                 |
 | zip       | _(optional)_ Cardholder's ZIP code.                              |
@@ -161,7 +161,7 @@ Payments may contain a `description` and a `amount` field. The former is a
 |-----------| ------------------------------------------------------ |
 | name      | _(optional)_ Recipient's full name.                    |
 | lat       | _(optional)_ Recipient's shipping address.             |
-| lon       | _(optional)_ Additional recipient address information. |
+| long      | _(optional)_ Additional recipient address information. |
 | city      | _(optional)_ Recipient's city.                         |
 | state     | _(optional)_ Recipient's state.                        |
 | zip       | _(optional)_ Recipient's ZIP code.                     |
@@ -296,17 +296,17 @@ Payments may contain a `description` and a `amount` field. The former is a
 <br/>
 
 ##### Physical store (point_of_sale)
-| Parameter               | Description                                                                              |
-|-------------------------|------------------------------------------------------------------------------------------|
-| id                      | _(required)_ A Unique identifier of the physical store.                                  |
-| name                    | _(required)_ Full name of the physical store.                                            |
-| lat                     | _(optional)_ Latitude of the physical store. We currently use maximum: -90, maximum: 90. |
-| lon                     | _(optional)_ Length of the physical store. We currently use maximum: -180, maximum: 180. |
-| address                 | _(optional)_ Physical store address.                                                     |
-| city                    | _(optional)_ Physical store city.                                                        |
-| state                   | _(optional)_ State of the physical store.                                                |
-| zip                     | _(optional)_ Physical store zip code.                                                    |
-| contry                  | _(optional)_ Country code of holder (ISO 3166-2).                                        |
+| Parameter       | Description                                                                              |
+|-----------------|------------------------------------------------------------------------------------------|
+| id              | _(required)_ A Unique identifier of the physical store.                                  |
+| name            | _(required)_ Full name of the physical store.                                            |
+| lat             | _(optional)_ Latitude of the physical store. We currently use maximum: -90, maximum: 90. |
+| long            | _(optional)_ Length of the physical store. We currently use maximum: -180, maximum: 180. |
+| address         | _(optional)_ Physical store address.                                                     |
+| city            | _(optional)_ Physical store city.                                                        |
+| state           | _(optional)_ State of the physical store.                                                |
+| zip             | _(optional)_ Physical store zip code.                                                    |
+| contry          | _(optional)_ Country code of holder (ISO 3166-2).                                        |
 
 ##### Agent (Seller)
 | Parameter               | Description                                                                                                                       |

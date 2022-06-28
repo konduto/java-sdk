@@ -1,5 +1,6 @@
 package com.konduto.sdk.models;
 
+import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
 /**
@@ -16,7 +17,9 @@ public class KondutoPointOfSale extends KondutoModel {
     private String id;
     @Required
     private String name;
+    @SerializedName("lat")
     private Double lat;
+    @SerializedName("long")
     private Double lon;
 
     private String address;

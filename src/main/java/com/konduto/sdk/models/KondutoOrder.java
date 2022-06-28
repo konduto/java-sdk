@@ -98,7 +98,7 @@ public final class KondutoOrder extends KondutoModel {
 
     @SerializedName("delivery")
     private KondutoDelivery delivery;
-
+    @SerializedName("point_of_sale")
     private KondutoPointOfSale pointOfSale;
 
     private KondutoAgentSeller agent;
