@@ -113,7 +113,7 @@
       "id": "000500",
       "name": "Capital Representações",
       "lat": -23.5677666,
-      "lon": -46.6487763,
+      "long": -46.6487763,
       "address": "Rua Dez de Abril, 23",
       "city": "São Paulo",
       "state": "SP",
@@ -171,6 +171,6 @@
   "tenant": {
     "id": "0001",
     "name": "TikPay",
-    "created_at": "2015-06-09"
+    "created_at": "2014-12-31T13:00:00Z"
   }
 }

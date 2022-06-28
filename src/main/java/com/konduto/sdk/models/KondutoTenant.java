@@ -1,9 +1,12 @@
 package com.konduto.sdk.models;
 
 import com.google.gson.annotations.SerializedName;
+import com.konduto.sdk.DateFormat;
 import com.konduto.sdk.annotations.Required;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Tenant model.
@@ -29,7 +32,7 @@ public final class KondutoTenant extends KondutoModel {
     private String name;
 
     @SerializedName("created_at")
-    private Date createdAt;
+    private String createdAt; // format: yyyy-MM-ddT2018-12-25T18:00Z
 
     /* Constructors */
 
@@ -60,11 +63,7 @@ public final class KondutoTenant extends KondutoModel {
         // required
         if (!id.equals(that.id)) return false;
         if (!name.equals(that.name)) return false;
-
-        // optional
-        if (!nullSafeAreDatesEqual(createdAt, that.createdAt)) {
-            return false;
-        }
+        if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
 
         return true;
     }
@@ -87,11 +86,34 @@ public final class KondutoTenant extends KondutoModel {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date created_at) {
+    /**
+     * Sets the expiration date.
+     *
+     * ATTENTION: must be an ISO (UTC) datetime (yyyy-MM-ddTHH:mm:ssZ)
+     *
+     * @param created_at ISO datetime string
+     */
+    public void setCreatedAt(String created_at) {
+        this.createdAt = created_at;
+        if(created_at == null ||
+                !created_at.matches(DateFormat.ISO_DATETIME.getRegex())) {
+            throw new IllegalArgumentException("Invalid datetime: " + created_at);
+        }
         this.createdAt = created_at;
     }
+    /**
+     * Sets
+     * @param created_at
+     */
+    public void setCreatedAt(Date created_at) {
+        SimpleDateFormat sdf =
+                new SimpleDateFormat(DateFormat.ISO_DATETIME.getFormat());
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        this.createdAt = sdf.format(created_at);
+    }
+
 }
