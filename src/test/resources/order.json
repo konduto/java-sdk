@@ -76,6 +76,9 @@
     },
     {
       "type": "voucher"
+    },
+    {
+      "type": "ted"
     }
   ],
   "shopping_cart": [

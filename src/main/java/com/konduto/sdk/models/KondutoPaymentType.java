@@ -50,6 +50,12 @@ public enum KondutoPaymentType {
 		protected Class<? extends KondutoPayment> getKlass() {
 			return KondutoDebitPayment.class;
 		}
+	},
+	TED {
+		@Override
+		protected Class<? extends KondutoPayment> getKlass() {
+			return KondutoTEDPayment.class;
+		}
 	};
 
 	protected abstract Class<? extends KondutoPayment> getKlass();

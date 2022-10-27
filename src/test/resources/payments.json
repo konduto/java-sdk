@@ -20,5 +20,8 @@
 	},
     {
         "type":"voucher"
-    }
+    },
+	{
+		"type":"ted"
+	}
 ]

@@ -43,6 +43,9 @@ public class KondutoPaymentFactory {
 	public static KondutoVoucherPayment getVoucherPayment() {
 		return new KondutoVoucherPayment();
 	}
+	public static KondutoTEDPayment getTEDPayment() {
+		return new KondutoTEDPayment();
+	}
 
 	public static Collection<KondutoPayment> getPayments() {
 		Collection<KondutoPayment> payments = new ArrayList<KondutoPayment>();
@@ -51,6 +54,7 @@ public class KondutoPaymentFactory {
         payments.add(getDebitPayment());
         payments.add(getTransferPayment());
         payments.add(getVoucherPayment());
+        payments.add(getTEDPayment());
 		return payments;
 	}
 }
