@@ -97,7 +97,7 @@ public class KondutoDebitPayment extends KondutoPayment {
 
     public String getStatusAsString() {
         return getStatus() == null ?
-                "" :
+                null :
                 getStatus().toString().toLowerCase();
     }
 
