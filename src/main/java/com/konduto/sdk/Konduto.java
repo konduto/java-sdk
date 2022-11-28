@@ -6,13 +6,7 @@ import com.konduto.sdk.exceptions.KondutoHTTPException;
 import com.konduto.sdk.exceptions.KondutoHTTPExceptionFactory;
 import com.konduto.sdk.exceptions.KondutoInvalidEntityException;
 import com.konduto.sdk.exceptions.KondutoUnexpectedAPIResponseException;
-import com.konduto.sdk.models.KondutoDevice;
-import com.konduto.sdk.models.KondutoGeolocation;
-import com.konduto.sdk.models.KondutoModel;
-import com.konduto.sdk.models.KondutoNavigationInfo;
-import com.konduto.sdk.models.KondutoOrder;
-import com.konduto.sdk.models.KondutoOrderStatus;
-import com.konduto.sdk.models.KondutoRecommendation;
+import com.konduto.sdk.models.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.HttpClient;
@@ -336,6 +330,10 @@ public final class Konduto {
 
 		if(responseBody.has("device")){
 			order.setDevice((KondutoDevice) KondutoModel.fromJSON(responseBody.getAsJsonObject("device"), KondutoDevice.class));
+		}
+
+		if(responseBody.has("external_device")){
+			order.setExternalDevice((KondutoExternalDevice) KondutoModel.fromJSON(responseBody.getAsJsonObject("external_device"), KondutoExternalDevice.class));
 		}
 
 		if(responseBody.has("navigation")){

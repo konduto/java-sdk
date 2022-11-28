@@ -119,6 +119,7 @@ public class KondutoTest {
 		assertNull("basic order should have no status", orderToSend.getStatus());
 		assertNull("basic order should have no geolocation", orderToSend.getGeolocation());
 		assertNull("basic order should have no device", orderToSend.getDevice());
+		assertNull("basic order should have no external device", orderToSend.getExternalDevice());
 		assertNull("basic order should have no navigation info", orderToSend.getNavigationInfo());
         assertTrue("basic order should have analyze set to true", orderToSend.getAnalyze());
 

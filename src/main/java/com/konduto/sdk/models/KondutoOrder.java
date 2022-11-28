@@ -84,6 +84,8 @@ public final class KondutoOrder extends KondutoModel {
 
     private KondutoDevice device;
 
+    private KondutoExternalDevice externalDevice;
+
     @SerializedName("navigation")
     private KondutoNavigationInfo navigationInfo;
 
@@ -170,6 +172,8 @@ public final class KondutoOrder extends KondutoModel {
 
         if (device != null ? !device.equals(order.device) : order.device != null) return false;
 
+        if (externalDevice != null ? !externalDevice.equals(order.externalDevice) : order.externalDevice != null) return false;
+
         if (navigationInfo != null ? !navigationInfo.equals(order.navigationInfo) : order.navigationInfo != null)
             return false;
 
@@ -214,6 +218,15 @@ public final class KondutoOrder extends KondutoModel {
     public void setDevice(KondutoDevice device) {
         this.device = device;
     }
+
+    public KondutoExternalDevice getExternalDevice() {
+        return externalDevice;
+    }
+
+    public void setExternalDevice(KondutoExternalDevice externalDevice) {
+        this.externalDevice = externalDevice;
+    }
+
     public Collection<KondutoItem> getShoppingCart() {
         return shoppingCart;
     }
