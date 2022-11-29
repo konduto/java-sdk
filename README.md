@@ -20,7 +20,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.16.1</version>
+	<version>2.17.2 </version>
 </dependency>
 ```
 
@@ -100,7 +100,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.16.0</version>
+	<version>2.17.2</version>
 </dependency>
 ```
 
@@ -281,7 +281,7 @@ paid via a discount voucher and 90.00 via credit card.
 
 ##### Common travel leg attributes
 | Parameter             | Description                             |
- | --------------------- | --------------------------------------- |
+| --------------------- | --------------------------------------- |
 | date                  | _(required)_ The travel date            |
 | number_of_connections | _(optional)_ The number of connections  |
 | class                 | _(optional)_ see **KondutoTravelClass** |
@@ -443,6 +443,20 @@ taking place which can be declared within this `tenant` node.
 | id                | _(required)_ unique platform identifier.                              |
 | name              | _(optional)_ Platform name.                                           |
 | created_at        | _(optional)_ Platform creation date, in YYYY-MM-DD format (ISO 8601). |
+
+#### External Device
+| Parameter    | Description                                       |
+|--------------|---------------------------------------------------|
+| user_id      | _(optional)_ Unique account identifier.           |
+| fingerprint  | _(optional)_ Browser identification.              |
+| provider     | _(optional)_ supplier type ex: `VTEX`             |
+| category     | _(optional)_ device type ex: `mobile`, `desktop`. |
+| model        | _(optional)_ device model ex: `iphone 8`, `S10`.  |
+| platform     | _(optional)_ Type of device by the customer.      |
+| manufacturer | _(optional)_ manufacturer type ex: `Samsung`.     |
+| os           | _(optional)_ operational system ex: `Android 11`. |
+| browser      | _(optional)_ Customer browser ex: `Chrome`.       |
+| language     | _(optional)_ local language ex: `pt-br`.          |
 
 ## Sending an order for analysis.
 
