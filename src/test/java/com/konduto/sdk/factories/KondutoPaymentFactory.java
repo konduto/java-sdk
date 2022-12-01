@@ -13,8 +13,12 @@ public class KondutoPaymentFactory {
 	public static KondutoCreditCardPayment getCreditCardPayment() {
 		KondutoCreditCardPayment creditCardPayment = new KondutoCreditCardPayment();
 		creditCardPayment.setBin("406655");
+		creditCardPayment.setSha1("3da541559918a808c2402bba5012f6c60b27661c");
 		creditCardPayment.setExpirationDate("012017");
 		creditCardPayment.setLast4("1234");
+		creditCardPayment.setAvsResult("X");
+		creditCardPayment.setCvvResult("Y");
+		creditCardPayment.setTaxId("11111111111");
 		creditCardPayment.setStatus(KondutoPaymentStatus.APPROVED);
 		creditCardPayment.setDescription("pagamento via cartão de crédito");
 		creditCardPayment.setAmount(12.39);

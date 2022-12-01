@@ -20,7 +20,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.16.1</version>
+	<version>2.17.1</version>
 </dependency>
 ```
 
@@ -100,7 +100,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.16.0</version>
+	<version>2.17.1</version>
 </dependency>
 ```
 
@@ -205,12 +205,15 @@ example, a transaction total amount could be 100.00, of which 10.00 are
 paid via a discount voucher and 90.00 via credit card.
 
 ##### Credit card
-| Parameter       | Description                                                                                                                                                         |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| status          | _(required)_ The status of the transaction returned by the payment processor. Accepts `approved`, `declined` or `pending` if the payment wasn't been processed yet. |
-| bin             | _(optional)_ First six digits of the customer's credit card. Used to identify the type of card being sent.                                                          |
-| last4           | _(optional)_ Four last digits of the customer's credit card number.                                                                                                 |
-| expiration_date | _(optional)_ Card's expiration date under MMYYYY format.                                                                                                            |
+| Parameter        | Description                                                                                                                                                         |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| status           | _(required)_ The status of the transaction returned by the payment processor. Accepts `approved`, `declined` or `pending` if the payment wasn't been processed yet. |
+| bin              | _(optional)_ First six digits of the customer's credit card. Used to identify the type of card being sent.                                                          |
+| last4            | _(optional)_ Four last digits of the customer's credit card number.                                                                                                 |
+| expiration_date  | _(optional)_ Card's expiration date under MMYYYY format.                                                                                                            |
+| cvv_result       | _(optional)_ Result code from CVV verification.                                                                                                                     |
+| avs_result       | _(optional)_ Result code from AVS verification.                                                                                                                     |               
+| sha1             | _(optional)_ Integrity payment code.                                                                                                                                |
 
 ##### Boleto
 | Parameter       | Description                                         |
@@ -221,6 +224,7 @@ paid via a discount voucher and 90.00 via credit card.
 * DEBIT
 * TRANSFER
 * VOUCHER
+* TED
 
 #### Billing address
 
