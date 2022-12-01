@@ -56,11 +56,15 @@
   },
   "payment": [
     {
-      "type": "credit",
-      "status": "approved",
-      "bin": "406655",
-      "last4": "1234",
-      "expiration_date": "012017",
+      "bin":"406655",
+      "last4":"1234",
+      "sha1": "3da541559918a808c2402bba5012f6c60b27661c",
+      "expiration_date":"012017",
+      "status":"approved",
+      "type":"credit",
+      "cvv_result": "Y",
+      "avs_result": "X",
+      "tax_id": "11111111111",
       "description": "pagamento via cartão de crédito",
       "amount": 12.39
     },

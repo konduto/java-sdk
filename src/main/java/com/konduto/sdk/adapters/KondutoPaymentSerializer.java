@@ -4,10 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.konduto.sdk.models.KondutoBoletoPayment;
-import com.konduto.sdk.models.KondutoCreditCardPayment;
-import com.konduto.sdk.models.KondutoPayment;
-import com.konduto.sdk.models.KondutoPaymentType;
+import com.konduto.sdk.models.*;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -45,6 +42,10 @@ public class KondutoPaymentSerializer implements JsonSerializer<KondutoPayment> 
         if(payment.getType().equals(KondutoPaymentType.BOLETO)) {
             KondutoBoletoPaymentSerializer boletoPaymentSerializer = new KondutoBoletoPaymentSerializer();
             return boletoPaymentSerializer.completeSerialization(paymentAsJson, (KondutoBoletoPayment) payment);
+        }
+        if(payment.getType().equals(KondutoPaymentType.DEBIT)) {
+            KondutoDebitPaymentSerializer debitPaymentSerializer = new KondutoDebitPaymentSerializer();
+            return debitPaymentSerializer.completeSerialization(paymentAsJson, (KondutoDebitPayment) payment);
         }
         return paymentAsJson;
     }
