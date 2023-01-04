@@ -5,7 +5,6 @@ import com.konduto.sdk.models.KondutoExternalDevice;
 public class KondutoExternalDeviceFactory {
     public static KondutoExternalDevice getExternalDevice(){
         KondutoExternalDevice externalDevice = new KondutoExternalDevice();
-        externalDevice.setUserId("anyID");
         externalDevice.setBrowser("Chrome");
         externalDevice.setProvider("SO");
         externalDevice.setCategory("Mobile");

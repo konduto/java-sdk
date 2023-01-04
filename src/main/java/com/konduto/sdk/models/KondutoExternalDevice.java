@@ -8,8 +8,6 @@ package com.konduto.sdk.models;
  *
  */
 public class KondutoExternalDevice extends KondutoModel {
-    // it is missing to create a field in the userId base to accept information
-    private String userId;
     private String fingerprint;
     private String provider;
     private String category;
@@ -31,7 +29,6 @@ public class KondutoExternalDevice extends KondutoModel {
 
         KondutoExternalDevice that = (KondutoExternalDevice) o;
 
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
         if (provider != null ? !provider.equals(that.provider) : that.provider != null) return false;
         if (category != null ? !category.equals(that.category) : that.category != null) return false;
         if (model != null ? !model.equals(that.model) : that.model != null) return false;
@@ -51,14 +48,6 @@ public class KondutoExternalDevice extends KondutoModel {
     }
 
     /* Getters and Setters */
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getFingerprint() {
         return fingerprint;
