@@ -612,6 +612,21 @@ taking place which can be declared within this `tenant` node.
 | name              | _(optional)_ Platform name.                                           |
 | created_at        | _(optional)_ Platform creation date, in YYYY-MM-DD format (ISO 8601). |
 
+
+#### External Device
+| Parameter    | Description                                        |
+|--------------|----------------------------------------------------|
+| fingerprint  | _(optional)_ Browser identification.               |
+| provider     | _(optional)_ supplier type ex: `VTEX`              |   
+| category     | _(optional)_ device type ex: `mobile`, `desktop`.  |
+| model        | _(optional)_ device model ex: `iphone 8`, `S10`.   |
+| platform     | _(optional)_ Type of device by the customer.       |
+| manufacturer | _(optional)_ manufacturer type ex: `samsung`.      |
+| os           | _(optional)_ operational system ex: `android 11`.  |
+| browser      | _(optional)_ Customer browser ex: `chrome`.        |
+| language     | _(optional)_ local language ex: `pt-br`.           |
+    
+
 ## Sending an order for analysis.
 
 After creating the order, sending it to Konduto's analysis is very simple.
