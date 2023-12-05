@@ -25,7 +25,7 @@ public class KondutoCustomerFactory {
 		customer.setPhone1("11987654321");
 		customer.setPhone2("1133333333");
 		customer.setTaxId("01234567890");
-		customer.setCreated_at(new Date(1433818800000L));
+		customer.setCreatedAt(new Date(1433818800000L));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Date dob = sdf.parse("27/12/1989");

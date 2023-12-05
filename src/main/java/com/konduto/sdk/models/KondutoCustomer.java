@@ -17,15 +17,20 @@ public final class KondutoCustomer extends KondutoModel {
 
 	@Required private String id = "1";
 	@Required private String name;
-	@Required private String email;
 	private String taxId;
 	private String phone1;
 	private String phone2;
-	@SerializedName("vip") private Boolean isVip;
+	@Required private String email;
 	@SerializedName("new") private Boolean isNew;
+	@SerializedName("vip") private Boolean isVip;
 
-	private Date created_at;
 	private Date dob;
+	@SerializedName("created_at") private Date createdAt;
+
+	private String type;
+	@SerializedName("risk_level") private String riskLevel;
+	@SerializedName("risk_score") private Integer riskScore;
+	@SerializedName("mother_name") private String motherName;
 
 	/* Constructors */
 
@@ -51,23 +56,21 @@ public final class KondutoCustomer extends KondutoModel {
 
 		KondutoCustomer that = (KondutoCustomer) o;
 
-		// required
-		if (!id.equals(that.id)) return false;
-		if (!email.equals(that.email)) return false;
-		if (!name.equals(that.name)) return false;
 
-		// optional
-		if (isNew != null ? !isNew.equals(that.isNew) : that.isNew != null) return false;
-		if (isVip != null ? !isVip.equals(that.isVip) : that.isVip != null) return false;
+		if (!id.equals(that.id)) return false;
+		if (!name.equals(that.name)) return false;
+		if (taxId != null ? !taxId.equals(that.taxId) : that.taxId != null) return false;
 		if (phone1 != null ? !phone1.equals(that.phone1) : that.phone1 != null) return false;
 		if (phone2 != null ? !phone2.equals(that.phone2) : that.phone2 != null) return false;
-		if (taxId != null ? !taxId.equals(that.taxId) : that.taxId != null) return false;
-		if (!nullSafeAreDatesEqual(created_at, that.created_at)){
-			return false;
-		}
-		if (!nullSafeAreDatesEqual(dob, that.dob)){
-			return false;
-		}
+		if (!email.equals(that.email)) return false;
+		if (isNew != null ? !isNew.equals(that.isNew) : that.isNew != null) return false;
+		if (isVip != null ? !isVip.equals(that.isVip) : that.isVip != null) return false;
+		if (!nullSafeAreDatesEqual(dob, that.dob)) return false;
+		if (!nullSafeAreDatesEqual(createdAt, that.createdAt)) return false;
+		if (type != null ? !type.equals(that.type) : that.type != null) return false;
+		if (riskLevel != null ? !riskLevel.equals(that.riskLevel) : that.riskLevel != null) return false;
+		if (riskScore != null ? !riskScore.equals(that.riskScore) : that.riskScore != null) return false;
+		if (motherName != null ? !motherName.equals(that.motherName) : that.motherName != null) return false;
 
 		return true;
 	}
@@ -138,11 +141,67 @@ public final class KondutoCustomer extends KondutoModel {
 		this.isNew = isNew;
 	}
 
-	public Date getCreated_at() { return created_at; }
+	public Date getCreatedAt() { return createdAt; }
 
-	public void setCreated_at(Date created_at) { this.created_at = created_at; }
+	public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
 	public Date getDOB() { return dob; }
 
 	public void setDOB(Date dob) { this.dob = dob; }
+
+	public Boolean getNew() {
+		return isNew;
+	}
+
+	public void setNew(Boolean aNew) {
+		isNew = aNew;
+	}
+
+	public Boolean getVip() {
+		return isVip;
+	}
+
+	public void setVip(Boolean vip) {
+		isVip = vip;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getRiskLevel() {
+		return riskLevel;
+	}
+
+	public void setRiskLevel(String riskLevel) {
+		this.riskLevel = riskLevel;
+	}
+
+	public Integer getRiskScore() {
+		return riskScore;
+	}
+
+	public void setRiskScore(Integer riskScore) {
+		this.riskScore = riskScore;
+	}
+
+	public String getMotherName() {
+		return motherName;
+	}
+
+	public void setMotherName(String motherName) {
+		this.motherName = motherName;
+	}
 }

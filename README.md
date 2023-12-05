@@ -20,7 +20,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.17.2 </version>
+	<version>2.17.4</version>
 </dependency>
 ```
 
@@ -100,7 +100,7 @@ To get started add our SDK as a dependency in your **pom.xml**:
 <dependency>
 	<groupId>com.konduto.sdk</groupId>
 	<artifactId>java-sdk</artifactId>
-	<version>2.17.2</version>
+	<version>2.17.4</version>
 </dependency>
 ```
 
@@ -184,7 +184,7 @@ KondutoOrder order = (KondutoOrder) KondutoModel.fromMap(attributes, KondutoOrde
 #### Customer information
 
 | Parameter  | Description                                                                                                                                               |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ---------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | id         | _(required)_ **Unique** identifier for each customer. Can be anything you like (counter, id, e-mail address) as long as it's consistent in future orders. |
 | name       | _(required)_ Customer's full name.                                                                                                                        |
 | email      | _(required)_ Customer's e-mail address                                                                                                                    |
@@ -194,6 +194,10 @@ KondutoOrder order = (KondutoOrder) KondutoModel.fromMap(attributes, KondutoOrde
 | new        | _(optional)_ Boolean indicating if the customer is using a newly created account for this purchase.                                                       |
 | vip        | _(optional)_ Boolean indicating if the customer is a VIP or frequent buyer.                                                                               |
 | created_at | _(optional)_ Date when customer was created.                                                                                                              |
+| type | _(optional)_ Identifier of the customer type.                                                                                                             |
+| risk_level | _(optional)_ Level of risk identifier. Currently we support low, medium, high.                                                                            |
+| risk_score | _(optional)_ Customer risk score identifier.                                                                                                              |
+| mother_name | _(optional)_ Full name of the client’s mother.                                                                                                            |
 
 
 #### Payment information
