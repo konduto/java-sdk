@@ -1,14 +1,85 @@
-* Run `gradle build && gradle jar && gradle signMavenJavaPublication`
-* Login to https://oss.sonatype.org
-* Go to Staging Upload
-* Select `Artifact(s) with a POM`
-* Upload the POM from `build/publications/mavenJava` (file should renamed to
- java-sdk-VERSION.pom before uploading)
-* Select artifacts to upload
-    * Signed pom (rename build/publications/mavenJava pom signature file to java
-    -sdk-VERSION.pom.asc before uploading)
-    * Javadoc and javadoc .asc
-    * Sources and sources .asc
-    * Jar and jar .asc
-* Go to Staging Repositories and check all validations passed
-* Refresh & release
+## Maven Public Central Portal publish
+
+### Estrutura
+```
+java-jdk/
+├── build.gradle
+├── secring.gpg <-- Chave GPG gerada (Sensível)
+└── gradle.properties  <-- Credenciais (Sensível)
+```
+
+### Chave GPG
+Os artefatos dos novos builds devem obrigatoriamente serem assinadas antes de subir para o Central Portal, segue passo a passo da criação e exportação da chave GPG **secring.gpg**:
+
+```bash
+gpg --full-generate-key
+# Opções recomendadas
+# 1- RSA padrão
+# 2- 4096
+# 3- 0
+# 4- email address: Mesmo do POM
+# 5- 0
+# 6- Será solicitado uma senha para utilizar no gradle.properties
+
+# Lista a chave gerada (keys os ultimos 8 caracteres)
+gpg --list-keys
+
+# Distribui a chave(caso falhar usar o keys.openpgp.org ou pgp.mit.edu) 
+gpg --keyserver keyserver.ubuntu.com --send-keys ABC12345
+
+#Exporta a chave
+gpg --export-secret-keys -o secring.gpg
+```
+
+### Properties
+
+Exemplo do arquivo **gradle.properties**:
+```bash
+# Credenciais do Portal (Token)
+mavenCentralUsername=seu-token-username
+mavenCentralPassword=seu-token-password
+
+# Configuração GPG
+signing.keyId=ABC12345
+signing.password=senha-gpg
+signing.secretKeyRingFile=secring.gpg
+```
+### Publish
+
+``` bash
+# Build
+gradle wrapper
+
+# Publish
+gradlew publishToMavenCentral
+```
+
+## Publish Nexus Repository
+
+### Estrutura
+```
+java-jdk/
+├── build.gradle
+└── gradle.properties  <-- Credenciais Nexus(Sensível)
+```
+
+Use o **build_nexus_example.gradle** para publicar em repositorio Nexus, adapte o **gradle.properties** com suas credencias do Nexus:
+
+```shell
+nexusUsername=usuario
+nexusPassword=senha/token
+```
+
+## Builder Container (Validar)
+
+```shell
+docker build -t java11-builder .
+```
+```docker
+docker run --rm \
+  -v "$(pwd)":/project \
+  -v "$HOME/.gradle/gradle.properties":/root/.gradle/gradle.properties \
+  -v "$HOME/.gradle/secring.gpg":/root/secring.gpg \
+  java11-builder \
+  gradlew publishToMavenCentral
+```

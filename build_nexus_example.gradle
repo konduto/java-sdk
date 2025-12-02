@@ -1,0 +1,131 @@
+plugins {
+    id 'java-library'
+    id 'java'
+    id 'maven-publish'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+def props = new Properties()
+file("src/main/resources/konduto.properties").withInputStream { props.load(it) }
+group = 'com.konduto.sdk'
+version = props["version"]
+
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+        resources {
+            srcDirs = ['src/test/resources']
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('commons-httpclient:commons-httpclient:3.1') {
+        exclude group: 'commons-codec', module: 'commons-codec'
+        exclude group: 'junit', module: 'junit'
+    }
+    implementation('commons-codec:commons-codec:1.15') {
+        exclude group: 'junit', module: 'junit'
+    }
+    implementation 'com.google.code.gson:gson:2.9.0'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'com.github.tomakehurst:wiremock-jre8:2.33.2'
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar) {
+    dependsOn javadoc
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from configurations.compileClasspath.collect {
+        it.isDirectory() ? it : zipTree(it)
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'java-sdk'
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'Konduto\'s Java SDK'
+                description = 'Easily integrate with Konduto (https://konduto' +
+                        '.com), a fraud prevention service.'
+                url = 'https://konduto.com'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'danilo.carmo'
+                        name = 'Danilo Carmo'
+                        email = 'danilo.carmo@boavistascpc.com.br'
+                    }
+                }
+                scm {
+                    connection = 'https://github.com/konduto/java-sdk'
+                    developerConnection = 'https://github.com/konduto/java-sdk'
+                    url = 'https://github.com/konduto/java-sdk'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            def releasesRepoUrl = "https://nexus.konduto.io/repository/maven-releases/"
+            def snapshotsRepoUrl = "https://nexus.konduto.io/repository/maven-snapshots/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username = project.findProperty("nexusUsername")
+                password = project.findProperty("nexusPassword")
+            }
+        }
+    }
+}
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}

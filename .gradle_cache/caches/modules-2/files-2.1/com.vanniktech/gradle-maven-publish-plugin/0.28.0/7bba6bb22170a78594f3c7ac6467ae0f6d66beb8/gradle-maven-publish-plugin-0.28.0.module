@@ -1,0 +1,116 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.vanniktech",
+    "module": "gradle-maven-publish-plugin",
+    "version": "0.28.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.6"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.23"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "gradle-maven-publish-plugin-0.28.0.jar",
+          "url": "gradle-maven-publish-plugin-0.28.0.jar",
+          "size": 181437,
+          "sha512": "c13fb629524fe5830db463c5663a94561bb62be49cad0e162a4fb0092e54a26acbb758e0c19d2c86624f94e347146ae524590fcc17f52c1128798a94cad6bdfc",
+          "sha256": "0ec26e0a109d98185c04f9ccd7feaf50b8c0b1bcaebc74049fa24d3cb79859b2",
+          "sha1": "b20c8c8df24e6152af14884e22565e253ab025b6",
+          "md5": "7472c6655f8b59ebf769271bfa00fdfa"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.vanniktech",
+          "module": "central-portal",
+          "version": {
+            "requires": "0.28.0"
+          }
+        },
+        {
+          "group": "com.vanniktech",
+          "module": "nexus",
+          "version": {
+            "requires": "0.28.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.23"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "gradle-maven-publish-plugin-0.28.0.jar",
+          "url": "gradle-maven-publish-plugin-0.28.0.jar",
+          "size": 181437,
+          "sha512": "c13fb629524fe5830db463c5663a94561bb62be49cad0e162a4fb0092e54a26acbb758e0c19d2c86624f94e347146ae524590fcc17f52c1128798a94cad6bdfc",
+          "sha256": "0ec26e0a109d98185c04f9ccd7feaf50b8c0b1bcaebc74049fa24d3cb79859b2",
+          "sha1": "b20c8c8df24e6152af14884e22565e253ab025b6",
+          "md5": "7472c6655f8b59ebf769271bfa00fdfa"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "gradle-maven-publish-plugin-0.28.0-sources.jar",
+          "url": "gradle-maven-publish-plugin-0.28.0-sources.jar",
+          "size": 20595,
+          "sha512": "60da2c0eb48a1382c3772bb8333a928477f39f463cc7290e6f467a0ef51f0645f636f51e4784640f28ff2a94ba327a15225c58c4a18401a407b926dbc7aea930",
+          "sha256": "8923b66a397a4ca2e303da2b6e99a5940872a38fd582c97a19ed30c12c839ae7",
+          "sha1": "4b1e475229eb9092eba271b28bed538a74b87091",
+          "md5": "bc779ca761a9e972da1be718e909cade"
+        }
+      ]
+    }
+  ]
+}

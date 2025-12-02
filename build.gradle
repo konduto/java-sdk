@@ -1,8 +1,16 @@
 plugins {
     id 'java-library'
-    id 'java'
-    id 'maven-publish'
-    id 'signing'
+    id "com.vanniktech.maven.publish" version "0.28.0"
+}
+
+// Configuração da Toolchain Java (forma moderna e recomendada)
+java {
+    toolchain {
+        // Define a versão de linguagem Java 11
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+    // Cria automaticamente a tarefa javadocJar
+    // withJavadocJar()
 }
 
 def props = new Properties()
@@ -10,8 +18,6 @@ file("src/main/resources/konduto.properties").withInputStream { props.load(it) }
 
 group = 'com.konduto.sdk'
 version = props["version"]
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
 
 sourceSets {
     main {
@@ -37,96 +43,61 @@ repositories {
 }
 
 dependencies {
-    implementation('commons-httpclient:commons-httpclient:3.1') {
-        exclude group: 'commons-codec', module: 'commons-codec'
-        exclude group: 'junit', module: 'junit'
-    }
-    implementation('commons-codec:commons-codec:1.15') {
-        exclude group: 'junit', module: 'junit'
-    }
+    // Dependência de produção
     implementation 'com.google.code.gson:gson:2.9.0'
+    // Dependências de teste
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'com.github.tomakehurst:wiremock-jre8:2.33.2'
+    testImplementation 'com.github.tomakehurst:wiremock-jre8:3.0.1'
 }
 
 task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier "sources"
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar) {
-    from javadoc
-    classifier "javadoc"
+    dependsOn javadoc
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
 }
 
+// Configuração do JAR principal
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from configurations.compileClasspath.collect {
-        it.isDirectory() ? it : zipTree(it)
-    }
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'java-sdk'
-            from components.java
-            artifact sourcesJar
-            artifact javadocJar
-            versionMapping {
-                usage('java-api') {
-                    fromResolutionOf('runtimeClasspath')
-                }
-                usage('java-runtime') {
-                    fromResolutionResult()
-                }
-            }
-            pom {
-                name = 'Konduto\'s Java SDK'
-                description = 'Easily integrate with Konduto (https://konduto' +
+mavenPublishing {
+    coordinates(group, "java-sdk", version)
+
+    pom {
+        name = 'Konduto\'s Java SDK'
+        description = 'Easily integrate with Konduto (https://konduto' +
                         '.com), a fraud prevention service.'
-                url = 'https://konduto.com'
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'danilo.carmo'
-                        name = 'Danilo Carmo'
-                        email = 'danilo.carmo@boavistascpc.com.br'
-                    }
-                }
-                scm {
-                    connection = 'https://github.com/konduto/java-sdk'
-                    developerConnection = 'https://github.com/konduto/java-sdk'
-                    url = 'https://github.com/konduto/java-sdk'
-                }
+        inceptionYear = "2025"
+        url = 'https://konduto.com'
+        licenses {
+            license {
+                name = 'The Apache License, Version 2.0'
+                url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
             }
         }
-    }
-    repositories {
-        maven {
-            // change URLs to point to your repos, e.g. http://my.org/repo
-            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-            credentials {
-                username = props.getProperty('ossrhUsername')
-                password = props.getProperty('ossrhPassword')
+        developers {
+            developer {
+                id = 'danilo.carmo'
+                name = 'Danilo Carmo'
+                email = 'danilo.carmo@boavistascpc.com.br'
             }
         }
-    }
-}
+        scm {
+            connection = 'https://github.com/konduto/java-sdk'
+            developerConnection = 'https://github.com/konduto/java-sdk'
+            url = 'https://github.com/konduto/java-sdk'
+        }
 
-javadoc {
-    if (JavaVersion.current().isJava9Compatible()) {
-        options.addBooleanOption('html5', true)
     }
-}
 
-signing {
-    sign publishing.publications.mavenJava
+    publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL)
+
+    // Enable GPG (obrigatorio)
+    signAllPublications()
 }
