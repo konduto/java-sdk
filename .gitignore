@@ -81,3 +81,5 @@ com_crashlytics_export_strings.xml
 gradle/wrapper/*.jar
 .gradle
 TODO.txt
+.gradle_cache/*
+/home/local/BVS/tr_srsilva/Documentos/work/git/java-sdk/.gradle_cache
