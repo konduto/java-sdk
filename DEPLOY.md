@@ -51,7 +51,7 @@ signing.secretKeyRingFile=secring.gpg
 gradle wrapper
 
 # Publish
-gradlew publishToMavenCentral
+gradle publishToMavenCentral
 ```
 
 ## Publish Nexus Repository
@@ -81,5 +81,5 @@ docker run --rm \
   -v "$HOME/.gradle/gradle.properties":/root/.gradle/gradle.properties \
   -v "$HOME/.gradle/secring.gpg":/root/secring.gpg \
   java11-builder \
-  gradlew publishToMavenCentral
+  gradle publishToMavenCentral
 ```

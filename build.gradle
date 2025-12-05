@@ -6,8 +6,8 @@ plugins {
 // Configuração da Toolchain Java (forma moderna e recomendada)
 java {
     toolchain {
-        // Define a versão de linguagem Java 11
-        languageVersion = JavaLanguageVersion.of(11)
+        // Define a versão de linguagem Java 17,11,8
+        languageVersion = JavaLanguageVersion.of(8)
     }
     // Cria automaticamente a tarefa javadocJar
     // withJavadocJar()
@@ -18,6 +18,11 @@ file("src/main/resources/konduto.properties").withInputStream { props.load(it) }
 
 group = 'com.konduto.sdk'
 version = props["version"]
+
+// ext {
+//     // Export java version
+//     javaBuildVersion = java.toolchain.languageVersion.get().asInt()
+// }
 
 sourceSets {
     main {
@@ -93,6 +98,10 @@ mavenPublishing {
             developerConnection = 'https://github.com/konduto/java-sdk'
             url = 'https://github.com/konduto/java-sdk'
         }
+        // properties {
+	    //     // Get toolchain version
+	    //     'java.build.version' = project.javaBuildVersion
+	    // }
 
     }
 

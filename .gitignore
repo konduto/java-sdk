@@ -83,3 +83,5 @@ gradle/wrapper/*.jar
 TODO.txt
 .gradle_cache/*
 /home/local/BVS/tr_srsilva/Documentos/work/git/java-sdk/.gradle_cache
+
+.gradle_cache
