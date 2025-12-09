@@ -8,10 +8,15 @@ package com.konduto.sdk.exceptions;
  * (e.g saving an order, reporting to our support team automatically, etc.)
  *
  */
-public abstract class KondutoException extends Exception {
+public class KondutoException extends Exception {
 
-	private static final long serialVersionUID = 1920403867720844824L;
+    private static final long serialVersionUID = 1920403867720844824L;
 
-	public abstract String getMessage();
+    public KondutoException() {
+        super();
+    }
 
+    public KondutoException(String message) {
+        super(message);
+    }
 }

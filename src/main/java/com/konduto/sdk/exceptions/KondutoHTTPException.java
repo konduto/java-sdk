@@ -2,26 +2,34 @@ package com.konduto.sdk.exceptions;
 
 import com.google.gson.JsonObject;
 
-/**
- *
- * This exception will be thrown whenever Konduto's API responds with an error HTTP status.
- *
- * @see com.konduto.sdk.Konduto#sendRequest
- */
-public abstract class KondutoHTTPException extends KondutoException {
+public class KondutoHTTPException extends KondutoException {
+    private static final long serialVersionUID = -1L;
+    private final int statusCode;
+    private final JsonObject responseBody;
 
-	private static final long serialVersionUID = -1046719551304454324L;
-	private String message;
+    public KondutoHTTPException(int statusCode, String message, JsonObject responseBody) {
+        super(message);
+        this.statusCode = statusCode;
+        this.responseBody = responseBody;
+    }
 
-	/**
-	 *
-	 * @param message instance's message
-	 * @param responseBody Konduto's API response
-	 */
-	protected KondutoHTTPException(String message, JsonObject responseBody){
-		this.message = String.format("%s Response body: %s", message, responseBody.toString());
-	}
+    /**
+     * Construtor para compatibilidade com testes que não fornecem um status code.
+     */
+    public KondutoHTTPException(String message, JsonObject responseBody) {
+        this(0, message, responseBody); // Define 0 como status code padrão
+    }
 
-	@Override
-	public String getMessage() { return this.message; }
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public JsonObject getResponseBody() {
+        return responseBody;
+    }
+
+    @Override
+    public String getMessage() {
+        return String.format("HTTP %d: %s - %s", statusCode, super.getMessage(), responseBody);
+    }
 }
