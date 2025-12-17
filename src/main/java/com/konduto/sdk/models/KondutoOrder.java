@@ -8,11 +8,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
- * Order model.
+ * Represents an order in the Konduto system.
+ * This class extends KondutoModel and contains all order-related attributes including customer, payments, and items.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
- *
  */
 public final class KondutoOrder extends KondutoModel {
     /* Attributes */

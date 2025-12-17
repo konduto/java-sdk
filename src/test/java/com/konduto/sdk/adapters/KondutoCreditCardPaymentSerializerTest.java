@@ -6,6 +6,7 @@ import com.konduto.sdk.models.KondutoCreditCardPayment;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -28,7 +29,7 @@ public class KondutoCreditCardPaymentSerializerTest {
         assertEquals(paymentAsJSON.get("description").getAsString(),
                 creditCardPayment.getDescription());
         assertEquals(paymentAsJSON.get("amount").getAsBigDecimal().setScale(2
-                , BigDecimal.ROUND_HALF_UP).doubleValue(),
+                , RoundingMode.HALF_UP).doubleValue(),
                 creditCardPayment.getAmount()
                 , 0.00001);
     }

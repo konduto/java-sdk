@@ -4,11 +4,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Collection;
 
 /**
- *
- * Device model.
+ * Represents a hotel booking in the Konduto system.
+ * This class extends KondutoModel and contains hotel-specific attributes.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
- *
  */
 public class KondutoHotel extends KondutoModel {
 

@@ -7,6 +7,7 @@ import com.konduto.sdk.models.KondutoCreditCardPayment;
 /**
  * Created by rsampaio on 9/8/16.
  *
+/**
  * Serializes a credit card payment.
  */
 public class KondutoCreditCardPaymentSerializer extends KondutoPaymentSerializer {

@@ -3,11 +3,10 @@ package com.konduto.sdk.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- *
- * Navigation info model.
+ * Represents navigation information in the Konduto system.
+ * This class extends KondutoModel and contains navigation-related attributes such as session times and page views.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
- *
  */
 public class KondutoNavigationInfo extends KondutoModel {
 

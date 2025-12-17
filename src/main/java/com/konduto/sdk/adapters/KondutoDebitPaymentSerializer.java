@@ -4,6 +4,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.konduto.sdk.models.KondutoDebitPayment;
 
+/**
+ * Serializes a debit payment.
+ */
 public class KondutoDebitPaymentSerializer extends KondutoPaymentSerializer {
 
     JsonElement completeSerialization(JsonObject paymentAsJson, KondutoDebitPayment debitPayment) {

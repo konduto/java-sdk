@@ -3,11 +3,10 @@ package com.konduto.sdk.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- *
- * Device model.
+ * Represents an option in the Konduto system.
+ * This class extends KondutoModel and contains option-specific attributes.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
- *
  */
 public class KondutoOption extends KondutoModel {
 

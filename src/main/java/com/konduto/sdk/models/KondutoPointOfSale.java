@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName;
 import com.konduto.sdk.annotations.Required;
 
 /**
- * Created by igor.rodrigues (nickname: igor.francesco) 02/06/2022.
- * Point of Sale model.
+ * Represents a point of sale in the Konduto system.
+ * This class extends KondutoModel and contains point of sale specific attributes.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */

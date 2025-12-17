@@ -3,11 +3,10 @@ package com.konduto.sdk.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by igor.rodrigues (nickname: igor.francesco) 08/06/2022.
- * Bank Origin Account  model.
+ * Represents a bank origin account in the Konduto system.
+ * This class extends KondutoBank and contains origin account specific attributes.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
- *
  */
 public class KondutoBankOriginAccount extends KondutoBank {
     @SerializedName(value = "balance")
@@ -45,7 +44,18 @@ public class KondutoBankOriginAccount extends KondutoBank {
 
     /** Getters/setters */
 
+    /**
+     * Gets the current balance of the origin account.
+     *
+     * @return the account balance
+     */
     public Double getBalance() {return balance;}
+
+    /**
+     * Sets the current balance of the origin account.
+     *
+     * @param balance the account balance
+     */
     public void setBalance(Double balance) {this.balance = balance;}
 
 }

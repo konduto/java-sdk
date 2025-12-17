@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created by igor.rodrigues (nickname: igor.francesco) 10/06/2022.
+ * Adapter for serializing and deserializing collections of KondutoBankDestinationAccount objects.
  */
 public class KondutoBankDestinationAccountAdapter implements JsonSerializer<Collection<KondutoBankDestinationAccount>>, JsonDeserializer<Collection<KondutoBankDestinationAccount>> {
 
@@ -33,7 +33,7 @@ public class KondutoBankDestinationAccountAdapter implements JsonSerializer<Coll
      *
      * @param je      The Json data being deserialized
      * @param typeOfT The type of the Object to deserialize to
-     * @param context
+     * @param context The context for deserialization
      * @return a deserialized object of the specified type typeOfT which is a subclass of {@code T}
      * @throws JsonParseException if json is not in the expected format of {@code typeofT}
      */
@@ -80,6 +80,13 @@ public class KondutoBankDestinationAccountAdapter implements JsonSerializer<Coll
         return destinationAccounts;
     }
 
+    /**
+     * Helper method to deserialize a single KondutoBankDestinationAccount from JSON.
+     *
+     * @param je the JSON object to deserialize
+     * @param context the deserialization context
+     * @return the deserialized KondutoBankDestinationAccount
+     */
     public KondutoBankDestinationAccount setDeserialize(JsonObject je,
                                                         JsonDeserializationContext context) {
         return context.deserialize(je, KondutoBankDestinationAccount.class);

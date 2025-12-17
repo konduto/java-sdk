@@ -12,6 +12,12 @@ public class KondutoBusTravelLeg extends KondutoTravelLeg {
     @Required
     private String destinationCity;
 
+    /**
+     * Default constructor.
+     */
+    public KondutoBusTravelLeg() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,14 +43,29 @@ public class KondutoBusTravelLeg extends KondutoTravelLeg {
         return originCity;
     }
 
+	/**
+	 * Sets the origin city for the bus travel leg.
+	 *
+	 * @param originCity the origin city
+	 */
     public void setOriginCity(String originCity) {
         this.originCity = originCity;
     }
 
+	/**
+	 * Gets the destination city for the bus travel leg.
+	 *
+	 * @return the destination city
+	 */
     public String getDestinationCity() {
         return destinationCity;
     }
 
+	/**
+	 * Sets the destination city for the bus travel leg.
+	 *
+	 * @param destinationCity the destination city
+	 */
     public void setDestinationCity(String destinationCity) {
         this.destinationCity = destinationCity;
     }

@@ -1,8 +1,8 @@
 package com.konduto.sdk.models;
 
 /**
- *
- * Geolocation model.
+ * Represents geolocation information in the Konduto system.
+ * This class extends KondutoModel and contains location attributes such as city, state, and country.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */

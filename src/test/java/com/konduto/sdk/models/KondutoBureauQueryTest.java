@@ -7,7 +7,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class KondutoBureauQueryTest {
-    private JsonParser jsonParser = new JsonParser();
     private static final String BUREAU_QUERY_AS_JSON_STRING =
         "{" +
             "\"service\": \"emailage\"," +
@@ -17,7 +16,7 @@ public class KondutoBureauQueryTest {
             "}" +
         "}";
     private JsonObject bureauQueryAsJsonObject =
-            (JsonObject) jsonParser.parse(BUREAU_QUERY_AS_JSON_STRING);
+            (JsonObject) JsonParser.parseString(BUREAU_QUERY_AS_JSON_STRING);
 
     @Test
     public void testBureauQueryDeserialization() {

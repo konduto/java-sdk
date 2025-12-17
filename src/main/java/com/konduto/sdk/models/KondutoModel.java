@@ -76,7 +76,7 @@ public abstract class KondutoModel {
 	/**
 	 * Serializes a model instance to JSON.
 	 * @return a {@link com.google.gson.JsonObject}
-	 * @throws KondutoInvalidEntityException
+	 * @throws KondutoInvalidEntityException if the model instance is not valid
 	 */
 	public JsonObject toJSON() throws KondutoInvalidEntityException{
 		if(!this.isValid()) { throw new KondutoInvalidEntityException(this); }
@@ -141,6 +141,7 @@ public abstract class KondutoModel {
     }
 
 	/**
+	 * Adds an invalid error message to the errors list.
 	 *
 	 * @param errors a String containing a
 	 * {@link com.konduto.sdk.models.KondutoModel#errors KondutoModel instance errors}
@@ -231,18 +232,21 @@ public abstract class KondutoModel {
 	 *
 	 * @param attributes a {@link HashMap} containing attributes. For a field 'totalAmount' with type Long, we should
 	 *                   add the following entry to the map: 'totalAmount', 123L.
+	 * @param klass the class type to instantiate
+	 * @return an instance of KondutoModel (e.g a KondutoAddress if klass is {@code KondutoAddress.class})
 	 */
 	public static KondutoModel fromMap(Map<String,Object> attributes, Class<?> klass){
 
 		KondutoModel model;
-
 		try {
-			model = (KondutoModel) klass.newInstance();
+			model = (KondutoModel) klass.getDeclaredConstructor().newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 			throw new RuntimeException("could not instantiate an object of " + klass);
 		} catch (IllegalAccessException e) {
 			throw new RuntimeException("constructor is not accessible in " + klass);
+		} catch (Exception e) {
+			throw new RuntimeException("could not instantiate an object of " + klass, e);
 		}
 
 

@@ -11,8 +11,7 @@ import com.konduto.sdk.models.KondutoBankOriginAccount;
 import java.lang.reflect.Type;
 
 /**
- * Created by igor.rodrigues (nickname: igor.francesco) 09/06/2022.
- * KondutoBanKAdapter to deserialize KondutoBank objects.
+ * KondutoBankAdapter to serialize KondutoBank objects to JSON.
  */
 public class KondutoBankAdapter implements JsonSerializer<KondutoBank> {
 
