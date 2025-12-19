@@ -16,6 +16,12 @@ import java.lang.reflect.Type;
 public class KondutoBankOriginAccountAdapter extends KondutoBankAdapter implements JsonDeserializer<KondutoBankOriginAccount> {
 
     /**
+     * Default constructor.
+     */
+    public KondutoBankOriginAccountAdapter() {
+    }
+
+    /**
      * Gson invokes this call-back method during deserialization when it encounters a field of the
      * specified type.
      * <p>In the implementation of this call-back method, you should consider invoking

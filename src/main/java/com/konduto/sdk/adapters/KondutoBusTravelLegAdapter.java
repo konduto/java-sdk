@@ -13,10 +13,18 @@ import com.konduto.sdk.models.KondutoTravelClass;
 import java.lang.reflect.Type;
 
 /**
- * Created by rsampaio on 7/12/16.
+ * Adapter for serializing and deserializing KondutoBusTravelLeg objects.
  *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public class KondutoBusTravelLegAdapter extends KondutoTravelLegAdapter implements JsonSerializer<KondutoBusTravelLeg>, JsonDeserializer<KondutoBusTravelLeg> {
+
+    /**
+     * Default constructor.
+     */
+    public KondutoBusTravelLegAdapter() {
+    }
+
     /**
      * Gson invokes this call-back method during deserialization when it encounters a field of the
      * specified type.

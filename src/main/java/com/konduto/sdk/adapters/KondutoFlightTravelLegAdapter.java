@@ -13,10 +13,17 @@ import com.konduto.sdk.models.KondutoTravelClass;
 import java.lang.reflect.Type;
 
 /**
- * Created by rsampaio on 7/12/16.
+ * Adapter for serializing and deserializing KondutoFlightTravelLeg objects.
  *
+ * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public class KondutoFlightTravelLegAdapter extends KondutoTravelLegAdapter implements JsonSerializer<KondutoFlightTravelLeg>, JsonDeserializer<KondutoFlightTravelLeg> {
+
+    /**
+     * Default constructor.
+     */
+    public KondutoFlightTravelLegAdapter() {
+    }
 
     /**
      * Gson invokes this call-back method during deserialization when it encounters a field of the
@@ -29,7 +36,7 @@ public class KondutoFlightTravelLegAdapter extends KondutoTravelLegAdapter imple
      *
      * @param je The Json data being deserialized
      * @param typeOfT The type of the Object to deserialize to
-     * @param context
+     * @param context The context for deserialization
      * @return a deserialized object of the specified type typeOfT which is a subclass of {@code T}
      * @throws JsonParseException if json is not in the expected format of {@code typeofT}
      */
@@ -81,7 +88,7 @@ public class KondutoFlightTravelLegAdapter extends KondutoTravelLegAdapter imple
      *
      * @param travelLeg       the object that needs to be converted to Json.
      * @param typeOfSrc the actual type (fully genericized version) of the source object.
-     * @param context
+     * @param context The context for serialization
      * @return a JsonElement corresponding to the specified object.
      */
     @Override

@@ -14,6 +14,9 @@ public class KondutoGeolocation extends KondutoModel {
 	String country;
 
 	/* Constructors */
+	/**
+	 * Default constructor.
+	 */
 	public KondutoGeolocation() { }
 
 	/* Equals */
@@ -32,26 +35,50 @@ public class KondutoGeolocation extends KondutoModel {
 	}
 
 	/* Getters and Setters */
+	/**
+	 * Gets the country.
+	 * @return the country
+	 */
 	public String getCountry() {
 		return country;
 	}
 
+	/**
+	 * Sets the country.
+	 * @param country the country
+	 */
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
+	/**
+	 * Gets the city.
+	 * @return the city
+	 */
 	public String getCity() {
 		return city;
 	}
 
+	/**
+	 * Sets the city.
+	 * @param city the city
+	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
 
+	/**
+	 * Gets the state.
+	 * @return the state
+	 */
 	public String getState() {
 		return state;
 	}
 
+	/**
+	 * Sets the state.
+	 * @param state the state
+	 */
 	public void setState(String state) {
 		this.state = state;
 	}

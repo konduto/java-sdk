@@ -15,6 +15,12 @@ import java.lang.reflect.Type;
  */
 public class KondutoBankAdapter implements JsonSerializer<KondutoBank> {
 
+    /**
+     * Default constructor.
+     */
+    public KondutoBankAdapter() {
+    }
+
     @Override
     public JsonElement serialize(KondutoBank bank, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject json = new JsonObject();

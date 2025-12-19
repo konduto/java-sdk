@@ -111,6 +111,9 @@ public final class KondutoOrder extends KondutoModel {
     private KondutoTenant tenant;
 
     /* Constructors */
+    /**
+     * Default constructor.
+     */
     public KondutoOrder() {}
 
     /**
@@ -205,72 +208,156 @@ public final class KondutoOrder extends KondutoModel {
     }
 
     /** getters and setters **/
+    /**
+     * Gets the navigation info.
+     * @return the navigation info
+     */
     public KondutoNavigationInfo getNavigationInfo() {
         return navigationInfo;
     }
     public void setNavigationInfo(KondutoNavigationInfo navigationInfo) {
         this.navigationInfo = navigationInfo;
     }
+    /**
+     * Gets the device.
+     * @return the device
+     */
     public KondutoDevice getDevice() {
         return device;
     }
+    /**
+     * Sets the device.
+     * @param device the device
+     */
     public void setDevice(KondutoDevice device) {
         this.device = device;
     }
 
+    /**
+     * Gets the external device.
+     * @return the external device
+     */
     public KondutoExternalDevice getExternalDevice() {
         return externalDevice;
     }
 
+    /**
+     * Sets the external device.
+     * @param externalDevice the external device
+     */
     public void setExternalDevice(KondutoExternalDevice externalDevice) {
         this.externalDevice = externalDevice;
     }
 
+    /**
+     * Gets the shopping cart.
+     * @return the shopping cart
+     */
     public Collection<KondutoItem> getShoppingCart() {
         return shoppingCart;
     }
+    /**
+     * Sets the shopping cart.
+     * @param shoppingCart the shopping cart
+     */
     public void setShoppingCart(Collection<KondutoItem> shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
+    /**
+     * Gets the payments.
+     * @return the payments
+     */
     public Collection<KondutoPayment> getPayments() {
         return payments;
     }
+    /**
+     * Sets the payments.
+     * @param payments the payments
+     */
     public void setPayments(Collection<KondutoPayment> payments) {
         this.payments = payments;
     }
+    /**
+     * Gets the status.
+     * @return the status
+     */
     public KondutoOrderStatus getStatus() {
         return status;
     }
+    /**
+     * Sets the status.
+     * @param status the status
+     */
     public void setStatus(KondutoOrderStatus status) {
         this.status = status;
     }
+    /**
+     * Gets the geolocation.
+     * @return the geolocation
+     */
     public KondutoGeolocation getGeolocation() {
         return geolocation;
     }
+    /**
+     * Sets the geolocation.
+     * @param geolocation the geolocation
+     */
     public void setGeolocation(KondutoGeolocation geolocation) {
         this.geolocation = geolocation;
     }
+    /**
+     * Gets the shipping address.
+     * @return the shipping address
+     */
     public KondutoAddress getShippingAddress() {
         return shippingAddress;
     }
+    /**
+     * Sets the shipping address.
+     * @param shippingAddress the shipping address
+     */
     public void setShippingAddress(KondutoAddress shippingAddress) {
         this.shippingAddress = shippingAddress;
     }
+    /**
+     * Gets the billing address.
+     * @return the billing address
+     */
     public KondutoAddress getBillingAddress() {
         return billingAddress;
     }
+    /**
+     * Sets the billing address.
+     * @param billingAddress the billing address
+     */
     public void setBillingAddress(KondutoAddress billingAddress) {
         this.billingAddress = billingAddress;
     }
+    /**
+     * Gets the recommendation.
+     * @return the recommendation
+     */
     public KondutoRecommendation getRecommendation() {
         return recommendation;
     }
+    /**
+     * Gets the score.
+     * @return the score
+     */
     public Double getScore() {
         return score;
     }
+    /**
+     * Gets the id.
+     * @return the id
+     */
     public String getId() {
         return id;
     }
+    /**
+     * Sets the id.
+     * @param id the id
+     */
     public void setId(String id) {
         this.id = id;
     }
@@ -417,6 +504,10 @@ public final class KondutoOrder extends KondutoModel {
     public void setPointOfSale(KondutoPointOfSale pointOfSale){
         this.pointOfSale = pointOfSale;
     }
+    /**
+     * Gets the agent.
+     * @return the agent
+     */
     public KondutoAgentSeller getAgent() {
         return  agent;
     }

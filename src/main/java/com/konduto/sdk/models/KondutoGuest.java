@@ -43,47 +43,90 @@ public class KondutoGuest extends KondutoModel {
 	private Date dob;
 	private String nationality;
 
+	/**
+	 * Default constructor.
+	 */
 	public KondutoGuest(){}
 
 	/* Equals */
 
 	/* Getters and Setters */
+	/**
+	 * Gets the name.
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 * @param name the name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Gets the document.
+	 * @return the document
+	 */
 	public String getDocument() {
 		return document;
 	}
 
+	/**
+	 * Sets the document.
+	 * @param document the document
+	 */
 	public void setDocument(String document) {
 		this.document = document;
 	}
 
+	/**
+	 * Gets the document type.
+	 * @return the document type
+	 */
 	public KondutoGuestDocumentType getDocumentType() {
 		return documentType;
 	}
 
+	/**
+	 * Sets the document type.
+	 * @param documentType the document type
+	 */
 	public void setDocumentType(KondutoGuestDocumentType documentType) {
 		this.documentType = documentType;
 	}
 
+	/**
+	 * Gets the date of birth.
+	 * @return the date of birth
+	 */
 	public Date getDob() {
 		return dob;
 	}
 
+	/**
+	 * Sets the date of birth.
+	 * @param dob the date of birth
+	 */
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 
+	/**
+	 * Gets the nationality.
+	 * @return the nationality
+	 */
 	public String getNationality() {
 		return nationality;
 	}
 
+	/**
+	 * Sets the nationality.
+	 * @param nationality the nationality
+	 */
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
 	}

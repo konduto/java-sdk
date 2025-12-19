@@ -80,6 +80,11 @@ public final class Konduto {
         this.httpClient = builder.build();
     }
 
+    /**
+     * Sets the proxy host and port.
+     * @param proxyHost the proxy host
+     * @param proxyPort the proxy port
+     */
     public void setProxyHost(String proxyHost, int proxyPort) {
         rebuildHttpClient(ProxySelector.of(new InetSocketAddress(proxyHost, proxyPort)), null);
     }
@@ -195,6 +200,12 @@ public final class Konduto {
                 .header("Content-Type", "application/json");
     }
 
+    /**
+     * Retrieves an order by its ID.
+     * @param orderId the order ID
+     * @return the KondutoOrder instance
+     * @throws KondutoUnexpectedAPIResponseException if the API response is unexpected
+     */
     public KondutoOrder getOrder(String orderId) throws KondutoUnexpectedAPIResponseException {
         HttpRequest request = newRequestBuilder(kondutoGetOrderUrl(orderId)).GET().build();
         JsonObject responseBody = sendRequest(request, null);

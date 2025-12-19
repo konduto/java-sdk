@@ -188,6 +188,10 @@ public final class KondutoCustomer extends KondutoModel {
 		this.email = email;
 	}
 
+	/**
+	 * Gets whether the customer is a VIP.
+	 * @return true if the customer is a VIP, false otherwise
+	 */
 	public Boolean getIsVip() {
 		return isVip;
 	}
@@ -265,6 +269,10 @@ public final class KondutoCustomer extends KondutoModel {
 		isNew = aNew;
 	}
 
+	/**
+	 * Gets whether the customer is a VIP (alias for getIsVip).
+	 * @return true if the customer is a VIP, false otherwise
+	 */
 	public Boolean getVip() {
 		return isVip;
 	}

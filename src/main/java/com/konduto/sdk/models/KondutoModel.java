@@ -41,6 +41,9 @@ import java.util.TimeZone;
  *
  */
 public abstract class KondutoModel {
+	/**
+	 * Default constructor.
+	 */
 	protected KondutoModel(){ }
 
 	@Override
@@ -56,6 +59,9 @@ public abstract class KondutoModel {
 	private static  Type bank = new TypeToken<KondutoBank>(){}.getType();
 
 
+	/**
+	 * The Gson instance used for JSON serialization and deserialization.
+	 */
 	protected static Gson gson = new GsonBuilder()
 			.registerTypeAdapter(paymentCollectionType, new KondutoPaymentCollectionDeserializer())
 			.registerTypeHierarchyAdapter(KondutoPayment.class, new KondutoPaymentSerializer())
@@ -69,6 +75,9 @@ public abstract class KondutoModel {
             .setDateFormat("yyyy-MM-dd")
 			.create();
 
+	/**
+	 * The list of validation errors.
+	 */
 	protected transient List<String> errors = new ArrayList<String>();
 
 	/* Serialization methods */
@@ -96,7 +105,8 @@ public abstract class KondutoModel {
 	/* Error printing methods */
 
 	/**
-	 * @return {@link com.konduto.sdk.models.KondutoModel#errors errors} pretty printed.
+	 * Gets the errors pretty printed.
+	 * @return the errors pretty printed
 	 */
 	public String getErrors(){
 		StringBuilder errors = new StringBuilder();
@@ -151,7 +161,8 @@ public abstract class KondutoModel {
 	}
 
 	/**
-	 * @return whether this KondutoModel instance is valid or not.
+	 * Checks whether this KondutoModel instance is valid or not.
+	 * @return whether this KondutoModel instance is valid or not
 	 */
 	/* Validation method */
 	public boolean isValid() {
@@ -217,6 +228,12 @@ public abstract class KondutoModel {
 		return (a == b) || (a != null && a.equals(b));
 	}
 
+	/**
+	 * Gets all fields from the class and its superclasses.
+	 * @param fields the list to add fields to
+	 * @param type the class type
+	 * @return the list of fields
+	 */
 	public static List<Field> getAllFields(List<Field> fields, Class<?> type) {
 		fields.addAll(Arrays.asList(type.getDeclaredFields()));
 
@@ -337,6 +354,12 @@ public abstract class KondutoModel {
 		return this;
 	}
 
+	/**
+	 * Checks if two dates are equal, handling null values.
+	 * @param one the first date
+	 * @param two the second date
+	 * @return true if both are null or equal, false otherwise
+	 */
 	protected boolean nullSafeAreDatesEqual(Date one, Date two){
 		return (one == null && two == null) ||
 				((one != null && two != null) && one.compareTo(two) == 0);

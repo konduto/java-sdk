@@ -155,6 +155,11 @@ public abstract class KondutoBank extends KondutoModel {
         return holderName;
     }
 
+    /**
+     * Sets the account holder's name.
+     *
+     * @param holderName the holder name
+     */
     public void setHolderName(String holderName) {
         this.holderName = holderName;
     }

@@ -9,6 +9,12 @@ import com.konduto.sdk.models.KondutoDebitPayment;
  */
 public class KondutoDebitPaymentSerializer extends KondutoPaymentSerializer {
 
+    /**
+     * Default constructor.
+     */
+    public KondutoDebitPaymentSerializer() {
+    }
+
     JsonElement completeSerialization(JsonObject paymentAsJson, KondutoDebitPayment debitPayment) {
         paymentAsJson.addProperty("sha1", debitPayment.getSha1());
         paymentAsJson.addProperty("status", debitPayment.getStatusAsString());

@@ -11,6 +11,13 @@ import com.konduto.sdk.models.KondutoCreditCardPayment;
  * Serializes a credit card payment.
  */
 public class KondutoCreditCardPaymentSerializer extends KondutoPaymentSerializer {
+
+    /**
+     * Default constructor.
+     */
+    public KondutoCreditCardPaymentSerializer() {
+    }
+
     JsonElement completeSerialization(JsonObject paymentAsJson, KondutoCreditCardPayment creditCardPayment) {
         paymentAsJson.addProperty("sha1", creditCardPayment.getSha1());
         paymentAsJson.addProperty("status", creditCardPayment.getStatusAsString());

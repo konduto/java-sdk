@@ -23,6 +23,12 @@ import java.util.Collection;
 public class KondutoBankDestinationAccountAdapter implements JsonSerializer<Collection<KondutoBankDestinationAccount>>, JsonDeserializer<Collection<KondutoBankDestinationAccount>> {
 
     /**
+     * Default constructor.
+     */
+    public KondutoBankDestinationAccountAdapter() {
+    }
+
+    /**
      * Gson invokes this call-back method during deserialization when it encounters a field of the
      * specified type.
      * <p>In the implementation of this call-back method, you should consider invoking

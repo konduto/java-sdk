@@ -18,6 +18,9 @@ public class KondutoExternalDevice extends KondutoModel {
     private String browser;
     private String language;
 
+    /**
+     * Default constructor.
+     */
     public KondutoExternalDevice(){}
 
     /* Equals */
@@ -49,74 +52,146 @@ public class KondutoExternalDevice extends KondutoModel {
 
     /* Getters and Setters */
 
+    /**
+     * Gets the fingerprint.
+     * @return the fingerprint
+     */
     public String getFingerprint() {
         return fingerprint;
     }
 
+    /**
+     * Sets the fingerprint.
+     * @param fingerprint the fingerprint
+     */
     public void setFingerprint(String fingerprint) {
         this.fingerprint = fingerprint;
     }
 
+    /**
+     * Gets the platform.
+     * @return the platform
+     */
     public String getPlatform() {
         return platform;
     }
 
+    /**
+     * Sets the platform.
+     * @param platform the platform
+     */
     public void setPlatform(String platform) {
         this.platform = platform;
     }
 
+    /**
+     * Gets the browser.
+     * @return the browser
+     */
     public String getBrowser() {
         return browser;
     }
 
+    /**
+     * Sets the browser.
+     * @param browser the browser
+     */
     public void setBrowser(String browser) {
         this.browser = browser;
     }
 
+    /**
+     * Gets the language.
+     * @return the language
+     */
     public String getLanguage() {
         return language;
     }
 
+    /**
+     * Sets the language.
+     * @param language the language
+     */
     public void setLanguage(String language) {
         this.language = language;
     }
 
+    /**
+     * Gets the provider.
+     * @return the provider
+     */
     public String getProvider() {
         return provider;
     }
 
+    /**
+     * Sets the provider.
+     * @param provider the provider
+     */
     public void setProvider(String provider) {
         this.provider = provider;
     }
 
+    /**
+     * Gets the category.
+     * @return the category
+     */
     public String getCategory() {
         return category;
     }
 
+    /**
+     * Sets the category.
+     * @param category the category
+     */
     public void setCategory(String category) {
         this.category = category;
     }
 
+    /**
+     * Gets the model.
+     * @return the model
+     */
     public String getModel() {
         return model;
     }
 
+    /**
+     * Sets the model.
+     * @param model the model
+     */
     public void setModel(String model) {
         this.model = model;
     }
 
+    /**
+     * Gets the manufacturer.
+     * @return the manufacturer
+     */
     public String getManufacturer() {
         return manufacturer;
     }
 
+    /**
+     * Sets the manufacturer.
+     * @param manufacturer the manufacturer
+     */
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
+    /**
+     * Gets the OS.
+     * @return the OS
+     */
     public String getOs() {
         return os;
     }
 
+    /**
+     * Sets the OS.
+     * @param os the OS
+     */
     public void setOs(String os) {
         this.os = os;
     }

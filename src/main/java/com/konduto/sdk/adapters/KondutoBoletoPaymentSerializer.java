@@ -14,6 +14,12 @@ import java.util.Date;
 public class KondutoBoletoPaymentSerializer extends KondutoPaymentSerializer {
 
     /**
+     * Default constructor.
+     */
+    public KondutoBoletoPaymentSerializer() {
+    }
+
+    /**
      * Completes the JSON serialization by adding boleto-specific fields including formatted expiration date.
      *
      * @param paymentAsJson the JSON object being built

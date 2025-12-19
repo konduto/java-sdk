@@ -39,6 +39,10 @@ public class KondutoBusTravelLeg extends KondutoTravelLeg {
         return result;
     }
 
+    /**
+     * Gets the origin city.
+     * @return the origin city
+     */
     public String getOriginCity() {
         return originCity;
     }

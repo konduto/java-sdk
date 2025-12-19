@@ -97,46 +97,90 @@ public class KondutoNavigationInfo extends KondutoModel {
 
 	/* Getters and Setters */
 
+	/**
+	 * Gets the session time.
+	 * @return the session time
+	 */
 	public Double getSessionTime() {
 		return sessionTime;
 	}
 
+	/**
+	 * Sets the session time.
+	 * @param sessionTime the session time
+	 */
 	public void setSessionTime(Double sessionTime) {
 		this.sessionTime = sessionTime;
 	}
 
+	/**
+	 * Gets the referrer.
+	 * @return the referrer
+	 */
 	public String getReferrer() {
 		return referrer;
 	}
 
+	/**
+	 * Sets the referrer.
+	 * @param referrer the referrer
+	 */
 	public void setReferrer(String referrer) {
 		this.referrer = referrer;
 	}
 
+	/**
+	 * Gets the time on site today.
+	 * @return the time on site today
+	 */
 	public Double getTimeOnSiteToday() {
 		return timeOnSiteToday;
 	}
 
+	/**
+	 * Sets the time on site today.
+	 * @param timeOnSiteToday the time on site today
+	 */
 	public void setTimeOnSiteToday(Double timeOnSiteToday) {
 		this.timeOnSiteToday = timeOnSiteToday;
 	}
 
+	/**
+	 * Gets the accounts created today.
+	 * @return the accounts created today
+	 */
 	public Integer getAccountsCreatedToday() {
 		return accountsCreatedToday;
 	}
 
+	/**
+	 * Sets the accounts created today.
+	 * @param accountsCreatedToday the accounts created today
+	 */
 	public void setAccountsCreatedToday(Integer accountsCreatedToday) {
 		this.accountsCreatedToday = accountsCreatedToday;
 	}
 
+	/**
+	 * Gets the password resets today.
+	 * @return the password resets today
+	 */
 	public Integer getPasswordResetsToday() {
 		return passwordResetsToday;
 	}
 
+	/**
+	 * Sets the password resets today.
+	 * @param passwordResetsToday the password resets today
+	 */
 	public void setPasswordResetsToday(Integer passwordResetsToday) {
 		this.passwordResetsToday = passwordResetsToday;
 	}
 
+	/**
+	 * Gets the sales declined today.
+	 * @return the sales declined today
+	 */
 	public Integer getSalesDeclinedToday() {
 		return salesDeclinedToday;
 	}
@@ -145,6 +189,10 @@ public class KondutoNavigationInfo extends KondutoModel {
 		this.salesDeclinedToday = salesDeclinedToday;
 	}
 
+	/**
+	 * Gets the sessions today.
+	 * @return the sessions today
+	 */
 	public Integer getSessionsToday() {
 		return sessionsToday;
 	}
@@ -153,6 +201,10 @@ public class KondutoNavigationInfo extends KondutoModel {
 		this.sessionsToday = sessionsToday;
 	}
 
+	/**
+	 * Gets the time on site since last week.
+	 * @return the time on site since last week
+	 */
 	public Double getTimeOnSiteSinceLastWeek() {
 		return timeOnSiteSinceLastWeek;
 	}
@@ -161,6 +213,10 @@ public class KondutoNavigationInfo extends KondutoModel {
 		this.timeOnSiteSinceLastWeek = timeOnSiteSinceLastWeek;
 	}
 
+	/**
+	 * Gets the accounts created since last week.
+	 * @return the accounts created since last week
+	 */
 	public Integer getAccountsCreatedSinceLastWeek() {
 		return accountsCreatedSinceLastWeek;
 	}
@@ -169,50 +225,98 @@ public class KondutoNavigationInfo extends KondutoModel {
 		this.accountsCreatedSinceLastWeek = accountsCreatedSinceLastWeek;
 	}
 
+	/**
+	 * Gets the time per page since last week.
+	 * @return the time per page since last week
+	 */
 	public Double getTimePerPageSinceLastWeek() {
 		return timePerPageSinceLastWeek;
 	}
 
+	/**
+	 * Sets the time per page since last week.
+	 * @param timePerPageSinceLastWeek the time per page since last week
+	 */
 	public void setTimePerPageSinceLastWeek(Double timePerPageSinceLastWeek) {
 		this.timePerPageSinceLastWeek = timePerPageSinceLastWeek;
 	}
 
+	/**
+	 * Gets the password resets since last week.
+	 * @return the password resets since last week
+	 */
 	public Integer getPasswordResetsSinceLastWeek() {
 		return passwordResetsSinceLastWeek;
 	}
 
+	/**
+	 * Sets the password resets since last week.
+	 * @param passwordResetsSinceLastWeek the password resets since last week
+	 */
 	public void setPasswordResetsSinceLastWeek(Integer passwordResetsSinceLastWeek) {
 		this.passwordResetsSinceLastWeek = passwordResetsSinceLastWeek;
 	}
 
+	/**
+	 * Gets the checkout page views since last week.
+	 * @return the checkout page views since last week
+	 */
 	public Integer getCheckoutPageViewsSinceLastWeek() {
 		return checkoutPageViewsSinceLastWeek;
 	}
 
+	/**
+	 * Sets the checkout page views since last week.
+	 * @param checkoutPageViewsSinceLastWeek the checkout page views since last week
+	 */
 	public void setCheckoutPageViewsSinceLastWeek(Integer checkoutPageViewsSinceLastWeek) {
 		this.checkoutPageViewsSinceLastWeek = checkoutPageViewsSinceLastWeek;
 	}
 
+	/**
+	 * Gets the sales declined since last week.
+	 * @return the sales declined since last week
+	 */
 	public Integer getSalesDeclinedSinceLastWeek() {
 		return salesDeclinedSinceLastWeek;
 	}
 
+	/**
+	 * Sets the sales declined since last week.
+	 * @param salesDeclinedSinceLastWeek the sales declined since last week
+	 */
 	public void setSalesDeclinedSinceLastWeek(Integer salesDeclinedSinceLastWeek) {
 		this.salesDeclinedSinceLastWeek = salesDeclinedSinceLastWeek;
 	}
 
+	/**
+	 * Gets the sessions since last week.
+	 * @return the sessions since last week
+	 */
 	public Integer getSessionsSinceLastWeek() {
 		return sessionsSinceLastWeek;
 	}
 
+	/**
+	 * Sets the sessions since last week.
+	 * @param sessionsSinceLastWeek the sessions since last week
+	 */
 	public void setSessionsSinceLastWeek(Integer sessionsSinceLastWeek) {
 		this.sessionsSinceLastWeek = sessionsSinceLastWeek;
 	}
 
+	/**
+	 * Gets the time since last sale.
+	 * @return the time since last sale
+	 */
 	public Double getTimeSinceLastSale() {
 		return timeSinceLastSale;
 	}
 
+	/**
+	 * Sets the time since last sale.
+	 * @param timeSinceLastSale the time since last sale
+	 */
 	public void setTimeSinceLastSale(Double timeSinceLastSale) {
 		this.timeSinceLastSale = timeSinceLastSale;
 	}
