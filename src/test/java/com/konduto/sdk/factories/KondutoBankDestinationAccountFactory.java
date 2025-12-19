@@ -4,7 +4,6 @@ import com.konduto.sdk.models.KondutoBankDestinationAccount;
 import com.konduto.sdk.models.KondutoBankDocumentType;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**

@@ -1,6 +1,5 @@
 package com.konduto.sdk.models;
 
-import com.google.gson.annotations.SerializedName;
 import java.util.Collection;
 
 /**

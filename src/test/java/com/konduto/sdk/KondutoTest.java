@@ -13,8 +13,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import java.net.URI;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.Assert.*;

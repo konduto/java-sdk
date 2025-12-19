@@ -124,6 +124,7 @@ tasks.named('javadoc', Javadoc) {
     if (JavaVersion.current().isJava9Compatible()) {
         options.addBooleanOption('html5', true)
     }
+    options.addStringOption('Xdoclint:none', '-quiet')
 }
 
 afterEvaluate {

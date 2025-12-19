@@ -5,7 +5,6 @@ import com.konduto.sdk.factories.KondutoPaymentFactory;
 import com.konduto.sdk.models.KondutoCreditCardPayment;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import static org.junit.Assert.assertEquals;
