@@ -85,3 +85,5 @@ TODO.txt
 /home/local/BVS/tr_srsilva/Documentos/work/git/java-sdk/.gradle_cache
 
 .gradle_cache
+
+gradle.properties

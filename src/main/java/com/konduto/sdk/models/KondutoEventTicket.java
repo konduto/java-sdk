@@ -9,6 +9,12 @@ import com.konduto.sdk.annotations.Required;
  */
 public class KondutoEventTicket extends KondutoModel {
 
+    /**
+     * Default constructor.
+     */
+    public KondutoEventTicket() {
+    }
+
     private String id;
 
     @Required
@@ -49,42 +55,92 @@ public class KondutoEventTicket extends KondutoModel {
         return super.isValid();
     }
 
+    /**
+     * Gets the ticket ID.
+     *
+     * @return the ticket ID
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets the ticket ID.
+     *
+     * @param id the ticket ID
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Gets the ticket category.
+     *
+     * @return the ticket category
+     */
     public KondutoEventTicketCategory getCategory() {
         return category;
     }
 
+    /**
+     * Sets the ticket category.
+     *
+     * @param category the ticket category
+     */
     public void setCategory(KondutoEventTicketCategory category) {
         this.category = category;
     }
 
+    /**
+     * Gets the ticket section.
+     *
+     * @return the ticket section
+     */
     public String getSection() {
         return section;
     }
 
+    /**
+     * Sets the ticket section.
+     *
+     * @param section the ticket section
+     */
     public void setSection(String section) {
         this.section = section;
     }
 
+    /**
+     * Gets whether the ticket is premium.
+     *
+     * @return true if the ticket is premium, false otherwise
+     */
     public Boolean getPremium() {
         return premium;
     }
 
+    /**
+     * Sets whether the ticket is premium.
+     *
+     * @param premium true if the ticket is premium, false otherwise
+     */
     public void setPremium(Boolean premium) {
         this.premium = premium;
     }
 
+    /**
+     * Gets the ticket attendee information.
+     *
+     * @return the ticket attendee
+     */
     public KondutoEventTicketAttendee getAttendee() {
         return attendee;
     }
 
+    /**
+     * Sets the ticket attendee information.
+     *
+     * @param attendee the ticket attendee
+     */
     public void setAttendee(KondutoEventTicketAttendee attendee) {
         this.attendee = attendee;
     }

@@ -10,14 +10,19 @@ import com.google.gson.annotations.SerializedName;
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public enum KondutoEventTicketCategory {
+    /** Student ticket category */
     @SerializedName("student")
     STUDENT,
+    /** Senior citizen ticket category */
     @SerializedName("senior")
     SENIOR,
+    /** Government employee ticket category */
     @SerializedName("government")
     GOVERNMENT,
+    /** Social program ticket category */
     @SerializedName("social")
     SOCIAL,
+    /** Regular ticket category */
     @SerializedName("regular")
     REGULAR
 }

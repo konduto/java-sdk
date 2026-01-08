@@ -8,6 +8,13 @@ import com.konduto.sdk.annotations.ValidateFormat;
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public class KondutoFlightTravelLeg extends KondutoTravelLeg {
+
+    /**
+     * Default constructor.
+     */
+    public KondutoFlightTravelLeg() {
+    }
+
     @ValidateFormat(format = "[A-Z]{3}")
     @Required
     private String originAirport;
@@ -55,34 +62,66 @@ public class KondutoFlightTravelLeg extends KondutoTravelLeg {
         return result;
     }
 
+    /**
+     * Gets the origin airport.
+     * @return the origin airport
+     */
     public String getOriginAirport() {
         return originAirport;
     }
 
+    /**
+     * Sets the origin airport.
+     * @param originAirport the origin airport
+     */
     public void setOriginAirport(String originAirport) {
         this.originAirport = originAirport;
     }
 
+    /**
+     * Gets the destination airport.
+     * @return the destination airport
+     */
     public String getDestinationAirport() {
         return destinationAirport;
     }
 
+    /**
+     * Sets the destination airport.
+     * @param destinationAirport the destination airport
+     */
     public void setDestinationAirport(String destinationAirport) {
         this.destinationAirport = destinationAirport;
     }
 
+    /**
+     * Gets the origin city.
+     * @return the origin city
+     */
     public String getOriginCity() {
         return originCity;
     }
 
+    /**
+     * Sets the origin city.
+     * @param originCity the origin city
+     */
     public void setOriginCity(String originCity) {
         this.originCity = originCity;
     }
 
+    /**
+     * Gets the destination city.
+     * @return the destination city
+     */
     public String getDestinationCity() {
         return destinationCity;
     }
 
+    /**
+     * Sets the destination city.
+     * @param destinationCity the destination city
+     */
     public void setDestinationCity(String destinationCity) {
         this.destinationCity = destinationCity;
     }

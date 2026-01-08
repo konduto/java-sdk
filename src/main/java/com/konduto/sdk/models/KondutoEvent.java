@@ -7,10 +7,18 @@ import java.util.List;
 
 /**
  * Model that represents an event.
+/**
+ * Event model.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
 public class KondutoEvent extends KondutoModel {
+
+    /**
+     * Default constructor.
+     */
+    public KondutoEvent() {
+    }
 
     @Required
     private String name;
@@ -64,50 +72,110 @@ public class KondutoEvent extends KondutoModel {
         return isValid && super.isValid();
     }
 
+	/**
+	 * Gets the event name.
+	 *
+	 * @return the event name
+	 */
     public String getName() {
         return name;
     }
 
+	/**
+	 * Sets the event name.
+	 *
+	 * @param name the event name
+	 */
     public void setName(String name) {
         this.name = name;
     }
 
+	/**
+	 * Gets the event date.
+	 *
+	 * @return the event date
+	 */
     public String getDate() {
         return date;
     }
 
+	/**
+	 * Sets the event date.
+	 *
+	 * @param date the event date
+	 */
     public void setDate(String date) {
         this.date = date;
     }
 
+	/**
+	 * Gets the event type.
+	 *
+	 * @return the event type
+	 */
     public KondutoEventType getType() {
         return type;
     }
 
+	/**
+	 * Sets the event type.
+	 *
+	 * @param type the event type
+	 */
     public void setType(KondutoEventType type) {
         this.type = type;
     }
 
+	/**
+	 * Gets the event subtype.
+	 *
+	 * @return the event subtype
+	 */
     public String getSubtype() {
         return subtype;
     }
 
+	/**
+	 * Sets the event subtype.
+	 *
+	 * @param subtype the event subtype
+	 */
     public void setSubtype(String subtype) {
         this.subtype = subtype;
     }
 
+	/**
+	 * Gets the event venue.
+	 *
+	 * @return the event venue
+	 */
     public KondutoEventVenue getVenue() {
         return venue;
     }
 
+	/**
+	 * Sets the event venue.
+	 *
+	 * @param venue the event venue
+	 */
     public void setVenue(KondutoEventVenue venue) {
         this.venue = venue;
     }
 
+	/**
+	 * Gets the list of event tickets.
+	 *
+	 * @return the list of event tickets
+	 */
     public List<KondutoEventTicket> getTickets() {
         return tickets;
     }
 
+	/**
+	 * Sets the list of event tickets.
+	 *
+	 * @param tickets the list of event tickets
+	 */
     public void setTickets(List<KondutoEventTicket> tickets) {
         this.tickets = tickets;
     }

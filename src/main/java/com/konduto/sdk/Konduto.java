@@ -27,6 +27,10 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * Main client class for interacting with the Konduto fraud prevention API.
+ * Provides methods for analyzing orders, retrieving order information, and updating order status.
+ */
 public final class Konduto {
     private static final Properties PROPERTIES = new Properties();
     private static final ClassLoader contextClassLoader = Konduto.class.getClassLoader();
@@ -53,6 +57,12 @@ public final class Konduto {
     private URI endpoint = URI.create("https://api.konduto.com/v1");
     private HttpClient httpClient;
 
+    /**
+     * Creates a new Konduto client instance with the specified API key.
+     *
+     * @param apiKey the 21-character API key provided by Konduto
+     * @throws IllegalArgumentException if the API key is null or not 21 characters long
+     */
     public Konduto(String apiKey) {
         setApiKey(apiKey);
         rebuildHttpClient(null, null);
@@ -70,10 +80,21 @@ public final class Konduto {
         this.httpClient = builder.build();
     }
 
+    /**
+     * Sets the proxy host and port.
+     * @param proxyHost the proxy host
+     * @param proxyPort the proxy port
+     */
     public void setProxyHost(String proxyHost, int proxyPort) {
         rebuildHttpClient(ProxySelector.of(new InetSocketAddress(proxyHost, proxyPort)), null);
     }
 
+    /**
+     * Sets the proxy credentials for HTTP proxy authentication.
+     *
+     * @param username the proxy username
+     * @param password the proxy password
+     */
     public void setProxyCredentials(String username, String password) {
         Authenticator authenticator = new Authenticator() {
             @Override
@@ -84,10 +105,21 @@ public final class Konduto {
         rebuildHttpClient(null, authenticator);
     }
 
+    /**
+     * Sets a custom API endpoint URL. Useful for testing or using different environments.
+     *
+     * @param endpoint the URI of the Konduto API endpoint
+     */
     public void setEndpoint(URI endpoint) {
         this.endpoint = endpoint;
     }
 
+    /**
+     * Sets the API key for authentication with Konduto services.
+     *
+     * @param apiKey the 21-character API key provided by Konduto
+     * @throws IllegalArgumentException if the API key is null or not 21 characters long
+     */
     public void setApiKey(String apiKey) {
         if (apiKey == null || apiKey.length() != 21) {
             throw new IllegalArgumentException("Illegal API Key: " + apiKey);
@@ -95,6 +127,12 @@ public final class Konduto {
         this.apiKey = apiKey;
     }
 
+    /**
+     * Returns debug information about the current request/response state.
+     * Useful for troubleshooting API interactions.
+     *
+     * @return a string containing debug information including API key, endpoint, and request/response bodies
+     */
     public String debug() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("API Key: %s\n", this.apiKey));
@@ -108,14 +146,31 @@ public final class Konduto {
         return sb.toString();
     }
 
+    /**
+     * Builds the URI for retrieving a specific order by ID.
+     *
+     * @param orderId the order identifier
+     * @return the URI for the GET order request
+     */
     protected URI kondutoGetOrderUrl(String orderId) {
         return URI.create(endpoint.toString().concat("/orders/" + orderId));
     }
 
+    /**
+     * Builds the URI for posting a new order analysis request.
+     *
+     * @return the URI for the POST order request
+     */
     protected URI kondutoPostOrderUrl() {
         return URI.create(endpoint.toString().concat("/orders"));
     }
 
+    /**
+     * Builds the URI for updating an existing order.
+     *
+     * @param orderId the order identifier
+     * @return the URI for the PUT order request
+     */
     protected URI kondutoPutOrderUrl(String orderId) {
         return URI.create(endpoint.toString().concat("/orders/" + orderId));
     }
@@ -145,6 +200,12 @@ public final class Konduto {
                 .header("Content-Type", "application/json");
     }
 
+    /**
+     * Retrieves an order by its ID.
+     * @param orderId the order ID
+     * @return the KondutoOrder instance
+     * @throws KondutoUnexpectedAPIResponseException if the API response is unexpected
+     */
     public KondutoOrder getOrder(String orderId) throws KondutoUnexpectedAPIResponseException {
         HttpRequest request = newRequestBuilder(kondutoGetOrderUrl(orderId)).GET().build();
         JsonObject responseBody = sendRequest(request, null);
@@ -162,6 +223,14 @@ public final class Konduto {
         return order;
     }
 
+    /**
+     * Analyzes an order for fraud risk using Konduto's fraud prevention service.
+     * The order must be valid before analysis.
+     *
+     * @param order the KondutoOrder object to analyze
+     * @throws KondutoInvalidEntityException if the order is not valid
+     * @throws KondutoUnexpectedAPIResponseException if there's an unexpected API response
+     */
     public void analyze(KondutoOrder order) throws KondutoInvalidEntityException, KondutoUnexpectedAPIResponseException {
         if (!order.isValid()) {
             throw new KondutoInvalidEntityException(order);
@@ -189,6 +258,17 @@ public final class Konduto {
         }
     }
 
+    /**
+     * Updates the status of an existing order in Konduto.
+     * Only certain status transitions are allowed: APPROVED, DECLINED, FRAUD, NOT_AUTHORIZED, CANCELED.
+     *
+     * @param order the KondutoOrder object to update
+     * @param newStatus the new status to set for the order
+     * @param comments mandatory comments explaining the status change
+     * @throws KondutoUnexpectedAPIResponseException if there's an unexpected API response
+     * @throws IllegalArgumentException if the new status is not allowed
+     * @throws NullPointerException if comments is null
+     */
     public void updateOrderStatus(KondutoOrder order, KondutoOrderStatus newStatus, String comments) throws KondutoUnexpectedAPIResponseException {
         List<KondutoOrderStatus> allowed = Arrays.asList(KondutoOrderStatus.APPROVED, KondutoOrderStatus.DECLINED, KondutoOrderStatus.FRAUD, KondutoOrderStatus.NOT_AUTHORIZED, KondutoOrderStatus.CANCELED);
         if (!allowed.contains(newStatus)) {

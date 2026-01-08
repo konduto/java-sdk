@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
-import com.konduto.sdk.adapters.KondutoBankAdapter;
 import com.konduto.sdk.adapters.KondutoBankDestinationAccountAdapter;
 import com.konduto.sdk.factories.KondutoBankDestinationAccountFactory;
 import com.konduto.sdk.utils.TestUtils;

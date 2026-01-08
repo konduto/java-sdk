@@ -6,8 +6,8 @@ import com.konduto.sdk.annotations.Required;
 import java.util.Date;
 
 /**
- *
- * Seller model.
+ * Represents a seller in the Konduto system.
+ * This class extends KondutoModel and contains seller-specific attributes.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */

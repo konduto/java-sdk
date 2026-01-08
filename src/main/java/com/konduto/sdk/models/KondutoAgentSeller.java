@@ -5,8 +5,8 @@ import com.konduto.sdk.annotations.Required;
 import java.util.Date;
 
 /**
- * Created by igor.rodrigues (nickname: igor.francesco) 03/06/2022.
- * Agent Seller model.
+ * Represents an agent seller in the Konduto system.
+ * This class extends KondutoModel and contains agent seller specific attributes.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
@@ -24,6 +24,9 @@ public final class KondutoAgentSeller extends KondutoModel {
 
 	/* Constructors */
 
+	/**
+	 * Default constructor for KondutoAgentSeller.
+	 */
 	public KondutoAgentSeller() { }
 
 	/**
@@ -66,51 +69,121 @@ public final class KondutoAgentSeller extends KondutoModel {
 
 	/* Getters and Setters */
 
+	/**
+	 * Gets the agent seller's name.
+	 *
+	 * @return the agent seller name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the agent seller's name.
+	 *
+	 * @param name the agent seller name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Gets the agent seller's unique identifier.
+	 *
+	 * @return the agent seller ID
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the agent seller's unique identifier.
+	 *
+	 * @param id the agent seller ID
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the agent seller's tax ID.
+	 *
+	 * @return the tax ID
+	 */
 	public String getTaxId() {
 		return taxId;
 	}
 
+	/**
+	 * Sets the agent seller's tax ID.
+	 *
+	 * @param taxId the tax ID
+	 */
 	public void setTaxId(String taxId) {
 		this.taxId = taxId;
 	}
 
+	/**
+	 * Gets the agent seller's category.
+	 *
+	 * @return the agent seller category
+	 */
 	public String getCategory() {
 		return category;
 	}
 
+	/**
+	 * Sets the agent seller's category.
+	 *
+	 * @param category the agent seller category
+	 */
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
+	/**
+	 * Gets the agent seller's login username.
+	 *
+	 * @return the login username
+	 */
 	public String getLogin() {
 		return login;
 	}
 
+	/**
+	 * Sets the agent seller's login username.
+	 *
+	 * @param login the login username
+	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
+	/**
+	 * Gets the agent seller's creation date.
+	 *
+	 * @return the creation date
+	 */
 	public Date getCreated_at() { return created_at; }
 
+	/**
+	 * Sets the agent seller's creation date.
+	 *
+	 * @param created_at the creation date
+	 */
 	public void setCreated_at(Date created_at) { this.created_at = created_at; }
 
+	/**
+	 * Gets the agent seller's date of birth.
+	 *
+	 * @return the date of birth
+	 */
 	public Date getDOB() { return dob; }
 
+	/**
+	 * Sets the agent seller's date of birth.
+	 *
+	 * @param dob the date of birth
+	 */
 	public void setDOB(Date dob) { this.dob = dob; }
 }

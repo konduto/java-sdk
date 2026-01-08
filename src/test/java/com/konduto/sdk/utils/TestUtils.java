@@ -24,8 +24,7 @@ public class TestUtils {
 				URI uri = resource.toURI();
 				byte[] bytes = readAllBytes(uri);
 				String jsonString = new String(bytes, "UTF-8");
-				JsonParser parser = new JsonParser();
-				return parser.parse(jsonString);
+				return JsonParser.parseString(jsonString);
 			} else {
 				throw new IllegalArgumentException(resourceName + " is an invalid resource name");
 			}

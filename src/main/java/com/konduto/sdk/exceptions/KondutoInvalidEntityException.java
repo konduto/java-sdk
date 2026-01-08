@@ -11,6 +11,10 @@ public final class KondutoInvalidEntityException extends KondutoException {
 	private static final long serialVersionUID = 4627487289664092129L;
 	private KondutoModel entity;
 
+	/**
+	 * Constructs a new KondutoInvalidEntityException with the specified invalid entity.
+	 * @param entity the invalid KondutoModel instance
+	 */
 	public KondutoInvalidEntityException(KondutoModel entity) {
 		this.entity = entity;
 	}
