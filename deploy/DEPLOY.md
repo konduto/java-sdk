@@ -83,3 +83,25 @@ docker run --rm \
   java11-builder \
   gradle publishToMavenCentral
 ```
+
+## Java compatibility e Grandle
+
+| Java version | Support for toolchains | Support for running Gradle |
+| :--- | :--- | :--- |
+| 8 | N/A | 2.0 to 8.14.* |
+| 9 | N/A | 4.3 to 8.14.* |
+| 10 | N/A | 4.7 to 8.14.* |
+| 11 | N/A | 5.0 to 8.14.* |
+| 12 | N/A | 5.4 to 8.14.* |
+| 13 | N/A | 6.0 to 8.14.* |
+| 14 | N/A | 6.3 to 8.14.* |
+| 15 | 6.7 | 6.7 to 8.14.* |
+| 16 | 7.0 | 7.0 to 8.14.* |
+| 17 | 7.3 | 7.3 and after |
+| 18 | 7.5 | 7.5 and after |
+| 19 | 7.6 | 7.6 and after |
+| 20 | 8.1 | 8.3 and after |
+| 21 | 8.4 | 8.5 and after |
+| 22 | 8.7 | 8.8 and after |
+| 23 | 8.10 | 8.10 and after |
+| 24 | 8.14 | 8.14 and after |

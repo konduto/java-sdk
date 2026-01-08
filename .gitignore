@@ -43,7 +43,7 @@ com_crashlytics_export_strings.xml
 
 *~
 .gradle
-/build
+# /build
 /out
 /intTestHomeDir
 /subprojects/*/out
@@ -82,8 +82,6 @@ gradle/wrapper/*.jar
 .gradle
 TODO.txt
 .gradle_cache/*
-/home/local/BVS/tr_srsilva/Documentos/work/git/java-sdk/.gradle_cache
-
-.gradle_cache
-
+.gradle*
+gradle_cache
 gradle.properties

@@ -1,5 +1,5 @@
 # 1. Base com Java 11 (Necessário para rodar o Gradle >+ 5.0 < or equal 8.14)
-FROM eclipse-temurin:11-jdk-jammy
+FROM eclipse-temurin:21-jdk-jammy
 
 LABEL maintainer="silvano.junior@equifax.com"
 
