@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.konduto.sdk.models.KondutoBankDestinationAccountTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-01-12T20:04:12" hostname="b800360472b5" time="0.012">
+<testsuite name="com.konduto.sdk.models.KondutoBankDestinationAccountTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-01-12T20:39:47" hostname="b800360472b5" time="0.016">
   <properties/>
-  <testcase name="serializeTest" classname="com.konduto.sdk.models.KondutoBankDestinationAccountTest" time="0.008"/>
+  <testcase name="serializeTest" classname="com.konduto.sdk.models.KondutoBankDestinationAccountTest" time="0.011"/>
   <testcase name="deserializeTest" classname="com.konduto.sdk.models.KondutoBankDestinationAccountTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

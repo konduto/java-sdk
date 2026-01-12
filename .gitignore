@@ -81,7 +81,10 @@ com_crashlytics_export_strings.xml
 gradle/wrapper/*.jar
 .gradle
 TODO.txt
+.gradle_cache
 .gradle_cache/*
 .gradle*
+deploy
+deploy/*
 gradle_cache
 gradle.properties

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.konduto.sdk.models.KondutoModelTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-01-12T20:04:12" hostname="b800360472b5" time="0.003">
+<testsuite name="com.konduto.sdk.models.KondutoModelTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-01-12T20:39:47" hostname="b800360472b5" time="0.006">
   <properties/>
-  <testcase name="fluentTest" classname="com.konduto.sdk.models.KondutoModelTest" time="0.0"/>
-  <testcase name="isValidTest" classname="com.konduto.sdk.models.KondutoModelTest" time="0.001"/>
+  <testcase name="fluentTest" classname="com.konduto.sdk.models.KondutoModelTest" time="0.001"/>
+  <testcase name="isValidTest" classname="com.konduto.sdk.models.KondutoModelTest" time="0.004"/>
   <testcase name="AgentTest" classname="com.konduto.sdk.models.KondutoModelTest" time="0.0"/>
-  <testcase name="hashMapFactoryTest" classname="com.konduto.sdk.models.KondutoModelTest" time="0.001"/>
+  <testcase name="hashMapFactoryTest" classname="com.konduto.sdk.models.KondutoModelTest" time="0.0"/>
   <testcase name="isRequiredErrorTest" classname="com.konduto.sdk.models.KondutoModelTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
