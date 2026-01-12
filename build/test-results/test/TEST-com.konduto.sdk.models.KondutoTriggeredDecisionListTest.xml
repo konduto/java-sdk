@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.konduto.sdk.models.KondutoTriggeredDecisionListTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-12T16:27:48" hostname="vdigcplnx0012" time="0.0">
+<testsuite name="com.konduto.sdk.models.KondutoTriggeredDecisionListTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-12T20:04:12" hostname="b800360472b5" time="0.001">
   <properties/>
-  <testcase name="deserializeTest" classname="com.konduto.sdk.models.KondutoTriggeredDecisionListTest" time="0.0"/>
+  <testcase name="deserializeTest" classname="com.konduto.sdk.models.KondutoTriggeredDecisionListTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

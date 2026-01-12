@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.konduto.sdk.models.KondutoVehicleTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-01-12T16:27:48" hostname="vdigcplnx0012" time="0.02">
+<testsuite name="com.konduto.sdk.models.KondutoVehicleTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-01-12T20:04:12" hostname="b800360472b5" time="0.006">
   <properties/>
-  <testcase name="invalidVid" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.004"/>
-  <testcase name="renavamSmallerThanExpected" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.0"/>
-  <testcase name="renavamLargerThanExpected" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.007"/>
-  <testcase name="invalidOwner" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.001"/>
-  <testcase name="serializeTest" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.005"/>
-  <testcase name="incompleteVehicle" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.001"/>
+  <testcase name="invalidVid" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.001"/>
+  <testcase name="renavamSmallerThanExpected" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.001"/>
+  <testcase name="renavamLargerThanExpected" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.0"/>
+  <testcase name="invalidOwner" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.003"/>
+  <testcase name="serializeTest" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.001"/>
+  <testcase name="incompleteVehicle" classname="com.konduto.sdk.models.KondutoVehicleTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

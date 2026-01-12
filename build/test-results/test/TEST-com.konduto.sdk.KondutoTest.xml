@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.konduto.sdk.KondutoTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-01-12T16:27:44" hostname="vdigcplnx0012" time="3.811">
+<testsuite name="com.konduto.sdk.KondutoTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-01-12T20:04:09" hostname="b800360472b5" time="2.874">
   <properties/>
-  <testcase name="getOrderSuccessfullyTest" classname="com.konduto.sdk.KondutoTest" time="3.132"/>
-  <testcase name="invalidStatusWhenUpdatingTest" classname="com.konduto.sdk.KondutoTest" time="0.031"/>
-  <testcase name="nullCommentsWhenUpdatingTest" classname="com.konduto.sdk.KondutoTest" time="0.024"/>
-  <testcase name="invalidApiKeyTest" classname="com.konduto.sdk.KondutoTest" time="0.062"/>
-  <testcase name="analyzeInvalidOrderTest" classname="com.konduto.sdk.KondutoTest" time="0.097"/>
-  <testcase name="getOrderErrorTest" classname="com.konduto.sdk.KondutoTest" time="0.269"/>
-  <testcase name="analyzeSuccessfullyTest" classname="com.konduto.sdk.KondutoTest" time="0.109"/>
-  <testcase name="updateSuccessfullyTest" classname="com.konduto.sdk.KondutoTest" time="0.084"/>
+  <testcase name="getOrderSuccessfullyTest" classname="com.konduto.sdk.KondutoTest" time="2.38"/>
+  <testcase name="invalidStatusWhenUpdatingTest" classname="com.konduto.sdk.KondutoTest" time="0.02"/>
+  <testcase name="nullCommentsWhenUpdatingTest" classname="com.konduto.sdk.KondutoTest" time="0.02"/>
+  <testcase name="invalidApiKeyTest" classname="com.konduto.sdk.KondutoTest" time="0.036"/>
+  <testcase name="analyzeInvalidOrderTest" classname="com.konduto.sdk.KondutoTest" time="0.037"/>
+  <testcase name="getOrderErrorTest" classname="com.konduto.sdk.KondutoTest" time="0.185"/>
+  <testcase name="analyzeSuccessfullyTest" classname="com.konduto.sdk.KondutoTest" time="0.111"/>
+  <testcase name="updateSuccessfullyTest" classname="com.konduto.sdk.KondutoTest" time="0.079"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[SLF4J: No SLF4J providers were found.
 SLF4J: Defaulting to no-operation (NOP) logger implementation
