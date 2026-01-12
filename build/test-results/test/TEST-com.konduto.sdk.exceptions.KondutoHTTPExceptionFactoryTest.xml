@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.konduto.sdk.exceptions.KondutoHTTPExceptionFactoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-08T20:10:26.913Z" hostname="537144d2e557" time="0.0">
+<testsuite name="com.konduto.sdk.exceptions.KondutoHTTPExceptionFactoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-12T16:27:48" hostname="vdigcplnx0012" time="0.0">
   <properties/>
   <testcase name="buildExceptionTest" classname="com.konduto.sdk.exceptions.KondutoHTTPExceptionFactoryTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
