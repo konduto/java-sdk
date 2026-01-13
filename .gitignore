@@ -43,7 +43,8 @@ com_crashlytics_export_strings.xml
 
 *~
 .gradle
-# /build
+build
+target
 /out
 /intTestHomeDir
 /subprojects/*/out

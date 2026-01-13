@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.konduto.sdk.adapters.KondutoTravelAdapterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-01-12T20:39:47" hostname="b800360472b5" time="0.011">
-  <properties/>
-  <testcase name="deserializeTest" classname="com.konduto.sdk.adapters.KondutoTravelAdapterTest" time="0.011"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
