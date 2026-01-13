@@ -1,54 +1,103 @@
-name: Gradle Package
+name: Build, Publish & Release
 
 on:
   release:
-    types: [created]
+    types: [created] # Dispara quando você cria uma Release na interface do GitHub
+  workflow_dispatch:
+
+env:
+  JAVA_VERSION: '21'
 
 jobs:
+  # Build e Teste
   build:
-
+    name: Build & Test
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Run Tests
+        run: ./gradlew clean check assemble --no-daemon
+
+  # Publish (Central + GitHub + Release)
+  publish-and-release:
+    name: Publish & Release
+    runs-on: ubuntu-latest
+    needs: build
+    
     permissions:
-      contents: read
-      packages: write
+      contents: write      # Para subir arquivos na Release
+      packages: write      # Para publicar no GitHub Packages
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
 
-    - name: Build with Gradle
-      run: ./gradlew build
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
-    - name: Publish to Maven Central
-      run: ./gradlew publishToMavenCentral
-      env:
-        # Token Konduto Sonatype Portal
-        ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_PASS }}
-        ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_USER }}
-        
-        # Credenciais da Chave GPG (O Pulo do Gato 🐈)
-        # O plugin vanniktech procura automaticamente por variáveis que começam com ORG_GRADLE_PROJECT_
-        # e mapeia para as propriedades do Gradle.
-        
-        # Aqui passamos o CONTEÚDO da chave, não o caminho do arquivo
-        ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_SIGNING_KEY }}
-        
-        # Aqui passamos a senha
-        ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASSWORD }}
+      - name: Define Release Message
+        run: |
 
-    # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
-    # the publishing section of your build.gradle
-    - name: Publish to GitHub Packages
-      run: ./gradlew publish
-      env:
-        USERNAME: ${{ github.actor }}
-        TOKEN: ${{ secrets.GITHUB_TOKEN }
+          DATE=$(date +'%Y-%m-%d %H:%M:%S')  
+          LINK_MAVEN="https://central.sonatype.com/artifact/com.konduto.sdk/java-sdk/${{ github.ref_name }}"
+          
+          # Adicione aqui sua mensagem
+          echo "🇧🇷 remoção da lib xyz e atualização para java 21<br>🇺🇸 remove lib xyz and update to java 21<br>✅ Publicado no Maven Central em: $DATE<br>🔗 [Visualizar no Portal]($LINK_MAVEN)" >> $GITHUB_ENV          
+
+      # ---------------------------------------------------
+      # Publish MAVEN CENTRAL
+      # ---------------------------------------------------
+      - name: Publish to Maven Central
+        run: ./gradlew publishToMavenCentral --no-daemon
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USER }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASS }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASS }}
+
+      # ---------------------------------------------------
+      # Publish GITHUB PACKAGES
+      # ---------------------------------------------------
+      - name: Publish to GitHub Packages
+        run: ./gradlew publishAllPublicationsToGitHubPackagesRepository --no-daemon
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Assinar no packages tbm
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASS }}
+
+      # ---------------------------------------------------
+      # ADD JARs na Pagina de RELEASE do GitHub
+      # ---------------------------------------------------
+      - name: Upload JARs to GitHub Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: build/libs/*.jar
+          body: |
+            ---
+            ${{ env.CUSTOM_RELEASE_MSG }}
+          draft: true      # Cria como rascunho apenas para mantedores
+          # prerelease: false # Se for release final, deixe false
+          # Garante o conteudo na variavel $env.CUSTOM_RELEASE_MSG
+          append_body: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
