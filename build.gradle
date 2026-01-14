@@ -99,11 +99,6 @@ mavenPublishing {
             developerConnection = 'https://github.com/konduto/java-sdk'
             url = 'https://github.com/konduto/java-sdk'
         }
-        // properties {
-	    //     // Get toolchain version
-	    //     'java.build.version' = project.javaBuildVersion
-	    // }
-
     }
 
     publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL)
