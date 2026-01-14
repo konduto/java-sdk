@@ -9,6 +9,3 @@
 **Details:** Loren Ipsum.....
 
 ---
-
-<!-- ### ✅ Publicado no Maven Central em: $DATE
-📦🔗 [Visualizar no Portal]($LINK_MAVEN) -->
