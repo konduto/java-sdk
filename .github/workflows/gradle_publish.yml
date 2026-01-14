@@ -71,8 +71,7 @@ jobs:
 
       - name: Define Release Message
         run: |
-
-          DATE=$(date +'%Y-%m-%d %H:%M:%S')  
+          DATE=$(date +'%Y-%m-%d %H:%M:%S')
           LINK_MAVEN="https://central.sonatype.com/artifact/com.konduto.sdk/java-sdk/$SDK_VERSION"
           
           # Add msg do RELEASE_MSG.md
