@@ -77,11 +77,14 @@ jobs:
       # Publish MAVEN CENTRAL
       # ---------------------------------------------------
       - name: Publish to Maven Central
-        run: ./gradlew publishToMavenCentral --no-daemon
+        run: |
+          export ORG_GRADLE_PROJECT_signingKey=$(echo "$GPG_BASE64" | base64 -d)
+          ./gradlew publishToMavenCentral --no-daemon
         env:
+          # Temp BASE64
+          GPG_BASE64: ${{ secrets.GPG_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USER }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASS }}
-          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASS }}
 
       # ---------------------------------------------------
