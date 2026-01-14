@@ -73,7 +73,7 @@ jobs:
         run: |
 
           DATE=$(date +'%Y-%m-%d %H:%M:%S')  
-          LINK_MAVEN="https://central.sonatype.com/artifact/com.konduto.sdk/java-sdk/${{ env.SDK_VERSION }}"
+          LINK_MAVEN="https://central.sonatype.com/artifact/com.konduto.sdk/java-sdk/$SDK_VERSION"
           
           # Add msg do RELEASE_MSG.md
           # echo "CUSTOM_RELEASE_MSG=🇧🇷 remoção da lib xyz e atualização para java 21<br><hr>🇺🇸 remove lib xyz and update to java 21<br><hr>✅ Publicado no Maven Central em: $DATE<br>🔗 [Visualizar no Portal]($LINK_MAVEN)" >> $GITHUB_ENV
