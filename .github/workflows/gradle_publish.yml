@@ -77,32 +77,34 @@ jobs:
       # Publish MAVEN CENTRAL
       # ---------------------------------------------------
       - name: Publish to Maven Central
-        run: |
-          export ORG_GRADLE_PROJECT_signingKey=$(echo "$GPG_BASE64" | base64 -d)
-          ./gradlew publishToMavenCentral --no-daemon
         env:
           # Temp BASE64
           GPG_BASE64: ${{ secrets.GPG_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USER }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASS }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASS }}
+        run: |
+          export ORG_GRADLE_PROJECT_signingKey=$(echo "$GPG_BASE64" | base64 -d)
+          ./gradlew publishToMavenCentral --no-daemon
 
       # ---------------------------------------------------
       # Publish GITHUB PACKAGES
       # ---------------------------------------------------
       - name: Publish to GitHub Packages
-        run: ./gradlew publishAllPublicationsToGitHubPackagesRepository --no-daemon
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Assinar no packages tbm
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASS }}
+        run: ./gradlew publishAllPublicationsToGitHubPackagesRepository --no-daemon
 
       # ---------------------------------------------------
       # ADD JARs na Pagina de RELEASE do GitHub
       # ---------------------------------------------------
       - name: Upload JARs to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
@@ -114,5 +116,3 @@ jobs:
           # prerelease: false # Se for release final, deixe false
           # Garante o conteudo na variavel $env.CUSTOM_RELEASE_MSG
           append_body: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
