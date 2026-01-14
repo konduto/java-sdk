@@ -16,7 +16,8 @@ java {
 def props = new Properties()
 file("src/main/resources/konduto.properties").withInputStream { props.load(it) }
 
-group = 'com.konduto.sdk'
+// group = 'com.konduto.sdk' // old
+group = 'com.konduto'
 version = props["version"]
 
 // Configuração dos sourceSets
