@@ -82,9 +82,13 @@ jobs:
           GPG_BASE64: ${{ secrets.GPG_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USER }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASS }}
-          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASS }}
+          # ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASS }}
+          # Change to InMemory GPG
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.GPG_SIGNING_KEY_ID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_SIGNING_PASS }}
         run: |
-          export ORG_GRADLE_PROJECT_signingKey=$(echo "$GPG_BASE64" | base64 -d)
+          # export ORG_GRADLE_PROJECT_signingKey=$(echo "$GPG_BASE64" | base64 -d)
+          export ORG_GRADLE_PROJECT_signingInMemoryKey=$(echo "$GPG_BASE64" | base64 -d)
           ./gradlew publishToMavenCentral --no-daemon
 
       # ---------------------------------------------------
@@ -95,9 +99,13 @@ jobs:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Assinar no packages tbm
-          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_SIGNING_KEY }}
-          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASS }}
-        run: ./gradlew publishAllPublicationsToGitHubPackagesRepository --no-daemon
+          # ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_SIGNING_KEY }}
+          # ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASS }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_SIGNING_PASS }}
+        run: |
+          export ORG_GRADLE_PROJECT_signingInMemoryKey=$(echo "$GPG_BASE64" | base64 -d)
+          ./gradlew publishAllPublicationsToGitHubPackagesRepository --no-daemon
 
       # ---------------------------------------------------
       # ADD JARs na Pagina de RELEASE do GitHub
