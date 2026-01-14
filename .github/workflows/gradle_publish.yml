@@ -1,6 +1,8 @@
 name: Build, Publish & Release
 
 on:
+  push:
+    branches: [ "pipeline" ]
   release:
     types: [created] # Dispara quando você cria uma Release na interface do GitHub
   workflow_dispatch:
