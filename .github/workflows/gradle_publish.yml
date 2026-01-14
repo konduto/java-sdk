@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  JAVA_VERSION: ${{env.JAVA_VERSION}}
+  JAVA_VERSION: ${{ vars.JAVA_VERSION }}
 
 jobs:
   # Build e Teste
