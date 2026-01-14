@@ -47,6 +47,11 @@ jobs:
       packages: write      # Para publicar no GitHub Packages
 
     steps:
+      - name: Get version konduto.properties
+        run: |
+          VERSION=$(grep 'version' src/main/resources/konduto.properties | cut -d'=' -f2 | tr -d '[:space:]')
+          echo "SDK_VERSION=$VERSION" >> $GITHUB_ENV
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -68,11 +73,15 @@ jobs:
         run: |
 
           DATE=$(date +'%Y-%m-%d %H:%M:%S')  
-          LINK_MAVEN="https://central.sonatype.com/artifact/com.konduto.sdk/java-sdk/${{ github.ref_name }}"
+          LINK_MAVEN="https://central.sonatype.com/artifact/com.konduto.sdk/java-sdk/${{ env.SDK_VERSION }}"
           
-          # Adicione aqui sua mensagem
-          echo "CUSTOM_RELEASE_MSG=🇧🇷 remoção da lib xyz e atualização para java 21<br>🇺🇸 remove lib xyz and update to java 21<br>✅ Publicado no Maven Central em: $DATE<br>🔗 [Visualizar no Portal]($LINK_MAVEN)" >> $GITHUB_ENV          
-
+          # Add msg do RELEASE_MSG.md
+          # echo "CUSTOM_RELEASE_MSG=🇧🇷 remoção da lib xyz e atualização para java 21<br><hr>🇺🇸 remove lib xyz and update to java 21<br><hr>✅ Publicado no Maven Central em: $DATE<br>🔗 [Visualizar no Portal]($LINK_MAVEN)" >> $GITHUB_ENV
+          echo "CUSTOM_RELEASE_MSG<<EOF" >> $GITHUB_ENV
+          cat RELEASE_MSG.md >> $GITHUB_ENV
+          echo "✅ Publicado no Maven Central em: $DATE<br>🔗 [Visualizar no Portal]($LINK_MAVEN)" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+          
       # ---------------------------------------------------
       # Publish MAVEN CENTRAL
       # ---------------------------------------------------
