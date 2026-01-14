@@ -66,7 +66,7 @@ jobs:
           LINK_MAVEN="https://central.sonatype.com/artifact/com.konduto.sdk/java-sdk/${{ github.ref_name }}"
           
           # Adicione aqui sua mensagem
-          echo "🇧🇷 remoção da lib xyz e atualização para java 21<br>🇺🇸 remove lib xyz and update to java 21<br>✅ Publicado no Maven Central em: $DATE<br>🔗 [Visualizar no Portal]($LINK_MAVEN)" >> $GITHUB_ENV          
+          echo "CUSTOM_RELEASE_MSG=🇧🇷 remoção da lib xyz e atualização para java 21<br>🇺🇸 remove lib xyz and update to java 21<br>✅ Publicado no Maven Central em: $DATE<br>🔗 [Visualizar no Portal]($LINK_MAVEN)" >> $GITHUB_ENV          
 
       # ---------------------------------------------------
       # Publish MAVEN CENTRAL
