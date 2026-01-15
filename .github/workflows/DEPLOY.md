@@ -13,12 +13,13 @@ A pipeline foi configurada com regras específicas para evitar publicações aci
 
 ---
 
-## 🔐 Configuração de Variáveis (Secrets)
+## 🔐 Configuração de Variáveis e Secrets
 
-Para que a assinatura GPG e a publicação funcionem corretamente, as seguintes chaves devem estar configuradas em `Settings > Secrets and variables > Actions`:
+Para que a assinatura GPG, a versão base do java e a publicação funcionem corretamente, as seguintes chaves devem estar configuradas em `Settings > Secrets and variables > Actions`:
 
 | Variável | Obrigatório | Descrição |
 | :--- | :---: | :--- |
+| `JAVA_VERSION` | ✅ Sim | Versão base do Java para o SDK. |
 | `MAVEN_CENTRAL_USER` | ✅ Sim | Usuário ou Token gerado no [Sonatype Central Portal](https://central.sonatype.com/). |
 | `MAVEN_CENTRAL_PASS` | ✅ Sim | Senha ou Token gerado no Sonatype Central Portal. |
 | `GPG_SIGNING_KEY` | ✅ Sim | Chave Privada GPG. **Importante:** Deve ser exportada em formato ASCII e convertida para **Base64** (em linha única) para evitar erros de quebra de linha. |
