@@ -2,7 +2,7 @@ name: Build, Publish & Release
 
 on:
   push:
-    branches: [ "pipeline" ]
+    branches: [ "master" ]
   release:
     types: [created] # Dispara quando você cria uma Release na interface do GitHub
   workflow_dispatch:
@@ -75,7 +75,6 @@ jobs:
           LINK_MAVEN="https://central.sonatype.com/artifact/com.konduto.sdk/java-sdk/$SDK_VERSION"
           
           # Add msg do RELEASE_MSG.md
-          # echo "CUSTOM_RELEASE_MSG=🇧🇷 remoção da lib xyz e atualização para java 21<br><hr>🇺🇸 remove lib xyz and update to java 21<br><hr>✅ Publicado no Maven Central em: $DATE<br>🔗 [Visualizar no Portal]($LINK_MAVEN)" >> $GITHUB_ENV
           echo "CUSTOM_RELEASE_MSG<<EOF" >> $GITHUB_ENV
           cat RELEASE_MSG.md >> $GITHUB_ENV
           echo "### ✅ Publicado no Maven Central em: $DATE<br>📦🔗 [Visualizar no Portal]($LINK_MAVEN)" >> $GITHUB_ENV
@@ -90,7 +89,6 @@ jobs:
           GPG_BASE64: ${{ secrets.GPG_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USER }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASS }}
-          # ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASS }}
           # Change to InMemory GPG
           ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.GPG_SIGNING_KEY_ID }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_SIGNING_PASS }}
@@ -99,22 +97,6 @@ jobs:
           export ORG_GRADLE_PROJECT_signingInMemoryKey=$(echo "$GPG_BASE64" | base64 -d)
           ./gradlew publishToMavenCentral --no-daemon
 
-      # # ---------------------------------------------------
-      # # Publish GITHUB PACKAGES
-      # # ---------------------------------------------------
-      # - name: Publish to GitHub Packages
-      #   env:
-      #     GITHUB_ACTOR: ${{ github.actor }}
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     # Assinar no packages tbm
-      #     # ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_SIGNING_KEY }}
-      #     # ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SIGNING_PASS }}
-      #     ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_SIGNING_KEY }}
-      #     ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_SIGNING_PASS }}
-      #   run: |
-      #     export ORG_GRADLE_PROJECT_signingInMemoryKey=$(echo "$GPG_BASE64" | base64 -d)
-      #     ./gradlew publishAllPublicationsToGitHubPackagesRepository --no-daemon
-
       # ---------------------------------------------------
       # ADD JARs na Pagina de RELEASE do GitHub
       # ---------------------------------------------------
@@ -122,7 +104,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/pipeline'
+        if: startsWith(github.ref, 'refs/tags/') # || github.ref == 'refs/heads/pipeline' # Caso queira usar uma branch especifica
         with:
           files: build/libs/*.jar
           body: |
