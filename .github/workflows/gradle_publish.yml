@@ -3,8 +3,6 @@ name: Build, Publish & Release
 on:
   push:
     branches: [ "master" ]
-  release:
-    types: [created] # Dispara quando você cria uma Release na interface do GitHub
   workflow_dispatch:
 
 env:
@@ -111,6 +109,5 @@ jobs:
             ---
             ${{ env.CUSTOM_RELEASE_MSG }}
           draft: true      # Cria como rascunho apenas para mantedores
-          # prerelease: false # Se for release final, deixe false
           # Garante o conteudo na variavel $env.CUSTOM_RELEASE_MSG
           append_body: true
