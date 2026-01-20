@@ -12,7 +12,11 @@ java {
     // Cria automaticamente a tarefa javadocJar
     // withJavadocJar()
 }
+  
+import org.gradle.jvm.toolchain.JavaLanguageVersion
+import org.gradle.api.tasks.bundling.Jar
 
+// Carrega propriedades do projeto (versão)
 def props = new Properties()
 file("src/main/resources/konduto.properties").withInputStream { props.load(it) }
 
