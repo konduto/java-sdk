@@ -1,10 +1,18 @@
 plugins {
     id 'java-library'
-    id 'java'
-    id 'maven-publish'
-    id 'signing'
+   id "com.vanniktech.maven.publish" version "0.28.0"
 }
 
+// Configuração da Toolchain Java (forma moderna e recomendada)
+java {
+    toolchain {
+        // Define a versão de linguagem Java 17,11,8
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    // Cria automaticamente a tarefa javadocJar
+    // withJavadocJar()
+}
+  
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.api.tasks.bundling.Jar
 
@@ -14,14 +22,6 @@ file("src/main/resources/konduto.properties").withInputStream { props.load(it) }
 
 group = 'com.konduto.sdk'
 version = props["version"]
-
-// Configuração da Toolchain Java
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
-    }
-    withJavadocJar()
-}
 
 // Configuração dos sourceSets
 sourceSets {
@@ -48,15 +48,27 @@ repositories {
 }
 
 dependencies {
+    // Dependência de produção
     implementation 'com.google.code.gson:gson:2.9.0'
+    // Dependências de teste
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'com.github.tomakehurst:wiremock-jre8:3.0.1'
 }
 
-// Tarefa para criar o JAR de código fonte
-tasks.register('sourcesJar', Jar) {
-    from sourceSets.main.allJava
-    archiveClassifier.set("sources")
+// Configuração do compilador Java para mostrar avisos de depreciação
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:deprecation"
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar) {
+    dependsOn javadoc
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
 }
 
 // Configuração do JAR principal
@@ -64,72 +76,42 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-// Configuração de Publicação para Maven Central
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'java-sdk'
-            from components.java
+mavenPublishing {
+    coordinates(group, "java-sdk", version)
 
-            artifact tasks.named('sourcesJar')
-
-            // Configuração POM
-            pom {
-                name = 'Konduto\'s Java SDK'
-                description = 'Easily integrate with Konduto (https://konduto.com), a fraud prevention service.'
-                url = 'https://konduto.com'
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'danilo.carmo'
-                        name = 'Danilo Carmo'
-                        email = 'danilo.carmo@boavistascpc.com.br'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:https://github.com/konduto/java-sdk.git'
-                    developerConnection = 'scm:git:https://github.com/konduto/java-sdk.git'
-                    url = 'https://github.com/konduto/java-sdk'
-                }
+    pom {
+        name = 'Konduto\'s Java SDK'
+        description = 'Easily integrate with Konduto (https://konduto' +
+                        '.com), a fraud prevention service.'
+        inceptionYear = "2025"
+        url = 'https://konduto.com'
+        licenses {
+            license {
+                name = 'The Apache License, Version 2.0'
+                url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
             }
         }
-    }
-    // Repositórios de destino (Sonatype OSSRH/Nexus)
-    repositories {
-        maven {
-            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-            credentials {
-                // CORREÇÃO: Lê diretamente das propriedades do projeto (gradle.properties)
-                username = project.property('ossrhUsername')
-                password = project.property('ossrhPassword')
+        developers {
+            developer {
+                id = 'danilo.carmo'
+                name = 'Danilo Carmo'
+                email = 'danilo.carmo@boavistascpc.com.br'
             }
         }
-    }
-}
-
-// Configuração do Javadoc
-tasks.named('javadoc', Javadoc) {
-    if (JavaVersion.current().isJava9Compatible()) {
-        options.addBooleanOption('html5', true)
-    }
-}
-
-afterEvaluate {
-    signing {
-        def isSigningConfigured = project.hasProperty('signing.keyId') && project.hasProperty('signing.password')
-
-        if (isSigningConfigured) {
-            useGpgCmd()
-            sign publishing.publications.mavenJava
-        } else {
-            logger.warn("Assinatura de artefatos ignorada: as propriedades 'signing.keyId' e/ou 'signing.password' estão faltando.")
+        scm {
+            connection = 'https://github.com/konduto/java-sdk'
+            developerConnection = 'https://github.com/konduto/java-sdk'
+            url = 'https://github.com/konduto/java-sdk'
         }
+        // properties {
+	    //     // Get toolchain version
+	    //     'java.build.version' = project.javaBuildVersion
+	    // }
+
     }
+
+    publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL)
+
+    // Enable GPG (obrigatorio)
+    signAllPublications()
 }

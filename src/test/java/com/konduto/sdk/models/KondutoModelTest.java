@@ -76,11 +76,15 @@ public class KondutoModelTest {
 		map.put("email", "raphael@konduto.com");
 		map.put("id", "1234");
 
-		KondutoCustomer c = (KondutoCustomer) KondutoModel.fromMap(map, KondutoCustomer.class);
+		try {
+			KondutoCustomer c = (KondutoCustomer) KondutoModel.fromMap(map, KondutoCustomer.class);
 
-		assertEquals("map constructor did not work", "Raphael", c.getName());
-		assertEquals("map constructor did not work", "raphael@konduto.com", c.getEmail());
-		assertEquals("map constructor did not work", "1234", c.getId());
+			assertEquals("map constructor did not work", "Raphael", c.getName());
+			assertEquals("map constructor did not work", "raphael@konduto.com", c.getEmail());
+			assertEquals("map constructor did not work", "1234", c.getId());
+		} catch (Exception e) {
+			fail("fromMap should not throw exception for valid data");
+		}
 	}
 
 	@Test

@@ -3,11 +3,10 @@ package com.konduto.sdk.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- *
- * Device model.
+ * Represents an option in the Konduto system.
+ * This class extends KondutoModel and contains option-specific attributes.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
- *
  */
 public class KondutoOption extends KondutoModel {
 
@@ -17,6 +16,9 @@ public class KondutoOption extends KondutoModel {
 	@SerializedName("sales_channel")
 	private KondutoSalesChannel salesChannel;
 
+	/**
+	 * Default constructor.
+	 */
 	public KondutoOption(){}
 
 	/* Equals */
@@ -40,18 +42,34 @@ public class KondutoOption extends KondutoModel {
 	}
 
 	/* Getters and Setters */
+	/**
+	 * Gets the real time flag.
+	 * @return the real time flag
+	 */
 	public boolean getRealTime() {
 		return realTime;
 	}
 
+	/**
+	 * Sets the real time flag.
+	 * @param realTime the real time flag
+	 */
 	public void setRealTime(boolean realTime) {
 		this.realTime = realTime;
 	}
 
+	/**
+	 * Gets the sales channel.
+	 * @return the sales channel
+	 */
 	public KondutoSalesChannel getSalesChannel() {
 		return salesChannel;
 	}
 
+	/**
+	 * Sets the sales channel.
+	 * @param salesChannel the sales channel
+	 */
 	public void setSalesChannel(KondutoSalesChannel salesChannel) {
 		this.salesChannel = salesChannel;
 	}

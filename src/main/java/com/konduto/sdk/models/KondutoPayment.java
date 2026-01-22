@@ -1,11 +1,10 @@
 package com.konduto.sdk.models;
 
 /**
- *
- * Payment model.
+ * Abstract base class for all payment types in the Konduto system.
+ * This class extends KondutoModel and provides common payment attributes such as description and amount.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
- *
  */
 public abstract class KondutoPayment extends KondutoModel {
 
@@ -23,6 +22,11 @@ public abstract class KondutoPayment extends KondutoModel {
 		return (KondutoPayment) super.with(attributeName, attributeValue);
 	}
 
+	/**
+	 * Gets the payment type for this payment method.
+	 *
+	 * @return the payment type
+	 */
 	abstract public KondutoPaymentType getType();
 
 	@Override

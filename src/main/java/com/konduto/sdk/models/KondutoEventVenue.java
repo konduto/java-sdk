@@ -9,6 +9,12 @@ import com.konduto.sdk.annotations.ValidateFormat;
  */
 public class KondutoEventVenue extends KondutoModel {
 
+    /**
+     * Default constructor.
+     */
+    public KondutoEventVenue() {
+    }
+
     private String name;
 
     private Integer capacity;
@@ -47,50 +53,98 @@ public class KondutoEventVenue extends KondutoModel {
                 country != null && country.equals(that.country);
     }
 
+    /**
+     * Gets the capacity.
+     * @return the capacity
+     */
     public Integer getCapacity() {
         return capacity;
     }
 
+    /**
+     * Sets the capacity.
+     * @param capacity the capacity
+     */
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 
+    /**
+     * Gets the name.
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name.
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the address.
+     * @return the address
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Sets the address.
+     * @param address the address
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     * Gets the city.
+     * @return the city
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Sets the city.
+     * @param city the city
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * Gets the state.
+     * @return the state
+     */
     public String getState() {
         return state;
     }
 
+    /**
+     * Sets the state.
+     * @param state the state
+     */
     public void setState(String state) {
         this.state = state;
     }
 
+    /**
+     * Gets the country.
+     * @return the country
+     */
     public String getCountry() {
         return country;
     }
 
+    /**
+     * Sets the country.
+     * @param country the country
+     */
     public void setCountry(String country) {
         this.country = country;
     }

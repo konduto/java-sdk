@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
 /**
- * Created by igor.rodrigues (nickname: igor.francesco) 08/06/2022.
- * Konduto Bank destination accounts model.
+ * Represents a bank destination account in the Konduto system.
+ * This class extends KondutoBank and contains destination account specific attributes.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
  */
@@ -58,10 +58,20 @@ public class KondutoBankDestinationAccount extends KondutoBank {
      * Getters/setters
      */
 
+    /**
+     * Gets the transfer amount for this destination account.
+     *
+     * @return the transfer amount
+     */
     public Double getAmount() {
         return amount;
     }
 
+    /**
+     * Sets the transfer amount for this destination account.
+     *
+     * @param amount the transfer amount
+     */
     public void setAmount(Double amount) {
         this.amount = amount;
     }

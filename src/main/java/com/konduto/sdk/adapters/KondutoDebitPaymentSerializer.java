@@ -4,7 +4,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.konduto.sdk.models.KondutoDebitPayment;
 
+/**
+ * Serializes a debit payment.
+ */
 public class KondutoDebitPaymentSerializer extends KondutoPaymentSerializer {
+
+    /**
+     * Default constructor.
+     */
+    public KondutoDebitPaymentSerializer() {
+    }
 
     JsonElement completeSerialization(JsonObject paymentAsJson, KondutoDebitPayment debitPayment) {
         paymentAsJson.addProperty("sha1", debitPayment.getSha1());

@@ -3,8 +3,6 @@ package com.konduto.sdk.factories;
 import com.konduto.sdk.DateFormat;
 import com.konduto.sdk.models.KondutoTenant;
 
-import java.util.Date;
-
 import static com.konduto.sdk.utils.TestUtils.getDateFrom;
 
 public class KondutoTenantFactory {

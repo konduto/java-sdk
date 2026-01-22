@@ -12,10 +12,17 @@ public class KondutoException extends Exception {
 
     private static final long serialVersionUID = 1920403867720844824L;
 
+    /**
+     * Default constructor.
+     */
     public KondutoException() {
         super();
     }
 
+    /**
+     * Constructor with message.
+     * @param message the exception message
+     */
     public KondutoException(String message) {
         super(message);
     }

@@ -5,20 +5,36 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.konduto.sdk.models.KondutoBank;
-import com.konduto.sdk.models.KondutoBankDestinationAccount;
 import com.konduto.sdk.models.KondutoBankOriginAccount;
 
 import java.lang.reflect.Type;
 
 /**
- * Created by igor.rodrigues (nickname: igor.francesco) 09/06/2022.
- * KondutoBanKAdapter to deserialize KondutoBank objects.
+ * KondutoBankAdapter to serialize KondutoBank objects to JSON.
  */
 public class KondutoBankAdapter implements JsonSerializer<KondutoBank> {
 
+    /**
+     * Default constructor.
+     */
+    public KondutoBankAdapter() {
+    }
+
+    /**
+     * Serializes a KondutoBank object into a JSON element.
+     * This method converts the properties of the KondutoBank instance into a JsonObject,
+     * handling null values appropriately. If the bank is an instance of KondutoBankOriginAccount,
+     * it delegates to KondutoBankOriginAccountAdapter for additional serialization.
+     *
+     * @param bank the KondutoBank object to serialize
+     * @param typeOfSrc the type of the source object
+     * @param context the serialization context
+     * @return the serialized JsonElement
+     */
     @Override
     public JsonElement serialize(KondutoBank bank, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject json = new JsonObject();
+        // Add bank properties to JSON object if they are not null
         if (bank.getId() != null) {
             json.addProperty("id", bank.getId());
         }
@@ -46,6 +62,7 @@ public class KondutoBankAdapter implements JsonSerializer<KondutoBank> {
         if (bank.getBankAccount() != null) {
             json.addProperty("bank_account", bank.getBankAccount());
         }
+        // If the bank is a KondutoBankOriginAccount, delegate to the specific adapter for additional fields
         if(bank.getClass().equals(KondutoBankOriginAccount.class)){
             KondutoBankOriginAccountAdapter originAccountAdapter = new KondutoBankOriginAccountAdapter();
             return originAccountAdapter.completeSerialization(json, (KondutoBankOriginAccount) bank);

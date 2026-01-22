@@ -11,9 +11,15 @@ import com.konduto.sdk.models.KondutoBankOriginAccount;
 import java.lang.reflect.Type;
 
 /**
- * Created by igor.rodrigues (nickname: igor.francesco) 09/06/2022.
+ * Adapter for deserializing KondutoBankOriginAccount objects.
  */
 public class KondutoBankOriginAccountAdapter extends KondutoBankAdapter implements JsonDeserializer<KondutoBankOriginAccount> {
+
+    /**
+     * Default constructor.
+     */
+    public KondutoBankOriginAccountAdapter() {
+    }
 
     /**
      * Gson invokes this call-back method during deserialization when it encounters a field of the
@@ -26,7 +32,7 @@ public class KondutoBankOriginAccountAdapter extends KondutoBankAdapter implemen
      *
      * @param je      The Json data being deserialized
      * @param typeOfT The type of the Object to deserialize to
-     * @param context
+     * @param context The context for deserialization
      * @return a deserialized object of the specified type typeOfT which is a subclass of {@code T}
      * @throws JsonParseException if json is not in the expected format of {@code typeofT}
      */
@@ -71,6 +77,13 @@ public class KondutoBankOriginAccountAdapter extends KondutoBankAdapter implemen
     }
 
 
+    /**
+     * Completes the JSON serialization by adding origin account specific fields.
+     *
+     * @param json the JSON object being built
+     * @param originAccount the origin account to serialize
+     * @return the updated JSON element
+     */
     public JsonElement completeSerialization(JsonObject json, KondutoBankOriginAccount originAccount){
 
         if (originAccount.getBalance() != null) {

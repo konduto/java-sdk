@@ -1,14 +1,12 @@
 package com.konduto.sdk.models;
 
-import com.google.gson.annotations.SerializedName;
 import java.util.Collection;
 
 /**
- *
- * Device model.
+ * Represents a hotel booking in the Konduto system.
+ * This class extends KondutoModel and contains hotel-specific attributes.
  *
  * @see <a href="http://docs.konduto.com">Konduto API Spec</a>
- *
  */
 public class KondutoHotel extends KondutoModel {
 
@@ -23,6 +21,9 @@ public class KondutoHotel extends KondutoModel {
 
 	private Collection<KondutoHotelRoom> rooms;
 
+	/**
+	 * Default constructor.
+	 */
 	public KondutoHotel(){}
 
 	/* Equals */
@@ -60,74 +61,146 @@ public class KondutoHotel extends KondutoModel {
 	}
 
 	/* Getters and Setters */
+	/**
+	 * Gets the name.
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 * @param name the name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Gets the address1.
+	 * @return the address1
+	 */
 	public String getAddress1() {
 		return address1;
 	}
 
+	/**
+	 * Sets the address1.
+	 * @param address1 the address1
+	 */
 	public void setAddress1(String address1) {
 		this.address1 = address1;
 	}
 
+	/**
+	 * Gets the address2.
+	 * @return the address2
+	 */
 	public String getAddress2() {
 		return address2;
 	}
 
+	/**
+	 * Sets the address2.
+	 * @param address2 the address2
+	 */
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
 
+	/**
+	 * Gets the city.
+	 * @return the city
+	 */
 	public String getCity() {
 		return city;
 	}
 
+	/**
+	 * Sets the city.
+	 * @param city the city
+	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
 
+	/**
+	 * Gets the state.
+	 * @return the state
+	 */
 	public String getState() {
 		return state;
 	}
 
+	/**
+	 * Sets the state.
+	 * @param state the state
+	 */
 	public void setState(String state) {
 		this.state = state;
 	}
 
+	/**
+	 * Gets the zip.
+	 * @return the zip
+	 */
 	public String getZip() {
 		return zip;
 	}
 
+	/**
+	 * Sets the zip.
+	 * @param zip the zip
+	 */
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
+	/**
+	 * Gets the country.
+	 * @return the country
+	 */
 	public String getCountry() {
 		return country;
 	}
 
+	/**
+	 * Sets the country.
+	 * @param country the country
+	 */
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
+	/**
+	 * Gets the category.
+	 * @return the category
+	 */
 	public String getCategory() {
 		return category;
 	}
 
+	/**
+	 * Sets the category.
+	 * @param category the category
+	 */
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
+	/**
+	 * Gets the rooms.
+	 * @return the rooms
+	 */
 	public Collection<KondutoHotelRoom> getRooms() {
 		return rooms;
 	}
 
+	/**
+	 * Sets the rooms.
+	 * @param rooms the rooms
+	 */
 	public void setRooms(Collection<KondutoHotelRoom> rooms) {
 		this.rooms = rooms;
 	}

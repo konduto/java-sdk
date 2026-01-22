@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.konduto.sdk.KondutoTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-01-12T20:39:44" hostname="b800360472b5" time="2.763">
+  <properties/>
+  <testcase name="getOrderSuccessfullyTest" classname="com.konduto.sdk.KondutoTest" time="2.231"/>
+  <testcase name="invalidStatusWhenUpdatingTest" classname="com.konduto.sdk.KondutoTest" time="0.03"/>
+  <testcase name="nullCommentsWhenUpdatingTest" classname="com.konduto.sdk.KondutoTest" time="0.025"/>
+  <testcase name="invalidApiKeyTest" classname="com.konduto.sdk.KondutoTest" time="0.031"/>
+  <testcase name="analyzeInvalidOrderTest" classname="com.konduto.sdk.KondutoTest" time="0.029"/>
+  <testcase name="getOrderErrorTest" classname="com.konduto.sdk.KondutoTest" time="0.209"/>
+  <testcase name="analyzeSuccessfullyTest" classname="com.konduto.sdk.KondutoTest" time="0.116"/>
+  <testcase name="updateSuccessfullyTest" classname="com.konduto.sdk.KondutoTest" time="0.09"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+]]></system-err>
+</testsuite>
