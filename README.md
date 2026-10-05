@@ -188,7 +188,7 @@ KondutoOrder order = (KondutoOrder) KondutoModel.fromMap(attributes, KondutoOrde
 | id         | _(required)_ **Unique** identifier for each customer. Can be anything you like (counter, id, e-mail address) as long as it's consistent in future orders. |
 | name       | _(required)_ Customer's full name.                                                                                                                        |
 | email      | _(required)_ Customer's e-mail address                                                                                                                    |
-| tax_id     | _(optional)_ Customer's tax id.                                                                                                                           |
+| tax_id     | _(required)_ Customer's tax id.                                                                                                                           |
 | phone1     | _(optional)_ Customer's primary phone number                                                                                                              |
 | phone 2    | _(optional)_ Customer's secondary phone number                                                                                                            |
 | new        | _(optional)_ Boolean indicating if the customer is using a newly created account for this purchase.                                                       |
