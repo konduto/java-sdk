@@ -163,7 +163,7 @@ KondutoOrder order = (KondutoOrder) KondutoModel.fromMap(attributes, KondutoOrde
 | Parameter          | Description                                                                              |
 | ------------------ | ---------------------------------------------------------------------------------------- |
 | id                 | _(required)_ Unique identifier for each order.                                           |
-| visitor            | _(required)_ Visitor identifier obtained from our JavaScript snippet.                    |
+| visitor            | _(optional)_ Visitor identifier obtained from our JavaScript snippet.                    |
 | total_amount       | _(required)_ Total order amount.                                                         |
 | shipping_amount    | _(optional)_ Shipping and handling amount.                                               |
 | tax_amount         | _(optional)_ Taxes amount.                                                               |
